@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="762" viewBox="0 0 1280 762" role="img" aria-label="키노라이츠 크롤링 순위 81-100 그래프">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#22c55e" stop-opacity="0.88"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" rx="0" fill="url(#bg)"/>
+  <rect x="34" y="30" width="1212" height="702" rx="22" fill="#111827" stroke="#334155" filter="url(#shadow)"/>
+  <text x="66" y="72" fill="#e2e8f0" font-size="30" font-weight="800" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">키노라이츠 크롤링 결과</text>
+  <text x="66" y="102" fill="#94a3b8" font-size="16" font-weight="600" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">순위 구간 81-100위 · 저장 실행 결과 기준 · 2026-04-26</text>
+  <text x="274" y="102" fill="#64748b" font-size="13" font-family="Arial">Rank score = 101 - rank</text>
+  <text x="66" y="134" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">81</text>
+  <title>콰이어트 플레이스 2</title>
+  <text x="102" y="134" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">콰이어트 플레이스 2</text>
+  <rect x="274" y="121" width="928" height="16" rx="8" fill="url(#bar)"/>
+  <text x="1212" y="134" fill="#94a3b8" font-size="12" font-family="Arial">20</text>
+  <text x="66" y="162" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">82</text>
+  <title>서치 2</title>
+  <text x="102" y="162" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">서치 2</text>
+  <rect x="274" y="149" width="881" height="16" rx="8" fill="url(#bar)"/>
+  <text x="1165" y="162" fill="#94a3b8" font-size="12" font-family="Arial">19</text>
+  <text x="66" y="190" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">83</text>
+  <title>좀비랜드: 더블 탭</title>
+  <text x="102" y="190" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">좀비랜드: 더블 탭</text>
+  <rect x="274" y="177" width="835" height="16" rx="8" fill="url(#bar)"/>
+  <text x="1119" y="190" fill="#94a3b8" font-size="12" font-family="Arial">18</text>
+  <text x="66" y="218" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">84</text>
+  <title>드래곤 길들이기 3</title>
+  <text x="102" y="218" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">드래곤 길들이기 3</text>
+  <rect x="274" y="205" width="788" height="16" rx="8" fill="url(#bar)"/>
+  <text x="1072" y="218" fill="#94a3b8" font-size="12" font-family="Arial">17</text>
+  <text x="66" y="246" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">85</text>
+  <title>랜드 오브 배드</title>
+  <text x="102" y="246" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">랜드 오브 배드</text>
+  <rect x="274" y="233" width="742" height="16" rx="8" fill="url(#bar)"/>
+  <text x="1026" y="246" fill="#94a3b8" font-size="12" font-family="Arial">16</text>
+  <text x="66" y="274" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">86</text>
+  <title>던전 앤 드래곤: 도적들의 명예</title>
+  <text x="102" y="274" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">던전 앤 드래곤: 도적들의 명예</text>
+  <rect x="274" y="261" width="696" height="16" rx="8" fill="url(#bar)"/>
+  <text x="980" y="274" fill="#94a3b8" font-size="12" font-family="Arial">15</text>
+  <text x="66" y="302" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">87</text>
+  <title>다크 나이트</title>
+  <text x="102" y="302" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">다크 나이트</text>
+  <rect x="274" y="289" width="649" height="16" rx="8" fill="url(#bar)"/>
+  <text x="933" y="302" fill="#94a3b8" font-size="12" font-family="Arial">14</text>
+  <text x="66" y="330" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">88</text>
+  <title>테넷</title>
+  <text x="102" y="330" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">테넷</text>
+  <rect x="274" y="317" width="603" height="16" rx="8" fill="url(#bar)"/>
+  <text x="887" y="330" fill="#94a3b8" font-size="12" font-family="Arial">13</text>
+  <text x="66" y="358" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">89</text>
+  <title>멀홀랜드 드라이브</title>
+  <text x="102" y="358" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">멀홀랜드 드라이브</text>
+  <rect x="274" y="345" width="556" height="16" rx="8" fill="url(#bar)"/>
+  <text x="840" y="358" fill="#94a3b8" font-size="12" font-family="Arial">12</text>
+  <text x="66" y="386" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">90</text>
+  <title>트루먼 쇼</title>
+  <text x="102" y="386" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">트루먼 쇼</text>
+  <rect x="274" y="373" width="510" height="16" rx="8" fill="url(#bar)"/>
+  <text x="794" y="386" fill="#94a3b8" font-size="12" font-family="Arial">11</text>
+  <text x="66" y="414" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">91</text>
+  <title>파벨만스</title>
+  <text x="102" y="414" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">파벨만스</text>
+  <rect x="274" y="401" width="464" height="16" rx="8" fill="url(#bar)"/>
+  <text x="748" y="414" fill="#94a3b8" font-size="12" font-family="Arial">10</text>
+  <text x="66" y="442" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">92</text>
+  <title>건국전쟁</title>
+  <text x="102" y="442" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">건국전쟁</text>
+  <rect x="274" y="429" width="417" height="16" rx="8" fill="url(#bar)"/>
+  <text x="701" y="442" fill="#94a3b8" font-size="12" font-family="Arial">9</text>
+  <text x="66" y="470" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">93</text>
+  <title>스파이더맨: 노 웨이 홈</title>
+  <text x="102" y="470" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">스파이더맨: 노 웨이 홈</text>
+  <rect x="274" y="457" width="371" height="16" rx="8" fill="url(#bar)"/>
+  <text x="655" y="470" fill="#94a3b8" font-size="12" font-family="Arial">8</text>
+  <text x="66" y="498" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">94</text>
+  <title>잠</title>
+  <text x="102" y="498" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">잠</text>
+  <rect x="274" y="485" width="324" height="16" rx="8" fill="url(#bar)"/>
+  <text x="608" y="498" fill="#94a3b8" font-size="12" font-family="Arial">7</text>
+  <text x="66" y="526" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">95</text>
+  <title>인셉션</title>
+  <text x="102" y="526" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">인셉션</text>
+  <rect x="274" y="513" width="278" height="16" rx="8" fill="url(#bar)"/>
+  <text x="562" y="526" fill="#94a3b8" font-size="12" font-family="Arial">6</text>
+  <text x="66" y="554" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">96</text>
+  <title>찰리와 초콜릿 공장</title>
+  <text x="102" y="554" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">찰리와 초콜릿 공장</text>
+  <rect x="274" y="541" width="232" height="16" rx="8" fill="url(#bar)"/>
+  <text x="516" y="554" fill="#94a3b8" font-size="12" font-family="Arial">5</text>
+  <text x="66" y="582" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">97</text>
+  <title>큐어</title>
+  <text x="102" y="582" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">큐어</text>
+  <rect x="274" y="569" width="185" height="16" rx="8" fill="url(#bar)"/>
+  <text x="469" y="582" fill="#94a3b8" font-size="12" font-family="Arial">4</text>
+  <text x="66" y="610" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">98</text>
+  <title>엘리멘탈</title>
+  <text x="102" y="610" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">엘리멘탈</text>
+  <rect x="274" y="597" width="139" height="16" rx="8" fill="url(#bar)"/>
+  <text x="423" y="610" fill="#94a3b8" font-size="12" font-family="Arial">3</text>
+  <text x="66" y="638" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">99</text>
+  <title>30일</title>
+  <text x="102" y="638" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">30일</text>
+  <rect x="274" y="625" width="92" height="16" rx="8" fill="url(#bar)"/>
+  <text x="376" y="638" fill="#94a3b8" font-size="12" font-family="Arial">2</text>
+  <text x="66" y="666" fill="#cbd5e1" font-size="14" font-weight="700" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">100</text>
+  <title>너와 나</title>
+  <text x="102" y="666" fill="#f8fafc" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">너와 나</text>
+  <rect x="274" y="653" width="46" height="16" rx="8" fill="url(#bar)"/>
+  <text x="330" y="666" fill="#94a3b8" font-size="12" font-family="Arial">1</text>
+  <text x="66" y="722" fill="#64748b" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">81-100위 작품명을 순위 점수로 시각화했습니다.</text>
+</svg>

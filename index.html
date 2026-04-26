@@ -38,35 +38,32 @@
       <div class="video-list">
         <article class="video-card">
           <div class="video-box">
-            <!-- 방법 1: 로컬 영상 사용 -->
-            <!-- video 폴더에 video1.mp4를 넣고 아래 src를 수정하세요. -->
-            <video controls poster="https://via.placeholder.com/1280x720?text=Video+1">
-              <source src="videos/video1.mp4" type="video/mp4" />
-              브라우저가 video 태그를 지원하지 않습니다.
-            </video>
-
-            <!-- 방법 2: 유튜브 사용 시 위 video 태그 대신 아래 iframe을 사용하세요. -->
-            <!--
-            <iframe
-              src="https://www.youtube.com/embed/영상ID"
-              title="영상 내용 1"
-              frameborder="0"
-              allowfullscreen>
-            </iframe>
-            -->
+            <img
+              src="assets/kinolights/charts/kinolights_rank_overview.svg"
+              alt="키노라이츠 크롤링 순위 구간별 요약 그래프"
+            />
           </div>
 
           <div class="video-content">
             <span class="number">01</span>
-            <h3>영상 내용</h3>
+            <h3>키노라이츠 데이터 크롤링</h3>
             <p>
-              여기에 첫 번째 영상 설명을 작성하세요.
-              프로젝트 목적, 담당 역할, 사용 기술, 문제 해결 과정, 성과를 넣으면 좋습니다.
+              Selenium으로 키노라이츠 작품 탐색 데이터를 수집하고, 실행 결과를 CSV로 정리한 뒤
+              20위 단위 순위 구간별 그래프로 시각화했습니다.
             </p>
             <ul>
               <li>프로젝트: 키노라이츠 데이터 크롤링</li>
-              <li>역할: Selenium 기반 자동 수집 및 Pandas 분석</li>
-              <li>성과: 반복 수작업 제거 및 데이터 자동 갱신</li>
+              <li>역할: Selenium 기반 자동 수집, CSV 변환 및 그래프 시각화</li>
+              <li>성과: 100개 작품 순위 데이터 CSV화 및 구간별 그래프 출력</li>
+              <li>
+                결과:
+                <a href="assets/kinolights/kinolights_crawling_result.csv" download>CSV</a>
+                · <a href="assets/kinolights/charts/kinolights_rank_01_20.svg" target="_blank" rel="noreferrer">1-20위</a>
+                · <a href="assets/kinolights/charts/kinolights_rank_21_40.svg" target="_blank" rel="noreferrer">21-40위</a>
+                · <a href="assets/kinolights/charts/kinolights_rank_41_60.svg" target="_blank" rel="noreferrer">41-60위</a>
+                · <a href="assets/kinolights/charts/kinolights_rank_61_80.svg" target="_blank" rel="noreferrer">61-80위</a>
+                · <a href="assets/kinolights/charts/kinolights_rank_81_100.svg" target="_blank" rel="noreferrer">81-100위</a>
+              </li>
             </ul>
           </div>
         </article>

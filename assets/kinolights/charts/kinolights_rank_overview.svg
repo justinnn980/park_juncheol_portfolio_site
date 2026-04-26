@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="키노라이츠 크롤링 전체 요약">
+  <rect width="100%" height="100%" fill="#0f172a"/>
+  <text x="70" y="78" fill="#f8fafc" font-size="38" font-weight="900" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">키노라이츠 크롤링 CSV 요약</text>
+  <text x="70" y="114" fill="#94a3b8" font-size="18" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">Crawling.ipynb 저장 실행 결과 100개 작품 · 2026-04-26</text>
+  <rect x="70" y="172" width="214" height="390" rx="18" fill="#111827" stroke="#334155"/>
+  <text x="90" y="214" fill="#38bdf8" font-size="24" font-weight="900" font-family="Arial">01-20</text>
+  <text x="90" y="244" fill="#cbd5e1" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">순위 구간</text>
+  <text x="90" y="288" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">01. 매드 맥스: 분노의 도로</text>
+  <text x="90" y="316" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">02. 목스박</text>
+  <text x="90" y="344" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">03. 시민덕희</text>
+  <text x="90" y="372" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">04. 댓글부대</text>
+  <text x="90" y="400" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">05. 히든 피겨스</text>
+  <text x="90" y="428" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">06. 가여운 것들</text>
+  <text x="90" y="456" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">07. 플랜 75</text>
+  <text x="90" y="484" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">08. 소울메이트</text>
+  <text x="90" y="530" fill="#64748b" font-size="12" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">외 12개</text>
+  <rect x="306" y="172" width="214" height="390" rx="18" fill="#111827" stroke="#334155"/>
+  <text x="326" y="214" fill="#60a5fa" font-size="24" font-weight="900" font-family="Arial">21-40</text>
+  <text x="326" y="244" fill="#cbd5e1" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">순위 구간</text>
+  <text x="326" y="288" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">21. 은밀하게 위대하게</text>
+  <text x="326" y="316" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">22. 슬픔의 삼각형</text>
+  <text x="326" y="344" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">23. 웡카</text>
+  <text x="326" y="372" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">24. 시카고</text>
+  <text x="326" y="400" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">25. 스즈메의 문단속</text>
+  <text x="326" y="428" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">26. 더 메뉴</text>
+  <text x="326" y="456" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">27. 우는 남자</text>
+  <text x="326" y="484" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">28. 바빌론</text>
+  <text x="326" y="530" fill="#64748b" font-size="12" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">외 12개</text>
+  <rect x="542" y="172" width="214" height="390" rx="18" fill="#111827" stroke="#334155"/>
+  <text x="562" y="214" fill="#818cf8" font-size="24" font-weight="900" font-family="Arial">41-60</text>
+  <text x="562" y="244" fill="#cbd5e1" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">순위 구간</text>
+  <text x="562" y="288" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">41. 펄프 픽션</text>
+  <text x="562" y="316" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">42. 월터의 상상은 현실이 …</text>
+  <text x="562" y="344" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">43. 비키퍼</text>
+  <text x="562" y="372" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">44. 헤어질 결심</text>
+  <text x="562" y="400" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">45. 범죄도시 3</text>
+  <text x="562" y="428" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">46. 굿 윌 헌팅</text>
+  <text x="562" y="456" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">47. 남은 인생 10년</text>
+  <text x="562" y="484" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">48. 올드보이</text>
+  <text x="562" y="530" fill="#64748b" font-size="12" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">외 12개</text>
+  <rect x="778" y="172" width="214" height="390" rx="18" fill="#111827" stroke="#334155"/>
+  <text x="798" y="214" fill="#14b8a6" font-size="24" font-weight="900" font-family="Arial">61-80</text>
+  <text x="798" y="244" fill="#cbd5e1" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">순위 구간</text>
+  <text x="798" y="288" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">61. 아가씨</text>
+  <text x="798" y="316" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">62. 쇼생크 탈출</text>
+  <text x="798" y="344" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">63. 모아나</text>
+  <text x="798" y="372" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">64. 본 아이덴티티</text>
+  <text x="798" y="400" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">65. 시큐리티</text>
+  <text x="798" y="428" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">66. 범죄도시 2</text>
+  <text x="798" y="456" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">67. 팬텀 스레드</text>
+  <text x="798" y="484" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">68. 콰이어트 플레이스</text>
+  <text x="798" y="530" fill="#64748b" font-size="12" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">외 12개</text>
+  <rect x="1014" y="172" width="214" height="390" rx="18" fill="#111827" stroke="#334155"/>
+  <text x="1034" y="214" fill="#f59e0b" font-size="24" font-weight="900" font-family="Arial">81-100</text>
+  <text x="1034" y="244" fill="#cbd5e1" font-size="14" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">순위 구간</text>
+  <text x="1034" y="288" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">81. 콰이어트 플레이스 2</text>
+  <text x="1034" y="316" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">82. 서치 2</text>
+  <text x="1034" y="344" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">83. 좀비랜드: 더블 탭</text>
+  <text x="1034" y="372" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">84. 드래곤 길들이기 3</text>
+  <text x="1034" y="400" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">85. 랜드 오브 배드</text>
+  <text x="1034" y="428" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">86. 던전 앤 드래곤: 도적…</text>
+  <text x="1034" y="456" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">87. 다크 나이트</text>
+  <text x="1034" y="484" fill="#f8fafc" font-size="13" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">88. 테넷</text>
+  <text x="1034" y="530" fill="#64748b" font-size="12" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">외 12개</text>
+  <text x="70" y="650" fill="#94a3b8" font-size="15" font-family="Apple SD Gothic Neo, Noto Sans KR, Pretendard, Arial">CSV에는 순위, 제목, 순위 구간, 순위 점수 컬럼을 포함했습니다.</text>
+</svg>

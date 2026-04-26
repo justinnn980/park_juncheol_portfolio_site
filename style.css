@@ -150,7 +150,8 @@ a {
 }
 
 .video-box video,
-.video-box iframe {
+.video-box iframe,
+.video-box img {
   width: 100%;
   height: 100%;
   display: block;
@@ -186,6 +187,13 @@ a {
   color: #e2e8f0;
   padding-left: 18px;
   position: relative;
+}
+
+.video-content a {
+  color: #93c5fd;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .video-content li::before {
