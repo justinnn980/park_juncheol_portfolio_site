@@ -195,22 +195,6 @@ a {
   color: #38bdf8;
 }
 
-.add-button {
-  margin-top: 42px;
-  padding: 14px 22px;
-  border: 0;
-  border-radius: 14px;
-  background: #2563eb;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.add-button:hover {
-  background: #1d4ed8;
-}
-
 .contact {
   text-align: center;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
