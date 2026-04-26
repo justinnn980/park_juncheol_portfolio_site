@@ -39,8 +39,8 @@
         <article class="video-card">
           <div class="video-box">
             <img
-              src="assets/kinolights/charts/kinolights_rank_overview.svg"
-              alt="키노라이츠 크롤링 순위 구간별 요약 그래프"
+              src="assets/kinolights/charts/kinolights_compare_overview.svg"
+              alt="키노라이츠 이전 실행 결과와 현재 실행 결과 비교 그래프"
             />
           </div>
 
@@ -48,21 +48,19 @@
             <span class="number">01</span>
             <h3>키노라이츠 데이터 크롤링</h3>
             <p>
-              Selenium으로 키노라이츠 작품 탐색 데이터를 수집하고, 실행 결과를 CSV로 정리한 뒤
-              20위 단위 순위 구간별 그래프로 시각화했습니다.
+              노트북에 저장된 이전 크롤링 결과와 현재 키노라이츠 페이지를 다시 실행해 얻은 결과를
+              CSV로 정리하고, 순위 변화와 신규 진입 작품을 비교 그래프로 시각화했습니다.
             </p>
             <ul>
               <li>프로젝트: 키노라이츠 데이터 크롤링</li>
-              <li>역할: Selenium 기반 자동 수집, CSV 변환 및 그래프 시각화</li>
-              <li>성과: 100개 작품 순위 데이터 CSV화 및 구간별 그래프 출력</li>
+              <li>역할: Selenium 기반 자동 수집, 현재 결과 재수집, CSV 비교 및 그래프 시각화</li>
+              <li>성과: 이전 Top100과 현재 Top20 비교 CSV 및 신규 진입 그래프 생성</li>
               <li>
                 결과:
-                <a href="assets/kinolights/kinolights_crawling_result.csv" download>CSV</a>
-                · <a href="assets/kinolights/charts/kinolights_rank_01_20.svg" target="_blank" rel="noreferrer">1-20위</a>
-                · <a href="assets/kinolights/charts/kinolights_rank_21_40.svg" target="_blank" rel="noreferrer">21-40위</a>
-                · <a href="assets/kinolights/charts/kinolights_rank_41_60.svg" target="_blank" rel="noreferrer">41-60위</a>
-                · <a href="assets/kinolights/charts/kinolights_rank_61_80.svg" target="_blank" rel="noreferrer">61-80위</a>
-                · <a href="assets/kinolights/charts/kinolights_rank_81_100.svg" target="_blank" rel="noreferrer">81-100위</a>
+                <a href="assets/kinolights/kinolights_crawling_result.csv" download>이전 CSV</a>
+                · <a href="assets/kinolights/kinolights_current_result.csv" download>현재 CSV</a>
+                · <a href="assets/kinolights/kinolights_rank_comparison.csv" download>비교 CSV</a>
+                · <a href="assets/kinolights/charts/kinolights_compare_current_top20.svg" target="_blank" rel="noreferrer">비교 그래프</a>
               </li>
             </ul>
           </div>
