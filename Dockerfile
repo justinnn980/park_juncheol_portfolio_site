@@ -1,0 +1,10 @@
+FROM nginx:stable-alpine
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY index.html style.css script.js /usr/share/nginx/html/
+COPY videos/ /usr/share/nginx/html/videos/
+
+EXPOSE 80
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget -qO- http://127.0.0.1/ >/dev/null || exit 1

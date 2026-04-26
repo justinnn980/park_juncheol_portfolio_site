@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>박준철 포트폴리오</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <h1>박준철 포트폴리오</h1>
+      <div class="nav-links">
+        <a href="#intro">소개</a>
+        <a href="#videos">영상</a>
+        <a href="#contact">연락처</a>
+      </div>
+    </nav>
+
+    <section class="hero" id="intro">
+      <p class="badge">AI · DATA · Web</p>
+      <h2>데이터 기반으로 사용자 경험을 개선하는 개발자</h2>
+      <p>
+        AI와 데이터 분석을 활용하여,
+        사용자가 고민 없이 사용할 수 있는 서비스를 만듭니다.
+      </p>
+      <a href="#videos" class="hero-button">영상 포트폴리오 보기</a>
+    </section>
+  </header>
+
+  <main>
+    <section class="section" id="videos">
+      <div class="section-title">
+        <p>Video Portfolio</p>
+        <h2>영상 포트폴리오</h2>
+      </div>
+
+      <div class="video-list">
+        <article class="video-card">
+          <div class="video-box">
+            <!-- 방법 1: 로컬 영상 사용 -->
+            <!-- video 폴더에 video1.mp4를 넣고 아래 src를 수정하세요. -->
+            <video controls poster="https://via.placeholder.com/1280x720?text=Video+1">
+              <source src="videos/video1.mp4" type="video/mp4" />
+              브라우저가 video 태그를 지원하지 않습니다.
+            </video>
+
+            <!-- 방법 2: 유튜브 사용 시 위 video 태그 대신 아래 iframe을 사용하세요. -->
+            <!--
+            <iframe
+              src="https://www.youtube.com/embed/영상ID"
+              title="영상 내용 1"
+              frameborder="0"
+              allowfullscreen>
+            </iframe>
+            -->
+          </div>
+
+          <div class="video-content">
+            <span class="number">01</span>
+            <h3>영상 내용</h3>
+            <p>
+              여기에 첫 번째 영상 설명을 작성하세요.
+              프로젝트 목적, 담당 역할, 사용 기술, 문제 해결 과정, 성과를 넣으면 좋습니다.
+            </p>
+            <ul>
+              <li>프로젝트: 오초이스 / 헬로tv 마이그레이션</li>
+              <li>역할: Flutter 앱 개발 및 웹 전환</li>
+              <li>성과: 배포 없이 콘텐츠 변경 가능한 구조 개선</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="video-card reverse">
+          <div class="video-box">
+            <video controls poster="https://via.placeholder.com/1280x720?text=Video+2">
+              <source src="videos/video2.mp4" type="video/mp4" />
+              브라우저가 video 태그를 지원하지 않습니다.
+            </video>
+          </div>
+
+          <div class="video-content">
+            <span class="number">02</span>
+            <h3>영상 내용</h3>
+            <p>
+              여기에 두 번째 영상 설명을 작성하세요.
+              예를 들어 크롤링 자동화, 데이터 시각화, 성능 최적화 사례를 넣을 수 있습니다.
+            </p>
+            <ul>
+              <li>프로젝트: 키노라이츠 데이터 크롤링</li>
+              <li>역할: Selenium 기반 자동 수집 및 Pandas 분석</li>
+              <li>성과: 반복 수작업 제거 및 데이터 자동 갱신</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <button class="add-button" id="addVideoBtn">영상 섹션 추가</button>
+    </section>
+
+    <section class="section contact" id="contact">
+      <h2>Contact</h2>
+      <div class="contact-links">
+        <a href="mailto:juncheol123@naver.com">Email</a>
+        <a href="https://github.com/justinnn980" target="_blank">GitHub</a>
+        <a href="https://justinnn980.tistory.com/" target="_blank">블로그</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 박준철 포트폴리오. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
