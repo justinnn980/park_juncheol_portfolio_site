@@ -40,8 +40,8 @@ a {
 .site-header {
   min-height: 92vh;
   background:
-    linear-gradient(135deg, rgba(31, 92, 76, 0.94), rgba(18, 61, 52, 0.88)),
-    url("https://github.com/user-attachments/assets/8aa53635-5244-4ef0-bba1-0bfb59906e25") center / cover;
+    linear-gradient(135deg, rgba(31, 92, 76, 0.96), rgba(18, 61, 52, 0.9)),
+    linear-gradient(110deg, rgba(231, 184, 77, 0.16), rgba(182, 83, 50, 0.08));
   color: var(--white);
 }
 
@@ -89,7 +89,7 @@ a {
   margin: 0 auto;
   padding: 96px 0 86px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 330px;
+  grid-template-columns: minmax(0, 820px);
   gap: 56px;
   align-items: center;
 }
@@ -181,38 +181,6 @@ a {
 .ghost-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
-}
-
-.profile-card {
-  overflow: hidden;
-  border-radius: 8px;
-  background: var(--paper-soft);
-  color: var(--ink);
-  box-shadow: var(--shadow);
-}
-
-.profile-card img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  display: block;
-  object-fit: cover;
-}
-
-.profile-card figcaption {
-  padding: 18px;
-  display: grid;
-  gap: 4px;
-}
-
-.profile-card strong {
-  color: var(--forest-dark);
-  font-size: 18px;
-}
-
-.profile-card span {
-  color: var(--muted);
-  font-size: 14px;
-  font-weight: 700;
 }
 
 .section {
@@ -488,10 +456,6 @@ footer {
   .hero {
     grid-template-columns: 1fr;
     padding-top: 62px;
-  }
-
-  .profile-card {
-    max-width: 360px;
   }
 
   .skill-grid,
