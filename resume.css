@@ -135,12 +135,7 @@ body::after {
   background: var(--accent-soft);
 }
 
-.nav-links a[href="index.html"],
-.nav-links a[href="resume.html"],
-.nav-links a[href="resume_backend.html"],
-.nav-links a[href="resume_flutter.html"],
-.nav-links a[href="resume_ai.html"],
-.nav-links a[href="resume_react.html"] {
+.nav-links a[href="index.html"] {
   border-color: var(--line);
   background: #ffffff;
 }
@@ -253,50 +248,6 @@ body::after {
 .ghost-button:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow);
-}
-
-.role-switcher {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-  margin-bottom: 30px;
-}
-
-.role-card {
-  min-height: 104px;
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-}
-
-.role-card:hover,
-.role-card.is-current {
-  transform: translateY(-2px);
-  border-color: rgba(var(--accent-rgb),0.34);
-  background: var(--accent-soft);
-}
-
-.role-card span {
-  color: var(--accent-strong);
-  font-size: 11px;
-  font-weight: 900;
-}
-
-.role-card strong {
-  color: var(--ink);
-  font-size: 16px;
-  line-height: 1.25;
-}
-
-.role-card small {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.4;
 }
 
 .hero-metrics {
@@ -771,7 +722,6 @@ footer {
     position: relative;
     top: auto;
   }
-  .role-switcher,
   .hero-metrics,
   .skill-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -781,7 +731,6 @@ footer {
 @media (max-width: 640px) {
   .hero-copy h1 { font-size: 48px; }
   .hero-lead { font-size: 16px; }
-  .role-switcher,
   .hero-metrics,
   .skill-grid,
   .certificate-list article {
