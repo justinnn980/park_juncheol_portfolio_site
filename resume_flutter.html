@@ -3,29 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>박준철 — 백엔드 이력서</title>
+  <title>박준철 — Flutter 이력서</title>
   <link rel="stylesheet" href="resume.css" />
   <style>
-    /* 백엔드 버전 강조색 오버라이드 */
     .easter-egg { display: none; }
 
-    .eyebrow { border-color: rgba(20,184,166,0.35); color: #5eead4; background: rgba(20,184,166,0.08); }
-    .section-title p { color: #14b8a6; }
-    .company-label { color: #14b8a6; }
-    .project-number { background: rgba(20,184,166,0.08); border-color: rgba(20,184,166,0.18); color: #14b8a6; }
-    .certificate-list span { color: #5eead4; background: rgba(20,184,166,0.06); }
-    .primary-button { background: linear-gradient(135deg, #0d9488, #0f766e); box-shadow: 0 4px 20px rgba(20,184,166,0.3); }
-    .primary-button:hover { background: linear-gradient(135deg, #14b8a6, #0d9488); box-shadow: 0 8px 28px rgba(20,184,166,0.4); }
-    .hero-metrics dt { background: linear-gradient(135deg, #5eead4, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .experience-card::before { background: linear-gradient(180deg, #14b8a6 0%, #3b82f6 100%); }
-    .nav-links a.is-active { color: #5eead4; background: rgba(20,184,166,0.12); }
-    .project-detail li::before { background: #14b8a6; }
-    .contact-links a:hover { background: rgba(20,184,166,0.1); border-color: rgba(20,184,166,0.25); color: #5eead4; }
-    .hero-panel::after { background: linear-gradient(135deg, rgba(20,184,166,0.35), rgba(59,130,246,0.2), transparent 60%); }
-    .panel-topline strong { color: #5eead4; background: rgba(20,184,166,0.1); }
-    .skill-card:nth-child(1)::before { background: linear-gradient(90deg, #14b8a6, #22d3ee); }
-    .skill-card:nth-child(2)::before { background: linear-gradient(90deg, #3b82f6, #818cf8); }
-    .skill-card:nth-child(3)::before { background: linear-gradient(90deg, #f59e0b, #f97316); }
+    /* Flutter 시그니처 스카이블루 */
+    .eyebrow { border-color: rgba(6,182,212,0.35); color: #67e8f9; background: rgba(6,182,212,0.08); }
+    .section-title p { color: #06b6d4; }
+    .company-label { color: #06b6d4; }
+    .project-number { background: rgba(6,182,212,0.08); border-color: rgba(6,182,212,0.2); color: #06b6d4; }
+    .certificate-list span { color: #67e8f9; background: rgba(6,182,212,0.06); }
+    .primary-button { background: linear-gradient(135deg, #0891b2, #0e7490); box-shadow: 0 4px 20px rgba(6,182,212,0.3); }
+    .primary-button:hover { background: linear-gradient(135deg, #06b6d4, #0891b2); box-shadow: 0 8px 28px rgba(6,182,212,0.42); }
+    .hero-metrics dt { background: linear-gradient(135deg, #67e8f9, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .experience-card::before { background: linear-gradient(180deg, #06b6d4 0%, #3b82f6 100%); }
+    .nav-links a.is-active { color: #67e8f9; background: rgba(6,182,212,0.12); }
+    .project-detail li::before { background: #06b6d4; }
+    .contact-links a:hover { background: rgba(6,182,212,0.1); border-color: rgba(6,182,212,0.28); color: #67e8f9; }
+    .hero-panel::after { background: linear-gradient(135deg, rgba(6,182,212,0.35), rgba(56,189,248,0.2), transparent 60%); }
+    .panel-topline strong { color: #67e8f9; background: rgba(6,182,212,0.1); }
+    .skill-card:nth-child(1)::before { background: linear-gradient(90deg, #06b6d4, #38bdf8); }
+    .skill-card:nth-child(2)::before { background: linear-gradient(90deg, #8b5cf6, #6366f1); }
+    .skill-card:nth-child(3)::before { background: linear-gradient(90deg, #3b82f6, #0891b2); }
 
     .version-tag {
       display: inline-block;
@@ -33,9 +33,9 @@
       padding: 2px 8px;
       font-size: 11px;
       font-weight: 700;
-      color: #5eead4;
-      background: rgba(20,184,166,0.1);
-      border: 1px solid rgba(20,184,166,0.2);
+      color: #67e8f9;
+      background: rgba(6,182,212,0.1);
+      border: 1px solid rgba(6,182,212,0.22);
       border-radius: 6px;
       letter-spacing: 0.05em;
       vertical-align: middle;
@@ -45,10 +45,10 @@
 <body>
   <header class="site-header" id="intro">
     <nav class="nav" aria-label="주요 메뉴">
-      <a class="brand" href="#intro">박준철 <span class="version-tag">Backend</span></a>
+      <a class="brand" href="#intro">박준철 <span class="version-tag">Flutter</span></a>
       <div class="nav-links">
         <a href="resume.html">전체 이력서</a>
-        <a href="resume_flutter.html">Flutter</a>
+        <a href="resume_backend.html">백엔드</a>
         <a href="index.html">포트폴리오</a>
         <a href="#skills">스킬</a>
         <a href="#experience">경력</a>
@@ -60,10 +60,10 @@
 
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">Backend · API · Infrastructure</p>
+        <p class="eyebrow">Flutter · Dart · Cross-platform</p>
         <h1>박준철</h1>
         <p class="hero-lead">
-          Python 백엔드 개발과 REST API 설계, 컨테이너 기반 배포 파이프라인 구축 경험을 보유한 서버 개발자입니다.
+          Flutter 기반 크로스플랫폼 앱 개발과 REST API 연동, OTT 서비스 앱 운영 경험을 보유한 모바일 개발자입니다.
         </p>
         <dl class="profile-list">
           <div>
@@ -81,33 +81,33 @@
         </div>
         <dl class="hero-metrics" aria-label="주요 성과">
           <div>
-            <dt>1,000+</dt>
-            <dd>일 처리 데이터 파이프라인</dd>
+            <dt>iOS·AOS</dt>
+            <dd>크로스플랫폼 동시 배포</dd>
           </div>
           <div>
-            <dt>Zero</dt>
-            <dd>수동 배포 (Cron + Docker)</dd>
+            <dt>OTT</dt>
+            <dd>스트리밍 앱 개발·운영</dd>
           </div>
           <div>
-            <dt>2 DB</dt>
-            <dd>MySQL · DynamoDB 운영 경험</dd>
+            <dt>실시간</dt>
+            <dd>콘텐츠 데이터 연동 UI</dd>
           </div>
         </dl>
       </div>
       <aside class="hero-panel" aria-label="핵심 역량 요약">
         <div class="panel-topline">
-          <span>Backend Stack</span>
+          <span>Flutter Stack</span>
           <strong>2026</strong>
         </div>
         <div class="panel-main">
-          <p>Server pipeline</p>
-          <strong>Python → MySQL → Docker → AWS/Render</strong>
+          <p>App pipeline</p>
+          <strong>Flutter → Dart → REST API → App Store</strong>
         </div>
         <div class="panel-grid">
-          <span>FastAPI</span>
-          <span>MySQL</span>
-          <span>Docker</span>
-          <span>AWS</span>
+          <span>Flutter</span>
+          <span>Dart</span>
+          <span>Provider</span>
+          <span>Firebase</span>
         </div>
       </aside>
     </section>
@@ -122,30 +122,30 @@
 
       <div class="skill-grid">
         <article class="skill-card">
-          <span>Python Backend</span>
-          <p>FastAPI, Flask, SQLAlchemy, Celery, Selenium, Pandas</p>
+          <span>Flutter / Dart</span>
+          <p>Widget Tree, StatefulWidget, CustomPainter, Animation, Responsive Layout</p>
           <div class="skill-tags">
-            <small>REST API</small>
-            <small>ORM</small>
-            <small>자동화</small>
+            <small>크로스플랫폼</small>
+            <small>UI 구현</small>
+            <small>애니메이션</small>
           </div>
         </article>
         <article class="skill-card">
-          <span>Database</span>
-          <p>MySQL, DynamoDB, Redis (기초)</p>
+          <span>상태 관리 / 연동</span>
+          <p>Provider, Riverpod (기초), REST API 연동, JSON 파싱, Firebase Auth·Firestore</p>
           <div class="skill-tags">
-            <small>스키마 설계</small>
-            <small>쿼리 최적화</small>
-            <small>NoSQL</small>
+            <small>상태 관리</small>
+            <small>API 연동</small>
+            <small>Firebase</small>
           </div>
         </article>
         <article class="skill-card">
-          <span>DevOps / 인프라</span>
-          <p>Docker, AWS (EC2·S3·Lambda), Nginx, Render, GitHub Actions</p>
+          <span>배포 / 협업</span>
+          <p>App Store, Google Play 배포, Android Studio, VS Code, Git, Figma</p>
           <div class="skill-tags">
-            <small>컨테이너</small>
-            <small>CI/CD</small>
-            <small>클라우드</small>
+            <small>iOS 배포</small>
+            <small>Android 배포</small>
+            <small>디자인 협업</small>
           </div>
         </article>
       </div>
@@ -171,7 +171,7 @@
         </p>
         <div class="experience-meta">
           <span>매출액 340억 1,850만원(25년)</span>
-          <span>주요업무: 백엔드 개발 · 자동화 파이프라인 구축</span>
+          <span>주요업무: Flutter 앱 개발 · 콘텐츠 UI 구현</span>
         </div>
       </article>
     </section>
@@ -187,10 +187,10 @@
           <div class="project-summary">
             <span class="project-number">01</span>
             <div class="project-summary-text">
-              <h3>콘텐츠 데이터 수집 및 적재 파이프라인</h3>
+              <h3>오초이스 OTT 앱 기능 개발 및 유지보수</h3>
               <p>
-                키노라이츠 웹사이트 콘텐츠 메타데이터를 Selenium으로 수집하고,
-                Pandas 전처리 후 MySQL에 적재하는 서버 파이프라인을 설계·운영했습니다.
+                Flutter로 개발된 OTT 서비스 "오초이스" 앱의 콘텐츠 목록, 상세 화면,
+                재생 관련 UI를 구현하고 유지보수했습니다.
               </p>
             </div>
           </div>
@@ -198,19 +198,18 @@
             <dl>
               <div>
                 <dt>기간 및 참여인원</dt>
-                <dd>2024.10 ~ 퇴사 전까지 운영 / 개인</dd>
+                <dd>2024.02 ~ 2025.11 / 팀</dd>
               </div>
               <div>
                 <dt>스킬</dt>
-                <dd>Python 3, Selenium 4, Pandas, MySQL, Docker, Render, Jupyter 6</dd>
+                <dd>Flutter, Dart, Provider, REST API</dd>
               </div>
             </dl>
             <ul>
-              <li>콘텐츠 메타데이터 약 1,000건 이상을 평균 10분 내 수집 후 전처리하여 DB에 적재하는 파이프라인을 설계하고, 수작업을 100% 제거했습니다.</li>
-              <li>MySQL 테이블 스키마를 설계하고, 날짜별 적재 및 중복 방지 로직을 구현했습니다.</li>
-              <li>Render Cron Job으로 하루 1회 파이프라인을 자동 실행하도록 구성했습니다.</li>
-              <li>Selenium execute_script 기반 무한 스크롤 처리와 대기 시간 조정으로 동적 페이지 로딩 오류를 크게 줄였습니다.</li>
-              <li>Docker 컨테이너화로 로컬·서버 간 환경 차이 없이 동일한 실행 환경을 보장했습니다.</li>
+              <li>콘텐츠 목록·상세·재생 화면을 Widget Tree 기반으로 구현하고, Provider를 활용해 상태를 관리했습니다.</li>
+              <li>백엔드 REST API와 연동하여 콘텐츠 메타데이터를 비동기 처리로 불러오고 JSON 파싱 레이어를 분리했습니다.</li>
+              <li>다양한 기기 해상도에 대응하는 Responsive Layout을 구성하고 스마트TV 환경에 맞게 UI를 조정했습니다.</li>
+              <li>앱 업데이트 시 iOS·Android 동시 배포 프로세스를 관리했습니다.</li>
             </ul>
           </div>
         </article>
@@ -219,10 +218,10 @@
           <div class="project-summary">
             <span class="project-number">02</span>
             <div class="project-summary-text">
-              <h3>데이터 조회 API 및 운영 자동화</h3>
+              <h3>콘텐츠 순위 데이터 연동 화면</h3>
               <p>
-                적재된 콘텐츠 데이터를 조회하고 비교 분석할 수 있도록 처리 로직을 모듈화하고,
-                Cron 기반 자동 갱신 구조로 운영 부담을 없앴습니다.
+                크롤링 파이프라인에서 수집된 콘텐츠 순위 데이터를 앱 내에서
+                시각화하는 화면을 Flutter로 구현했습니다.
               </p>
             </div>
           </div>
@@ -234,13 +233,13 @@
               </div>
               <div>
                 <dt>스킬</dt>
-                <dd>Python 3, Pandas, MySQL, Docker, Render, Jupyter 6</dd>
+                <dd>Flutter, Dart, REST API, CustomPainter</dd>
               </div>
             </dl>
             <ul>
-              <li>DB에서 날짜별 데이터를 불러와 비교 분석하는 처리 로직을 함수 단위로 분리해 재사용성을 높였습니다.</li>
-              <li>Render Cron Job으로 반복 갱신 작업을 분리하여 하루 1회 자동 실행되도록 구성했습니다.</li>
-              <li>Docker 기반 환경 고정으로 서버 재배포 시 의존성 충돌 없이 안정적으로 운영했습니다.</li>
+              <li>백엔드에서 제공하는 콘텐츠 순위 API를 Flutter 앱에서 호출하고, FutureBuilder로 비동기 데이터를 렌더링했습니다.</li>
+              <li>CustomPainter로 순위 변동 그래프를 직접 그려 시각적으로 비교할 수 있도록 구현했습니다.</li>
+              <li>날짜별 데이터 필터 기능을 추가하여 운영자가 특정 기간의 순위 변화를 손쉽게 확인할 수 있도록 했습니다.</li>
             </ul>
           </div>
         </article>
@@ -249,10 +248,10 @@
           <div class="project-summary">
             <span class="project-number">03</span>
             <div class="project-summary-text">
-              <h3>따릉이 이용 데이터 분석 및 예측 모델 개발</h3>
+              <h3>따릉이 이용 패턴 시각화 앱</h3>
               <p>
-                서울시 공공 API와 기상 데이터를 결합한 통합 데이터셋을 구축하고,
-                회귀 모델로 거치대 수요를 예측해 운영 의사결정 지표를 도출했습니다.
+                따릉이 수요 예측 분석 데이터를 Flutter 앱 형태로 시각화하여
+                구별 거치대 증감 현황을 직관적으로 확인할 수 있도록 구현했습니다.
               </p>
             </div>
           </div>
@@ -264,14 +263,13 @@
               </div>
               <div>
                 <dt>스킬</dt>
-                <dd>Python 3, Pandas, Scikit-learn, Matplotlib</dd>
+                <dd>Flutter, Dart, fl_chart, Python (분석 백엔드)</dd>
               </div>
             </dl>
             <ul>
-              <li>공공 API 데이터와 기상 데이터의 시간 단위 불일치를 datetime 기준으로 정규화 후 병합하여 통합 데이터셋을 구축했습니다.</li>
-              <li>요일·시간대·강수량·기온 기준 그룹화 분석으로 이용 패턴의 주요 영향 요인을 도출했습니다.</li>
-              <li>선형 회귀 대비 랜덤 포레스트 모델에서 MAE 기준 약 15% 이상 예측 오차를 줄였습니다.</li>
-              <li>최종 모델 기준 MAE 약 7~10% 수준의 예측 정확도를 확보하고 거치대 증설 필요 구간을 도출했습니다.</li>
+              <li>fl_chart 라이브러리로 요일·시간대별 이용량 추이를 라인 차트와 바 차트로 시각화했습니다.</li>
+              <li>Python 분석 백엔드에서 REST API로 예측 결과를 받아 Flutter 앱에서 구별 지도 마커로 표시했습니다.</li>
+              <li>StatefulWidget과 setState로 필터 조건(요일·날씨·시간대) 변경 시 차트가 실시간 갱신되도록 구현했습니다.</li>
             </ul>
           </div>
         </article>
@@ -280,10 +278,10 @@
           <div class="project-summary">
             <span class="project-number">04</span>
             <div class="project-summary-text">
-              <h3>CCTV 실시간 낙상 감지 — 처리 파이프라인 및 판별 로직</h3>
+              <h3>CCTV 낙상 감지 — PyQt5 GUI 개발</h3>
               <p>
-                YOLOv5 추론 결과를 바탕으로 다중 조건 판별 로직을 설계하고,
-                프레임 샘플링·경량 모델 선택으로 25 FPS 이상의 실시간 처리 성능을 확보했습니다.
+                YOLOv5 실시간 낙상 감지 시스템의 모니터링 UI를 구현했습니다.
+                Flutter는 아니지만 GUI 설계·이벤트 처리 경험으로 모바일 UI 개발에 직접 연결됩니다.
               </p>
             </div>
           </div>
@@ -295,14 +293,13 @@
               </div>
               <div>
                 <dt>스킬</dt>
-                <dd>Python 3, YOLOv5, OpenCV, PyQt5</dd>
+                <dd>Python 3, PyQt5, YOLOv5, OpenCV</dd>
               </div>
             </dl>
             <ul>
-              <li>바운딩 박스 종횡비, 중심 좌표 이동, 자세 유지 시간을 결합한 다중 조건 판별 로직을 설계하여 오탐률을 30% → 10% 이하로 낮췄습니다.</li>
-              <li>프레임 샘플링과 경량 YOLOv5 모델 조합으로 평균 25 FPS 이상의 실시간 처리 성능을 달성했습니다.</li>
-              <li>Threshold 튜닝과 Temporal 조건 적용으로 false positive를 체계적으로 관리했습니다.</li>
-              <li>PyQt5 기반 UI와 이벤트 로그 모듈을 분리해 처리 결과를 실시간으로 시각화했습니다.</li>
+              <li>실시간 영상 스트림, 이벤트 로그, 낙상 알림을 하나의 화면에서 확인할 수 있는 GUI를 PyQt5로 설계했습니다.</li>
+              <li>신호-슬롯 패턴으로 감지 이벤트와 UI 업데이트를 분리해 화면 렉 없이 처리 결과를 반영했습니다.</li>
+              <li>컴포넌트 단위 UI 설계 경험이 Flutter Widget Tree 구조 이해의 기반이 됐습니다.</li>
             </ul>
           </div>
         </article>
