@@ -4,7 +4,9 @@ if (year) {
   year.textContent = new Date().getFullYear();
 }
 
-const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
+const navLinks = Array.from(document.querySelectorAll(".nav-links a")).filter((link) =>
+  link.getAttribute("href")?.startsWith("#")
+);
 const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
