@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>박준철 — 휴넷 iOS 개발자 이력서</title>
+  <link rel="stylesheet" href="resume.css?v=20260514-hunet" />
+  <style>
+    :root {
+      --accent: #ea580c;
+      --accent-strong: #c2410c;
+      --accent-soft: rgba(234,88,12,0.10);
+      --accent-rgb: 234,88,12;
+    }
+
+    .eyebrow { border-color: rgba(234,88,12,0.24); color: #c2410c; background: rgba(234,88,12,0.08); }
+    .section-title p { color: #c2410c; }
+    .company-label { color: #c2410c; }
+    .project-number { background: rgba(234,88,12,0.1); border-color: rgba(234,88,12,0.22); color: #c2410c; }
+    .certificate-list span { color: #c2410c; background: rgba(234,88,12,0.08); }
+    .primary-button { background: linear-gradient(135deg, #ea580c, #c2410c); box-shadow: 0 4px 20px rgba(234,88,12,0.30); }
+    .primary-button:hover { background: linear-gradient(135deg, #f97316, #ea580c); box-shadow: 0 8px 28px rgba(234,88,12,0.42); }
+    .hero-metrics dt { background: linear-gradient(135deg, #c2410c, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .experience-card::before { background: linear-gradient(180deg, #ea580c 0%, #f97316 100%); }
+    .nav-links a.is-active { color: #c2410c; background: rgba(234,88,12,0.10); }
+    .project-detail li::before { background: #ea580c; }
+    .contact-links a:hover { background: rgba(234,88,12,0.10); border-color: rgba(234,88,12,0.28); color: #c2410c; }
+    .hero-panel::after { background: linear-gradient(135deg, rgba(234,88,12,0.28), rgba(251,146,60,0.18), transparent 60%); }
+    .panel-topline strong { color: #c2410c; background: rgba(234,88,12,0.10); }
+    .skill-card:nth-child(1)::before { background: linear-gradient(90deg, #ea580c, #f97316); }
+    .skill-card:nth-child(2)::before { background: linear-gradient(90deg, #0284c7, #06b6d4); }
+    .skill-card:nth-child(3)::before { background: linear-gradient(90deg, #7c3aed, #a855f7); }
+
+    /* 지원동기 강조 박스 */
+    .motivation-box {
+      margin: 0 0 32px;
+      padding: 22px 24px;
+      border: 1px solid rgba(234,88,12,0.22);
+      border-left: 4px solid #ea580c;
+      border-radius: 8px;
+      background: rgba(234,88,12,0.04);
+    }
+    .motivation-box p {
+      color: #475467;
+      font-size: 15px;
+      line-height: 1.82;
+    }
+
+    /* 핵심성과 하이라이트 */
+    .highlight-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(234,88,12,0.12);
+      color: #c2410c;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    /* 문제-해결 구조 카드 */
+    .problem-solution-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .ps-item {
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .ps-item-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .ps-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .ps-badge-problem {
+      background: rgba(234,88,12,0.10);
+      color: #c2410c;
+    }
+
+    .ps-badge-solve {
+      background: rgba(2,132,199,0.10);
+      color: #0369a1;
+    }
+
+    .ps-item p {
+      color: #475467;
+      font-size: 14px;
+      line-height: 1.72;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="intro">
+    <nav class="nav" aria-label="주요 메뉴">
+      <a class="brand" href="#intro">박준철 <span class="version-tag">휴넷 지원</span></a>
+      <div class="nav-links">
+        <a href="index.html">포트폴리오</a>
+        <a href="#motivation">지원동기</a>
+        <a href="#skills">스킬</a>
+        <a href="#experience">경력</a>
+        <a href="#projects">프로젝트</a>
+        <a href="#certificates">수료증</a>
+        <a href="#contact">연락처</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Flutter · iOS/Android · WebView ↔ Native · 실서비스 1년 10개월</p>
+        <h1>박준철</h1>
+        <p class="hero-lead">
+          OTT 앱의 WebView ↔ Native 연동 구조를 설계하고, FCP 39%·LCP 10.8% 성능 개선을 이끈 모바일 앱 개발자입니다. 이종 서비스 간 앱 마이그레이션과 레거시 분석·전환 경험을 바탕으로 휴넷 iOS 앱 아키텍처 개선에 기여하고 싶습니다.
+        </p>
+        <dl class="profile-list">
+          <div>
+            <dt>전공</dt>
+            <dd>컴퓨터공학과</dd>
+          </div>
+          <div>
+            <dt>복수전공</dt>
+            <dd>모빌리티AI/SW융합전공</dd>
+          </div>
+          <div>
+            <dt>경력</dt>
+            <dd>(주)홈초이스 · 1년 10개월</dd>
+          </div>
+        </dl>
+        <div class="hero-actions">
+          <a class="primary-button" href="#projects">프로젝트 보기</a>
+          <a class="ghost-button" href="mailto:justinnn980@gmail.com">메일 보내기</a>
+        </div>
+        <dl class="hero-metrics" aria-label="주요 성과">
+          <div>
+            <dt>FCP −39%</dt>
+            <dd>WebView 초기 로딩 개선</dd>
+          </div>
+          <div>
+            <dt>LCP −10.8%</dt>
+            <dd>콘텐츠 로딩 성능 개선</dd>
+          </div>
+          <div>
+            <dt>2건</dt>
+            <dd>이종 앱 마이그레이션 완수</dd>
+          </div>
+        </dl>
+      </div>
+      <aside class="hero-panel" aria-label="핵심 역량 요약">
+        <div class="panel-topline">
+          <span>Mobile App Stack</span>
+          <strong>2026</strong>
+        </div>
+        <div class="panel-main">
+          <p>App pipeline</p>
+          <strong>Flutter → WebView ↔ Native → iOS · Android 배포</strong>
+        </div>
+        <div class="panel-grid">
+          <span>Flutter 3</span>
+          <span>Riverpod</span>
+          <span>WebView</span>
+          <span>iOS/AOS</span>
+        </div>
+      </aside>
+    </section>
+  </header>
+
+  <main>
+    <!-- 지원동기 -->
+    <section class="section" id="motivation">
+      <div class="section-title">
+        <p>Motivation</p>
+        <h2>지원동기</h2>
+      </div>
+      <div class="motivation-box">
+        <p>
+          300만 명의 학습자에게 서비스하는 휴넷의 iOS 앱 아키텍처를 개선하고 싶어 지원했습니다.<br><br>
+          저는 OTT 앱에서 WebView를 Native와 연동하는 구조를 직접 설계하고, <strong>FCP 39%·LCP 10.8% 개선</strong>을 이끌어낸 경험이 있습니다. 또한 이종 서비스 간 앱 마이그레이션에서 레거시 구조를 분석하고 안정적으로 전환한 경험은 <strong>Objective-C → Swift 전환 업무</strong>에 바로 적용 가능하다고 생각합니다.<br><br>
+          Codex·Claude Code 등 AI 도구를 활용해 기획·설계·구현 사이클을 가속화하는 데도 익숙하며, 팀의 기술 부채 해소와 개발 생산성 향상에 함께 기여하고 싶습니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- 스킬 -->
+    <section class="section" id="skills">
+      <div class="section-title">
+        <p>Skills</p>
+        <h2>스킬</h2>
+      </div>
+
+      <div class="skill-grid">
+        <article class="skill-card">
+          <span>Flutter · iOS/Android</span>
+          <p>Flutter 2.0~3.38 기반 크로스플랫폼 개발, WKWebView 연동, betterPlayer 커스터마이징, DRM(Multi/NCG) 대응, iOS·Android 동시 배포</p>
+          <div class="skill-tags">
+            <small>크로스플랫폼</small>
+            <small>WebView 연동</small>
+            <small>DRM</small>
+            <small>App Store 배포</small>
+          </div>
+        </article>
+        <article class="skill-card">
+          <span>상태관리 · 아키텍처</span>
+          <p>Riverpod 기반 상태관리, 클린 아키텍처 지향 모듈 설계, JavaScript Bridge, WebSocket 기반 실시간 통신</p>
+          <div class="skill-tags">
+            <small>Riverpod</small>
+            <small>클린 아키텍처</small>
+            <small>JS Bridge</small>
+            <small>WebSocket</small>
+          </div>
+        </article>
+        <article class="skill-card">
+          <span>AI 도구 · 인프라</span>
+          <p>Codex·Claude Code로 기획·설계·구현 전 단계 생산성 향상, AWS EC2/S3/Beanstalk, Docker, Proxy/SSL 인프라 구성</p>
+          <div class="skill-tags">
+            <small>Codex</small>
+            <small>Claude Code</small>
+            <small>AWS</small>
+            <small>Docker</small>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 경력 -->
+    <section class="section" id="experience">
+      <div class="section-title">
+        <p>Experience</p>
+        <h2>경력</h2>
+      </div>
+
+      <article class="experience-card">
+        <div class="experience-heading">
+          <div>
+            <span class="company-label">회사</span>
+            <h3>(주)홈초이스</h3>
+          </div>
+          <p>2024.02.19 ~ 2025.11.03 · 1년 10개월</p>
+        </div>
+        <p>
+          전국 디지털케이블TV 가입가구에 VOD 전용 프로그램을 공급하는 국내 유일 사업자. OTT 서비스 "오초이스"를 Flutter 기반 iOS/Android 앱으로 운영합니다.
+        </p>
+        <div class="experience-meta">
+          <span>매출액 340억 1,850만원(25년)</span>
+          <span>Flutter 앱 개발 · WebView 구조 설계 · 앱 마이그레이션 · 성능 최적화</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- 프로젝트 -->
+    <section class="section" id="projects">
+      <div class="section-title">
+        <p>Projects</p>
+        <h2>프로젝트 경험</h2>
+      </div>
+
+      <div class="project-list">
+
+        <!-- 01 OTT 앱 마이그레이션 -->
+        <article class="project-card">
+          <div class="project-summary">
+            <span class="project-number">01</span>
+            <div class="project-summary-text">
+              <h3>OTT 앱 마이그레이션 및 WebView ↔ Native 전환</h3>
+              <p>
+                LG헬로비전·딜라이브의 기존 앱을 "오초이스" 앱으로 통합 마이그레이션하고, 콘텐츠 화면을 WebView 하이브리드 구조로 전환한 핵심 프로젝트입니다.
+              </p>
+            </div>
+          </div>
+          <div class="project-detail">
+            <dl>
+              <div>
+                <dt>기간 및 참여인원</dt>
+                <dd>2024.02 ~ 2025.10 · 1년 10개월 / 시니어 1명, 개발자 2명, 디자이너 1명</dd>
+              </div>
+              <div>
+                <dt>스킬</dt>
+                <dd>Flutter 3, React 18, TypeScript, Java 17, Spring Boot 2, MySQL, DynamoDB, AWS Elastic Beanstalk, S3, EC2</dd>
+              </div>
+              <div>
+                <dt>협력사</dt>
+                <dd>LG헬로비전(매출액 1조), 딜라이브(매출액 3,500억)</dd>
+              </div>
+            </dl>
+            <ul>
+              <li>콘텐츠 포스터가 많은 화면을 WebView로 분리하여 앱 재배포 없이 운영 요구사항을 실시간으로 반영하는 하이브리드 구조로 전환했습니다.</li>
+              <li>JavaScript Bridge를 활용하여 콘텐츠 선택·재생 시작·구매 흐름 등 핵심 인터랙션을 WebView ↔ Native 간 데이터 동기화 구조로 설계했습니다.</li>
+              <li>FCP/LCP 기준으로 병목을 분석하고 스켈레톤 UI, Lazy Loading, 포스터 이미지 리사이징을 적용하여 FCP 39%, LCP 10.8%를 개선했습니다.</li>
+              <li>기존 앱의 화면 흐름·재생 인터페이스·DRM 구조를 분석하고, 사용자가 기존 경험을 유지하도록 인터페이스를 조정하며 안정적으로 마이그레이션했습니다.</li>
+              <li>Riverpod 기반 상태관리로 최대 3개 셋톱박스 페어링 상태와 콘텐츠 변경 흐름을 안정적으로 관리했습니다.</li>
+              <li>딜라이브 NCG DRM과 오초이스 Multi DRM 호환 문제를 별도 솔루션 없이 플레이어 커스터마이징으로 해결하여 추가 비용과 운영 리스크를 줄였습니다.</li>
+              <li>EC2 기반 Proxy 서버에 Elastic IP를 할당하고 SSL 인증서를 적용하여 전체 통신 구간을 HTTPS로 안정화했습니다.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 문제-해결 상세 -->
+        <article class="project-card">
+          <div class="project-summary">
+            <span class="project-number" style="font-size:11px; padding: 0 8px; width:auto;">심화</span>
+            <div class="project-summary-text">
+              <h3>주요 기술 문제 해결 사례</h3>
+              <p>실서비스 운영 중 직접 분석하고 해결한 기술적 난제 사례입니다.</p>
+            </div>
+          </div>
+          <div class="project-detail">
+            <div class="problem-solution-list">
+              <div class="ps-item">
+                <div class="ps-item-title">
+                  <span class="ps-badge ps-badge-problem">문제</span>
+                  WebView 초기 로딩 성능 저하
+                </div>
+                <p><span class="ps-badge ps-badge-solve">해결</span> FCP·LCP 기준 병목 분석 후 스켈레톤 UI, Lazy Loading, 포스터 이미지 리사이징 적용. <strong>FCP 39%·LCP 10.8% 개선</strong>. 휴넷 WebView 기반 하이브리드 앱 최적화에 직접 적용 가능한 경험입니다.</p>
+              </div>
+              <div class="ps-item">
+                <div class="ps-item-title">
+                  <span class="ps-badge ps-badge-problem">문제</span>
+                  쇼츠형 화면 플레이어 중복 실행 — 사운드 이중 출력
+                </div>
+                <p><span class="ps-badge ps-badge-solve">해결</span> 원본 라이브러리 소스를 직접 수정하여 앱 생명주기 레벨에서 단일 오디오 출력을 보장하는 구조로 개선했습니다.</p>
+              </div>
+              <div class="ps-item">
+                <div class="ps-item-title">
+                  <span class="ps-badge ps-badge-problem">문제</span>
+                  NCG DRM ↔ Multi DRM 호환 이슈
+                </div>
+                <p><span class="ps-badge ps-badge-solve">해결</span> 별도 솔루션 도입 없이 플레이어를 커스터마이징하여 동일 UI·재생 흐름을 제공. 추가 비용과 운영 리스크를 제거했습니다.</p>
+              </div>
+              <div class="ps-item">
+                <div class="ps-item-title">
+                  <span class="ps-badge ps-badge-problem">문제</span>
+                  EC2 로드밸런싱 환경 IP 변경으로 Proxy 불안정
+                </div>
+                <p><span class="ps-badge ps-badge-solve">해결</span> Elastic IP 고정 할당 + SSL 인증서 적용으로 전체 통신 구간을 HTTPS로 구성하여 인프라를 안정화했습니다.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 02 SECT -->
+        <article class="project-card">
+          <div class="project-summary">
+            <span class="project-number">02</span>
+            <div class="project-summary-text">
+              <h3>SECT — AI 에이전트 기반 커뮤니티 웹앱</h3>
+              <p>
+                Codex·Claude Code로 기획부터 ERD 설계, 구현, 배포까지 전 과정을 단독으로 빠르게 완성한 개인 프로젝트입니다.
+              </p>
+            </div>
+          </div>
+          <div class="project-detail">
+            <dl>
+              <div>
+                <dt>기간 및 참여인원</dt>
+                <dd>2026.05 ~ 진행중 / 개인</dd>
+              </div>
+              <div>
+                <dt>스킬</dt>
+                <dd>Codex, Claude Code, Docker, Render</dd>
+              </div>
+            </dl>
+            <ul>
+              <li><strong>기획·설계 단계</strong> — 기능 요구사항 정리, ERD 초안, API 설계 문서 작성을 Claude Code로 수행하여 설계 시간을 단축했습니다.</li>
+              <li><strong>구현 단계</strong> — 반복적인 CRUD, 인증 흐름, 도커 설정 등 패턴이 명확한 코드는 Codex로 초안 생성 후 검토·수정하는 방식으로 구현 속도를 높였습니다.</li>
+              <li>팔로우/팔로잉, 게시글 작성, 좋아요, 채팅 등 커뮤니티 핵심 기능을 포함한 서비스를 단독으로 빠르게 완성했습니다.</li>
+              <li>AI 도구를 단순 코드 생성이 아닌 기획·설계·구현·배포 전 단계 생산성 향상 도구로 활용하는 방법을 검증했습니다.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 03 담아 -->
+        <article class="project-card">
+          <div class="project-summary">
+            <span class="project-number">03</span>
+            <div class="project-summary-text">
+              <h3>담아(Dama) — 구독 관리 커뮤니티 앱</h3>
+              <p>
+                Flutter + Spring Boot 기반 구독 관리 서비스. 도메인 분리·JWT 인증·Soft Delete 등 클린 아키텍처를 지향하며 설계했습니다.
+              </p>
+            </div>
+          </div>
+          <div class="project-detail">
+            <dl>
+              <div>
+                <dt>기간 및 참여인원</dt>
+                <dd>2026.01 ~ 2026.02 · 2개월 / 개발자 2명, 디자이너 1명</dd>
+              </div>
+              <div>
+                <dt>스킬</dt>
+                <dd>Flutter, Spring Boot, JWT, MySQL, Docker</dd>
+              </div>
+            </dl>
+            <ul>
+              <li>User / Subscription / Community 컨텍스트로 분리하여 도메인 기반 구조를 설계했습니다.</li>
+              <li>JWT Access Token / Refresh Token 구조로 Stateless 인증 시스템을 구축했습니다.</li>
+              <li>Soft Delete 정책과 BaseEntity 구조로 데이터 관리 일관성을 확보했습니다.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 04 숫자 대결 -->
+        <article class="project-card">
+          <div class="project-summary">
+            <span class="project-number">04</span>
+            <div class="project-summary-text">
+              <h3>숫자 대결 — 실시간 증감 게임 (3일 MVP)</h3>
+              <p>
+                3일 내 기획부터 Flutter 앱, Spring Boot 백엔드, 배포까지 전 과정을 단독으로 구현한 실시간 게임 앱입니다.
+              </p>
+            </div>
+          </div>
+          <div class="project-detail">
+            <dl>
+              <div>
+                <dt>기간 및 참여인원</dt>
+                <dd>2026.01 ~ 진행중 / 개인</dd>
+              </div>
+              <div>
+                <dt>스킬</dt>
+                <dd>Flutter, Spring Boot, WebSocket, Render</dd>
+              </div>
+            </dl>
+            <ul>
+              <li>다수 사용자가 동시에 값을 변경할 때 데이터 충돌 문제를 서버를 단일 상태 관리 지점으로 설정하고 WebSocket 기반 양방향 통신으로 해결했습니다.</li>
+              <li>데이터 일관성을 유지하면서 실시간 반응성을 확보하고, 빠른 MVP 개발·배포 경험을 쌓았습니다.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 05 CCTV 낙상 감지 -->
+        <article class="project-card">
+          <div class="project-summary">
+            <span class="project-number">05</span>
+            <div class="project-summary-text">
+              <h3>CCTV 실시간 낙상 감지 시스템</h3>
+              <p>
+                YOLOv5 기반 객체 탐지 모델로 CCTV 영상에서 낙상을 실시간 감지하고, AI 추론 정확도와 처리 속도를 동시에 개선한 프로젝트입니다.
+              </p>
+            </div>
+          </div>
+          <div class="project-detail">
+            <dl>
+              <div>
+                <dt>기간 및 참여인원</dt>
+                <dd>2023.05 ~ 2023.07 · 2개월 / 5명</dd>
+              </div>
+              <div>
+                <dt>스킬</dt>
+                <dd>Python 3, YOLOv5, OpenCV, PyQt5</dd>
+              </div>
+            </dl>
+            <ul>
+              <li>바운딩 박스 종횡비, 중심 좌표 이동, 자세 유지 시간을 복합 조건으로 결합하고 Threshold 튜닝을 적용하여 오탐률을 30%에서 10% 이하로 감소시켰습니다.</li>
+              <li>프레임 샘플링과 경량 YOLOv5 모델을 적용하여 평균 25 FPS 이상의 실시간 처리 성능을 확보했습니다.</li>
+              <li>PyQt5 기반 UI로 실시간 영상, 이벤트 로그, 낙상 발생 알림 기능을 통합 제공했습니다.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 06 따릉이 -->
+        <article class="project-card">
+          <div class="project-summary">
+            <span class="project-number">06</span>
+            <div class="project-summary-text">
+              <h3>따릉이 사용량 데이터 통계와 예측</h3>
+              <p>
+                서울시 공공데이터 약 120만 건과 기상 데이터를 결합하여 이용 패턴을 분석하고 거치대 수요를 예측한 데이터 분석 프로젝트입니다.
+              </p>
+            </div>
+          </div>
+          <div class="project-detail">
+            <dl>
+              <div>
+                <dt>기간 및 참여인원</dt>
+                <dd>2023.09 ~ 2023.11 · 3개월 / 2명</dd>
+              </div>
+              <div>
+                <dt>스킬</dt>
+                <dd>Python 3, Pandas, Matplotlib, Scikit-learn</dd>
+              </div>
+            </dl>
+            <ul>
+              <li>시간대·요일·날씨에 따른 이용 패턴을 EDA로 분석하고 구별 거치대 수요를 예측했습니다.</li>
+              <li>선형 회귀 대비 랜덤 포레스트 모델에서 MAE 기준 약 15% 이상 예측 오차를 감소시켰습니다.</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 수료증 -->
+    <section class="section" id="certificates">
+      <div class="section-title">
+        <p>Certificates &amp; Book</p>
+        <h2>수료증 및 저서</h2>
+      </div>
+
+      <div class="certificate-list">
+        <article>
+          <span>정보통신산업진흥원</span>
+          <p>인공지능 기본과정 수료</p>
+        </article>
+        <article>
+          <span>네이버</span>
+          <p>부스트코스 DATA SCIENCE 코칭스터디 2023 수료</p>
+        </article>
+        <article>
+          <span>블로그</span>
+          <p>
+            <a href="https://justinnn980.tistory.com/126" target="_blank" rel="noreferrer">3일만에 앱만들기 프로젝트</a> /
+            <a href="https://justinnn980.tistory.com/134" target="_blank" rel="noreferrer">웹앱 개발하기 as 웹뷰의 필요성</a>
+          </p>
+        </article>
+        <article>
+          <span>저서</span>
+          <p>
+            <a href="https://www.yes24.com/Product/Goods/109711067" target="_blank" rel="noreferrer">
+              개발자가 되기 위해 꼭 알아야하는 IT 용어 — 공동 저자
+            </a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 연락처 -->
+    <section class="section contact" id="contact">
+      <div class="section-title">
+        <p>Contact</p>
+        <h2>연락처</h2>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:justinnn980@gmail.com">Email</a>
+        <a href="https://github.com/justinnn980" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://justinnn980.tistory.com/" target="_blank" rel="noreferrer">블로그</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="currentYear">2026</span> 박준철. All rights reserved.</p>
+  </footer>
+
+  <script src="resume.js"></script>
+</body>
+</html>
