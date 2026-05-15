@@ -11,12 +11,12 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:    #0A0E1A;
-      --bg2:   #111827;
-      --bg3:   #1A2235;
-      --sur:   rgba(255,255,255,0.04);
-      --sur-h: rgba(255,255,255,0.07);
-      --bdr:   rgba(255,255,255,0.08);
+      --bg:    #1A2035;
+      --bg2:   #222B42;
+      --bg3:   #2B3554;
+      --sur:   rgba(255,255,255,0.06);
+      --sur-h: rgba(255,255,255,0.10);
+      --bdr:   rgba(255,255,255,0.11);
       --bdr-a: rgba(0,212,180,0.28);
       --text:  #E2E8F0;
       --muted: #94A3B8;
@@ -194,63 +194,6 @@
     .nm   { color: #F78C6C; }
     .pl   { color: #A6ACCD; }
     .cdiv { margin: 7px 0; border: none; border-top: 1px solid rgba(255,255,255,0.06); }
-
-    /* ── MATCH ── */
-    .motiv {
-      padding: 22px 24px; margin-bottom: 28px;
-      border: 1px solid rgba(0,212,180,0.18); border-left: 3px solid var(--teal);
-      border-radius: var(--r); background: rgba(0,212,180,0.04);
-      font-size: 14px; line-height: 1.85; color: var(--muted);
-    }
-    .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .match-col-h { font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
-    .match-list { display: flex; flex-direction: column; gap: 8px; }
-    .mi {
-      display: flex; align-items: flex-start; gap: 10px;
-      padding: 10px 14px; border: 1px solid var(--bdr);
-      border-radius: var(--r); background: var(--sur);
-      font-size: 13px; font-weight: 600; color: var(--muted);
-      transition: border-color .15s;
-    }
-    .mi:hover { border-color: var(--bdr-a); }
-    .mck {
-      flex-shrink: 0; width: 18px; height: 18px; border-radius: 4px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 10px; font-weight: 900; margin-top: 1px;
-    }
-    .ck-yes  { background: rgba(52,211,153,0.15); color: var(--grn); border: 1px solid rgba(52,211,153,0.25); }
-    .ck-pref { background: rgba(0,212,180,0.12);  color: var(--teal); border: 1px solid rgba(0,212,180,0.22); }
-    .mi-sub  { display: block; font-size: 11px; font-weight: 500; color: var(--soft); margin-top: 2px; }
-
-    /* ── SKILLS ── */
-    .skill-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-    .sk {
-      padding: 22px; border: 1px solid var(--bdr); border-radius: var(--r);
-      background: var(--sur); transition: border-color .15s, transform .15s;
-    }
-    .sk:hover { border-color: var(--bdr-a); transform: translateY(-2px); }
-    .sk-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 14px; }
-    .sk-title { font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
-    .sk-desc  { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
-    .sk-tags  { display: flex; gap: 5px; flex-wrap: wrap; }
-    .sk-tag   { padding: 3px 8px; border-radius: 4px; background: rgba(255,255,255,0.06); border: 1px solid var(--bdr); color: var(--soft); font-size: 11px; font-weight: 700; }
-
-    /* ── EXPERIENCE ── */
-    .exp {
-      padding: 28px; border: 1px solid var(--bdr); border-radius: 12px;
-      background: var(--sur); position: relative; overflow: hidden;
-    }
-    .exp::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-      background: linear-gradient(180deg, var(--teal), var(--ind));
-    }
-    .exp-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
-    .exp-co   { font-size: 11px; font-weight: 800; color: var(--teal); letter-spacing: .5px; margin-bottom: 4px; }
-    .exp-name { font-size: 22px; font-weight: 900; color: var(--text); }
-    .exp-per  { padding: 5px 10px; border-radius: 6px; border: 1px solid var(--bdr); background: rgba(255,255,255,0.03); color: var(--soft); font-size: 12px; font-weight: 700; white-space: nowrap; }
-    .exp-desc { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
-    .exp-meta { display: flex; gap: 8px; flex-wrap: wrap; }
-    .exp-bdg  { padding: 4px 10px; border-radius: 6px; border: 1px solid var(--bdr); background: rgba(255,255,255,0.03); color: var(--soft); font-size: 12px; font-weight: 700; }
 
     /* ── PROBLEM CARDS ── */
     .prob-list { display: grid; gap: 20px; }
