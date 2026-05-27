@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 포트폴리오 — 이노시뮬레이션 시뮬레이터 응용SW 개발자</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bl:   #3B82F6;
+      --bl-l: #BFDBFE;
+      --bl-d: #1E3A5F;
+      --bg:   #060810;
+      --card: #0A0F1E;
+      --card2:#0F1526;
+      --bdr:  #1A2440;
+      --text: #F9FAFB;
+      --sub:  #D1D5DB;
+      --muted:#9CA3AF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans KR', 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: #60A5FA; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(6,8,16,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bdr);
+      padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 52px;
+    }
+    .nav-name { font-weight: 800; font-size: 15px; }
+    .nav-tag  { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: rgba(59,130,246,0.15); color: #60A5FA; margin-left: 8px; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px; margin: 0 auto; padding: 64px 40px 48px;
+      display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: start;
+    }
+    .hero-badge {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3);
+      color: #60A5FA; font-size: 12px; font-weight: 700; margin-bottom: 16px;
+    }
+    .hero-name { font-size: 44px; font-weight: 900; line-height: 1.1; margin-bottom: 8px; letter-spacing: -1px; }
+    .hero-role { font-size: 18px; font-weight: 700; color: #60A5FA; margin-bottom: 16px; }
+    .hero-lead { font-size: 14.5px; color: var(--sub); line-height: 1.85; margin-bottom: 28px; max-width: 480px; }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: var(--bdr); border-radius: 10px; overflow: hidden; margin-bottom: 28px;
+    }
+    .stat { background: var(--card); padding: 14px 10px; text-align: center; }
+    .stat-num   { font-size: 16px; font-weight: 900; color: #60A5FA; }
+    .stat-label { font-size: 10.5px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+    .hero-contacts { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-contact  { font-size: 13px; color: var(--muted); }
+
+    /* CODE PANEL */
+    .code-panel { background: #030408; border: 1px solid var(--bdr); border-radius: 12px; overflow: hidden; }
+    .code-header { background: var(--card); padding: 10px 16px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--bdr); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; } .dot-y { background: #FFBD2E; } .dot-g { background: #28C840; }
+    .code-filename { font-size: 12px; color: var(--muted); margin-left: 6px; font-family: 'JetBrains Mono', monospace; }
+    .code-divider  { padding: 6px 20px; background: rgba(59,130,246,0.07); border-top: 1px solid var(--bdr); border-bottom: 1px solid var(--bdr); font-size: 11px; font-weight: 700; color: #60A5FA; font-family: 'JetBrains Mono', monospace; letter-spacing: 1px; }
+    .code-body { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.85; }
+    .code-body-sm { padding: 16px 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.75; }
+    .c-cmt { color: #3A5070; }
+    .c-kw  { color: #93C5FD; }
+    .c-str { color: #BFDBFE; }
+    .c-num { color: #FBBF24; }
+    .c-fn  { color: #60A5FA; }
+    .c-var { color: #F9FAFB; }
+    .c-prop{ color: #A5F3FC; }
+    .c-type{ color: #67E8F9; }
+    .c-dec { color: #93C5FD; }
+    .c-ann { color: #FDE68A; }
+    .c-pp  { color: #C4B5FD; }
+
+    /* SECTION */
+    .section { max-width: 1100px; margin: 0 auto; padding: 56px 40px; border-top: 1px solid var(--bdr); }
+    .sec-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #60A5FA; margin-bottom: 6px; }
+    .sec-title { font-size: 26px; font-weight: 900; margin-bottom: 8px; }
+    .sec-sub   { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+
+    /* MATCH GRID */
+    .match-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .match-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px; transition: border-color .2s; }
+    .match-card:hover { border-color: rgba(59,130,246,0.35); }
+    .match-icon  { font-size: 24px; margin-bottom: 10px; }
+    .match-title { font-size: 14px; font-weight: 800; margin-bottom: 8px; }
+    .match-desc  { font-size: 12.5px; color: var(--sub); line-height: 1.7; }
+    .match-proof { margin-top: 8px; padding: 6px 10px; background: rgba(59,130,246,0.08); border-radius: 6px; font-size: 11.5px; color: #93C5FD; font-weight: 600; }
+
+    /* PROBLEM CARDS */
+    .prob-list { display: grid; gap: 18px; }
+    .prob-card {
+      background: var(--card); border: 1px solid var(--bdr);
+      border-left: 3px solid var(--bl); border-radius: 0 12px 12px 0; padding: 22px 26px;
+    }
+    .prob-num   { font-size: 11px; font-weight: 800; color: #60A5FA; letter-spacing: 1px; margin-bottom: 8px; }
+    .prob-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+    .prob-flow  { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .pf-tag    { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; background: var(--card2); color: var(--sub); }
+    .pf-arrow  { color: #60A5FA; font-size: 14px; }
+    .pf-result { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; background: rgba(59,130,246,0.15); color: #BFDBFE; }
+    .prob-desc { font-size: 13px; color: var(--sub); line-height: 1.75; }
+    .prob-desc strong { color: var(--text); font-weight: 700; }
+
+    /* SIDE-BY-SIDE */
+    .sbs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    .sbs-box { background: var(--card2); border: 1px solid var(--bdr); border-radius: 8px; padding: 12px 14px; }
+    .sbs-label { font-size: 11px; font-weight: 800; color: #60A5FA; margin-bottom: 5px; }
+    .sbs-body  { font-size: 12px; color: var(--sub); line-height: 1.6; }
+
+    /* PROJ GRID */
+    .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .proj-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px; transition: border-color .2s; }
+    .proj-card:hover { border-color: rgba(59,130,246,0.35); }
+    .proj-head   { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+    .proj-title  { font-size: 14px; font-weight: 800; }
+    .proj-period { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .proj-sub    { font-size: 12px; color: #60A5FA; font-weight: 700; margin-bottom: 8px; }
+    .tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+    .tag { padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: 700; background: var(--bdr); color: var(--sub); }
+    .tag.hl { background: rgba(59,130,246,0.12); color: #93C5FD; }
+    .ul { list-style: none; display: grid; gap: 5px; }
+    .ul li { font-size: 12.5px; color: var(--sub); padding-left: 14px; position: relative; line-height: 1.6; }
+    .ul li::before { content: '▸'; position: absolute; left: 0; color: #60A5FA; font-size: 9px; top: 3px; }
+    .ul li strong { color: var(--text); font-weight: 700; }
+
+    /* CAREER */
+    .career-co     { font-size: 20px; font-weight: 900; margin-bottom: 4px; }
+    .career-role   { font-size: 13px; font-weight: 700; color: #60A5FA; margin-bottom: 4px; }
+    .career-period { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .career-desc   { font-size: 12.5px; color: var(--muted); margin-bottom: 12px; padding: 8px 12px; background: var(--card2); border-radius: 8px; border-left: 3px solid var(--bdr); }
+
+    /* STRENGTH BOX */
+    .strength-box {
+      margin-top: 32px; padding: 24px 28px; background: var(--card); border: 1px solid var(--bdr); border-radius: 12px;
+    }
+    .strength-title { font-size: 13px; font-weight: 800; margin-bottom: 14px; color: #60A5FA; }
+    .strength-grid  { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .strength-item  { background: var(--card2); border: 1px solid var(--bdr); border-radius: 8px; padding: 12px 14px; }
+    .si-label { font-size: 11px; font-weight: 800; color: #93C5FD; margin-bottom: 4px; }
+    .si-body  { font-size: 12px; color: var(--sub); line-height: 1.6; }
+
+    footer { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--bdr); }
+
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .match-grid, .proj-grid, .sbs, .strength-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">박준철<span class="nav-tag">C++ 시뮬레이터 SW</span></div>
+  <div class="nav-links">
+    <a href="#match">역량 매칭</a>
+    <a href="#problem">문제 해결</a>
+    <a href="#career">경력</a>
+    <a href="#projects">프로젝트</a>
+    <a href="#contact">연락처</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-badge">이노시뮬레이션 · 시뮬레이터 응용SW 개발자 지원</div>
+    <div class="hero-name">박준철</div>
+    <div class="hero-role">시스템 SW 개발자 · 실시간 처리 · C/C++ 기반</div>
+    <div class="hero-lead">
+      컴퓨터공학과 전공으로 C/C++ 자료구조·알고리즘·운영체제·시스템프로그래밍을 체계적으로 이수했습니다.<br/><br/>
+      실무에서는 <strong style="color:var(--text);">라이브러리 내부를 소스 레벨에서 분석해 근본 원인을 해결</strong>하고, WebSocket 기반 실시간 동시성 시스템을 설계한 경험이 있습니다. YOLOv5 + OpenCV로 제한된 하드웨어에서 25FPS 실시간 추론을 구현했으며, 새로운 기술 스택을 빠르게 습득해 실서비스에 적용해온 이력을 바탕으로 C++ 시뮬레이터 도메인에 기여하겠습니다.
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">CS 전공</div>
+        <div class="stat-label">C/C++ 자료구조<br/>OS·시스템프로그래밍</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">소스 레벨</div>
+        <div class="stat-label">라이브러리 내부 분석<br/>근본 원인 해결</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">25 FPS</div>
+        <div class="stat-label">실시간 영상처리<br/>YOLOv5 + OpenCV</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">멀티스레드</div>
+        <div class="stat-label">동시성 설계<br/>실시간 상태 동기화</div>
+      </div>
+    </div>
+    <div class="hero-contacts">
+      <span class="hero-contact">📞 010-2538-1519</span>
+      <span class="hero-contact">✉ justinnn980@gmail.com</span>
+      <span class="hero-contact">📝 <a href="https://justinnn980.tistory.com">justinnn980.tistory.com</a></span>
+    </div>
+  </div>
+
+  <!-- CODE PANEL -->
+  <div class="code-panel">
+    <div class="code-header">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="code-filename">RealtimeStateManager.cpp</span>
+    </div>
+    <div class="code-divider">▶ C++ · 실시간 상태 관리 (학습 구현)</div>
+    <div class="code-body">
+<span class="c-pp">#include</span> <span class="c-str">&lt;atomic&gt;</span>
+<span class="c-pp">#include</span> <span class="c-str">&lt;mutex&gt;</span>
+<span class="c-pp">#include</span> <span class="c-str">&lt;thread&gt;</span>
+<br/>
+<span class="c-kw">class</span> <span class="c-type">RealtimeStateManager</span> {
+<span class="c-kw">public</span>:
+  <span class="c-kw">void</span> <span class="c-fn">updateLoop</span>() {
+    <span class="c-kw">while</span> (<span class="c-var">m_running</span>.<span class="c-fn">load</span>()) {
+      <span class="c-type">auto</span> <span class="c-var">delta</span> = <span class="c-fn">calcDeltaTime</span>();
+      {
+        <span class="c-type">std::lock_guard</span>&lt;<span class="c-type">std::mutex</span>&gt;
+          <span class="c-fn">lock</span>(<span class="c-var">m_stateMutex</span>);
+        <span class="c-var">m_state</span>.<span class="c-fn">update</span>(<span class="c-var">delta</span>);
+      }
+      <span class="c-fn">notifyObservers</span>(<span class="c-var">m_state</span>);
+    }
+  }
+<span class="c-kw">private</span>:
+  <span class="c-type">std::atomic</span>&lt;<span class="c-kw">bool</span>&gt;  <span class="c-var">m_running</span>{<span class="c-num">true</span>};
+  <span class="c-type">std::mutex</span>          <span class="c-var">m_stateMutex</span>;
+  <span class="c-type">SimulatorState</span>      <span class="c-var">m_state</span>;
+};
+    </div>
+    <div class="code-divider" style="background:rgba(139,92,246,0.06); color:#C4B5FD;">≡ 유사 경험 — WebSocket 서버 단일 상태 관리 (Kotlin)</div>
+    <div class="code-body-sm">
+<span class="c-cmt">// 서버를 단일 상태 원천으로 설계</span>
+<span class="c-cmt">// 동시 입력 충돌 방지 — 실제 구현 경험</span>
+<span class="c-kw" style="color:#C4B5FD;">class</span> <span class="c-type" style="color:#A78BFA;">GameStateManager</span> {
+  <span class="c-kw" style="color:#C4B5FD;">private val</span> <span class="c-var">_state</span> =
+    <span class="c-type" style="color:#A78BFA;">MutableStateFlow</span>(<span class="c-type" style="color:#A78BFA;">GameState</span>())
+
+  <span class="c-kw" style="color:#C4B5FD;">fun</span> <span class="c-fn" style="color:#A78BFA;">applyInput</span>(<span class="c-var">input</span>: <span class="c-type" style="color:#A78BFA;">PlayerInput</span>) {
+    <span class="c-var">_state</span>.<span class="c-fn" style="color:#A78BFA;">update</span> { <span class="c-var">it</span>.<span class="c-fn" style="color:#A78BFA;">apply</span>(<span class="c-var">input</span>) }
+    <span class="c-fn" style="color:#A78BFA;">broadcast</span>(<span class="c-var">_state</span>.<span class="c-var">value</span>)
+  }
+}
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01: 역량 매칭 -->
+<div class="section" id="match">
+  <div class="sec-label">Section 01</div>
+  <div class="sec-title">시뮬레이터 응용SW 개발자 — 요건별 역량</div>
+  <div class="sec-sub">전공 이수, 실무 경험, 프로젝트를 통해 형성된 역량과 공고 요건을 1:1로 대응했습니다.</div>
+  <div class="match-grid">
+
+    <div class="match-card">
+      <div class="match-icon">⚙️</div>
+      <div class="match-title">C/C++ 전공 기반 — 자료구조·알고리즘·OS·시스템프로그래밍</div>
+      <div class="match-desc">컴퓨터공학과 전공 과정에서 C/C++ 기반 자료구조, 알고리즘, 운영체제, 시스템프로그래밍을 체계적으로 이수. 메모리 관리, 포인터, 스택·힙 구조, 프로세스·스레드, 동기화 메커니즘을 이론과 실습으로 학습. 복수전공(모빌리티AI/SW융합)을 통해 임베디드·시스템 수준의 SW 구조까지 이해.</div>
+      <div class="match-proof">컴퓨터공학과 주요 이수: 자료구조 / 알고리즘 / 운영체제 / 시스템프로그래밍(C/C++) / 컴퓨터구조 / 소프트웨어공학</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-icon">🔬</div>
+      <div class="match-title">라이브러리 소스 직접 분석 — 복잡한 C++ 코드베이스 해독 능력</div>
+      <div class="match-desc">실서비스에서 API 문서만으로 해결되지 않는 문제를 만났을 때, 라이브러리 원본 소스를 직접 열어 내부 초기화·생명주기·상태 전이 흐름을 분석해 근본 원인을 찾는 경험을 보유. 이 능력은 C++ 시뮬레이터처럼 대규모 레거시 코드베이스에 합류할 때 즉시 발휘되는 역량.</div>
+      <div class="match-proof">플레이어 라이브러리 원본 소스 분석 → Android 생명주기 레벨 이슈 근본 해결</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-icon">⏱️</div>
+      <div class="match-title">실시간 처리 설계 경험 — 멀티 클라이언트 동시성 제어</div>
+      <div class="match-desc">여러 클라이언트가 동시에 상태를 변경할 때 발생하는 데이터 충돌 문제를 서버 중심 상태 관리(Single Source of Truth)로 해결. 입력 직렬화, 상태 브로드캐스트, Optimistic Update 구조를 직접 설계·구현. 시뮬레이터의 실시간 상태 동기화 요구와 동일한 사고 구조 적용 가능.</div>
+      <div class="match-proof">숫자 대결: WebSocket 서버 중심 동시성 제어 — 기획부터 배포 3일 단독 구현</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-icon">🎯</div>
+      <div class="match-title">실시간 영상 처리 — YOLOv5 + OpenCV 25FPS 추론</div>
+      <div class="match-desc">Python 기반이지만 OpenCV의 이미지 처리 파이프라인(BGR 변환, 프레임 샘플링, ROI 분석)과 YOLOv5 추론 구조를 직접 구현. 제한된 컴퓨팅 환경에서 경량 모델과 프레임 샘플링 전략을 조합해 평균 25 FPS 이상의 실시간 처리를 확보. OpenCV는 C++ 네이티브 라이브러리이므로 C++ 환경에서 동일한 구조 적용 가능.</div>
+      <div class="match-proof">CCTV 실시간 이상 감지 시스템 — 오탐률 30% → 10% 이하 + 25FPS 확보</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-icon">🏗</div>
+      <div class="match-title">복잡한 상태 관리 설계 — 멀티 디바이스 실시간 동기화</div>
+      <div class="match-desc">단일 모바일 기기에서 최대 3개의 셋톱박스 연결 상태를 실시간으로 추적하며, 연결·종료·변경 이벤트마다 콘텐츠 상태가 즉시 갱신되도록 관찰자 패턴(Observer Pattern) 기반 상태 관리 구조를 설계. 시뮬레이터의 다중 입출력 장치 상태 관리와 동일한 설계 사고.</div>
+      <div class="match-proof">헬로tv 마이그레이션: 셋톱박스 3대 동시 연결, 실시간 콘텐츠 상태 전이 설계</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-icon">🚀</div>
+      <div class="match-title">빠른 기술 습득 → 실서비스 적용 이력</div>
+      <div class="match-desc">Flutter, Java/Spring Boot, Python(AI), React를 각각 단기간에 습득해 매출 1조·3,500억 파트너사 실서비스에 적용. C++ 도메인 역시 전공 기반 핵심 개념을 갖추고 있어, 실무 특화 코드베이스와 MFC 프레임워크를 빠르게 학습해 기여할 수 있다는 자신감의 근거.</div>
+      <div class="match-proof">Flutter(앱) · Kotlin(백엔드) · Python(AI) · React(프론트) — 실서비스 적용 전 과정 직접 수행</div>
+    </div>
+
+  </div>
+
+  <div class="strength-box">
+    <div class="strength-title">C++ 시뮬레이터 SW 개발에 바로 연결되는 경험 매핑</div>
+    <div class="strength-grid">
+      <div class="strength-item">
+        <div class="si-label">전공 C/C++ → 시뮬레이터 코드베이스 분석</div>
+        <div class="si-body">자료구조·OS·시스템프로그래밍 전공 이수 → 포인터 관리, 메모리 레이아웃, 스레드 동기화를 이론 수준에서 이해하고 있어 C++ 코드베이스 합류 속도가 빠름</div>
+      </div>
+      <div class="strength-item">
+        <div class="si-label">라이브러리 소스 분석 경험 → 레거시 C++ 코드 독해</div>
+        <div class="si-body">API 문서가 없거나 불충분한 상황에서 소스를 직접 추적해 동작 원리를 파악한 경험 → 대규모 레거시 시뮬레이터 코드베이스에서 동일한 방식으로 접근 가능</div>
+      </div>
+      <div class="strength-item">
+        <div class="si-label">실시간 동시성 설계 → 시뮬레이터 루프 이해</div>
+        <div class="si-body">멀티 클라이언트 입력 직렬화, 상태 원자적 업데이트, 구독자 알림 구조를 직접 설계 → 시뮬레이터 업데이트 루프의 mutex·atomic·조건 변수 활용 구조와 동일한 개념</div>
+      </div>
+      <div class="strength-item">
+        <div class="si-label">OpenCV 실시간 파이프라인 → C++ 네이티브 연동</div>
+        <div class="si-body">OpenCV는 C++ 네이티브 라이브러리 — Python 바인딩을 통해 구현했지만 Mat 구조, 프레임 처리 파이프라인, ROI 분석 구조는 C++ 구현과 직접 대응. 시뮬레이터의 렌더링·처리 파이프라인 이해에 연결 가능</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 02: 문제 해결 -->
+<div class="section" id="problem">
+  <div class="sec-label">Section 02</div>
+  <div class="sec-title">실제 문제를 구조적으로 해결한 경험</div>
+  <div class="sec-sub">C++ 시뮬레이터 환경에서도 동일한 사고 방식으로 대응할 수 있습니다.</div>
+  <div class="prob-list">
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 01</div>
+      <div class="prob-title">라이브러리 소스 직접 분석 — Android 생명주기 레벨 근본 해결 (C++ 코드베이스 분석 능력과 직결)</div>
+      <div class="prob-flow">
+        <span class="pf-tag">스크롤 시 오디오 이중 출력</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">API 문서로 해결 불가 판단</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">원본 라이브러리 소스 직접 추적</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">생명주기 분리로 완전 해결</span>
+      </div>
+      <div class="prob-desc">
+        딜라이브 마이그레이션에서 쇼츠형 피드 스크롤 시 이전 영상의 오디오가 겹쳐 출력되는 문제 발생. 단순 재생 메서드 재호출로 내부 생명주기를 제어할 수 없다는 사실을 인지하고, <strong>원본 플레이어 라이브러리 소스를 직접 열어 초기화·재생·해제 흐름을 파악</strong>한 뒤 생명주기를 명시적으로 분리 호출해 근본 해결. 이 접근 방식은 C++ 시뮬레이터 코드베이스에서 문서화되지 않은 동작 원리를 추적할 때 동일하게 적용됩니다.
+      </div>
+      <div class="sbs">
+        <div class="sbs-box">
+          <div class="sbs-label">기존 접근 (표면 수준)</div>
+          <div class="sbs-body">재생 API 재호출 → 내부 상태 미초기화 → 오디오 잔존</div>
+        </div>
+        <div class="sbs-box">
+          <div class="sbs-label">소스 분석 후 (근본 해결)</div>
+          <div class="sbs-body">생성 / 재생 / 해제 단계 명시적 분리 호출 → 오디오 겹침 완전 제거</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 02</div>
+      <div class="prob-title">실시간 동시성 문제 — 서버 중심 상태 관리로 데이터 일관성 확보</div>
+      <div class="prob-flow">
+        <span class="pf-tag">다중 클라이언트 동시 입력</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">상태 충돌·불일치 가능성</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">서버 단일 상태 원천 설계</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">충돌 없는 실시간 동기화</span>
+      </div>
+      <div class="prob-desc">
+        실시간 숫자 대결 게임에서 여러 클라이언트가 동시에 값을 변경하면 데이터 불일치가 발생하는 동시성 문제. <strong>서버를 단일 상태 원천(Single Source of Truth)으로 설계</strong>해 모든 상태 변경 요청을 서버에서 순차 처리. 클라이언트에는 Optimistic Update로 즉각 UI 반응을 주고 서버 확정값으로 최종 동기화. C++ 시뮬레이터에서 멀티스레드 환경의 mutex·조건 변수를 통한 상태 직렬화와 동일한 사고.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 03</div>
+      <div class="prob-title">실시간 영상 처리 성능 확보 — 제한된 환경에서 25FPS 실시간 추론</div>
+      <div class="prob-flow">
+        <span class="pf-tag">전체 프레임 처리 시 추론 속도 부족</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">경량 YOLOv5 모델 선택</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">프레임 샘플링 + ROI 분석</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">평균 25FPS 이상 확보</span>
+      </div>
+      <div class="prob-desc">
+        CCTV 실시간 이상 감지 시스템에서 일반 컴퓨팅 환경에 전체 프레임을 그대로 추론했을 때 실시간 처리가 불가능했습니다. <strong>YOLOv5 경량 모델 채택, 프레임 샘플링(N 프레임당 1회 추론), 관심 영역(ROI) 중심 처리를 조합</strong>해 평균 25FPS 이상의 실시간 처리 성능을 확보. OpenCV Mat 구조·BGR 변환·프레임 파이프라인은 C++ 네이티브 구현과 직접 대응됩니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 04</div>
+      <div class="prob-title">오탐률 알고리즘 개선 — 복합 조건 + Temporal 필터로 30% → 10% 이하</div>
+      <div class="prob-flow">
+        <span class="pf-tag">단순 객체 탐지로 오탐 30%</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">바운딩 박스·중심 좌표·자세 분석 결합</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Threshold + Temporal 조건 적용</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">오탐률 10% 이하 달성</span>
+      </div>
+      <div class="prob-desc">
+        단순 객체 탐지만으로는 기대기·구분리기 등 일상 동작을 이상으로 오인하는 오탐률이 약 30%에 달했습니다. <strong>바운딩 박스 종횡비, 중심 좌표 이동 거리, 자세 유지 시간을 복합 조건으로 결합</strong>하고 Threshold 필터링과 Temporal 조건(지속 시간 임계)을 추가해 오탐률을 10% 이하로 감소. 파라미터 기반 조건 튜닝과 성능 측정을 반복하는 방식은 시뮬레이터 파라미터 최적화 작업과 유사한 접근.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 05</div>
+      <div class="prob-title">멀티 디바이스 상태 분리 설계 — 연결·기기·콘텐츠 단위 독립 관리</div>
+      <div class="prob-flow">
+        <span class="pf-tag">3대 셋톱박스 상태 혼재·렌더링 오류</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">도메인별 상태 분리 설계</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">각 상태 독립 변경·구독 구조 완성</span>
+      </div>
+      <div class="prob-desc">
+        헬로tv 마이그레이션에서 셋톱박스 최대 3대의 상태를 단일 구조로 관리하면 상태가 혼재되어 잘못된 콘텐츠가 노출되는 문제 발생. <strong>연결 상태 / 기기 노출 / 콘텐츠 접근 권한을 각각 독립된 관리 단위로 분리</strong>해 각 상태가 독립적으로 변경·구독되도록 재설계. 다중 입출력을 처리하는 시뮬레이터에서 각 장치 상태를 독립 모듈로 분리 관리하는 구조와 동일한 설계 원칙.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 06</div>
+      <div class="prob-title">네트워크 인프라 구조적 해결 — Elastic IP + HTTPS 전 구간 보안 적용</div>
+      <div class="prob-flow">
+        <span class="pf-tag">로드밸런싱 환경 IP 변경 → 방화벽 차단</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">EC2 Elastic IP 고정 구조 재설계</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">SSL 인증서 Proxy 서버 직접 적용</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">안정적 통신 + 전 구간 HTTPS 보안</span>
+      </div>
+      <div class="prob-desc">
+        로드밸런싱 환경에서 Proxy 서버 IP가 변경되며 방화벽에 의해 요청이 차단되는 인프라 문제 발생. <strong>EC2 기반 Proxy 서버에 Elastic IP를 할당해 고정 IP 구조로 재설계</strong>하고, HTTP→HTTPS 전환 시 SSL 인증서를 Proxy 서버에 직접 적용해 전체 통신 구간을 HTTPS로 안전하게 전환. 시스템 레벨 문제를 구조적으로 접근해 근본 해결한 사례.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 03: 경력 -->
+<div class="section" id="career">
+  <div class="sec-label">Section 03</div>
+  <div class="sec-title">경력</div>
+  <div class="sec-sub"></div>
+
+  <div class="career-co">(주)홈초이스</div>
+  <div class="career-role">Flutter 앱 개발자 · iOS / Android 앱 개발 및 유지보수</div>
+  <div class="career-period">2024.02 ~ 2025.11 · 1년 10개월</div>
+  <div class="career-desc">전국 디지털케이블TV VOD 공급 국내 1위 · OTT 서비스 "오초이스" · 매출 340억 / LG헬로비전(매출 1조) · 딜라이브(매출 3,500억) 파트너사 마이그레이션 2건 개발 주도</div>
+  <ul class="ul">
+    <li><strong>플레이어 라이브러리 소스 직접 분석</strong> → Android 생명주기 레벨 근본 이슈 해결 (C++ 코드베이스 분석 역량 직결)</li>
+    <li>멀티 디바이스 실시간 상태 동기화 — 셋톱박스 3대 연결·콘텐츠 상태를 도메인별 분리 설계</li>
+    <li>DRM(NCG / Widevine / FairPlay) 라이브러리 내부 커스터마이징 → 단일 플레이어 인터페이스로 통합</li>
+    <li>React + Flutter WebView JS Bridge 양방향 통신 구조 설계 → FCP 39% 단축, LCP 10.8% 개선</li>
+    <li>Flutter 2 → 3 메이저 버전업 — 전체 의존성 재검토, 비호환 라이브러리 교체·안정적 업그레이드 완료</li>
+    <li>LG헬로비전·딜라이브 파트너사 앱 마이그레이션 2건 주도 (팀 4인 · 개발 3/디자인 1)</li>
+    <li>네트워크 인프라 구조적 해결 — EC2 Elastic IP, SSL 적용, HTTPS 전 구간 보안 전환</li>
+  </ul>
+</div>
+
+<!-- SECTION 04: 프로젝트 -->
+<div class="section" id="projects">
+  <div class="sec-label">Section 04</div>
+  <div class="sec-title">프로젝트</div>
+  <div class="sec-sub"></div>
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">CCTV 실시간 이상 감지 시스템</span>
+        <span class="proj-period">2023.05–2023.07 · 5인</span>
+      </div>
+      <div class="proj-sub">Python 3 / YOLOv5 / OpenCV / PyQt5 — 실시간 영상처리 + 온디바이스 추론</div>
+      <div class="tags">
+        <span class="tag hl">YOLOv5 + OpenCV</span><span class="tag hl">25FPS 실시간 처리</span>
+        <span class="tag">오탐률 30%→10%</span><span class="tag">PyQt5 GUI</span>
+      </div>
+      <ul class="ul">
+        <li>YOLOv5 객체 탐지 + OpenCV 이미지 처리로 CCTV 영상에서 이상 행동 실시간 감지</li>
+        <li>경량 모델 + 프레임 샘플링 + ROI 분석으로 <strong>평균 25FPS 이상 실시간 처리 성능</strong> 확보</li>
+        <li>복합 조건(바운딩 박스·중심 좌표·자세 지속 시간) + Temporal 필터 → <strong>오탐률 30% → 10% 이하</strong></li>
+        <li>PyQt5 GUI: 실시간 영상 출력 + 이벤트 로그 + 경보 알림을 단일 화면 통합</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">숫자 대결 — WebSocket 실시간 게임</span>
+        <span class="proj-period">2026.01~ · 솔로 3일</span>
+      </div>
+      <div class="proj-sub">Flutter / Kotlin Spring Boot / WebSocket / Render — 기획부터 배포까지 단독</div>
+      <div class="tags">
+        <span class="tag hl">실시간 동시성 설계</span><span class="tag hl">서버 중심 상태 관리</span>
+        <span class="tag">WebSocket</span><span class="tag">Kotlin</span><span class="tag">Render</span>
+      </div>
+      <ul class="ul">
+        <li>서버를 단일 상태 원천으로 설계 — 다중 클라이언트 동시 입력 충돌 방지</li>
+        <li>Optimistic Update(즉각 UI 반응) + 서버 확정값 동기화로 실시간 일관성 확보</li>
+        <li>기획/Flutter/Kotlin 서버/배포 <strong>전 과정 3일 내 단독 구현</strong> · <a href="https://justinnn980.tistory.com/126">블로그 포스트</a></li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">헬로tv → 오초이스 앱 마이그레이션</span>
+        <span class="proj-period">2025.02–2025.10</span>
+      </div>
+      <div class="proj-sub">LG헬로비전 (매출 1조) · 팀 4인 · Flutter / React / Spring Boot / AWS</div>
+      <div class="tags">
+        <span class="tag hl">멀티 디바이스 상태 설계</span><span class="tag hl">FCP −39%</span>
+        <span class="tag">Riverpod</span><span class="tag">WebView Bridge</span><span class="tag">AWS</span>
+      </div>
+      <ul class="ul">
+        <li>셋톱박스 3대 상태를 연결/기기/콘텐츠 단위로 분리 설계 → 상태 독립 변경·구독 구조</li>
+        <li>React + WebView JS Bridge 양방향 설계 → 앱 배포 없이 콘텐츠 즉시 반영</li>
+        <li><strong>FCP 39% 단축, LCP 10.8% 개선</strong> — 지표 기반 병목 분석 후 최적화</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">딜라이브 모바일TV → 오초이스 마이그레이션</span>
+        <span class="proj-period">2024.02–2024.11</span>
+      </div>
+      <div class="proj-sub">딜라이브 (매출 3,500억) · 팀 4인 · Flutter / DRM / Spring Boot</div>
+      <div class="tags">
+        <span class="tag hl">라이브러리 소스 분석</span><span class="tag hl">DRM 통합</span>
+        <span class="tag">Flutter 2→3</span><span class="tag">NCG DRM</span><span class="tag">Widevine</span>
+      </div>
+      <ul class="ul">
+        <li><strong>플레이어 라이브러리 소스 직접 분석</strong> → 생명주기 분리로 오디오 이중 출력 완전 해결</li>
+        <li>NCG DRM → Multi DRM 단일 플레이어로 통합, 내부 추상화로 서비스 무관 사용자 경험</li>
+        <li>Flutter 2 → 3 버전업 — 전체 의존성 재검토, 안정적 업그레이드 완료</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">담아(Dama) — 구독 통합 관리 서비스</span>
+        <span class="proj-period">2026.01–2026.02</span>
+      </div>
+      <div class="proj-sub">팀 3인 · Flutter / Kotlin Spring Boot / JWT / MySQL / Docker</div>
+      <div class="tags">
+        <span class="tag hl">Clean Architecture</span><span class="tag hl">도메인 분리 설계</span>
+        <span class="tag">Kotlin</span><span class="tag">Spring Boot</span><span class="tag">Docker</span>
+      </div>
+      <ul class="ul">
+        <li>Kotlin으로 User / Subscription / Community 도메인 분리 설계 + Clean Architecture 적용</li>
+        <li>JWT Access/Refresh Token 인증 흐름 직접 구현 — Stateless 인증 구조</li>
+        <li>Docker 통합 실행 환경으로 팀원 간 환경 차이 제거</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">학력 · 교육 · 저서</span>
+        <span class="proj-period"></span>
+      </div>
+      <div class="proj-sub">대전대학교 컴퓨터공학과 / 모빌리티AI·SW융합 복수전공 · 2024.02 졸업</div>
+      <div class="tags"><span class="tag">2017–2024</span></div>
+      <ul class="ul">
+        <li>주요 이수: 자료구조 · 알고리즘 · 운영체제 · 시스템프로그래밍(C/C++) · 컴퓨터구조 · 소프트웨어공학</li>
+        <li>정보통신산업진흥원 인공지능 기본과정 수료</li>
+        <li>네이버 부스트코스 DATA SCIENCE 코칭스터디 2023 수료</li>
+        <li>공동 저서 <a href="https://www.yes24.com/Product/Goods/109711067">『개발자가 꼭 알아야 하는 IT 용어』</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+  <div class="sec-label">Contact</div>
+  <div class="sec-title">연락처</div>
+  <div style="display:flex; gap:32px; flex-wrap:wrap; background:var(--card); border:1px solid var(--bdr); border-radius:12px; padding:24px;">
+    <div><div style="font-size:12px;color:var(--muted);margin-bottom:4px;">전화</div><div style="font-weight:700;">010-2538-1519</div></div>
+    <div><div style="font-size:12px;color:var(--muted);margin-bottom:4px;">이메일</div><div style="font-weight:700;">justinnn980@gmail.com</div></div>
+    <div><div style="font-size:12px;color:var(--muted);margin-bottom:4px;">블로그</div><div style="font-weight:700;"><a href="https://justinnn980.tistory.com">justinnn980.tistory.com</a></div></div>
+    <div><div style="font-size:12px;color:var(--muted);margin-bottom:4px;">포트폴리오</div><div style="font-weight:700;"><a href="https://justinnn980.github.io/park_juncheol_portfolio_site/">justinnn980.github.io</a></div></div>
+    <div><div style="font-size:12px;color:var(--muted);margin-bottom:4px;">도서</div><div style="font-weight:700;"><a href="https://www.yes24.com/Product/Goods/109711067">개발자가 꼭 알아야 하는 IT 용어</a></div></div>
+  </div>
+</div>
+
+<footer>박준철 포트폴리오 · 이노시뮬레이션 시뮬레이터 응용SW 개발자 지원</footer>
+
+</body>
+</html>
