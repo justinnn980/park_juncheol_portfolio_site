@@ -29,7 +29,7 @@ jobs:
       - name: Prepare site files
         run: |
           mkdir -p _site
-          cp index.html style.css script.js _site/
+          cp *.html *.css *.js _site/
           if [ -d videos ]; then
             cp -R videos _site/videos
           fi
