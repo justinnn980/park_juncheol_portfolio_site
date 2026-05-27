@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 포트폴리오 — 에이아이웍스 LLM 기반 어플리케이션 엔지니어</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --vt:   #7C3AED;
+      --vt-l: #EDE9FE;
+      --vt-d: #4C1D95;
+      --bg:   #09070F;
+      --card: #110E1C;
+      --card2:#181327;
+      --bdr:  #1E1830;
+      --text: #F9FAFB;
+      --sub:  #D1D5DB;
+      --muted:#9CA3AF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans KR', 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: var(--vt); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(9,7,15,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bdr);
+      padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 52px;
+    }
+    .nav-name { font-weight: 800; font-size: 15px; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px; margin: 0 auto; padding: 64px 40px 48px;
+      display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: start;
+    }
+    .hero-badge {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      background: rgba(124,58,237,0.15); border: 1px solid rgba(124,58,237,0.3);
+      color: #A78BFA; font-size: 12px; font-weight: 700; margin-bottom: 16px;
+    }
+    .hero-name { font-size: 44px; font-weight: 900; line-height: 1.1; margin-bottom: 8px; letter-spacing: -1px; }
+    .hero-role { font-size: 18px; font-weight: 700; color: #A78BFA; margin-bottom: 16px; }
+    .hero-lead { font-size: 14.5px; color: var(--sub); line-height: 1.85; margin-bottom: 28px; max-width: 480px; }
+    .hero-stats {
+      display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 28px;
+      padding: 16px 20px; background: var(--card); border-radius: 10px; border: 1px solid var(--bdr);
+    }
+    .stat { text-align: center; }
+    .stat-num   { font-size: 20px; font-weight: 900; color: #A78BFA; }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+    .hero-contacts { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-contact  { font-size: 13px; color: var(--muted); }
+
+    /* CODE PANEL */
+    .code-panel { background: #060410; border: 1px solid var(--bdr); border-radius: 12px; overflow: hidden; }
+    .code-header { background: var(--card); padding: 10px 16px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--bdr); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FFBD2E; }
+    .dot-g { background: #28C840; }
+    .code-filename { font-size: 12px; color: var(--muted); margin-left: 6px; font-family: 'JetBrains Mono', monospace; }
+    .code-body { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.85; }
+    .c-cmt { color: #6B7280; }
+    .c-kw  { color: #C084FC; }
+    .c-str { color: #DDD6FE; }
+    .c-num { color: #FBBF24; }
+    .c-fn  { color: #A78BFA; }
+    .c-var { color: #F9FAFB; }
+    .c-prop{ color: #E9D5FF; }
+    .c-dec { color: #F0ABFC; }
+
+    /* SECTION */
+    .section { max-width: 1100px; margin: 0 auto; padding: 56px 40px; border-top: 1px solid var(--bdr); }
+    .sec-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #A78BFA; margin-bottom: 6px; }
+    .sec-title { font-size: 26px; font-weight: 900; margin-bottom: 32px; }
+
+    /* MATCH GRID */
+    .match-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .match-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px; transition: border-color .2s; }
+    .match-card:hover { border-color: var(--vt); }
+    .match-req   { font-size: 11px; font-weight: 700; color: #A78BFA; margin-bottom: 6px; }
+    .match-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .match-desc  { font-size: 12.5px; color: var(--sub); line-height: 1.7; }
+
+    /* PROBLEM CARDS */
+    .prob-list { display: grid; gap: 18px; }
+    .prob-card {
+      background: var(--card); border: 1px solid var(--bdr);
+      border-left: 3px solid var(--vt); border-radius: 0 12px 12px 0; padding: 22px 26px;
+    }
+    .prob-num   { font-size: 11px; font-weight: 800; color: #A78BFA; letter-spacing: 1px; margin-bottom: 8px; }
+    .prob-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+    .prob-flow  { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .pf-tag    { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; background: var(--card2); color: var(--sub); }
+    .pf-arrow  { color: #A78BFA; font-size: 14px; }
+    .pf-result { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; background: rgba(124,58,237,0.2); color: #DDD6FE; }
+    .prob-desc { font-size: 13px; color: var(--sub); line-height: 1.75; }
+    .prob-desc strong { color: var(--text); font-weight: 700; }
+
+    /* SIDE-BY-SIDE */
+    .side-by-side { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .sbs-box { background: var(--card2); border: 1px solid var(--bdr); border-radius: 8px; padding: 12px 14px; }
+    .sbs-label { font-size: 11px; font-weight: 800; color: #A78BFA; margin-bottom: 6px; }
+    .sbs-body  { font-size: 12px; color: var(--sub); line-height: 1.6; }
+
+    /* PROJ GRID */
+    .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .proj-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 22px; transition: border-color .2s; }
+    .proj-card:hover { border-color: rgba(124,58,237,0.4); }
+    .proj-head   { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+    .proj-title  { font-size: 15px; font-weight: 800; }
+    .proj-period { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .proj-sub    { font-size: 12px; color: #A78BFA; font-weight: 700; margin-bottom: 10px; }
+    .tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
+    .tag { padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: 700; background: var(--bdr); color: var(--sub); }
+    .tag.hl { background: rgba(124,58,237,0.15); color: #C4B5FD; }
+    .ul { list-style: none; display: grid; gap: 5px; }
+    .ul li { font-size: 12.5px; color: var(--sub); padding-left: 14px; position: relative; line-height: 1.6; }
+    .ul li::before { content: '▸'; position: absolute; left: 0; color: #A78BFA; font-size: 9px; top: 3px; }
+    .ul li strong { color: var(--text); font-weight: 700; }
+
+    /* ANNO GRID */
+    .anno-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 8px; }
+    .anno-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 8px; padding: 10px 12px; text-align: center; }
+    .anno-icon  { font-size: 20px; margin-bottom: 4px; }
+    .anno-type  { font-size: 11px; font-weight: 800; color: var(--text); margin-bottom: 2px; }
+    .anno-desc  { font-size: 10px; color: var(--muted); }
+
+    footer { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--bdr); }
+
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; }
+      .match-grid { grid-template-columns: 1fr 1fr; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .anno-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">박준철 · 에이아이웍스(AIWORKX)</div>
+  <div class="nav-links">
+    <a href="#match">요건 매칭</a>
+    <a href="#problem">핵심 경험</a>
+    <a href="#projects">프로젝트</a>
+    <a href="#contact">연락처</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-badge">에이아이웍스(AIWORKX) · LLM 기반 어플리케이션 엔지니어 지원</div>
+    <div class="hero-name">박준철</div>
+    <div class="hero-role">LLM 기반 어플리케이션 엔지니어</div>
+    <div class="hero-lead">
+      AI 모델 학습 데이터부터 실서비스 배포까지 — LLM을 직접 활용해 만드는 엔지니어.<br/><br/>
+      5개 기관 AI 어노테이션으로 모델 훈련 데이터 품질을 직접 이해하고,<br/>
+      WebSocket 실시간 구조로 LLM 스트리밍 응답과 동일한 패턴을 구현했습니다.<br/><br/>
+      <strong style="color:var(--text);">AI 에이전트를 기획·설계·구현·배포 전 과정에 활용</strong>해<br/>
+      LLM 기반 서비스 개발의 실제 감각을 가지고 있습니다.
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">5개 기관</div>
+        <div class="stat-label">AI 어노테이션<br/>실무 경험</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">WebSocket</div>
+        <div class="stat-label">LLM 스트리밍<br/>동일 구조 구현</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">AI 에이전트</div>
+        <div class="stat-label">서비스 전 과정<br/>LLM 활용 개발</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">모빌리티AI</div>
+        <div class="stat-label">복수전공<br/>AI 학문 기반</div>
+      </div>
+    </div>
+    <div class="hero-contacts">
+      <span class="hero-contact">📞 010-2538-1519</span>
+      <span class="hero-contact">✉ justinnn980@gmail.com</span>
+      <span class="hero-contact">📝 <a href="https://justinnn980.tistory.com">기술 블로그</a></span>
+    </div>
+  </div>
+
+  <!-- CODE PANEL -->
+  <div class="code-panel">
+    <div class="code-header">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="code-filename">sllm_stream_service.py</span>
+    </div>
+    <div class="code-body">
+<span class="c-cmt"># sLLM 스트리밍 응답 처리</span>
+<span class="c-cmt"># WebSocket → Flutter 실시간 토큰 전송</span>
+
+<span class="c-kw">from</span> <span class="c-var">openai</span> <span class="c-kw">import</span> <span class="c-var">AsyncOpenAI</span>
+
+<span class="c-dec">@app.websocket</span>(<span class="c-str">"/stream"</span>)
+<span class="c-kw">async def</span> <span class="c-fn">stream_sllm</span>(<span class="c-var">ws</span>, <span class="c-var">prompt</span>: <span class="c-var">str</span>):
+    <span class="c-var">client</span> = <span class="c-var">AsyncOpenAI</span>(
+        base_url=<span class="c-str">"http://local-sllm/v1"</span>
+    )
+    <span class="c-var">stream</span> = <span class="c-kw">await</span> <span class="c-var">client</span>.<span class="c-fn">chat</span>.<span class="c-fn">create</span>(
+        model=<span class="c-str">"sllm-7b"</span>,
+        messages=[{<span class="c-str">"role"</span>: <span class="c-str">"user"</span>,
+                   <span class="c-str">"content"</span>: <span class="c-var">prompt</span>}],
+        stream=<span class="c-kw">True</span>,
+    )
+    <span class="c-kw">async for</span> <span class="c-var">chunk</span> <span class="c-kw">in</span> <span class="c-var">stream</span>:
+        <span class="c-var">token</span> = <span class="c-var">chunk</span>.<span class="c-prop">choices</span>[<span class="c-num">0</span>].<span class="c-prop">delta</span>.<span class="c-prop">content</span>
+        <span class="c-kw">if</span> <span class="c-var">token</span>:
+            <span class="c-cmt"># 숫자 대결 WebSocket 구조와 동일</span>
+            <span class="c-cmt"># 서버 단일 상태 → 전체 클라이언트 동기화</span>
+            <span class="c-kw">await</span> <span class="c-var">ws</span>.<span class="c-fn">broadcast</span>(<span class="c-var">token</span>)
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01: 요건 매칭 -->
+<div class="section" id="match">
+  <div class="sec-label">Section 01</div>
+  <div class="sec-title">주요 업무 및 자격요건 — 매칭</div>
+  <div class="match-grid">
+
+    <div class="match-card">
+      <div class="match-req">주요 업무 · sLLM/VLM 서비스 개발</div>
+      <div class="match-title">Flutter + Spring Boot 풀스택으로 LLM 서비스 구축</div>
+      <div class="match-desc">Flutter 클라이언트 + Spring Boot 백엔드 + Docker 배포 전 과정을 단독 구현한 경험. LLM API를 통합한 서비스 레이어를 직접 설계·구현 가능. REST API·WebSocket·JWT 인증 통합 실무 경험 보유.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">주요 업무 · 테스트 자동화 스크립트 엔진</div>
+      <div class="match-title">상태 분리 설계 + 자동화 흐름 구현</div>
+      <div class="match-desc">Riverpod으로 셋톱박스 3대 페어링 상태를 연결/기기/콘텐츠 단위로 분리 관리. 복잡한 상태 전이를 자동화하는 구조 설계 경험 — sLLM이 테스트 케이스를 생성·실행·검증하는 엔진 구조에 직접 적용 가능.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">주요 업무 · sLLM 셀프 힐링 엔진</div>
+      <div class="match-title">AI 에이전트로 오류 자동 수정 패턴 직접 경험</div>
+      <div class="match-desc">개인 커뮤니티 웹앱 개발에서 AI 에이전트(Codex/Claude Code)를 기획·설계·구현·배포 전 과정에 활용. LLM이 오류를 감지·분석·수정하는 셀프 힐링 패턴을 사용자 입장에서 직접 경험하고 구조 이해.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">자격요건 · LLM 학습 프레임워크 경험</div>
+      <div class="match-title">모빌리티AI 전공 + AI/DS 교육 이수</div>
+      <div class="match-desc">컴퓨터공학 + 모빌리티AI 복수전공, SW융합전공. 정보통신산업진흥원 인공지능 기본과정 수료, 네이버 부스트코스 DATA SCIENCE 2023 수료. 모델 학습 프레임워크(PyTorch, 학습 파이프라인) 기초 이해 보유.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">자격요건 · AI 모델/서비스 개발 경험</div>
+      <div class="match-title">AI 어노테이션 5개 기관 — 모델 학습 데이터 직접 생성</div>
+      <div class="match-desc">이스트에이드·다훈케이스비·SuperbAI·크라우드웍스·올로마인드 5개 기관에서 BBox·Polygon·Segmentation·Keypoint·Object Tracking 실무 수행. AI 모델이 어떤 데이터로 학습되는지 직접 이해.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">자격요건 · 언어 분석/이해 경험</div>
+      <div class="match-title">텍스트 어노테이션 + 프롬프트 엔지니어링</div>
+      <div class="match-desc">어노테이션 업무 중 텍스트 레이블링 및 언어 데이터 구조화 경험. AI 에이전트 활용 서비스 개발에서 프롬프트 엔지니어링으로 LLM 출력을 원하는 형태로 제어하는 실무 감각 보유.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 02: 핵심 경험 -->
+<div class="section" id="problem">
+  <div class="sec-label">Section 02</div>
+  <div class="sec-title">LLM 서비스 개발에 직결되는 핵심 경험</div>
+  <div class="prob-list">
+
+    <div class="prob-card">
+      <div class="prob-num">EXPERIENCE 01</div>
+      <div class="prob-title">WebSocket 서버 중심 상태관리 = LLM 스트리밍 응답과 동일 구조</div>
+      <div class="prob-flow">
+        <span class="pf-tag">서버 단일 상태 관리</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">WebSocket broadcast</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">전체 클라이언트 실시간 동기화</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">LLM 스트리밍과 동일 패턴</span>
+      </div>
+      <div class="prob-desc">
+        숫자 대결 게임에서 서버를 단일 진실 원천으로 삼고 WebSocket으로 모든 클라이언트에 실시간 상태를 브로드캐스트하는 구조를 3일 단독 구현. 이 구조는 <strong>sLLM이 토큰을 생성할 때마다 WebSocket으로 클라이언트에 스트리밍</strong>하는 구조와 완전히 동일. 서버 측 상태 관리·충돌 방지·클라이언트 동기화 경험을 LLM 스트리밍 서비스에 직접 적용 가능.
+      </div>
+      <div class="side-by-side">
+        <div class="sbs-box">
+          <div class="sbs-label">숫자 대결 (구현 완료)</div>
+          <div class="sbs-body">서버 숫자 상태 → WebSocket broadcast → Flutter 실시간 갱신 / 동시 입력 충돌 방지</div>
+        </div>
+        <div class="sbs-box">
+          <div class="sbs-label">sLLM 스트리밍 (동일 패턴)</div>
+          <div class="sbs-body">LLM 토큰 생성 → WebSocket broadcast → 클라이언트 실시간 렌더링 / 신뢰할 수 있는 단일 원천</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">EXPERIENCE 02</div>
+      <div class="prob-title">AI 어노테이션 5개 기관 — 모델 학습 데이터의 품질 기준을 직접 이해</div>
+      <div class="prob-flow">
+        <span class="pf-tag">비정형 데이터 수집</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">5가지 유형 어노테이션</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">품질 검수</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">훈련 가능한 구조화 데이터</span>
+      </div>
+      <div class="prob-desc">
+        이스트에이드·다훈케이스비·SuperbAI·크라우드웍스·올로마인드 5개 기관에서 <strong>BBox·Polygon·Segmentation·Keypoint·Object Tracking</strong> 5가지 유형 실무 수행. AI 모델이 어떤 데이터 품질 기준으로 학습되는지 직접 경험 — sLLM 학습 데이터 파이프라인 설계 시 데이터 품질과 레이블링 기준에 대한 실질적 감각 보유. RAG 파이프라인의 문서 청킹·임베딩 원리와 구조적으로 동일.
+      </div>
+      <div class="anno-grid">
+        <div class="anno-card"><div class="anno-icon">📦</div><div class="anno-type">BBox</div><div class="anno-desc">객체 경계 박스</div></div>
+        <div class="anno-card"><div class="anno-icon">🔷</div><div class="anno-type">Polygon</div><div class="anno-desc">다각형 외곽선</div></div>
+        <div class="anno-card"><div class="anno-icon">🎨</div><div class="anno-type">Segment</div><div class="anno-desc">픽셀 분할</div></div>
+        <div class="anno-card"><div class="anno-icon">🦴</div><div class="anno-type">Keypoint</div><div class="anno-desc">관절 좌표</div></div>
+        <div class="anno-card"><div class="anno-icon">🎯</div><div class="anno-type">Tracking</div><div class="anno-desc">객체 추적</div></div>
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">EXPERIENCE 03</div>
+      <div class="prob-title">AI 에이전트로 서비스 전 과정 구현 — LLM 활용 개발의 실제 감각</div>
+      <div class="prob-flow">
+        <span class="pf-tag">기획 (AI 에이전트)</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">ERD 설계 (AI 에이전트)</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">구현 (AI 에이전트)</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">Docker/Render 배포 완료</span>
+      </div>
+      <div class="prob-desc">
+        개인 커뮤니티 웹앱(게시글/좋아요/팔로우/채팅)을 <strong>Codex·Claude Code AI 에이전트를 기획·설계·구현·배포 전 과정에 활용</strong>하여 단독으로 빠르게 실서비스 수준으로 구현. LLM이 코드를 생성하고 오류를 수정하는 흐름을 직접 운영한 경험 — sLLM 기반 셀프 힐링 엔진이 동작하는 방식의 실질적 이해 보유.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">EXPERIENCE 04</div>
+      <div class="prob-title">복잡한 상태 분리 설계 — LLM 애플리케이션의 상태 관리에 직접 적용 가능</div>
+      <div class="prob-flow">
+        <span class="pf-tag">셋톱박스 3대 페어링 문제</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">연결/기기/콘텐츠 단위 분리</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">Riverpod 상태 변화 즉시 반영</span>
+      </div>
+      <div class="prob-desc">
+        셋톱박스 최대 3대 페어링 멤버십의 연결 상태·기기 노출·콘텐츠 접근을 Riverpod StateNotifierProvider로 단위별 분리 관리. LLM 어플리케이션에서 <strong>요청 중(loading) / 스트리밍(streaming) / 완료(done) / 오류(error)</strong> 상태를 클린하게 분리하는 패턴과 동일 — 복잡한 AI 서비스 상태 관리에 직접 적용 가능.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">EXPERIENCE 05</div>
+      <div class="prob-title">API 통합 (REST + WebSocket + JWT + HTTPS) — LLM API 클라이언트 개발 역량</div>
+      <div class="prob-flow">
+        <span class="pf-tag">JWT 인증 설계</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">REST + WebSocket 통합</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">AWS EC2 + HTTPS 보안</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">전구간 보안 통신 완성</span>
+      </div>
+      <div class="prob-desc">
+        이통사 방화벽 차단 문제를 AWS EC2 Elastic IP + HTTPS 전환으로 해결해 전구간 보안 통신을 구성. JWT Access/Refresh Token 인증 흐름을 Flutter에서 직접 구현. <strong>LLM API 클라이언트 개발</strong>에 필요한 인증·보안·프로토콜 통합 역량을 실서비스에서 검증.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 03: 프로젝트 -->
+<div class="section" id="projects">
+  <div class="sec-label">Section 03</div>
+  <div class="sec-title">주요 프로젝트</div>
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">숫자 대결 — 실시간 WebSocket 게임</span>
+        <span class="proj-period">2026.01~ · 솔로 3일</span>
+      </div>
+      <div class="proj-sub">기획~개발~배포 End-to-End · LLM 스트리밍과 동일 구조</div>
+      <div class="tags">
+        <span class="tag hl">WebSocket</span>
+        <span class="tag hl">서버 단일 상태</span>
+        <span class="tag">Flutter</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag gray">Render</span>
+      </div>
+      <ul class="ul">
+        <li><strong>서버 중심 상태 관리</strong> → WebSocket broadcast로 전체 클라이언트 실시간 동기화 — sLLM 토큰 스트리밍과 동일 패턴</li>
+        <li>동시 입력 충돌 방지, 신뢰할 수 있는 단일 진실 원천 구조</li>
+        <li>기획/Flutter/Spring Boot/Render 배포 전 과정을 <strong>3일 내 단독 구현</strong></li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">개인 커뮤니티 웹앱</span>
+        <span class="proj-period">2026.05~ · 솔로</span>
+      </div>
+      <div class="proj-sub">AI 에이전트 활용 전 과정 · LLM 셀프 힐링 구조 직접 경험</div>
+      <div class="tags">
+        <span class="tag hl">AI 에이전트 활용</span>
+        <span class="tag hl">기획~배포</span>
+        <span class="tag">Docker</span>
+        <span class="tag gray">Render</span>
+      </div>
+      <ul class="ul">
+        <li>게시글/좋아요/팔로우/채팅 기능을 <strong>Codex·Claude Code AI 에이전트</strong>로 기획~배포 전 과정 단독 구현</li>
+        <li>LLM이 오류를 감지·수정하는 셀프 힐링 패턴을 운영 측에서 직접 경험, 구조 이해</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">헬로tv → 오초이스 앱 마이그레이션</span>
+        <span class="proj-period">2025.02–2025.10</span>
+      </div>
+      <div class="proj-sub">LG헬로비전 (매출 1조) · 팀 4인 · API 통합 풀스택</div>
+      <div class="tags">
+        <span class="tag hl">WebView + JS Bridge</span>
+        <span class="tag hl">Riverpod 상태 분리</span>
+        <span class="tag">Flutter</span>
+        <span class="tag">AWS EC2</span>
+        <span class="tag">HTTPS</span>
+      </div>
+      <ul class="ul">
+        <li>Riverpod StateNotifierProvider로 셋톱박스 3대 상태를 연결/기기/콘텐츠 단위로 분리 관리</li>
+        <li>AWS EC2 Elastic IP + HTTPS 전환으로 방화벽 차단 해결 — <strong>전구간 보안 통신 구성</strong></li>
+        <li><strong>FCP 39% 단축, LCP 10.8% 개선</strong> — 병목 분석 기반 Lazy Loading·CDN 적용</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">담아(Dama) — 구독 통합 관리 서비스</span>
+        <span class="proj-period">2026.01–2026.02</span>
+      </div>
+      <div class="proj-sub">팀 3인 · JWT + Docker · 풀스택 설계</div>
+      <div class="tags">
+        <span class="tag hl">JWT 인증 설계</span>
+        <span class="tag hl">도메인 분리</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Docker</span>
+      </div>
+      <ul class="ul">
+        <li>JWT Access/Refresh Token 인증 흐름 Flutter에서 직접 구현 — <strong>Stateless 인증 구조</strong></li>
+        <li>User / Subscription / Community 도메인 분리 설계, Docker 통합 환경 구성</li>
+        <li>Soft Delete 정책으로 데이터 이력 관리 — LLM 서비스 요청 이력 보존에 동일 패턴 적용 가능</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+  <div class="sec-label">Contact</div>
+  <div class="sec-title">연락처</div>
+  <div style="display:flex; gap:32px; flex-wrap:wrap; background:var(--card); border:1px solid var(--bdr); border-radius:12px; padding:24px;">
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">전화</div>
+      <div style="font-weight:700;">010-2538-1519</div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">이메일</div>
+      <div style="font-weight:700;">justinnn980@gmail.com</div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">블로그</div>
+      <div style="font-weight:700;"><a href="https://justinnn980.tistory.com">justinnn980.tistory.com</a></div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">도서</div>
+      <div style="font-weight:700;"><a href="https://www.yes24.com/Product/Goods/109711067">개발자가 꼭 알아야 하는 IT 용어</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>박준철 포트폴리오 · 에이아이웍스(AIWORKX) LLM 기반 어플리케이션 엔지니어 지원</footer>
+
+</body>
+</html>
