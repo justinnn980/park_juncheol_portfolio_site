@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 포트폴리오 — 데이터유니버스 모바일 앱 개발자</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bl:   #2563EB;
+      --bl-l: #DBEAFE;
+      --bl-d: #1E3A8A;
+      --bg:   #07090F;
+      --card: #0D1221;
+      --card2:#131A2E;
+      --bdr:  #1A2540;
+      --text: #F9FAFB;
+      --sub:  #D1D5DB;
+      --muted:#9CA3AF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans KR', 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: #60A5FA; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(7,9,15,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bdr);
+      padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 52px;
+    }
+    .nav-name { font-weight: 800; font-size: 15px; }
+    .nav-tag  { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: rgba(37,99,235,0.15); color: #60A5FA; margin-left: 8px; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px; margin: 0 auto; padding: 64px 40px 48px;
+      display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: start;
+    }
+    .hero-badge {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      background: rgba(37,99,235,0.12); border: 1px solid rgba(37,99,235,0.3);
+      color: #60A5FA; font-size: 12px; font-weight: 700; margin-bottom: 16px;
+    }
+    .hero-name { font-size: 44px; font-weight: 900; line-height: 1.1; margin-bottom: 8px; letter-spacing: -1px; }
+    .hero-role { font-size: 18px; font-weight: 700; color: #60A5FA; margin-bottom: 16px; }
+    .hero-lead { font-size: 14.5px; color: var(--sub); line-height: 1.85; margin-bottom: 28px; max-width: 480px; }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: var(--bdr); border-radius: 10px; overflow: hidden; margin-bottom: 28px;
+    }
+    .stat { background: var(--card); padding: 14px 10px; text-align: center; }
+    .stat-num   { font-size: 16px; font-weight: 900; color: #60A5FA; }
+    .stat-label { font-size: 10.5px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+    .hero-contacts { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-contact  { font-size: 13px; color: var(--muted); }
+
+    /* CODE PANEL */
+    .code-panel { background: #050710; border: 1px solid var(--bdr); border-radius: 12px; overflow: hidden; }
+    .code-header { background: var(--card); padding: 10px 16px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--bdr); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; } .dot-y { background: #FFBD2E; } .dot-g { background: #28C840; }
+    .code-filename { font-size: 12px; color: var(--muted); margin-left: 6px; font-family: 'JetBrains Mono', monospace; }
+    .code-body { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.85; }
+    .c-cmt { color: #4B6B8A; }
+    .c-kw  { color: #93C5FD; }
+    .c-str { color: #BFDBFE; }
+    .c-num { color: #FBBF24; }
+    .c-fn  { color: #60A5FA; }
+    .c-var { color: #F9FAFB; }
+    .c-prop{ color: #BAE6FD; }
+    .c-type{ color: #34D399; }
+    .c-dec { color: #7DD3FC; }
+
+    /* SECTION */
+    .section { max-width: 1100px; margin: 0 auto; padding: 56px 40px; border-top: 1px solid var(--bdr); }
+    .sec-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #60A5FA; margin-bottom: 6px; }
+    .sec-title { font-size: 26px; font-weight: 900; margin-bottom: 8px; }
+    .sec-sub   { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+
+    /* MATCH GRID */
+    .match-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .match-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px; transition: border-color .2s; }
+    .match-card:hover { border-color: rgba(37,99,235,0.4); }
+    .match-icon  { font-size: 24px; margin-bottom: 10px; }
+    .match-title { font-size: 14px; font-weight: 800; margin-bottom: 8px; }
+    .match-desc  { font-size: 12.5px; color: var(--sub); line-height: 1.7; }
+    .match-proof { margin-top: 8px; padding: 6px 10px; background: rgba(37,99,235,0.1); border-radius: 6px; font-size: 11.5px; color: #93C5FD; font-weight: 600; }
+
+    /* PROBLEM CARDS */
+    .prob-list { display: grid; gap: 18px; }
+    .prob-card {
+      background: var(--card); border: 1px solid var(--bdr);
+      border-left: 3px solid var(--bl); border-radius: 0 12px 12px 0; padding: 22px 26px;
+    }
+    .prob-num   { font-size: 11px; font-weight: 800; color: #60A5FA; letter-spacing: 1px; margin-bottom: 8px; }
+    .prob-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+    .prob-flow  { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .pf-tag    { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; background: var(--card2); color: var(--sub); }
+    .pf-arrow  { color: #60A5FA; font-size: 14px; }
+    .pf-result { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; background: rgba(37,99,235,0.2); color: #BFDBFE; }
+    .prob-desc { font-size: 13px; color: var(--sub); line-height: 1.75; }
+    .prob-desc strong { color: var(--text); font-weight: 700; }
+
+    /* SIDE-BY-SIDE */
+    .sbs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    .sbs-box { background: var(--card2); border: 1px solid var(--bdr); border-radius: 8px; padding: 12px 14px; }
+    .sbs-label { font-size: 11px; font-weight: 800; color: #60A5FA; margin-bottom: 5px; }
+    .sbs-body  { font-size: 12px; color: var(--sub); line-height: 1.6; }
+
+    /* PROJ GRID */
+    .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .proj-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px; transition: border-color .2s; }
+    .proj-card:hover { border-color: rgba(37,99,235,0.4); }
+    .proj-head   { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+    .proj-title  { font-size: 14px; font-weight: 800; }
+    .proj-period { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .proj-sub    { font-size: 12px; color: #60A5FA; font-weight: 700; margin-bottom: 8px; }
+    .tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+    .tag { padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: 700; background: var(--bdr); color: var(--sub); }
+    .tag.hl { background: rgba(37,99,235,0.15); color: #93C5FD; }
+    .ul { list-style: none; display: grid; gap: 5px; }
+    .ul li { font-size: 12.5px; color: var(--sub); padding-left: 14px; position: relative; line-height: 1.6; }
+    .ul li::before { content: '▸'; position: absolute; left: 0; color: #60A5FA; font-size: 9px; top: 3px; }
+    .ul li strong { color: var(--text); font-weight: 700; }
+
+    /* CAREER */
+    .career-co     { font-size: 20px; font-weight: 900; margin-bottom: 4px; }
+    .career-role   { font-size: 13px; font-weight: 700; color: #60A5FA; margin-bottom: 4px; }
+    .career-period { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .career-desc   { font-size: 12.5px; color: var(--muted); margin-bottom: 12px; padding: 8px 12px; background: var(--card2); border-radius: 8px; border-left: 3px solid var(--bdr); }
+
+    footer { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--bdr); }
+
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .match-grid, .proj-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">박준철<span class="nav-tag">Flutter · Mobile</span></div>
+  <div class="nav-links">
+    <a href="#match">역량 매칭</a>
+    <a href="#problem">문제 해결</a>
+    <a href="#career">경력</a>
+    <a href="#projects">프로젝트</a>
+    <a href="#contact">연락처</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-badge">데이터유니버스 · 모바일 앱 개발자 지원</div>
+    <div class="hero-name">박준철</div>
+    <div class="hero-role">Flutter 앱 개발자 · iOS / Android</div>
+    <div class="hero-lead">
+      매출 340억 실서비스에서 1년 10개월 — Flutter 개발 전 과정을 단독 책임진 모바일 개발자.<br/><br/>
+      API 연동·상태관리·성능 최적화·배포 운영은 물론,<br/>
+      라이브러리 소스 직접 분석·DRM 통합·WebSocket 실시간 구조까지<br/>
+      <strong style="color:var(--text);">문제가 생기면 끝까지 파고드는 개발자</strong>입니다.
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">1년 10개월</div>
+        <div class="stat-label">Flutter 실서비스<br/>단독 개발·운영</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">FCP −39%</div>
+        <div class="stat-label">지표 기반<br/>성능 최적화</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">마이그레이션 2건</div>
+        <div class="stat-label">매출 1조·3,500억<br/>파트너사 앱 전환</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Flutter 2→3</div>
+        <div class="stat-label">메이저 버전업<br/>전체 완료</div>
+      </div>
+    </div>
+    <div class="hero-contacts">
+      <span class="hero-contact">📞 010-2538-1519</span>
+      <span class="hero-contact">✉ justinnn980@gmail.com</span>
+      <span class="hero-contact">📝 <a href="https://justinnn980.tistory.com">justinnn980.tistory.com</a></span>
+    </div>
+  </div>
+
+  <!-- CODE PANEL -->
+  <div class="code-panel">
+    <div class="code-header">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="code-filename">number_game_viewmodel.dart</span>
+    </div>
+    <div class="code-body">
+<span class="c-cmt">// WebSocket 실시간 동기화 — Flutter 클라이언트</span>
+<span class="c-cmt">// 서버 상태 기준 동기화 (단일 진실 원천)</span>
+
+<span class="c-kw">class</span> <span class="c-type">GameViewModel</span> <span class="c-kw">extends</span> <span class="c-type">ChangeNotifier</span> {
+  <span class="c-kw">int</span> <span class="c-var">_serverValue</span> = <span class="c-num">0</span>;
+  <span class="c-kw">int</span> <span class="c-var">_localValue</span>  = <span class="c-num">0</span>;  <span class="c-cmt">// 즉각 UI 반응</span>
+
+  <span class="c-kw">void</span> <span class="c-fn">onTap</span>(<span class="c-kw">bool</span> <span class="c-var">isIncrease</span>) {
+    <span class="c-cmt">// 1. Optimistic update — UI 즉시 반응</span>
+    <span class="c-var">_localValue</span> += <span class="c-var">isIncrease</span> ? <span class="c-num">1</span> : -<span class="c-num">1</span>;
+    <span class="c-fn">notifyListeners</span>();
+
+    <span class="c-cmt">// 2. 서버로 요청 전송</span>
+    <span class="c-var">_channel</span>.sink.<span class="c-fn">add</span>(<span class="c-fn">jsonEncode</span>({
+      <span class="c-str">'action'</span>: <span class="c-var">isIncrease</span> ? <span class="c-str">'inc'</span> : <span class="c-str">'dec'</span>
+    }));
+  }
+
+  <span class="c-kw">void</span> <span class="c-fn">_onServerMessage</span>(<span class="c-kw">dynamic</span> <span class="c-var">msg</span>) {
+    <span class="c-cmt">// 3. 서버 값으로 확정 — 충돌 방지</span>
+    <span class="c-var">_serverValue</span> = <span class="c-fn">jsonDecode</span>(<span class="c-var">msg</span>)[<span class="c-str">'value'</span>];
+    <span class="c-var">_localValue</span>  = <span class="c-var">_serverValue</span>;
+    <span class="c-fn">notifyListeners</span>();
+  }
+}
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01: 역량 매칭 -->
+<div class="section" id="match">
+  <div class="sec-label">Section 01</div>
+  <div class="sec-title">모바일 앱 개발자로서의 역량</div>
+  <div class="sec-sub">실서비스에서 검증된 경험만 담았습니다.</div>
+  <div class="match-grid">
+
+    <div class="match-card">
+      <div class="match-icon">📱</div>
+      <div class="match-title">Flutter 크로스플랫폼 · 1년 10개월 실무</div>
+      <div class="match-desc">Flutter 2.0~3.38 전 버전을 실서비스에서 운영. 단순 UI 구현을 넘어 상태관리 설계, 네이티브 연동, 라이브러리 선택까지 전 과정을 주도해온 경험.</div>
+      <div class="match-proof">매출 340억 OTT 서비스 "오초이스" 단독 개발·운영</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-icon">🔗</div>
+      <div class="match-title">REST API 연동 · JWT 인증 · 상태관리</div>
+      <div class="match-desc">Riverpod으로 복잡한 상태를 도메인별 분리 관리. JWT Access/Refresh Token 인증 흐름을 Flutter에서 직접 구현. WebSocket 실시간 양방향 통신 경험 보유.</div>
+      <div class="match-proof">셋톱박스 3대 페어링 상태 분리 설계 / 담아(Dama) JWT 인증</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-icon">🚀</div>
+      <div class="match-title">iOS / Android 배포 운영 전 과정</div>
+      <div class="match-desc">Apple Developer 인증서·프로비저닝·TestFlight, 플레이스토어 Keystore·ProGuard 설정. 네이티브 권한·빌드·인증서 이슈를 직접 대응하고 버전 관리까지 수행.</div>
+      <div class="match-proof">App Store · Play Store 출시 및 상시 버전 관리 운영</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-icon">⚡</div>
+      <div class="match-title">FCP/LCP 기반 성능 최적화</div>
+      <div class="match-desc">화면 로딩 지연 문제를 FCP·LCP 지표로 정량화하고 Lazy Loading·스켈레톤 UI·CDN 적용으로 개선. 감으로 하는 최적화가 아닌 데이터 기반 접근.</div>
+      <div class="match-proof">FCP 39% 단축 · LCP 10.8% 개선 달성</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-icon">🔬</div>
+      <div class="match-title">라이브러리 소스 직접 분석 · 근본 해결</div>
+      <div class="match-desc">문서만으로 해결 안 되는 문제는 원본 라이브러리 소스를 직접 분석해 근본 원인을 찾아 해결. 쇼츠형 화면 오디오 이중 출력 문제를 이 방식으로 해결.</div>
+      <div class="match-proof">플레이어 라이브러리 소스 레벨 분석 → 생명주기 이슈 해결</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-icon">🏗</div>
+      <div class="match-title">백엔드·인프라 직접 구현 · 배포 이해</div>
+      <div class="match-desc">Spring Boot API 서버, WebSocket, JWT 인증 백엔드를 직접 설계·구현. AWS EC2, Docker, Render 배포 경험. 서버 개발자 없이도 문제를 해결할 수 있는 Full-picture 개발자.</div>
+      <div class="match-proof">담아·숫자 대결: Spring Boot + Docker + Render 전 과정 단독 구현</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 02: 문제 해결 -->
+<div class="section" id="problem">
+  <div class="sec-label">Section 02</div>
+  <div class="sec-title">실서비스에서 맞닥뜨린 문제와 해결 과정</div>
+  <div class="sec-sub">어떻게 생각하고 해결하는지 보여드립니다.</div>
+  <div class="prob-list">
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 01</div>
+      <div class="prob-title">쇼츠형 화면 오디오 이중 출력 — 라이브러리 소스 레벨에서 근본 원인 해결</div>
+      <div class="prob-flow">
+        <span class="pf-tag">스크롤 시 이전 영상 오디오 잔존</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">API 문서로 해결 불가 판단</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">원본 라이브러리 소스 직접 분석</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">오디오 겹침 완전 해결</span>
+      </div>
+      <div class="prob-desc">
+        딜라이브 마이그레이션에서 쇼츠형 피드를 스크롤할 때 이전 영상의 오디오가 남아 겹쳐 출력되는 문제 발생. 단순히 재생 메서드를 재호출하는 방식으로는 플레이어 내부 생명주기를 제어하기 어렵다고 판단. <strong>원본 플레이어 라이브러리 소스를 직접 열어 내부 초기화·재생·해제 흐름을 파악</strong>한 뒤, 영상 전환 시 생성 / 재생 / 종료 단계를 명시적으로 분리 호출하도록 수정. 오디오 겹침 문제 완전 해결.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 02</div>
+      <div class="prob-title">Riverpod으로 셋톱박스 3대 상태 — 연결·기기·콘텐츠 단위 분리 설계</div>
+      <div class="prob-flow">
+        <span class="pf-tag">최대 3대 상태 혼재 · 렌더링 오류</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">도메인별 StateNotifierProvider 분리</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">상태 변화 즉시 반영 · 유지보수 명확</span>
+      </div>
+      <div class="prob-desc">
+        헬로tv 마이그레이션에서 셋톱박스 최대 3대 페어링 상태를 단일 Provider로 관리하면 상태가 혼재되어 잘못된 콘텐츠가 노출되는 문제 발생. <strong>연결 상태 / 기기 노출 / 콘텐츠 접근 권한을 각각 별도 StateNotifierProvider로 분리</strong>해 각 단위의 상태가 독립적으로 변경·구독되도록 재설계. 이후 신규 기기 추가 기능 붙일 때도 영향 범위가 명확해져 유지보수 속도 향상.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 03</div>
+      <div class="prob-title">앱 배포 주기 의존 탈피 — WebView 분리로 운영 구조 개선, FCP 39% 단축</div>
+      <div class="prob-flow">
+        <span class="pf-tag">화면 변경마다 앱 재배포 필요</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">탐색 화면 React + WebView 분리</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">FCP/LCP 지표 기반 최적화</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">즉시 반영 운영 + FCP −39%</span>
+      </div>
+      <div class="prob-desc">
+        콘텐츠 구성·배너·화면 변경마다 앱 재배포가 필요해 운영 비용이 높고, WebView 전환 후 초기 로딩이 느려지는 부작용도 발생. <strong>React 기반 웹으로 탐색 화면을 분리하고 Flutter ↔ WebView JavaScript Bridge 양방향 통신 구조를 설계</strong>해 앱 배포 없이 즉시 반영 가능한 운영 구조 구현. FCP/LCP 지표로 병목을 찾아 Lazy Loading·스켈레톤 UI·CDN을 적용해 <strong>FCP 39% 단축, LCP 10.8% 개선</strong>.
+      </div>
+      <div class="sbs">
+        <div class="sbs-box">
+          <div class="sbs-label">변경 전</div>
+          <div class="sbs-body">화면 변경 → 코드 수정 → 앱 빌드 → 스토어 심사(1~3일) → 배포</div>
+        </div>
+        <div class="sbs-box">
+          <div class="sbs-label">변경 후</div>
+          <div class="sbs-body">화면 변경 → React 웹 배포 → 즉시 반영 (앱 배포 없음)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 04</div>
+      <div class="prob-title">NCG DRM → Multi DRM 전환 — 단일 플레이어 인터페이스로 통합</div>
+      <div class="prob-flow">
+        <span class="pf-tag">서비스마다 다른 DRM 방식</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">DRM 추상화 레이어 설계</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">단일 플레이어 인터페이스로 통합</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">서비스 무관 동일 사용자 경험</span>
+      </div>
+      <div class="prob-desc">
+        딜라이브 앱(NCG DRM)과 헬로tv 앱(Multi DRM: Widevine/FairPlay) DRM 방식이 달라 재생 흐름이 서비스마다 달라지는 문제. 서비스별로 별도 플레이어를 만들면 유지보수 비용이 두 배가 된다고 판단. <strong>기존 플레이어를 커스터마이징해 DRM 방식을 내부에서 추상화</strong>하고 사용자에게는 동일한 UI·요청 흐름으로 콘텐츠를 재생할 수 있도록 단일 인터페이스로 통합.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 05</div>
+      <div class="prob-title">Flutter 2 → 3 메이저 버전업 — 전체 의존성 재검토 후 안정적 완료</div>
+      <div class="prob-flow">
+        <span class="pf-tag">Flutter 3 업그레이드 필요</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">DRM·플레이어·상태관리 라이브러리 전체 검토</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">비호환 라이브러리 교체 · Null Safety 수정</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">서비스 중단 없이 업그레이드 완료</span>
+      </div>
+      <div class="prob-desc">
+        딜라이브 마이그레이션 중 Flutter 2 기반 코드베이스의 Flutter 3 업그레이드 필요. 단순 버전 태그 변경으로 끝나지 않고 <strong>DRM 라이브러리, 미디어 플레이어, Riverpod, 기타 의존 라이브러리의 Flutter 3 호환 여부를 전수 검토</strong>. 비호환 라이브러리 교체 버전 확인 및 Null Safety 마이그레이션이 필요한 코드를 직접 수정해 기능 이상 없이 안정적으로 업그레이드 완료.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 06</div>
+      <div class="prob-title">로드밸런싱 환경의 방화벽 차단 — AWS Elastic IP + HTTPS로 해결</div>
+      <div class="prob-flow">
+        <span class="pf-tag">Proxy IP 변경 → 방화벽 차단</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">EC2 Proxy에 Elastic IP 고정</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Nginx SSL 인증서 적용</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">전구간 HTTPS 보안 통신 완성</span>
+      </div>
+      <div class="prob-desc">
+        로드밸런싱 환경에서 Proxy 서버 IP가 바뀌면서 이통사 방화벽에 차단되어 앱-서버 간 통신이 끊기는 문제 발생. EC2 기반 Proxy 서버에 <strong>Elastic IP를 할당해 고정 IP 구조로 전환</strong>하고, Nginx에 Let's Encrypt SSL 인증서를 적용해 HTTP에서 HTTPS로 전환. 방화벽 차단 문제를 해결하면서 동시에 전구간 보안 통신 구조를 완성.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 03: 경력 -->
+<div class="section" id="career">
+  <div class="sec-label">Section 03</div>
+  <div class="sec-title">경력</div>
+  <div class="sec-sub"></div>
+
+  <div class="career-co">(주)홈초이스</div>
+  <div class="career-role">Flutter 개발자 · iOS / Android 앱 개발 및 유지보수</div>
+  <div class="career-period">2024.02 ~ 2025.11 · 1년 10개월</div>
+  <div class="career-desc">전국 디지털케이블TV VOD 공급 국내 1위 · OTT 서비스 "오초이스" · 매출 340억 / LG헬로비전(매출 1조) · 딜라이브(매출 3,500억) 파트너사 마이그레이션 2건 개발 주도</div>
+  <ul class="ul">
+    <li>LG헬로비전·딜라이브 파트너사 앱 → 오초이스 전환 마이그레이션 2건 개발 주도 (팀 4인 · 개발 3/디자인 1)</li>
+    <li><strong>Riverpod 기반 상태관리</strong>로 셋톱박스 3대 페어링 상태를 연결/기기/콘텐츠 단위 분리 관리, 변화 즉시 반영</li>
+    <li>React + WebView JavaScript Bridge 양방향 구조 설계 → 앱 배포 없이 콘텐츠 즉시 반영 가능한 운영 구조</li>
+    <li>FCP/LCP 지표 기반 병목 분석 → Lazy Loading·스켈레톤 UI·CDN 적용으로 <strong>FCP 39% 단축, LCP 10.8% 개선</strong></li>
+    <li>NCG DRM → Multi DRM(Widevine/FairPlay) 전환: 단일 플레이어 커스터마이징으로 라이선스 검증 흐름 통합</li>
+    <li>Flutter 2 → 3 메이저 버전업 · 전체 라이브러리 의존성 재검토 · 안정적 업그레이드 완료</li>
+    <li>iOS/Android 네이티브 인증서·권한·빌드 이슈 직접 대응 · App Store · Play Store 출시 및 버전 관리</li>
+    <li>Firebase Analytics · Google Analytics · AdMob 연동 · FCP/LCP 성능 지표 모니터링 운영</li>
+    <li>AWS EC2 Elastic IP + Nginx HTTPS 구성으로 이통사 Proxy 방화벽 차단 해결</li>
+  </ul>
+</div>
+
+<!-- SECTION 04: 프로젝트 -->
+<div class="section" id="projects">
+  <div class="sec-label">Section 04</div>
+  <div class="sec-title">프로젝트</div>
+  <div class="sec-sub"></div>
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">헬로tv → 오초이스 앱 마이그레이션</span>
+        <span class="proj-period">2025.02–2025.10</span>
+      </div>
+      <div class="proj-sub">LG헬로비전 (매출 1조) · 팀 4인 · Flutter / React / Spring Boot / AWS</div>
+      <div class="tags">
+        <span class="tag hl">Riverpod</span><span class="tag hl">WebView JS Bridge</span>
+        <span class="tag">Flutter</span><span class="tag">React/TS</span><span class="tag">AWS</span>
+      </div>
+      <ul class="ul">
+        <li>기존 사용자 콘텐츠 탐색·시청·재시청 흐름 분석 후 신규 앱 구조에 맞게 재설계</li>
+        <li>Riverpod으로 셋톱박스 3대 상태를 연결/기기/콘텐츠 단위 분리, 상태 변화 즉시 반영</li>
+        <li>React + WebView JS Bridge로 탐색 화면 분리 → 앱 배포 없이 콘텐츠 즉시 반영</li>
+        <li><strong>FCP 39% 단축, LCP 10.8% 개선</strong></li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">딜라이브 모바일TV → 오초이스 마이그레이션</span>
+        <span class="proj-period">2024.02–2024.11</span>
+      </div>
+      <div class="proj-sub">딜라이브 (매출 3,500억) · 팀 4인 · Flutter / DRM / Spring Boot</div>
+      <div class="tags">
+        <span class="tag hl">라이브러리 소스 분석</span><span class="tag hl">DRM 통합</span>
+        <span class="tag">Flutter 2→3</span><span class="tag">NCG DRM</span><span class="tag">Multi DRM</span>
+      </div>
+      <ul class="ul">
+        <li>플레이어 라이브러리 소스 직접 분석 → 생명주기 분리로 쇼츠형 오디오 이중 출력 해결</li>
+        <li>NCG DRM → Multi DRM 단일 플레이어로 통합, 서비스 무관 동일 사용자 경험</li>
+        <li><strong>Flutter 2 → 3 버전업</strong> · 전체 라이브러리 의존성 재검토 · 안정적 업그레이드</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">숫자 대결 — 실시간 WebSocket 게임</span>
+        <span class="proj-period">2026.01~ · 솔로 3일</span>
+      </div>
+      <div class="proj-sub">기획~배포 3일 단독 · Flutter / Spring Boot / WebSocket / Render</div>
+      <div class="tags">
+        <span class="tag hl">WebSocket</span><span class="tag hl">서버 단일 상태</span>
+        <span class="tag">Flutter</span><span class="tag">Spring Boot</span><span class="tag gray">Render</span>
+      </div>
+      <ul class="ul">
+        <li>서버 단일 상태 관리로 동시 입력 충돌 방지, WebSocket으로 전체 클라이언트 실시간 동기화</li>
+        <li>Optimistic Update(즉각 UI 반응) + 서버 확정값 동기화 구조 설계</li>
+        <li>기획/Flutter/Spring Boot/Render 배포 <strong>전 과정 3일 내 단독 구현</strong> · <a href="https://justinnn980.tistory.com/126">블로그 포스트</a></li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">담아(Dama) — 구독 통합 관리 서비스</span>
+        <span class="proj-period">2026.01–2026.02</span>
+      </div>
+      <div class="proj-sub">팀 3인 (개발 2/디자인 1) · Flutter / Spring Boot / JWT / MySQL / Docker</div>
+      <div class="tags">
+        <span class="tag hl">JWT 인증</span><span class="tag hl">도메인 분리 설계</span>
+        <span class="tag">Flutter</span><span class="tag">Spring Boot</span><span class="tag">Docker</span>
+      </div>
+      <ul class="ul">
+        <li>User / Subscription / Community 도메인 분리 설계, 기능 확장에 영향 범위가 명확한 구조</li>
+        <li>JWT Access/Refresh Token 인증 흐름을 Flutter에서 직접 구현 — Stateless 인증 구조</li>
+        <li>Soft Delete로 구독 이력 보존 · Docker 통합 실행 환경으로 팀원 간 환경 차이 제거</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">개인 커뮤니티 웹앱</span>
+        <span class="proj-period">2026.05~ · 진행 중</span>
+      </div>
+      <div class="proj-sub">개인 · 기획~배포 단독 · Docker / Render</div>
+      <div class="tags">
+        <span class="tag hl">ERD 기획~배포</span><span class="tag hl">AI 에이전트 활용</span>
+        <span class="tag">Docker</span><span class="tag gray">Render</span>
+      </div>
+      <ul class="ul">
+        <li>게시글 / 좋아요 / 팔로우 / 채팅 기능을 ERD 설계부터 배포까지 단독 구현</li>
+        <li>AI 에이전트를 기획·설계·구현·배포 전 과정에 활용해 개발 속도 최적화</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">학력 · 교육 · 저서</span>
+        <span class="proj-period"></span>
+      </div>
+      <div class="proj-sub">대전대학교 컴퓨터공학과 · 모빌리티AI·SW융합 복수전공 · 2024.02 졸업</div>
+      <div class="tags"><span class="tag">2017–2024</span></div>
+      <ul class="ul">
+        <li>정보통신산업진흥원 인공지능 기본과정 수료</li>
+        <li>네이버 부스트코스 DATA SCIENCE 코칭스터디 2023 수료</li>
+        <li>공동 저서 <a href="https://www.yes24.com/Product/Goods/109711067">『개발자가 꼭 알아야 하는 IT 용어』</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+  <div class="sec-label">Contact</div>
+  <div class="sec-title">연락처</div>
+  <div style="display:flex; gap:32px; flex-wrap:wrap; background:var(--card); border:1px solid var(--bdr); border-radius:12px; padding:24px;">
+    <div><div style="font-size:12px;color:var(--muted);margin-bottom:4px;">전화</div><div style="font-weight:700;">010-2538-1519</div></div>
+    <div><div style="font-size:12px;color:var(--muted);margin-bottom:4px;">이메일</div><div style="font-weight:700;">justinnn980@gmail.com</div></div>
+    <div><div style="font-size:12px;color:var(--muted);margin-bottom:4px;">블로그</div><div style="font-weight:700;"><a href="https://justinnn980.tistory.com">justinnn980.tistory.com</a></div></div>
+    <div><div style="font-size:12px;color:var(--muted);margin-bottom:4px;">도서</div><div style="font-weight:700;"><a href="https://www.yes24.com/Product/Goods/109711067">개발자가 꼭 알아야 하는 IT 용어</a></div></div>
+  </div>
+</div>
+
+<footer>박준철 포트폴리오 · 데이터유니버스 모바일 앱 개발자 지원</footer>
+
+</body>
+</html>
