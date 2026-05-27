@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 — 금융 서비스 APP 개발자 / 다날 지원</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:    #0E1520;
+      --bg2:   #151D2E;
+      --bg3:   #1C2740;
+      --sur:   rgba(255,255,255,0.05);
+      --sur-h: rgba(255,255,255,0.09);
+      --bdr:   rgba(255,255,255,0.10);
+      --bdr-a: rgba(59,130,246,0.30);
+      --text:  #E2E8F0;
+      --muted: #94A3B8;
+      --soft:  #64748B;
+      --blu:   #3B82F6;
+      --blu-d: #2563EB;
+      --ind:   #818CF8;
+      --grn:   #34D399;
+      --red:   #F87171;
+      --r: 10px;
+      --sh: 0 0 0 1px rgba(255,255,255,0.05), 0 20px 50px rgba(0,0,0,0.55);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.65; overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    body::after {
+      content: ''; position: fixed; top: -200px; left: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(59,130,246,0.06), transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(8,12,22,0.90); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--bdr);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      height: 56px; display: flex; align-items: center;
+      justify-content: space-between; gap: 20px;
+    }
+    .nav-brand { font-size: 15px; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    .nav-tag {
+      padding: 2px 8px; border-radius: 4px;
+      background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.28);
+      color: var(--blu); font-size: 11px; font-weight: 800;
+    }
+    .nav-links { display: flex; gap: 2px; }
+    .nav-links a {
+      padding: 6px 12px; border-radius: 6px;
+      color: var(--muted); font-size: 13px; font-weight: 600;
+      transition: color .15s, background .15s;
+    }
+    .nav-links a:hover { color: var(--blu); background: rgba(59,130,246,0.08); }
+
+    /* ── LAYOUT ── */
+    .main { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 80px 0; border-top: 1px solid var(--bdr); }
+    .section:first-child { border-top: none; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .sec-num  { font-size: 11px; font-weight: 800; color: var(--blu); letter-spacing: 1px; }
+    .sec-lbl  { font-size: 11px; font-weight: 700; color: var(--soft); letter-spacing: 1.5px; text-transform: uppercase; }
+    .sec-title { font-size: 36px; font-weight: 900; color: var(--text); letter-spacing: -0.5px; margin-bottom: 28px; line-height: 1.15; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 90px 0 80px;
+      display: grid; grid-template-columns: minmax(0,1fr) 420px;
+      gap: 60px; align-items: start;
+    }
+    .hero-role {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 20px; padding: 6px 14px;
+      border: 1px solid rgba(59,130,246,0.28); border-radius: 999px;
+      background: rgba(59,130,246,0.07); color: var(--blu);
+      font-size: 12px; font-weight: 700;
+    }
+    .hero-role::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--blu); animation: blink 2s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.35} }
+    .hero-name {
+      font-size: 80px; font-weight: 900; line-height: 1;
+      letter-spacing: -2px; margin-bottom: 20px;
+      background: linear-gradient(135deg, #E2E8F0 30%, var(--blu));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-lead { font-size: 16px; line-height: 1.82; color: var(--muted); max-width: 580px; margin-bottom: 24px; }
+    .profile-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    .ptag {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 10px; border: 1px solid var(--bdr); border-radius: 6px;
+      background: var(--sur); color: var(--muted); font-size: 12px; font-weight: 600;
+    }
+    .ptag span { color: var(--soft); font-size: 11px; }
+    .hero-actions { display: flex; gap: 10px; margin-bottom: 36px; }
+    .btn-p {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: var(--r);
+      background: linear-gradient(135deg, var(--blu), var(--blu-d));
+      color: #fff; font-size: 14px; font-weight: 800;
+      box-shadow: 0 4px 20px rgba(59,130,246,0.28);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn-p:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(59,130,246,0.38); }
+    .btn-g {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: var(--r);
+      border: 1px solid var(--bdr); background: var(--sur);
+      color: var(--text); font-size: 14px; font-weight: 700;
+      transition: border-color .15s, background .15s;
+    }
+    .btn-g:hover { border-color: var(--bdr-a); background: rgba(59,130,246,0.05); }
+    .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .stat { padding: 16px; border: 1px solid var(--bdr); border-radius: var(--r); background: var(--sur); }
+    .stat-n {
+      font-size: 26px; font-weight: 900; letter-spacing: -0.5px; line-height: 1.1;
+      background: linear-gradient(135deg, var(--blu), var(--ind));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .stat-l { margin-top: 4px; color: var(--soft); font-size: 12px; font-weight: 600; }
+
+    /* Code panel */
+    .code-panel {
+      position: sticky; top: 76px;
+      border: 1px solid var(--bdr); border-radius: 14px;
+      overflow: hidden; background: #0D1117; box-shadow: var(--sh);
+    }
+    .code-bar {
+      display: flex; align-items: center; gap: 7px;
+      padding: 11px 16px; background: rgba(255,255,255,0.025);
+      border-bottom: 1px solid var(--bdr);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .code-fn { margin-left: 6px; font-size: 12px; color: var(--soft); font-weight: 600; font-family: 'SF Mono','Fira Code',monospace; }
+    .code-body { padding: 18px 20px; font-family: 'SF Mono','Fira Code','Consolas',monospace; font-size: 12.5px; line-height: 1.72; }
+    .cl { display: flex; }
+    .ln { width: 22px; flex-shrink: 0; color: #3D4452; text-align: right; margin-right: 16px; user-select: none; }
+    .cmt  { color: #637777; }
+    .kw   { color: #C792EA; }
+    .tp   { color: #FFCB6B; }
+    .str  { color: #C3E88D; }
+    .fn   { color: #82AAFF; }
+    .vr   { color: #F07178; }
+    .tc   { color: var(--blu); }
+    .nm   { color: #F78C6C; }
+    .pl   { color: #A6ACCD; }
+    .cdiv { margin: 7px 0; border: none; border-top: 1px solid rgba(255,255,255,0.06); }
+
+    /* ── MATCH GRID ── */
+    .match-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-bottom: 0; }
+    .match-card {
+      padding: 20px 22px; border: 1px solid var(--bdr); border-radius: 12px;
+      background: var(--bg2); transition: border-color .15s, transform .15s;
+    }
+    .match-card:hover { border-color: var(--bdr-a); transform: translateY(-2px); }
+    .match-card.req { border-left: 3px solid var(--blu); }
+    .match-card.pref { border-left: 3px solid var(--grn); }
+    .mc-badge {
+      display: inline-block; margin-bottom: 10px;
+      padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 800;
+    }
+    .mc-badge.req  { background: rgba(59,130,246,0.12); color: var(--blu); border: 1px solid rgba(59,130,246,0.22); }
+    .mc-badge.pref { background: rgba(52,211,153,0.12); color: var(--grn); border: 1px solid rgba(52,211,153,0.22); }
+    .mc-req  { font-size: 12px; font-weight: 800; color: var(--muted); margin-bottom: 7px; line-height: 1.4; }
+    .mc-ans  { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.5; }
+    .mc-sub  { font-size: 12px; color: var(--muted); margin-top: 5px; line-height: 1.6; }
+
+    /* ── PROBLEM CARDS ── */
+    .prob-list { display: grid; gap: 20px; }
+    .pc {
+      border: 1px solid var(--bdr); border-radius: 14px;
+      overflow: hidden; background: var(--bg2); transition: border-color .15s;
+    }
+    .pc:hover { border-color: rgba(59,130,246,0.22); }
+    .pc-head { padding: 24px 28px 0; }
+    .pc-meta { display: flex; align-items: center; gap: 7px; margin-bottom: 12px; flex-wrap: wrap; }
+    .tg { padding: 3px 9px; border-radius: 4px; font-size: 11px; font-weight: 800; }
+    .tg-prob { background: rgba(248,113,113,0.12); color: #F87171; border: 1px solid rgba(248,113,113,0.2); }
+    .tg-blu  { background: rgba(59,130,246,0.10);  color: var(--blu); border: 1px solid rgba(59,130,246,0.2); }
+    .tg-eng  { background: rgba(129,140,248,0.10);  color: var(--ind); border: 1px solid rgba(129,140,248,0.2); }
+    .tg-grn  { background: rgba(52,211,153,0.10);  color: var(--grn); border: 1px solid rgba(52,211,153,0.2); }
+    .pc-title { font-size: 19px; font-weight: 900; color: var(--text); line-height: 1.35; margin-bottom: 14px; }
+    .pc-body  { padding: 0 28px; }
+    .sit, .sol { font-size: 14px; line-height: 1.84; color: var(--muted); margin-bottom: 18px; }
+    .sl {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 9px; border-radius: 4px; margin-right: 8px;
+      background: rgba(59,130,246,0.10); color: var(--blu);
+      font-size: 11px; font-weight: 800; border: 1px solid rgba(59,130,246,0.2);
+    }
+    .impact {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      padding: 14px 28px; background: rgba(59,130,246,0.04);
+      border-top: 1px solid rgba(59,130,246,0.10);
+    }
+    .imp {
+      display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px;
+      border-radius: 6px; background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.18); color: var(--blu);
+      font-size: 12px; font-weight: 800;
+    }
+
+    /* ── DIAGRAMS ── */
+    .diag {
+      margin: 0 28px 18px; padding: 18px;
+      border-radius: 10px; background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06); overflow-x: auto;
+    }
+    .dlbl { font-size: 10px; font-weight: 800; color: var(--soft); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+    .nd {
+      padding: 8px 14px; border-radius: 7px; font-size: 12px; font-weight: 800;
+      text-align: center; border: 1.5px solid; line-height: 1.35; white-space: nowrap;
+    }
+    .nd small { display: block; font-size: 10px; font-weight: 600; opacity: .7; margin-top: 2px; }
+    .nd-t  { border-color: rgba(59,130,246,0.4);   background: rgba(59,130,246,0.08);   color: var(--blu); }
+    .nd-b  { border-color: rgba(56,189,248,0.4);   background: rgba(56,189,248,0.08);   color: #38BDF8; }
+    .nd-i  { border-color: rgba(129,140,248,0.4);  background: rgba(129,140,248,0.08);  color: var(--ind); }
+    .nd-g  { border-color: rgba(52,211,153,0.4);   background: rgba(52,211,153,0.08);   color: var(--grn); }
+    .nd-gr { border-color: rgba(148,163,184,0.3);  background: rgba(148,163,184,0.05);  color: var(--muted); }
+    .nd-r  { border-color: rgba(248,113,113,0.4);  background: rgba(248,113,113,0.08);  color: #F87171; }
+    .nd-y  { border-color: rgba(251,191,36,0.4);   background: rgba(251,191,36,0.08);   color: #FCD34D; }
+    .fr { display: flex; align-items: center; flex-wrap: nowrap; margin: 5px 0; }
+    .ar { padding: 0 10px; color: var(--soft); font-size: 15px; display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+    .ar small { font-size: 9px; color: var(--soft); font-weight: 700; margin-top: 1px; white-space: nowrap; }
+    .fc  { display: flex; flex-direction: column; align-items: center; }
+    .ard { color: var(--soft); font-size: 14px; line-height: 1.8; }
+    .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 2px; }
+    .ba-p { padding: 14px; border-radius: 8px; }
+    .ba-b { background: rgba(248,113,113,0.04); border: 1px solid rgba(248,113,113,0.15); }
+    .ba-a { background: rgba(52,211,153,0.04);  border: 1px solid rgba(52,211,153,0.15); }
+    .ba-t { font-size: 10px; font-weight: 900; letter-spacing: .5px; margin-bottom: 10px; }
+    .ba-b .ba-t { color: #F87171; }
+    .ba-a .ba-t { color: var(--grn); }
+    .vf { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+    .vf .nd { align-self: stretch; text-align: left; white-space: normal; }
+    .vf .ard { margin-left: 12px; }
+    .bdg-diag { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+    .bdg-mid  { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 0 12px; }
+    .bdg-box  { padding: 8px 14px; border-radius: 7px; background: rgba(59,130,246,0.10); border: 1.5px solid rgba(59,130,246,0.38); color: var(--blu); font-size: 11px; font-weight: 900; text-align: center; }
+    .bdg-arr  { color: var(--soft); font-size: 10px; font-weight: 700; }
+    .sevts    { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+    .sev      { padding: 4px 9px; border-radius: 5px; font-size: 11px; font-weight: 700; text-align: center; }
+
+    /* ── PROJECT GRID ── */
+    .proj-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+    .prj {
+      padding: 22px; border: 1px solid var(--bdr); border-radius: 12px;
+      background: var(--sur); transition: border-color .15s, transform .15s;
+    }
+    .prj:hover { border-color: var(--bdr-a); transform: translateY(-2px); }
+    .prj-num   { font-size: 11px; font-weight: 900; color: var(--soft); letter-spacing: 1px; margin-bottom: 7px; }
+    .prj-title { font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
+    .prj-scale { font-size: 12px; font-weight: 800; color: var(--blu); margin-bottom: 8px; }
+    .prj-tags  { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 12px; }
+    .prj-tag   { padding: 2px 7px; border-radius: 4px; background: rgba(255,255,255,0.05); border: 1px solid var(--bdr); color: var(--soft); font-size: 10px; font-weight: 700; }
+    .prj-ul    { list-style: none; display: grid; gap: 6px; }
+    .prj-ul li { padding-left: 13px; position: relative; font-size: 12px; color: var(--muted); line-height: 1.6; }
+    .prj-ul li::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: var(--blu); }
+
+    /* ── CERT ── */
+    .cert-list { display: grid; gap: 10px; }
+    .cert { display: grid; grid-template-columns: 180px 1fr; overflow: hidden; border: 1px solid var(--bdr); border-radius: var(--r); }
+    .cert-lbl { padding: 14px 16px; border-right: 1px solid var(--bdr); background: rgba(59,130,246,0.05); color: var(--blu); font-size: 11px; font-weight: 800; display: flex; align-items: center; }
+    .cert-val { padding: 14px 18px; display: flex; align-items: center; font-size: 13px; color: var(--muted); }
+    .cert-val a { color: var(--blu); text-decoration: underline; text-decoration-color: rgba(59,130,246,0.3); }
+
+    /* ── CONTACT ── */
+    .contact-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .clink {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border: 1px solid var(--bdr); border-radius: var(--r);
+      background: var(--sur); color: var(--text); font-size: 14px; font-weight: 700;
+      transition: border-color .15s, transform .15s;
+    }
+    .clink:hover { border-color: var(--bdr-a); transform: translateY(-2px); }
+
+    footer { padding: 32px 24px; text-align: center; color: var(--soft); font-size: 12px; border-top: 1px solid var(--bdr); position: relative; z-index: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px) {
+      .hero { grid-template-columns: 1fr; padding: 60px 0; }
+      .hero-name { font-size: 52px; }
+      .match-grid, .proj-grid { grid-template-columns: 1fr; }
+      .ba, .bdg-diag { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+    @media(max-width:600px) {
+      .hero-name { font-size: 40px; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .pc-head, .pc-body { padding-left: 18px; padding-right: 18px; }
+      .diag { margin-left: 18px; margin-right: 18px; }
+      .impact { padding-left: 18px; padding-right: 18px; }
+      .section { padding: 56px 0; }
+      .cert { grid-template-columns: 1fr; }
+      .cert-lbl { border-right: none; border-bottom: 1px solid var(--bdr); }
+    }
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#intro">박준철 <span class="nav-tag">다날 지원</span></a>
+    <div class="nav-links">
+      <a href="#match">요건 매칭</a>
+      <a href="#problems">문제 해결</a>
+      <a href="#projects">프로젝트</a>
+      <a href="#contact">연락처</a>
+    </div>
+  </div>
+</nav>
+
+<div class="main">
+
+  <!-- HERO -->
+  <section class="section" id="intro" style="border-top:none;">
+    <div class="hero">
+      <div>
+        <div class="hero-role">금융 서비스 APP 개발자 · 다날 지원</div>
+        <h1 class="hero-name">박준철</h1>
+        <p class="hero-lead">Flutter 기반 크로스플랫폼 앱을 1년 10개월간 실서비스에서 개발한 모바일 앱 개발자입니다. DRM 라이선스 검증·HTTPS 보안통신·JWT 인증 흐름 등 <strong style="color:var(--blu);">결제/금융 서비스 구조와 동일한 패턴</strong>을 OTT B2C 서비스(매출 340억)에서 직접 구현했습니다. React + Flutter WebView 연동, iOS/Android 배포까지 자격요건 전 항목을 실무에서 경험했습니다.</p>
+        <div class="profile-row">
+          <span class="ptag"><span>전공</span> 컴퓨터공학과</span>
+          <span class="ptag"><span>복수전공</span> 모빌리티AI/SW융합전공</span>
+          <span class="ptag"><span>경력</span> (주)홈초이스 1년 10개월</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn-p" href="#problems">문제 해결 과정 보기</a>
+          <a class="btn-g" href="mailto:justinnn980@gmail.com">메일 보내기</a>
+        </div>
+        <div class="stats-row">
+          <div class="stat"><div class="stat-n">매출 1조+</div><div class="stat-l">B2C 대규모 서비스 Flutter 개발</div></div>
+          <div class="stat"><div class="stat-n">FCP −39%</div><div class="stat-l">성능 최적화 지표 달성</div></div>
+          <div class="stat"><div class="stat-n">2건</div><div class="stat-l">iOS / Android 동시 배포 마이그레이션</div></div>
+        </div>
+      </div>
+
+      <!-- Code panel -->
+      <div class="code-panel" aria-hidden="true">
+        <div class="code-bar">
+          <div class="dot" style="background:#FF5F57"></div>
+          <div class="dot" style="background:#FEBC2E"></div>
+          <div class="dot" style="background:#28C840"></div>
+          <span class="code-fn">auth_service.dart</span>
+        </div>
+        <div class="code-body">
+          <div class="cl"><span class="ln">1</span><span class="cmt">// JWT Access / Refresh Token 인증 흐름</span></div>
+          <div class="cl"><span class="ln">2</span><span class="cmt">// 금융 서비스 Stateless 인증 구조 직접 구현</span></div>
+          <div class="cl"><span class="ln">3</span><span class="pl">&nbsp;</span></div>
+          <div class="cl"><span class="ln">4</span><span class="kw">final </span><span class="vr">authProvider</span><span class="pl"> =</span></div>
+          <div class="cl"><span class="ln">5</span><span class="pl">  </span><span class="tp">StateNotifierProvider</span><span class="pl">&lt;</span></div>
+          <div class="cl"><span class="ln">6</span><span class="pl">    </span><span class="tp">AuthNotifier</span><span class="pl">, </span><span class="tp">AuthState</span><span class="pl">&gt;(</span></div>
+          <div class="cl"><span class="ln">7</span><span class="pl">  (</span><span class="vr">ref</span><span class="pl">) </span><span class="kw">=&gt; </span><span class="tp">AuthNotifier</span><span class="pl">(),</span></div>
+          <div class="cl"><span class="ln">8</span><span class="pl">);</span></div>
+          <hr class="cdiv"/>
+          <div class="cl"><span class="ln">10</span><span class="cmt">// 401 감지 → Refresh Token 자동 갱신</span></div>
+          <div class="cl"><span class="ln">11</span><span class="pl">&nbsp;</span></div>
+          <div class="cl"><span class="ln">12</span><span class="kw">Future</span><span class="pl">&lt;</span><span class="tp">Response</span><span class="pl">&gt; </span><span class="fn">request</span><span class="pl">(</span></div>
+          <div class="cl"><span class="ln">13</span><span class="pl">  </span><span class="tp">String</span><span class="pl"> </span><span class="vr">path</span><span class="pl">, {</span><span class="kw">bool </span><span class="vr">retry</span><span class="pl"> = </span><span class="kw">true</span><span class="pl">}) </span><span class="kw">async </span><span class="pl">{</span></div>
+          <div class="cl"><span class="ln">14</span><span class="pl">  </span><span class="kw">final </span><span class="vr">res</span><span class="pl"> = </span><span class="kw">await </span><span class="fn">_dio</span><span class="pl">.</span><span class="fn">get</span><span class="pl">(</span><span class="vr">path</span><span class="pl">);</span></div>
+          <div class="cl"><span class="ln">15</span><span class="pl">  </span><span class="kw">if </span><span class="pl">(</span><span class="vr">res</span><span class="pl">.statusCode == </span><span class="nm">401</span><span class="pl"> &amp;&amp; </span><span class="vr">retry</span><span class="pl">) {</span></div>
+          <div class="cl"><span class="ln">16</span><span class="pl">    </span><span class="kw">await </span><span class="fn">refreshToken</span><span class="pl">();</span></div>
+          <div class="cl"><span class="ln">17</span><span class="pl">    </span><span class="kw">return </span><span class="fn">request</span><span class="pl">(</span><span class="vr">path</span><span class="pl">, </span><span class="vr">retry</span><span class="pl">: </span><span class="kw">false</span><span class="pl">);</span></div>
+          <div class="cl"><span class="ln">18</span><span class="pl">  }</span></div>
+          <div class="cl"><span class="ln">19</span><span class="pl">  </span><span class="kw">return </span><span class="vr">res</span><span class="pl">;</span></div>
+          <div class="cl"><span class="ln">20</span><span class="pl">}</span></div>
+          <hr class="cdiv"/>
+          <div class="cl"><span class="ln">22</span><span class="cmt">// DRM 라이선스 검증 = 결제 토큰 검증과</span></div>
+          <div class="cl"><span class="ln">23</span><span class="cmt">// 동일한 서버 검증 → 허가 → 콘텐츠 흐름</span></div>
+          <div class="cl"><span class="ln">24</span><span class="pl">&nbsp;</span></div>
+          <div class="cl"><span class="ln">25</span><span class="kw">final </span><span class="vr">license</span><span class="pl"> = </span><span class="kw">await</span></div>
+          <div class="cl"><span class="ln">26</span><span class="pl">  </span><span class="fn">validateDRM</span><span class="pl">(</span></div>
+          <div class="cl"><span class="ln">27</span><span class="pl">    </span><span class="vr">token</span><span class="pl">: </span><span class="vr">authState</span><span class="pl">.</span><span class="vr">accessToken</span><span class="pl">,</span></div>
+          <div class="cl"><span class="ln">28</span><span class="pl">  );</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 요건 매칭 -->
+  <section class="section" id="match">
+    <div class="eyebrow"><span class="sec-num">01</span><span class="sec-lbl">Requirements Match</span></div>
+    <h2 class="sec-title">자격요건 · 우대사항 매칭</h2>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.7;">다날 채용공고의 요건별로 실무 경험을 직접 매핑했습니다.</p>
+    <div class="match-grid">
+
+      <div class="match-card req">
+        <span class="mc-badge req">필수 요건</span>
+        <div class="mc-req">Flutter 크로스플랫폼 (iOS/Android) 개발</div>
+        <div class="mc-ans">Flutter 2.0 ~ 3.38 · 1년 10개월 실무</div>
+        <div class="mc-sub">(주)홈초이스 OTT 서비스 스카이이어스 iOS/Android 동시 개발 및 배포. App Store·Google Play 인증서 관리, 버전 빌드 직접 수행.</div>
+      </div>
+
+      <div class="match-card req">
+        <span class="mc-badge req">필수 요건</span>
+        <div class="mc-req">모바일앱 개발 경력 3년 이상</div>
+        <div class="mc-ans">실무 1년 10개월 + 재학 중 앱 개발 프로젝트</div>
+        <div class="mc-sub">실서비스(매출 340억) Flutter 앱 개발·유지보수. 매출 1조 LG헬로비전, 매출 3,500억 드라이브 대상 마이그레이션 2건 완료.</div>
+      </div>
+
+      <div class="match-card req">
+        <span class="mc-badge req">필수 요건</span>
+        <div class="mc-req">React/Next.js 환경 모바일웹 개발 경험</div>
+        <div class="mc-ans">React + Flutter WebView JS Bridge 직접 설계</div>
+        <div class="mc-sub">콘텐츠 화면을 React + TypeScript WebView로 분리하고, addJavaScriptChannel로 Flutter Native와 양방향 통신 구조 구현. 앱 재배포 없이 즉시 반영.</div>
+      </div>
+
+      <div class="match-card req">
+        <span class="mc-badge req">필수 요건</span>
+        <div class="mc-req">결제/금융 B2C 서비스 APP 개발</div>
+        <div class="mc-ans">DRM 라이선스 검증 · JWT 인증 · HTTPS 보안통신</div>
+        <div class="mc-sub">DRM 검증은 결제 토큰 검증과 구조가 동일합니다: 서버 인증 → 라이선스(권한) 발급 → 콘텐츠 허가. JWT Refresh Token 자동 갱신, SSL 보안통신 구성 실무 경험.</div>
+      </div>
+
+      <div class="match-card pref">
+        <span class="mc-badge pref">우대사항</span>
+        <div class="mc-req">대규모 트래픽 B2C 서비스 운영 경험</div>
+        <div class="mc-ans">LG헬로비전(매출 1조) 서비스 앱 마이그레이션</div>
+        <div class="mc-sub">전국 케이블TV 가입자 대상 OTT 앱(스카이이어스)을 9개월간 운영. 실서비스 트래픽 환경에서 성능 병목 분석 및 FCP 39% 개선 경험.</div>
+      </div>
+
+      <div class="match-card pref">
+        <span class="mc-badge pref">우대사항</span>
+        <div class="mc-req">신규 사업 기획~런칭 End-to-End 참여</div>
+        <div class="mc-ans">구독 통합 관리 서비스 내일(Dama) 기획~배포</div>
+        <div class="mc-sub">Flutter 앱 + Spring Boot 백엔드 + Docker 배포까지 2인 팀으로 End-to-End 직접 수행. 숫자연결 게임(WebSocket 실시간) 솔로 3일 기획·개발·배포 경험.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 문제 해결 -->
+  <section class="section" id="problems">
+    <div class="eyebrow"><span class="sec-num">02</span><span class="sec-lbl">Problem Solving</span></div>
+    <h2 class="sec-title">문제 해결 — 다날 업무와의 연결</h2>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:32px;line-height:1.7;">실무에서 마주한 문제와 해결 과정을 데이터 흐름으로 풀어냈습니다. 다날 금융 서비스와 직결되는 경험들입니다.</p>
+
+    <div class="prob-list">
+
+      <!-- P1 -->
+      <div class="pc">
+        <div class="pc-head">
+          <div class="pc-meta">
+            <span class="tg tg-prob">문제</span>
+            <span class="tg tg-blu">다날 필수 — 보안통신 · 결제 안전성</span>
+          </div>
+          <h3 class="pc-title">Elastic IP 고정 후 Proxy 방화벽이 차단돼 앱 전체가 API를 호출할 수 없었다</h3>
+        </div>
+        <div class="pc-body">
+          <p class="sit">AWS EC2 Elastic IP를 고정한 뒤 일부 이동통신사 네트워크에서 Proxy 방화벽이 해당 IP를 차단하기 시작했습니다. 기존 HTTP 통신은 중간 Proxy에 노출되어 차단 대상이 됐고, 앱 전체의 API 호출이 불가능해졌습니다. 결제 서비스에서 동일한 문제가 발생하면 결제 자체가 불가능해지는 치명적 상황입니다.</p>
+        </div>
+        <div class="diag">
+          <div class="dlbl">HTTPS 보안통신 적용 전후 비교</div>
+          <div class="ba">
+            <div class="ba-p ba-b">
+              <div class="ba-t">❌ 적용 전 (HTTP)</div>
+              <div class="vf">
+                <div class="nd nd-gr">Flutter 앱</div>
+                <div class="ard">↓ HTTP 요청</div>
+                <div class="nd nd-r">이통사 Proxy 서버<small>패킷 검사 후 차단</small></div>
+                <div class="ard">↓</div>
+                <div class="nd nd-r">API 호출 불가 ❌</div>
+              </div>
+            </div>
+            <div class="ba-p ba-a">
+              <div class="ba-t">✅ 적용 후 (HTTPS + SSL)</div>
+              <div class="vf">
+                <div class="nd nd-t">Flutter 앱</div>
+                <div class="ard">↓ TLS 암호화</div>
+                <div class="nd nd-g">이통사 Proxy 서버<small>암호화로 내용 검사 불가</small></div>
+                <div class="ard">↓ 통과</div>
+                <div class="nd nd-g">EC2 API 서버 정상 응답 ✅</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pc-body">
+          <p class="sol"><span class="sl">해결</span>SSL 인증서를 EC2 인스턴스에 적용하고 전체 API 엔드포인트를 HTTPS로 전환했습니다. TLS 암호화로 Proxy가 내용을 검사할 수 없게 되어 차단이 해제됐습니다. 결제 서비스에서의 카드 정보·인증 토큰 전송 보호와 완전히 동일한 구조입니다.</p>
+        </div>
+        <div class="impact">
+          <span class="imp">전체 API 통신 차단 문제 해결</span>
+          <span class="imp">TLS 암호화로 데이터 보안 확보</span>
+          <span class="imp">결제 정보 보호와 동일 구조 적용</span>
+        </div>
+      </div>
+
+      <!-- P2 -->
+      <div class="pc">
+        <div class="pc-head">
+          <div class="pc-meta">
+            <span class="tg tg-prob">문제</span>
+            <span class="tg tg-blu">다날 필수 — 결제 토큰 검증 흐름</span>
+          </div>
+          <h3 class="pc-title">NCG DRM → Multi DRM 전환 시, 라이선스 검증 흐름이 플레이어마다 달라 재생이 불안정했다</h3>
+        </div>
+        <div class="pc-body">
+          <p class="sit">기존 NCG DRM에서 Multi DRM(Widevine/FairPlay)으로 전환하면서 각 플레이어가 라이선스 서버에 인증을 요청하는 흐름이 달라졌습니다. 라이선스 검증 로직이 플레이어 코드 곳곳에 흩어지면 토큰 갱신 타이밍이 어긋나 재생이 끊기거나 인증이 실패합니다. <strong style="color:var(--blu);">결제 서버 토큰 검증/갱신 흐름과 구조가 동일합니다.</strong></p>
+        </div>
+        <div class="diag">
+          <div class="dlbl">DRM 라이선스 검증 = 결제 토큰 검증 동일 패턴</div>
+          <div class="fr" style="justify-content:center;gap:8px;margin-bottom:6px;">
+            <div class="nd nd-gr" style="min-width:90px;">사용자 요청<small>재생 / 결제</small></div>
+            <div class="ard">→</div>
+            <div class="nd nd-t" style="min-width:150px;">단일 검증 레이어<small>플레이어 커스터마이징</small></div>
+            <div class="ard">→</div>
+            <div class="nd nd-y" style="min-width:110px;">라이선스 서버<small>토큰 발급</small></div>
+          </div>
+          <div style="text-align:center;color:var(--soft);font-size:12px;margin:4px 0;">↓ 허가 완료</div>
+          <div class="fr" style="justify-content:center;gap:8px;">
+            <div class="nd nd-g" style="min-width:130px;">콘텐츠 재생 허가<small>= 결제 승인</small></div>
+          </div>
+        </div>
+        <div class="pc-body">
+          <p class="sol"><span class="sl">해결</span>플레이어 커스터마이징으로 DRM 라이선스 검증 로직을 단일 레이어에 통합했습니다. 모든 재생 요청이 이 레이어를 반드시 통과하도록 만들어 토큰 갱신 타이밍이 일치하고 단일 재생 구조가 유지됐습니다. 결제 서비스의 PG 토큰 검증·갱신 로직과 동일하게 적용할 수 있습니다.</p>
+        </div>
+        <div class="impact">
+          <span class="imp">라이선스 검증 단일 레이어 통합</span>
+          <span class="imp">재생 불안정 완전 해소</span>
+          <span class="imp">결제 토큰 검증 패턴에 직접 전이 가능</span>
+        </div>
+      </div>
+
+      <!-- P3 -->
+      <div class="pc">
+        <div class="pc-head">
+          <div class="pc-meta">
+            <span class="tg tg-prob">문제</span>
+            <span class="tg tg-blu">다날 필수 — React + Flutter 연동</span>
+          </div>
+          <h3 class="pc-title">콘텐츠 선택·구매 흐름이 React WebView와 Flutter Native 사이를 오가야 했다</h3>
+        </div>
+        <div class="pc-body">
+          <p class="sit">콘텐츠 화면을 React + TypeScript WebView로 분리한 후, 사용자가 콘텐츠를 선택하거나 구매 버튼을 누르면 Flutter Native에서 재생·결제 흐름이 이어져야 했습니다. 두 환경의 데이터 동기화 없이는 화면이 멈추거나 상태가 어긋납니다. <strong style="color:var(--blu);">다날 금융 서비스 앱의 결제 WebView ↔ Native 연동과 동일한 구조입니다.</strong></p>
+        </div>
+        <div class="diag">
+          <div class="dlbl">JavaScript Bridge 양방향 데이터 흐름</div>
+          <div class="bdg-diag">
+            <div class="fc">
+              <div class="nd nd-b" style="width:100%;padding:10px 12px;">WebView<small>React / TypeScript</small></div>
+              <div class="sevts">
+                <div class="sev nd-b">콘텐츠 선택 이벤트</div>
+                <div class="sev nd-b">구매 버튼 클릭</div>
+                <div class="sev nd-b">페이지 상태 변경</div>
+              </div>
+            </div>
+            <div class="bdg-mid">
+              <div class="bdg-arr">→ JSON 직렬화</div>
+              <div class="bdg-box">JS<br>Bridge</div>
+              <div class="bdg-arr">콜백 반환 ←</div>
+            </div>
+            <div class="fc">
+              <div class="nd nd-t" style="width:100%;padding:10px 12px;">Native<small>Flutter / Dart</small></div>
+              <div class="sevts">
+                <div class="sev nd-t">재생 화면 push</div>
+                <div class="sev nd-t">결제 흐름 시작</div>
+                <div class="sev nd-t">앱 상태 동기화</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pc-body">
+          <p class="sol"><span class="sl">해결</span>addJavaScriptChannel로 Bridge를 등록하고, WebView 이벤트를 JSON 직렬화하여 Native로 전달한 뒤 evaluateJavascript 콜백으로 반환하는 양방향 구조를 설계했습니다. 화면 전환과 앱 상태는 Native에서만 관리하도록 역할을 명확히 분리했습니다. 앱 재배포 없이 WebView 화면만 갱신할 수 있어 운영 유연성도 확보됐습니다.</p>
+        </div>
+        <div class="impact">
+          <span class="imp">앱 재배포 없이 WebView 화면 즉시 반영</span>
+          <span class="imp">Native/Web 역할 명확히 분리</span>
+          <span class="imp">결제 WebView 연동 패턴에 직접 전이 가능</span>
+        </div>
+      </div>
+
+      <!-- P4 -->
+      <div class="pc">
+        <div class="pc-head">
+          <div class="pc-meta">
+            <span class="tg tg-prob">문제</span>
+            <span class="tg tg-grn">다날 우대 — 대규모 B2C 성능 최적화</span>
+          </div>
+          <h3 class="pc-title">전국 케이블TV 가입자가 앱 진입 시 첫 화면 로딩이 느려 이탈률이 높았다</h3>
+        </div>
+        <div class="pc-body">
+          <p class="sit">전국 규모 B2C 서비스(LG헬로비전, 가입자 수백만)에서 앱 첫 화면 로딩 지연이 이탈률에 직결됐습니다. FCP(First Contentful Paint)와 LCP(Largest Contentful Paint) 지표를 측정했을 때 로딩 병목이 확인됐고, 이를 데이터 기반으로 개선했습니다.</p>
+        </div>
+        <div class="diag">
+          <div class="dlbl">FCP / LCP 개선 적용 항목</div>
+          <div class="fr" style="flex-wrap:wrap;gap:8px;justify-content:center;">
+            <div class="nd nd-gr" style="min-width:100px;">FCP/LCP 측정<small>병목 구간 식별</small></div>
+            <div class="ard">→</div>
+            <div class="nd nd-t" style="min-width:110px;">스켈레톤 UI<small>지각 성능 개선</small></div>
+            <div class="ard">+</div>
+            <div class="nd nd-t" style="min-width:110px;">Lazy Loading<small>ViewportEntry</small></div>
+            <div class="ard">+</div>
+            <div class="nd nd-t" style="min-width:90px;">CDN 적용<small>이미지 리사이즈</small></div>
+          </div>
+          <div style="text-align:center;color:var(--soft);font-size:12px;margin:10px 0 4px;">↓ 결과</div>
+          <div class="fr" style="justify-content:center;gap:12px;">
+            <div class="nd nd-g" style="min-width:130px;">FCP 39% 단축</div>
+            <div class="nd nd-g" style="min-width:130px;">LCP 10.8% 개선</div>
+          </div>
+        </div>
+        <div class="pc-body">
+          <p class="sol"><span class="sl">해결</span>스켈레톤 UI로 지각 성능을 개선하고, Lazy Loading으로 뷰포트 외 리소스 로딩을 지연시켰습니다. CDN 적용 및 이미지 리사이즈(300px 기준)로 전송량을 줄여 FCP 39% 단축, LCP 10.8% 개선을 달성했습니다. 결제 서비스의 첫 화면 로딩 및 결제 페이지 진입 속도 최적화에 동일하게 적용 가능합니다.</p>
+        </div>
+        <div class="impact">
+          <span class="imp">FCP −39%</span>
+          <span class="imp">LCP −10.8%</span>
+          <span class="imp">대규모 B2C 서비스 성능 데이터 기반 개선</span>
+        </div>
+      </div>
+
+      <!-- P5 -->
+      <div class="pc">
+        <div class="pc-head">
+          <div class="pc-meta">
+            <span class="tg tg-prob">문제</span>
+            <span class="tg tg-eng">Flutter 2→3 마이그레이션 · 안정성</span>
+          </div>
+          <h3 class="pc-title">실서비스 마이그레이션 중 Flutter 2→3 업그레이드 시 의존 라이브러리 호환성이 무너졌다</h3>
+        </div>
+        <div class="pc-body">
+          <p class="sit">드라이브 모바일TV 앱을 스카이이어스로 마이그레이션하는 도중 Flutter 3 업그레이드가 필요했습니다. Null Safety 도입으로 기존 DRM 플레이어 라이브러리가 호환되지 않았고, Android Activity 생명주기 레벨의 플레이어 동작 방식도 변경됐습니다.</p>
+        </div>
+        <div class="pc-body" style="padding-bottom:18px;">
+          <p class="sol"><span class="sl">해결</span>의존 라이브러리의 호환성을 사전 전수 점검하고, Android 생명주기 레벨에서 플레이어 생성/재생/종료 시점을 명확히 분리했습니다. 라이브러리 소스를 직접 분석해 플레이어 중복 실행 문제를 완전히 해소했습니다. 실서비스에 영향 없이 마이그레이션을 완료했습니다.</p>
+        </div>
+        <div class="impact">
+          <span class="imp">실서비스 중단 없이 Flutter 3 전환 완료</span>
+          <span class="imp">플레이어 중복 실행 완전 해소</span>
+          <span class="imp">라이브러리 소스 직접 분석 역량</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 프로젝트 -->
+  <section class="section" id="projects">
+    <div class="eyebrow"><span class="sec-num">03</span><span class="sec-lbl">Projects</span></div>
+    <h2 class="sec-title">프로젝트 · 경력</h2>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.7;">실서비스에서 직접 개발·배포한 프로젝트입니다.</p>
+
+    <div class="proj-grid">
+
+      <div class="prj">
+        <div class="prj-num">PROJECT 01 · (주)홈초이스</div>
+        <div class="prj-title">크로tv → 스카이이어스 앱 마이그레이션 및 WebView 전환</div>
+        <div class="prj-scale">클라이언트: LG헬로비전 (매출 1조)</div>
+        <div class="prj-tags">
+          <span class="prj-tag">Flutter</span>
+          <span class="prj-tag">React / TypeScript</span>
+          <span class="prj-tag">Riverpod</span>
+          <span class="prj-tag">WebView</span>
+          <span class="prj-tag">AWS EC2</span>
+          <span class="prj-tag">Spring Boot</span>
+          <span class="prj-tag">9개월</span>
+        </div>
+        <ul class="prj-ul">
+          <li>EC2 Elastic IP 고정 + SSL 인증서 적용으로 Proxy 방화벽 차단 해결 및 전구간 HTTPS 보안통신 구성</li>
+          <li>Riverpod StateNotifierProvider로 STB 최대 3대 연결 상태를 단일 지점 관리 → 전체 화면 실시간 반영</li>
+          <li>콘텐츠 화면을 React + WebView 구조로 분리 → 앱 재배포 없이 운영 요구사항 즉시 반영</li>
+          <li>FCP/LCP 지표 기반 병목 분석 → 스켈레톤 UI·Lazy Loading·CDN으로 <strong>FCP 39% 단축, LCP 10.8% 개선</strong></li>
+        </ul>
+      </div>
+
+      <div class="prj">
+        <div class="prj-num">PROJECT 02 · (주)홈초이스</div>
+        <div class="prj-title">드라이브 모바일TV → 스카이이어스 앱 마이그레이션</div>
+        <div class="prj-scale">클라이언트: 드라이브 (매출 3,500억)</div>
+        <div class="prj-tags">
+          <span class="prj-tag">Flutter 2→3</span>
+          <span class="prj-tag">Multi DRM</span>
+          <span class="prj-tag">NCG DRM</span>
+          <span class="prj-tag">Spring Boot</span>
+          <span class="prj-tag">AWS</span>
+          <span class="prj-tag">10개월</span>
+        </div>
+        <ul class="prj-ul">
+          <li>NCG DRM → Multi DRM(Widevine/FairPlay) 전환: 플레이어 커스터마이징으로 라이선스 검증 흐름 단일화</li>
+          <li>인계 화면 플레이어 중복 실행 문제 → 라이브러리 소스 직접 분석, Android 생명주기 레벨 생성/재생/종료 분리</li>
+          <li>Flutter 2→3 업그레이드 시 의존 라이브러리 호환성 전수 점검 및 플레이어 동작 방식 재구성</li>
+        </ul>
+      </div>
+
+      <div class="prj">
+        <div class="prj-num">PROJECT 03 · 개인 프로젝트</div>
+        <div class="prj-title">내일(Dama) — 구독 통합 관리 서비스</div>
+        <div class="prj-scale">End-to-End 기획·개발·배포 (2인 팀)</div>
+        <div class="prj-tags">
+          <span class="prj-tag">Flutter</span>
+          <span class="prj-tag">Spring Boot</span>
+          <span class="prj-tag">JWT</span>
+          <span class="prj-tag">MySQL</span>
+          <span class="prj-tag">Docker</span>
+          <span class="prj-tag">2개월</span>
+        </div>
+        <ul class="prj-ul">
+          <li>JWT Access Token / Refresh Token 인증 흐름을 Flutter 앱에서 직접 구현 → Stateless 기반 인증 구조 설계</li>
+          <li>User / Subscription / Community 도메인 분리 설계, Soft Delete + BaseEntity 데이터 관리 정책 적용</li>
+          <li>Docker 기반 실행 환경 구성으로 개발자 간 환경 차이 제거 및 배포 구조 통일</li>
+        </ul>
+      </div>
+
+      <div class="prj">
+        <div class="prj-num">PROJECT 04 · 개인 프로젝트</div>
+        <div class="prj-title">숫자 연결 — 실시간 증가 경매 게임</div>
+        <div class="prj-scale">솔로 기획·개발·배포 (3일)</div>
+        <div class="prj-tags">
+          <span class="prj-tag">Flutter</span>
+          <span class="prj-tag">Spring Boot</span>
+          <span class="prj-tag">WebSocket</span>
+          <span class="prj-tag">Render</span>
+        </ul>
+        <ul class="prj-ul">
+          <li>서버 단일 상태 관리 설계 → 동시 입력 충돌 없이 WebSocket으로 모든 클라이언트에 최종값 즉시 전달</li>
+          <li>클라이언트는 증가 UI만 반응하고 실제 데이터는 서버 결과 기준으로 동기화하는 구조 구현</li>
+          <li>실시간 트랜잭션 처리 구조 — 다날 결제 실시간 처리 로직과 유사한 패턴</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 자격증 / 학력 -->
+  <section class="section" id="certs">
+    <div class="eyebrow"><span class="sec-num">04</span><span class="sec-lbl">Credentials</span></div>
+    <h2 class="sec-title">자격증 · 학력</h2>
+    <div class="cert-list">
+      <div class="cert">
+        <div class="cert-lbl">학력</div>
+        <div class="cert-val">컴퓨터공학과 / 복수전공: 모빌리티AI·SW융합전공</div>
+      </div>
+      <div class="cert">
+        <div class="cert-lbl">진행 중</div>
+        <div class="cert-val">정보통신산업진흥원 — 인공지능 기본과정 이수</div>
+      </div>
+      <div class="cert">
+        <div class="cert-lbl">자격증</div>
+        <div class="cert-val">네이버 부스트코스 &lt;DATA SCIENCE&gt; 코칭스터디 2023 수료</div>
+      </div>
+      <div class="cert">
+        <div class="cert-lbl">저서</div>
+        <div class="cert-val"><a href="https://www.yes24.com/Product/Goods/109711067" target="_blank">개발자가 되기 위해 꼭 알아야 하는 IT 용어 (공동 저자)</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 연락처 -->
+  <section class="section" id="contact">
+    <div class="eyebrow"><span class="sec-num">05</span><span class="sec-lbl">Contact</span></div>
+    <h2 class="sec-title">연락처</h2>
+    <div class="contact-row">
+      <a class="clink" href="tel:010-2538-1519">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.81 19.79 19.79 0 01.06 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        010-2538-1519
+      </a>
+      <a class="clink" href="mailto:justinnn980@gmail.com">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        justinnn980@gmail.com
+      </a>
+      <a class="clink" href="mailto:juncheol123@naver.com">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        juncheol123@naver.com
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<footer>박준철 · 금융 서비스 APP 개발자 · 다날 지원 포트폴리오</footer>
+
+</body>
+</html>

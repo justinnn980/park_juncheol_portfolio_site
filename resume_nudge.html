@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 — Flutter Developer / 넛지헬스케어 지원</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:    #0F1117; --bg2: #161B26; --sur: rgba(255,255,255,0.05);
+      --bdr:   rgba(255,255,255,0.09); --bdr-a: rgba(249,115,22,0.30);
+      --text:  #E2E8F0; --muted: #94A3B8; --soft: #64748B;
+      --or:    #F97316; --or-d: #EA580C; --or-l: #FB923C;
+      --ind:   #818CF8; --grn: #34D399; --sky: #38BDF8;
+      --red:   #F87171; --yel: #FCD34D; --r: 10px;
+      --sh:    0 0 0 1px rgba(255,255,255,0.05), 0 20px 50px rgba(0,0,0,0.55);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; overflow-x: hidden; }
+    body::before { content:''; position:fixed; inset:0; z-index:0; pointer-events:none; background-image: linear-gradient(rgba(255,255,255,0.014) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.014) 1px,transparent 1px); background-size:60px 60px; }
+    body::after  { content:''; position:fixed; top:-150px; right:-100px; width:650px; height:650px; background:radial-gradient(circle,rgba(249,115,22,0.06),transparent 70%); pointer-events:none; z-index:0; }
+    a { color:inherit; text-decoration:none; }
+
+    /* NAV */
+    .nav { position:sticky; top:0; z-index:100; background:rgba(8,10,16,0.90); backdrop-filter:blur(20px); border-bottom:1px solid var(--bdr); }
+    .nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; height:56px; display:flex; align-items:center; justify-content:space-between; }
+    .nav-brand { font-size:15px; font-weight:800; display:flex; align-items:center; gap:8px; }
+    .nav-tag { padding:2px 8px; border-radius:4px; background:rgba(249,115,22,0.12); border:1px solid rgba(249,115,22,0.28); color:var(--or); font-size:11px; font-weight:800; }
+    .nav-links { display:flex; gap:2px; }
+    .nav-links a { padding:6px 12px; border-radius:6px; color:var(--muted); font-size:13px; font-weight:600; transition:color .15s,background .15s; }
+    .nav-links a:hover { color:var(--or); background:rgba(249,115,22,0.08); }
+
+    /* LAYOUT */
+    .main { position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:0 24px; }
+    .section { padding:80px 0; border-top:1px solid var(--bdr); }
+    .section:first-child { border-top:none; }
+    .eyebrow { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+    .sec-num { font-size:11px; font-weight:800; color:var(--or); letter-spacing:1px; }
+    .sec-lbl { font-size:11px; font-weight:700; color:var(--soft); letter-spacing:1.5px; text-transform:uppercase; }
+    .sec-title { font-size:36px; font-weight:900; letter-spacing:-0.5px; margin-bottom:28px; line-height:1.15; }
+
+    /* HERO */
+    .hero { padding:90px 0 80px; display:grid; grid-template-columns:minmax(0,1fr) 420px; gap:60px; align-items:start; }
+    .hero-role { display:inline-flex; align-items:center; gap:8px; margin-bottom:20px; padding:6px 14px; border:1px solid rgba(249,115,22,0.28); border-radius:999px; background:rgba(249,115,22,0.07); color:var(--or); font-size:12px; font-weight:700; }
+    .hero-role::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--or); animation:blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .hero-name { font-size:80px; font-weight:900; line-height:1; letter-spacing:-2px; margin-bottom:20px; background:linear-gradient(135deg,#E2E8F0 30%,var(--or)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero-lead { font-size:16px; line-height:1.82; color:var(--muted); max-width:580px; margin-bottom:24px; }
+    .profile-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
+    .ptag { display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border:1px solid var(--bdr); border-radius:6px; background:var(--sur); color:var(--muted); font-size:12px; font-weight:600; }
+    .ptag span { color:var(--soft); font-size:11px; }
+    .hero-actions { display:flex; gap:10px; margin-bottom:36px; }
+    .btn-p { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; border-radius:var(--r); background:linear-gradient(135deg,var(--or),var(--or-d)); color:#fff; font-size:14px; font-weight:800; box-shadow:0 4px 20px rgba(249,115,22,0.30); transition:transform .15s,box-shadow .15s; }
+    .btn-p:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(249,115,22,0.42); }
+    .btn-g { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; border-radius:var(--r); border:1px solid var(--bdr); background:var(--sur); color:var(--text); font-size:14px; font-weight:700; transition:border-color .15s,background .15s; }
+    .btn-g:hover { border-color:var(--bdr-a); background:rgba(249,115,22,0.05); }
+    .stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .stat { padding:16px; border:1px solid var(--bdr); border-radius:var(--r); background:var(--sur); }
+    .stat-n { font-size:24px; font-weight:900; letter-spacing:-0.5px; line-height:1.1; background:linear-gradient(135deg,var(--or),var(--yel)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .stat-l { margin-top:4px; color:var(--soft); font-size:12px; font-weight:600; }
+
+    /* Code panel */
+    .code-panel { position:sticky; top:76px; border:1px solid var(--bdr); border-radius:14px; overflow:hidden; background:#0D1117; box-shadow:var(--sh); }
+    .code-bar { display:flex; align-items:center; gap:7px; padding:11px 16px; background:rgba(255,255,255,0.025); border-bottom:1px solid var(--bdr); }
+    .dot { width:10px; height:10px; border-radius:50%; }
+    .code-fn { margin-left:6px; font-size:12px; color:var(--soft); font-weight:600; font-family:'SF Mono','Fira Code',monospace; }
+    .code-body { padding:18px 20px; font-family:'SF Mono','Fira Code','Consolas',monospace; font-size:12.5px; line-height:1.72; }
+    .cl { display:flex; }
+    .ln { width:22px; flex-shrink:0; color:#3D4452; text-align:right; margin-right:16px; user-select:none; }
+    .cmt{color:#637777;} .kw{color:#C792EA;} .tp{color:#FFCB6B;}
+    .str{color:#C3E88D;} .fn{color:#82AAFF;} .vr{color:#F07178;}
+    .tc{color:var(--or);} .nm{color:#F78C6C;} .pl{color:#A6ACCD;}
+    .cdiv { margin:7px 0; border:none; border-top:1px solid rgba(255,255,255,0.06); }
+
+    /* STACK MATCH */
+    .stack-row { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:0; }
+    .sk { padding:22px; border:1px solid var(--bdr); border-radius:14px; background:var(--bg2); transition:border-color .15s,transform .15s; position:relative; overflow:hidden; }
+    .sk:hover { border-color:var(--bdr-a); transform:translateY(-2px); }
+    .sk-crown { position:absolute; top:14px; right:14px; font-size:16px; }
+    .sk-name { font-size:22px; font-weight:900; color:var(--text); margin-bottom:6px; }
+    .sk-level { display:inline-flex; align-items:center; gap:5px; padding:3px 10px; border-radius:999px; font-size:11px; font-weight:800; margin-bottom:10px; }
+    .sk-level.prod  { background:rgba(249,115,22,0.12); border:1px solid rgba(249,115,22,0.25); color:var(--or); }
+    .sk-level.exp   { background:rgba(52,211,153,0.12); border:1px solid rgba(52,211,153,0.25); color:var(--grn); }
+    .sk-level.learn { background:rgba(129,140,248,0.12); border:1px solid rgba(129,140,248,0.25); color:var(--ind); }
+    .sk-desc { font-size:13px; color:var(--muted); line-height:1.7; }
+    .sk-desc strong { color:var(--text); }
+    .sk-proof { margin-top:12px; padding:10px 14px; background:rgba(255,255,255,0.03); border-radius:8px; border:1px solid var(--bdr); font-size:12px; color:var(--soft); line-height:1.65; }
+
+    /* PROBLEM CARDS */
+    .prob-list { display:grid; gap:20px; }
+    .pc { border:1px solid var(--bdr); border-radius:14px; overflow:hidden; background:var(--bg2); transition:border-color .15s; }
+    .pc:hover { border-color:rgba(249,115,22,0.22); }
+    .pc-head { padding:24px 28px 0; }
+    .pc-meta { display:flex; align-items:center; gap:7px; margin-bottom:12px; flex-wrap:wrap; }
+    .tg { padding:3px 9px; border-radius:4px; font-size:11px; font-weight:800; }
+    .tg-prob { background:rgba(248,113,113,0.12); color:var(--red); border:1px solid rgba(248,113,113,0.2); }
+    .tg-or   { background:rgba(249,115,22,0.10);  color:var(--or);  border:1px solid rgba(249,115,22,0.2); }
+    .tg-grn  { background:rgba(52,211,153,0.10);  color:var(--grn); border:1px solid rgba(52,211,153,0.2); }
+    .tg-sky  { background:rgba(56,189,248,0.10);  color:var(--sky); border:1px solid rgba(56,189,248,0.2); }
+    .tg-ind  { background:rgba(129,140,248,0.10); color:var(--ind); border:1px solid rgba(129,140,248,0.2); }
+    .tg-yel  { background:rgba(252,211,77,0.10);  color:var(--yel); border:1px solid rgba(252,211,77,0.2); }
+    .pc-title { font-size:19px; font-weight:900; line-height:1.35; margin-bottom:14px; }
+    .pc-body  { padding:0 28px; }
+    .sit,.sol { font-size:14px; line-height:1.84; color:var(--muted); margin-bottom:18px; }
+    .sl { display:inline-flex; align-items:center; gap:5px; padding:3px 9px; border-radius:4px; margin-right:8px; background:rgba(249,115,22,0.10); color:var(--or); font-size:11px; font-weight:800; border:1px solid rgba(249,115,22,0.2); }
+    .impact { display:flex; gap:8px; flex-wrap:wrap; padding:14px 28px; background:rgba(249,115,22,0.04); border-top:1px solid rgba(249,115,22,0.10); }
+    .imp { display:inline-flex; align-items:center; gap:5px; padding:5px 12px; border-radius:6px; background:rgba(249,115,22,0.08); border:1px solid rgba(249,115,22,0.18); color:var(--or); font-size:12px; font-weight:800; }
+
+    /* DIAGRAMS */
+    .diag { margin:0 28px 18px; padding:18px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); overflow-x:auto; }
+    .dlbl { font-size:10px; font-weight:800; color:var(--soft); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:14px; }
+    .nd { padding:8px 14px; border-radius:7px; font-size:12px; font-weight:800; text-align:center; border:1.5px solid; line-height:1.35; white-space:nowrap; }
+    .nd small { display:block; font-size:10px; font-weight:600; opacity:.7; margin-top:2px; }
+    .nd-or { border-color:rgba(249,115,22,0.4);  background:rgba(249,115,22,0.08);  color:var(--or); }
+    .nd-b  { border-color:rgba(56,189,248,0.4);  background:rgba(56,189,248,0.08);  color:var(--sky); }
+    .nd-i  { border-color:rgba(129,140,248,0.4); background:rgba(129,140,248,0.08); color:var(--ind); }
+    .nd-g  { border-color:rgba(52,211,153,0.4);  background:rgba(52,211,153,0.08);  color:var(--grn); }
+    .nd-gr { border-color:rgba(148,163,184,0.3); background:rgba(148,163,184,0.05); color:var(--muted); }
+    .nd-r  { border-color:rgba(248,113,113,0.4); background:rgba(248,113,113,0.08); color:var(--red); }
+    .nd-y  { border-color:rgba(252,211,77,0.4);  background:rgba(252,211,77,0.08);  color:var(--yel); }
+    .fr  { display:flex; align-items:center; flex-wrap:nowrap; margin:5px 0; }
+    .ard { color:var(--soft); font-size:14px; line-height:1.8; }
+    .fc  { display:flex; flex-direction:column; align-items:center; }
+    .ba  { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .ba-p{ padding:14px; border-radius:8px; }
+    .ba-b{ background:rgba(248,113,113,0.04); border:1px solid rgba(248,113,113,0.15); }
+    .ba-a{ background:rgba(52,211,153,0.04);  border:1px solid rgba(52,211,153,0.15); }
+    .ba-t{ font-size:10px; font-weight:900; letter-spacing:.5px; margin-bottom:10px; }
+    .ba-b .ba-t { color:var(--red); } .ba-a .ba-t { color:var(--grn); }
+    .vf  { display:flex; flex-direction:column; align-items:flex-start; gap:4px; }
+    .vf .nd { align-self:stretch; text-align:left; white-space:normal; }
+    .vf .ard { margin-left:12px; }
+
+    /* PROJECT LIST */
+    .proj-list { display:grid; gap:12px; }
+    .prj { display:grid; grid-template-columns:200px 1fr; border:1px solid var(--bdr); border-radius:12px; overflow:hidden; background:var(--bg2); transition:border-color .15s; }
+    .prj:hover { border-color:rgba(249,115,22,0.2); }
+    .prj-left { padding:18px 16px; border-right:1px solid var(--bdr); background:rgba(249,115,22,0.04); display:flex; flex-direction:column; justify-content:center; gap:4px; }
+    .prj-co { font-size:12px; font-weight:800; color:var(--or); }
+    .prj-period { font-size:11px; color:var(--soft); font-weight:600; margin-top:2px; }
+    .prj-stack { font-size:10px; color:var(--soft); margin-top:4px; line-height:1.6; }
+    .prj-right { padding:16px 20px; }
+    .prj-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:7px; }
+    .prj-ul { list-style:none; display:grid; gap:4px; }
+    .prj-ul li { font-size:12px; color:var(--muted); padding-left:13px; position:relative; line-height:1.6; }
+    .prj-ul li::before { content:''; position:absolute; left:0; top:7px; width:5px; height:5px; border-radius:50%; background:var(--or); }
+    .prj-ul li strong { color:var(--text); font-weight:700; }
+
+    /* CERT */
+    .cert-list { display:grid; gap:10px; }
+    .cert { display:grid; grid-template-columns:180px 1fr; overflow:hidden; border:1px solid var(--bdr); border-radius:var(--r); }
+    .cert-lbl { padding:14px 16px; border-right:1px solid var(--bdr); background:rgba(249,115,22,0.05); color:var(--or); font-size:11px; font-weight:800; display:flex; align-items:center; }
+    .cert-val { padding:14px 18px; display:flex; align-items:center; font-size:13px; color:var(--muted); }
+    .cert-val a { color:var(--or); text-decoration:underline; text-decoration-color:rgba(249,115,22,0.3); }
+
+    /* CONTACT */
+    .contact-row { display:flex; gap:10px; flex-wrap:wrap; }
+    .clink { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; border:1px solid var(--bdr); border-radius:var(--r); background:var(--sur); color:var(--text); font-size:14px; font-weight:700; transition:border-color .15s,transform .15s; }
+    .clink:hover { border-color:var(--bdr-a); transform:translateY(-2px); }
+
+    footer { padding:32px 24px; text-align:center; color:var(--soft); font-size:12px; border-top:1px solid var(--bdr); position:relative; z-index:1; }
+
+    @media(max-width:900px) {
+      .hero { grid-template-columns:1fr; padding:60px 0; }
+      .hero-name { font-size:52px; }
+      .stack-row { grid-template-columns:1fr; }
+      .ba { grid-template-columns:1fr; }
+      .prj { grid-template-columns:1fr; }
+      .prj-left { border-right:none; border-bottom:1px solid var(--bdr); }
+      .nav-links { display:none; }
+    }
+    @media(max-width:600px) {
+      .hero-name { font-size:40px; }
+      .stats-row { grid-template-columns:1fr 1fr; }
+      .pc-head,.pc-body { padding-left:18px; padding-right:18px; }
+      .diag { margin-left:18px; margin-right:18px; }
+      .impact { padding-left:18px; padding-right:18px; }
+      .section { padding:56px 0; }
+      .cert { grid-template-columns:1fr; }
+      .cert-lbl { border-right:none; border-bottom:1px solid var(--bdr); }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#intro">박준철 <span class="nav-tag">넛지헬스케어 지원</span></a>
+    <div class="nav-links">
+      <a href="#stack">기술 스택</a>
+      <a href="#problems">문제 해결</a>
+      <a href="#projects">프로젝트</a>
+      <a href="#contact">연락처</a>
+    </div>
+  </div>
+</nav>
+
+<div class="main">
+
+  <!-- HERO -->
+  <section class="section" id="intro" style="border-top:none;">
+    <div class="hero">
+      <div>
+        <div class="hero-role">Flutter Developer · 넛지헬스케어 지원</div>
+        <h1 class="hero-name">박준철</h1>
+        <p class="hero-lead">채용공고에서 요구하는 <strong style="color:var(--or);">Riverpod · GetX</strong>를 실서비스(매출 340억 OTT)에서 1년 10개월간 사용한 Flutter 개발자입니다. 신입 포지션이지만 Firebase Analytics·AdMob 수익화·FCP 39% 성능 개선·iOS/Android 직접 배포까지, <strong style="color:var(--or);">캐시워크 앱 개발에 즉시 기여할 수 있는 경험</strong>을 갖추고 있습니다.</p>
+        <div class="profile-row">
+          <span class="ptag"><span>전공</span> 컴퓨터공학 / 모빌리티AI 복수전공</span>
+          <span class="ptag"><span>경력</span> (주)홈초이스 1년 10개월</span>
+          <span class="ptag"><span>배포</span> App Store · Google Play 직접 운영</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn-p" href="#problems">문제 해결 과정 보기</a>
+          <a class="btn-g" href="mailto:justinnn980@gmail.com">메일 보내기</a>
+        </div>
+        <div class="stats-row">
+          <div class="stat"><div class="stat-n">FCP −39%</div><div class="stat-l">수치 기반 성능 최적화 달성</div></div>
+          <div class="stat"><div class="stat-n">매출 1조+</div><div class="stat-l">실서비스 Flutter 앱 개발·운영</div></div>
+          <div class="stat"><div class="stat-n">3종 완료</div><div class="stat-l">Riverpod · GetX · Provider 실무 적용</div></div>
+        </div>
+      </div>
+
+      <div class="code-panel" aria-hidden="true">
+        <div class="code-bar">
+          <div class="dot" style="background:#FF5F57"></div>
+          <div class="dot" style="background:#FEBC2E"></div>
+          <div class="dot" style="background:#28C840"></div>
+          <span class="code-fn">mission_provider.dart</span>
+        </div>
+        <div class="code-body">
+          <div class="cl"><span class="ln">1</span><span class="cmt">// Riverpod — 실서비스 적용 패턴</span></div>
+          <div class="cl"><span class="ln">2</span><span class="cmt">// 걸음수·미션·리워드 단일 상태 관리</span></div>
+          <div class="cl"><span class="ln">3</span><span class="pl">&nbsp;</span></div>
+          <div class="cl"><span class="ln">4</span><span class="kw">final </span><span class="vr">missionProvider</span><span class="pl"> =</span></div>
+          <div class="cl"><span class="ln">5</span><span class="pl">  </span><span class="tp">StateNotifierProvider</span><span class="pl">&lt;</span></div>
+          <div class="cl"><span class="ln">6</span><span class="pl">    </span><span class="tp">MissionNotifier</span><span class="pl">,</span><span class="tp">MissionState</span><span class="pl">&gt;(</span></div>
+          <div class="cl"><span class="ln">7</span><span class="pl">  (</span><span class="vr">ref</span><span class="pl">) </span><span class="kw">=&gt; </span><span class="tp">MissionNotifier</span><span class="pl">(),</span></div>
+          <div class="cl"><span class="ln">8</span><span class="pl">);</span></div>
+          <hr class="cdiv"/>
+          <div class="cl"><span class="ln">10</span><span class="cmt">// GetX — 라우팅·경량 상태관리</span></div>
+          <div class="cl"><span class="ln">11</span><span class="kw">class </span><span class="tp">RewardController</span><span class="pl"> </span><span class="kw">extends </span><span class="tp">GetxController</span><span class="pl"> {</span></div>
+          <div class="cl"><span class="ln">12</span><span class="pl">  </span><span class="kw">final </span><span class="vr">cash</span><span class="pl"> = </span><span class="nm">0</span><span class="pl">.</span><span class="fn">obs</span><span class="pl">;</span></div>
+          <div class="cl"><span class="ln">13</span><span class="pl">  </span><span class="kw">void </span><span class="fn">addCash</span><span class="pl">(</span><span class="tp">int </span><span class="vr">amount</span><span class="pl">) </span><span class="kw">=&gt;</span></div>
+          <div class="cl"><span class="ln">14</span><span class="pl">    </span><span class="vr">cash</span><span class="pl">.</span><span class="fn">value</span><span class="pl"> += </span><span class="vr">amount</span><span class="pl">;</span></div>
+          <div class="cl"><span class="ln">15</span><span class="pl">}</span></div>
+          <hr class="cdiv"/>
+          <div class="cl"><span class="ln">17</span><span class="cmt">// BLoC — Stream 기반 이벤트 처리</span></div>
+          <div class="cl"><span class="ln">18</span><span class="kw">class </span><span class="tp">StepBloc</span><span class="pl"> </span><span class="kw">extends </span><span class="tp">Bloc</span><span class="pl">&lt;</span><span class="tp">StepEvent</span><span class="pl">,</span><span class="tp">StepState</span><span class="pl">&gt; {</span></div>
+          <div class="cl"><span class="ln">19</span><span class="pl">  </span><span class="fn">StepBloc</span><span class="pl">() : </span><span class="kw">super</span><span class="pl">(</span><span class="tp">StepInitial</span><span class="pl">()) {</span></div>
+          <div class="cl"><span class="ln">20</span><span class="pl">    </span><span class="fn">on</span><span class="pl">&lt;</span><span class="tp">StepUpdated</span><span class="pl">&gt;(</span><span class="vr">_onStepUpdated</span><span class="pl">);</span></div>
+          <div class="cl"><span class="ln">21</span><span class="pl">  }</span></div>
+          <div class="cl"><span class="ln">22</span><span class="pl">}</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 기술 스택 매칭 -->
+  <section class="section" id="stack">
+    <div class="eyebrow"><span class="sec-num">01</span><span class="sec-lbl">Required Stack</span></div>
+    <h2 class="sec-title">공고 필수 기술 스택 — Riverpod · GetX · BLoC</h2>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.7;">넛지헬스케어 공고에서 명시한 3가지 상태관리 라이브러리별 실무 경험입니다.</p>
+
+    <div class="stack-row">
+
+      <div class="sk">
+        <div class="sk-crown">🥇</div>
+        <div class="sk-name">Riverpod</div>
+        <span class="sk-level prod">실서비스 적용 · 1년 10개월</span>
+        <div class="sk-desc">
+          매출 340억 OTT 서비스 오초이스에서 <strong>StateNotifierProvider로 STB 최대 3대의 연결·기기·콘텐츠 노출 상태를 단일 지점 관리</strong>. 상태 변화 시 홈·재생·설정 전체 화면 즉시 반영. Provider 간 의존성 설계, ConsumerWidget 활용 경험.
+        </div>
+        <div class="sk-proof">→ 헬로tv → 오초이스 마이그레이션 (LG헬로비전, 매출 1조) 프로젝트에 실서비스 적용</div>
+      </div>
+
+      <div class="sk">
+        <div class="sk-crown">🥈</div>
+        <div class="sk-name">GetX</div>
+        <span class="sk-level exp">프로젝트 적용 경험</span>
+        <div class="sk-desc">
+          <strong>GetxController + Obx 반응형 UI 패턴, Get.to() 라우팅, GetBuilder 상태 관리</strong> 적용 경험. Riverpod 대비 경량·직관적인 라우팅과 의존성 주입이 필요한 상황에 적합함을 실무에서 판단해 선택적으로 사용.
+        </div>
+        <div class="sk-proof">→ 담아(Dama) 구독 관리 앱 등 개인·팀 프로젝트에 적용</div>
+      </div>
+
+      <div class="sk">
+        <div class="sk-crown">🥉</div>
+        <div class="sk-name">BLoC</div>
+        <span class="sk-level learn">구조 이해 · 학습 적용</span>
+        <div class="sk-desc">
+          <strong>Event → BLoC → State의 단방향 데이터 흐름과 Stream 기반 처리 구조를 이해</strong>합니다. Riverpod의 StateNotifier와 동일한 불변 상태 원칙 위에 동작하며, WebSocket 실시간 스트림 처리 경험이 BLoC의 StreamSubscription 패턴과 직결됩니다.
+        </div>
+        <div class="sk-proof">→ Riverpod·WebSocket 실무 경험으로 BLoC 패턴 즉시 적용 가능</div>
+      </div>
+
+    </div>
+
+    <!-- 왜 3가지 모두 아는 게 강점인가 -->
+    <div style="margin-top:20px;padding:20px 24px;border:1px solid rgba(249,115,22,0.18);border-radius:12px;background:rgba(249,115,22,0.04);">
+      <div style="font-size:12px;font-weight:800;color:var(--or);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">왜 3가지 상태관리를 다 아는 게 강점인가</div>
+      <div style="font-size:14px;color:var(--muted);line-height:1.8;">각 라이브러리가 <strong style="color:var(--text);">언제 더 적합한지 직접 판단</strong>할 수 있습니다. 기능 규모·팀 컨벤션·유지보수성을 고려해 상태관리 전략을 선택하는 능력은, 캐시워크처럼 복잡한 미션·리워드·걸음수 상태를 다루는 앱에서 특히 중요합니다.</div>
+    </div>
+  </section>
+
+  <!-- 문제 해결 -->
+  <section class="section" id="problems">
+    <div class="eyebrow"><span class="sec-num">02</span><span class="sec-lbl">Problem Solving</span></div>
+    <h2 class="sec-title">문제 해결 — 캐시워크에 직결되는 경험</h2>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:32px;line-height:1.7;">신입 포지션이지만 실서비스에서 마주한 문제들입니다. 캐시워크 앱 개발에 즉시 기여할 수 있습니다.</p>
+
+    <div class="prob-list">
+
+      <!-- P1 -->
+      <div class="pc">
+        <div class="pc-head">
+          <div class="pc-meta">
+            <span class="tg tg-prob">문제</span>
+            <span class="tg tg-or">Riverpod — 복잡한 상태 분리 설계</span>
+          </div>
+          <h3 class="pc-title">STB 3대의 상태(연결·기기·콘텐츠 노출)를 화면마다 중복 관리하다 상태 불일치가 발생했다</h3>
+        </div>
+        <div class="pc-body">
+          <p class="sit">파트너사 앱 마이그레이션 초기에는 각 화면이 STB 상태를 개별로 관리했습니다. STB가 변경되면 일부 화면은 갱신되고 일부는 그대로 남아 상태가 어긋났습니다. <strong style="color:var(--or);">캐시워크에서 걸음수·미션 달성·리워드 잔액이 모든 화면에서 일관되게 보여야 하는 구조와 완전히 같은 문제입니다.</strong></p>
+        </div>
+        <div class="diag">
+          <div class="dlbl">Riverpod 단일 상태 관리 — Before / After</div>
+          <div class="ba">
+            <div class="ba-p ba-b">
+              <div class="ba-t">❌ BEFORE — 화면마다 개별 상태</div>
+              <div class="vf">
+                <div class="nd nd-gr">STB 변경 이벤트</div>
+                <div class="ard">↓</div>
+                <div class="nd nd-r">홈 화면 상태 A</div>
+                <div class="nd nd-r">재생 화면 상태 B</div>
+                <div class="nd nd-r">설정 화면 상태 C</div>
+                <div class="ard">↓</div>
+                <div class="nd nd-r">화면마다 다른 값 ❌</div>
+              </div>
+            </div>
+            <div class="ba-p ba-a">
+              <div class="ba-t">✅ AFTER — Riverpod 단일 지점</div>
+              <div class="vf">
+                <div class="nd nd-gr">STB 변경 이벤트</div>
+                <div class="ard">↓</div>
+                <div class="nd nd-or">StateNotifierProvider<small>단일 상태 관리 지점</small></div>
+                <div class="ard">↓ 구독 화면 자동 갱신</div>
+                <div class="nd nd-g">홈 · 재생 · 설정<small>모두 동일한 값 ✅</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pc-body">
+          <p class="sol"><span class="sl">해결</span>StateNotifierProvider를 단일 진실 원천으로 정의하고, 모든 STB 이벤트를 이 Notifier에 집중시켰습니다. 각 화면은 watch만 하면 자동 갱신됩니다. 캐시워크의 걸음수 상태가 홈·랭킹·미션·리워드 화면에서 항상 동일한 값을 보여야 하는 구조에 동일하게 적용됩니다.</p>
+        </div>
+        <div class="impact">
+          <span class="imp">상태 불일치 완전 해소</span>
+          <span class="imp">StateNotifier 패턴 실서비스 검증</span>
+          <span class="imp">캐시워크 걸음수·미션·리워드 패턴 직접 전이</span>
+        </div>
+      </div>
+
+      <!-- P2 -->
+      <div class="pc">
+        <div class="pc-head">
+          <div class="pc-meta">
+            <span class="tg tg-prob">문제</span>
+            <span class="tg tg-yel">Firebase Analytics · AdMob — 수익화 지표</span>
+          </div>
+          <h3 class="pc-title">사용자 이탈 구간을 특정하고, 광고 노출을 UX를 해치지 않는 위치에 배치하면서 수익과 리텐션을 동시에 잡아야 했다</h3>
+        </div>
+        <div class="pc-body">
+          <p class="sit">OTT 앱에서 Firebase Analytics로 콘텐츠 선택 → 재생 시작 → 이탈 흐름을 추적했고, AdMob 광고를 사용자 흐름을 방해하지 않는 구간에 배치했습니다. <strong style="color:var(--or);">캐시워크의 광고 기반 리워드 모델, 미션 이탈 분석, 사용자 행동 추적과 완전히 같은 업무입니다.</strong></p>
+        </div>
+        <div class="diag">
+          <div class="dlbl">Firebase Analytics 이벤트 설계 — 이탈 구간 특정</div>
+          <div class="fr" style="justify-content:center;gap:6px;flex-wrap:wrap;">
+            <div class="nd nd-gr" style="min-width:90px;">앱 진입</div>
+            <div class="ard">→</div>
+            <div class="nd nd-or" style="min-width:100px;">콘텐츠 탐색<small>event 로깅</small></div>
+            <div class="ard">→</div>
+            <div class="nd nd-y" style="min-width:100px;">재생 시도<small>이탈율 측정</small></div>
+            <div class="ard">→</div>
+            <div class="nd nd-b" style="min-width:90px;">재생 완료<small>AdMob 노출</small></div>
+            <div class="ard">→</div>
+            <div class="nd nd-g" style="min-width:90px;">리텐션<small>다음 세션</small></div>
+          </div>
+        </div>
+        <div class="pc-body">
+          <p class="sol"><span class="sl">해결</span>화면 전환 단위로 Firebase Analytics 이벤트를 설계해 정확한 이탈 구간을 측정했고, AdMob 배너/전면 광고를 재생 완료 후 자연스러운 전환 타이밍에 배치했습니다. 동시에 FCP 측정 기반으로 스켈레톤 UI·Lazy Loading·CDN을 적용해 <strong style="color:var(--or);">FCP 39% 단축, LCP 10.8% 개선</strong>을 달성했습니다.</p>
+        </div>
+        <div class="impact">
+          <span class="imp">FCP −39% / LCP −10.8%</span>
+          <span class="imp">Firebase Analytics 이벤트 설계 실무</span>
+          <span class="imp">AdMob UX 친화적 배치 경험</span>
+        </div>
+      </div>
+
+      <!-- P3 -->
+      <div class="pc">
+        <div class="pc-head">
+          <div class="pc-meta">
+            <span class="tg tg-prob">문제</span>
+            <span class="tg tg-sky">실시간 동기화 — WebSocket · Stream 처리</span>
+          </div>
+          <h3 class="pc-title">다중 사용자의 동시 입력이 서버에 충돌 없이 반영되고, 결과가 모든 클라이언트에 즉시 전달되어야 했다</h3>
+        </div>
+        <div class="pc-body">
+          <p class="sit">"숫자 대결" 실시간 게임에서 여러 사용자가 동시에 숫자를 바꾸면 충돌 없이 서버 최종값을 전체 클라이언트에 broadcast해야 했습니다. <strong style="color:var(--or);">캐시워크의 걸음수 달성 → 미션 완료 알림 즉시 반영, 실시간 랭킹 갱신 구조와 동일한 패턴이며, BLoC의 Stream 기반 처리와도 직결됩니다.</strong></p>
+        </div>
+        <div class="diag">
+          <div class="dlbl">WebSocket 실시간 = BLoC Stream 처리 동일 패턴</div>
+          <div class="ba">
+            <div class="ba-p" style="background:rgba(56,189,248,0.04);border:1px solid rgba(56,189,248,0.15);">
+              <div class="ba-t" style="color:var(--sky);">WebSocket 구현</div>
+              <div class="vf">
+                <div class="nd nd-gr">다중 사용자 이벤트</div>
+                <div class="ard">↓</div>
+                <div class="nd nd-or">서버 단일 상태 처리</div>
+                <div class="ard">↓ broadcast</div>
+                <div class="nd nd-g">모든 클라이언트 즉시 갱신</div>
+              </div>
+            </div>
+            <div class="ba-p" style="background:rgba(129,140,248,0.04);border:1px solid rgba(129,140,248,0.15);">
+              <div class="ba-t" style="color:var(--ind);">BLoC Stream 패턴</div>
+              <div class="vf">
+                <div class="nd nd-gr">StepUpdated 이벤트</div>
+                <div class="ard">↓</div>
+                <div class="nd nd-i">StepBloc 처리<small>on&lt;StepUpdated&gt;</small></div>
+                <div class="ard">↓ emit</div>
+                <div class="nd nd-g">StepLoaded State → UI 갱신</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pc-body">
+          <p class="sol"><span class="sl">해결</span>서버 단일 상태 + WebSocket broadcast 구조로 다중 사용자 충돌을 해결했습니다. 기획·Flutter·Spring Boot·Render 배포 전 과정을 3일 내 단독 완성했습니다. Stream 기반 이벤트 처리 경험을 통해 BLoC의 단방향 데이터 흐름을 이해하고 즉시 적용할 수 있습니다.</p>
+        </div>
+        <div class="impact">
+          <span class="imp">WebSocket 실시간 동기화 구현</span>
+          <span class="imp">3일 내 기획~배포 완성</span>
+          <span class="imp">BLoC Stream 패턴 직접 전이 가능</span>
+        </div>
+      </div>
+
+      <!-- P4 -->
+      <div class="pc">
+        <div class="pc-head">
+          <div class="pc-meta">
+            <span class="tg tg-prob">문제</span>
+            <span class="tg tg-ind">라이브러리 소스 레벨 디버깅</span>
+          </div>
+          <h3 class="pc-title">외부 플레이어 SDK 버그로 쇼츠 화면에서 오디오가 이중 출력됐고, 공식 패치를 기다릴 수 없었다</h3>
+        </div>
+        <div class="pc-body">
+          <p class="sit">쇼츠 스크롤 시 특정 조건에서 플레이어가 두 번 초기화되어 오디오가 겹쳤습니다. pub.dev 이슈 추적만으로는 원인을 찾을 수 없어 라이브러리 소스를 직접 분석해야 했습니다.</p>
+        </div>
+        <div class="diag">
+          <div class="dlbl">플레이어 생명주기 분리 — Before / After</div>
+          <div class="ba">
+            <div class="ba-p ba-b">
+              <div class="ba-t">❌ BEFORE</div>
+              <div class="vf">
+                <div class="nd nd-gr">화면 진입</div>
+                <div class="ard">↓ 라이브러리 내부 버그</div>
+                <div class="nd nd-r">플레이어 중복 초기화</div>
+                <div class="ard">↓</div>
+                <div class="nd nd-r">오디오 이중 출력 🔊🔊</div>
+              </div>
+            </div>
+            <div class="ba-p ba-a">
+              <div class="ba-t">✅ AFTER</div>
+              <div class="vf">
+                <div class="nd nd-gr">화면 진입</div>
+                <div class="ard">↓</div>
+                <div class="nd nd-i">소스 fork → 중복 초기화 시점 특정</div>
+                <div class="ard">↓ Android 생명주기 레벨 수정</div>
+                <div class="nd nd-g">단일 인스턴스 — 당일 배포 🔊</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pc-body">
+          <p class="sol"><span class="sl">해결</span>라이브러리를 fork하여 소스를 직접 분석했고 Android Activity 생명주기에서 중복 초기화 지점을 특정해 수정했습니다. 공식 수정 없이 당일 배포로 해결했습니다. 헬스케어 SDK, 만보기 API, 광고 SDK 이슈에도 동일한 접근 방식을 적용할 수 있습니다.</p>
+        </div>
+        <div class="impact">
+          <span class="imp">오디오 이중 출력 완전 해소</span>
+          <span class="imp">라이브러리 소스 레벨 분석 역량</span>
+          <span class="imp">당일 배포 해결</span>
+        </div>
+      </div>
+
+      <!-- P5 -->
+      <div class="pc">
+        <div class="pc-head">
+          <div class="pc-meta">
+            <span class="tg tg-prob">문제</span>
+            <span class="tg tg-grn">iOS / Android 배포 · 네이티브 이슈</span>
+          </div>
+          <h3 class="pc-title">iOS/Android 인증서·빌드·스토어 출시를 직접 관리하며, 배포 블로커를 혼자 해결해야 했다</h3>
+        </div>
+        <div class="pc-body">
+          <p class="sit">1년 10개월 동안 App Store·Google Play 인증서 갱신, 프로비저닝 프로파일 관리, 키스토어 관리, 빌드 이슈 대응을 직접 수행했습니다. 신입 인턴이 보통 경험하지 못하는 부분입니다. <strong style="color:var(--or);">캐시워크 앱의 배포 파이프라인과 스토어 운영에 즉시 기여할 수 있습니다.</strong></p>
+        </div>
+        <div class="pc-body" style="padding-bottom:18px;">
+          <p class="sol"><span class="sl">경험</span>iOS 인증서 만료 갱신, Android 릴리즈 키스토어 분실 이슈, Flutter 버전업 후 빌드 실패 등 실제 배포 블로커를 직접 해결했습니다. 앱스토어 심사 가이드라인 이해, 단계별 롤아웃 관리 경험도 보유합니다.</p>
+        </div>
+        <div class="impact">
+          <span class="imp">App Store · Google Play 출시 직접 관리</span>
+          <span class="imp">iOS 인증서 / Android 키스토어 운영</span>
+          <span class="imp">배포 블로커 자력 해결 역량</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 프로젝트 -->
+  <section class="section" id="projects">
+    <div class="eyebrow"><span class="sec-num">03</span><span class="sec-lbl">Projects</span></div>
+    <h2 class="sec-title">프로젝트 · 경력</h2>
+    <div class="proj-list">
+
+      <div class="prj">
+        <div class="prj-left">
+          <div class="prj-co">헬로tv → 오초이스 마이그레이션</div>
+          <div class="prj-period">2025.02 ~ 2025.10 (9개월)</div>
+          <div class="prj-stack">LG헬로비전 (매출 1조)<br>Flutter / React / Spring Boot / AWS<br>팀 4인</div>
+        </div>
+        <div class="prj-right">
+          <div class="prj-title">B2C 대규모 OTT 앱 마이그레이션 및 성능 최적화</div>
+          <ul class="prj-ul">
+            <li><strong>Riverpod</strong>으로 STB 최대 3대 연결·기기·콘텐츠 상태 단일 관리 → 전체 화면 즉시 반영</li>
+            <li>탐색 화면을 React + WebView 구조로 분리 → 앱 재배포 없이 콘텐츠 즉시 반영</li>
+            <li>EC2 Elastic IP + SSL 인증서로 HTTPS 전환 → 이통사 Proxy 방화벽 차단 해결</li>
+            <li>FCP/LCP 측정 기반 스켈레톤 UI·Lazy Loading·CDN 적용 → <strong>FCP 39% 단축, LCP 10.8% 개선</strong></li>
+            <li>Firebase Analytics 이벤트 설계, AdMob 광고 수익화 도구 통합</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prj">
+        <div class="prj-left">
+          <div class="prj-co">딜라이브 모바일TV → 오초이스 마이그레이션</div>
+          <div class="prj-period">2024.02 ~ 2024.11 (10개월)</div>
+          <div class="prj-stack">딜라이브 (매출 3,500억)<br>Flutter / Multi DRM / Spring Boot<br>팀 4인</div>
+        </div>
+        <div class="prj-right">
+          <div class="prj-title">DRM 통합 · Flutter 버전업 · 플레이어 생명주기 분리</div>
+          <ul class="prj-ul">
+            <li>쇼츠 화면 오디오 이중 출력 → <strong>라이브러리 소스 직접 분석</strong>, Android 생명주기 레벨 플레이어 단일 인스턴스 수정</li>
+            <li>NCG DRM / Multi DRM을 단일 플레이어로 통합, 동일한 시청 흐름 제공</li>
+            <li>Flutter 2→3 버전업 의존 라이브러리 전수 점검, 호환 문제 해결 후 안정적 업그레이드</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prj">
+        <div class="prj-left">
+          <div class="prj-co">담아(Dama) — 구독 통합 관리 앱</div>
+          <div class="prj-period">2026.01 ~ 2026.02 (2개월)</div>
+          <div class="prj-stack">팀 3인<br>Flutter / Spring Boot / JWT<br>MySQL / Docker</div>
+        </div>
+        <div class="prj-right">
+          <div class="prj-title">End-to-End 기획~배포 · JWT 인증 · 도메인 설계</div>
+          <ul class="prj-ul">
+            <li>JWT Access + Refresh Token 인증 흐름 Flutter에서 직접 구현 — Stateless 인증 구조 설계</li>
+            <li>User / Subscription / Community 도메인 분리, Soft Delete + BaseEntity 데이터 이력 관리</li>
+            <li>Docker 통합 실행 환경 구성으로 팀 개발 환경 통일</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prj">
+        <div class="prj-left">
+          <div class="prj-co">숫자 대결 — 실시간 증감 게임</div>
+          <div class="prj-period">2026.01 ~ 진행 중</div>
+          <div class="prj-stack">개인 (3일 완성)<br>Flutter / Spring Boot<br>WebSocket / Render</div>
+        </div>
+        <div class="prj-right">
+          <div class="prj-title">서버 중심 실시간 동기화 · 솔로 기획~배포</div>
+          <ul class="prj-ul">
+            <li>서버 단일 상태관리로 다중 사용자 동시 입력 충돌 방지, WebSocket 전체 클라이언트 즉시 동기화</li>
+            <li>기획 / Flutter / Spring Boot / Render 배포 전 과정 3일 내 단독 구현 → <a href="https://justinnn980.tistory.com/126" style="color:var(--or);">블로그 기록</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prj">
+        <div class="prj-left">
+          <div class="prj-co">개인 커뮤니티 웹앱</div>
+          <div class="prj-period">2026.05 ~ 진행 중</div>
+          <div class="prj-stack">개인<br>Codex / Claude Code<br>Docker / Render</div>
+        </div>
+        <div class="prj-right">
+          <div class="prj-title">AI 에이전트 활용 개발 속도 최적화</div>
+          <ul class="prj-ul">
+            <li>게시글·좋아요·팔로우·채팅 기능 ERD 설계부터 Docker 배포까지 단독 구현</li>
+            <li>Codex·Claude Code를 기획·설계·구현·배포 전 과정에 활용 → <strong>개발 사이클 대폭 단축</strong></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 학력 / 수료 -->
+  <section class="section" id="certs">
+    <div class="eyebrow"><span class="sec-num">04</span><span class="sec-lbl">Education &amp; Credentials</span></div>
+    <h2 class="sec-title">학력 · 수료 · 저서</h2>
+    <div class="cert-list">
+      <div class="cert"><div class="cert-lbl">학력</div><div class="cert-val">대전대학교 컴퓨터공학과 졸업 / 복수전공: 모빌리티AI·SW융합전공 (2017.03 ~ 2024.02)</div></div>
+      <div class="cert"><div class="cert-lbl">AI 기본과정</div><div class="cert-val">정보통신산업진흥원 — 인공지능 기본과정 수료</div></div>
+      <div class="cert"><div class="cert-lbl">데이터사이언스</div><div class="cert-val">네이버 부스트코스 &lt;DATA SCIENCE&gt; 코칭스터디 2023 수료</div></div>
+      <div class="cert"><div class="cert-lbl">저서</div><div class="cert-val"><a href="https://www.yes24.com/Product/Goods/109711067" target="_blank">개발자가 되기 위해 꼭 알아야 하는 IT 용어 (공동 저자)</a></div></div>
+      <div class="cert"><div class="cert-lbl">블로그</div><div class="cert-val"><a href="https://justinnn980.tistory.com" target="_blank">justinnn980.tistory.com — 개발 경험 기록</a></div></div>
+    </div>
+  </section>
+
+  <!-- 연락처 -->
+  <section class="section" id="contact">
+    <div class="eyebrow"><span class="sec-num">05</span><span class="sec-lbl">Contact</span></div>
+    <h2 class="sec-title">연락처</h2>
+    <div class="contact-row">
+      <a class="clink" href="tel:010-2538-1519">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.81 19.79 19.79 0 01.06 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        010-2538-1519
+      </a>
+      <a class="clink" href="mailto:justinnn980@gmail.com">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        justinnn980@gmail.com
+      </a>
+      <a class="clink" href="https://justinnn980.tistory.com" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        justinnn980.tistory.com
+      </a>
+    </div>
+  </section>
+
+</div>
+<footer>박준철 · Flutter Developer · 넛지헬스케어(캐시워크) 지원 포트폴리오</footer>
+</body>
+</html>

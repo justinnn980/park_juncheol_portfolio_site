@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 경력기술서 — LLM Engineer 대웅제약 지원</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --em:   #059669;
+      --em-l: #D1FAE5;
+      --text: #111827;
+      --sub:  #374151;
+      --muted:#6B7280;
+      --bdr:  #E5E7EB;
+      --bg-h: #F0FDF4;
+    }
+    html { font-size: 12.5px; }
+    body {
+      font-family: 'Noto Sans KR', -apple-system, 'Segoe UI', sans-serif;
+      color: var(--text); background: #fff; line-height: 1.55;
+    }
+    a { color: var(--em); text-decoration: none; }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      margin: 0 auto;
+      padding: 13mm 15mm 13mm 15mm;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    /* HEADER */
+    .hd { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 2px solid var(--text); }
+    .hd-left {}
+    .hd-name { font-size: 26px; font-weight: 900; letter-spacing: -1px; line-height: 1.1; margin-bottom: 3px; }
+    .hd-role { font-size: 11.5px; font-weight: 700; color: var(--em); margin-bottom: 6px; }
+    .hd-contacts { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hd-contact { font-size: 11px; color: var(--muted); }
+    .hd-summary {
+      margin-top: 8px; padding: 8px 12px;
+      background: var(--bg-h); border-left: 3px solid var(--em);
+      font-size: 11px; color: var(--sub); line-height: 1.65;
+    }
+
+    /* SECTION */
+    .sec { margin-bottom: 11px; }
+    .sec-title {
+      font-size: 10px; font-weight: 900; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--em);
+      border-bottom: 1px solid var(--bdr);
+      padding-bottom: 4px; margin-bottom: 8px;
+    }
+
+    /* CAREER */
+    .career-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1px; }
+    .career-co   { font-size: 13px; font-weight: 900; }
+    .career-period { font-size: 10.5px; color: var(--muted); font-weight: 600; }
+    .career-role { font-size: 11.5px; font-weight: 700; color: var(--sub); margin-bottom: 4px; }
+    .career-desc { font-size: 10.5px; color: var(--muted); margin-bottom: 5px; }
+    .ul { list-style: none; display: grid; gap: 2px; }
+    .ul li { font-size: 11px; color: var(--sub); padding-left: 13px; position: relative; line-height: 1.55; }
+    .ul li::before { content: '▸'; position: absolute; left: 0; color: var(--em); font-size: 9px; top: 2px; }
+    .ul li strong { color: var(--text); font-weight: 700; }
+
+    /* PROJECTS — 2-col */
+    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .proj { padding: 8px 10px; border: 1px solid var(--bdr); border-left: 3px solid var(--em); border-radius: 0 4px 4px 0; }
+    .proj-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+    .proj-title  { font-size: 12px; font-weight: 900; }
+    .proj-period { font-size: 10px; color: var(--muted); font-weight: 600; }
+    .proj-sub    { font-size: 10.5px; color: var(--em); font-weight: 700; margin-bottom: 4px; }
+    .tags { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 5px; }
+    .tag { padding: 1px 5px; border-radius: 3px; font-size: 9.5px; font-weight: 700; background: var(--em-l); color: var(--em); }
+    .tag.gray { background: #F3F4F6; color: var(--muted); }
+
+    /* SKILL TABLE */
+    .sk-table { width: 100%; border-collapse: collapse; }
+    .sk-table tr { border-bottom: 1px solid var(--bdr); }
+    .sk-table tr:last-child { border-bottom: none; }
+    .sk-table td { padding: 4px 6px; font-size: 11px; vertical-align: top; }
+    .sk-table .sk-key { width: 110px; font-weight: 700; color: var(--sub); white-space: nowrap; }
+
+    /* EDU */
+    .edu-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--bdr); font-size: 11px; }
+    .edu-row:last-child { border-bottom: none; }
+    .edu-title { font-weight: 700; }
+    .edu-sub   { color: var(--muted); font-size: 10.5px; margin-top: 1px; }
+    .edu-date  { color: var(--muted); font-size: 10.5px; flex-shrink: 0; margin-left: 8px; }
+
+    /* PRINT */
+    @media print {
+      html { font-size: 11.5px; }
+      body { background: #fff; }
+      .page { margin: 0; padding: 11mm 13mm 11mm 13mm; width: 100%; height: auto; }
+      .no-print { display: none !important; }
+    }
+
+    /* SCREEN */
+    @media screen {
+      body { background: #e5e7eb; padding: 32px 0; }
+      .page { box-shadow: 0 2px 20px rgba(0,0,0,0.12); }
+      .print-btn {
+        position: fixed; top: 20px; right: 20px; z-index: 100;
+        padding: 10px 20px; background: var(--em); color: #fff;
+        border: none; border-radius: 8px; font-size: 14px; font-weight: 700;
+        cursor: pointer; box-shadow: 0 4px 12px rgba(5,150,105,0.3);
+        font-family: inherit;
+      }
+      .print-btn:hover { background: #047857; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨 PDF 저장 / 인쇄</button>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="hd">
+    <div class="hd-left">
+      <div class="hd-name">박준철</div>
+      <div class="hd-role">LLM Engineer · 대웅제약 지원</div>
+      <div class="hd-contacts">
+        <span class="hd-contact">📞 010-2538-1519</span>
+        <span class="hd-contact">✉ justinnn980@gmail.com</span>
+        <span class="hd-contact">🌐 <a href="https://justinnn980.github.io/park_juncheol_portfolio_site/resume_daewoong.html">포트폴리오 상세보기 →</a></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hd-summary" style="margin-bottom:12px;">
+    컴퓨터공학 + 모빌리티AI·SW융합전공, AI 기본과정·데이터사이언스 수료. (주)홈초이스에서 매출 340억 OTT 서비스 Flutter 앱을 1년 10개월간 개발·운영했으며, <strong>API 통합·실시간 WebSocket·JWT 인증·Docker 배포</strong> 등 LLM 서비스 개발에 직결되는 풀스택 역량을 보유합니다. AI 데이터 어노테이션 5개 기관 실무 경험으로 데이터 파이프라인과 품질 기준을 직접 이해합니다.
+  </div>
+
+  <!-- 경력 -->
+  <div class="sec">
+    <div class="sec-title">경력</div>
+    <div class="career-head">
+      <span class="career-co">(주)홈초이스</span>
+      <span class="career-period">2024.02 ~ 2025.11 &nbsp;(1년 10개월) · Flutter 앱 개발 및 유지보수</span>
+    </div>
+    <div class="career-desc">전국 디지털케이블TV VOD 공급 국내 1위 / OTT 서비스 "스카이이어스" / 매출 340억 · LG헬로비전(매출 1조) · 드라이브(3,500억) 마이그레이션 2건</div>
+    <ul class="ul">
+      <li>AWS EC2 + SSL 인증서 적용으로 이통사 Proxy 방화벽 차단 해결 — <strong>전구간 HTTPS 보안통신 구성</strong></li>
+      <li>React + WebView JavaScript Bridge 양방향 구조 설계 → 앱 재배포 없이 운영 요구사항 즉시 반영</li>
+      <li>FCP/LCP 지표 기반 병목 분석 → 스켈레톤 UI·Lazy Loading·CDN 적용으로 <strong>FCP 39% 단축, LCP 10.8% 개선</strong></li>
+      <li>NCG DRM → Multi DRM 전환: 플레이어 커스터마이징으로 라이선스 검증 흐름 단일화 / Flutter 2→3 업그레이드 완료</li>
+    </ul>
+  </div>
+
+  <!-- 프로젝트 -->
+  <div class="sec">
+    <div class="sec-title">프로젝트</div>
+    <div class="proj-grid">
+
+      <div class="proj">
+        <div class="proj-head">
+          <span class="proj-title">내일(Dama) — 구독 통합 관리 서비스</span>
+          <span class="proj-period">2026.01~02 · 2인 팀</span>
+        </div>
+        <div class="proj-sub">End-to-End 기획~배포</div>
+        <div class="tags">
+          <span class="tag">Flutter</span><span class="tag">Spring Boot</span><span class="tag">JWT</span><span class="tag">MySQL</span><span class="tag">Docker</span>
+        </div>
+        <ul class="ul">
+          <li>JWT Access/Refresh Token 인증 흐름 Flutter에서 직접 구현 — <strong>Stateless 인증 구조 설계</strong></li>
+          <li>Docker 기반 환경 통일, 도메인 분리 설계 (User/Subscription/Community)</li>
+        </ul>
+      </div>
+
+      <div class="proj">
+        <div class="proj-head">
+          <span class="proj-title">숫자 연결 — 실시간 증가 게임</span>
+          <span class="proj-period">2026.01~ · 솔로 3일</span>
+        </div>
+        <div class="proj-sub">기획~개발~배포 End-to-End</div>
+        <div class="tags">
+          <span class="tag">Flutter</span><span class="tag">Spring Boot</span><span class="tag">WebSocket</span><span class="tag gray">Render</span>
+        </div>
+        <ul class="ul">
+          <li>서버 단일 상태 관리 → WebSocket broadcast — <strong>LLM 스트리밍 응답과 동일 구조</strong></li>
+          <li>클라이언트 UI 반응 / 실제 데이터 서버 기준 동기화 (신뢰할 수 있는 단일 진실 원천)</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AI / 데이터 경험 -->
+  <div class="sec">
+    <div class="sec-title">AI · 데이터 경험</div>
+    <div class="career-desc" style="margin-bottom:4px;"><strong style="color:var(--text);">AI 학습 데이터 어노테이션</strong> — 이스트에이드 · 다훈케이스비 · SuperbAI · 크라우드웍스 · 올로마인드 (5개 기관)</div>
+    <ul class="ul">
+      <li>BBox·Polygon·Segmentation·Keypoint·Object Tracking 5가지 유형 실무 수행 — AI 모델 훈련 데이터 품질 기준 직접 경험</li>
+      <li>RAG 파이프라인의 문서 청킹·임베딩 원리와 동일 — 비정형 데이터를 AI 처리 가능 구조로 변환하는 과정 체득</li>
+    </ul>
+  </div>
+
+  <!-- 기술 스택 -->
+  <div class="sec">
+    <div class="sec-title">기술 스택</div>
+    <table class="sk-table">
+      <tr>
+        <td class="sk-key">AI / ML</td>
+        <td>Python · LangChain (RAG 파이프라인 학습) · 프롬프트 엔지니어링 · 벡터 DB 이해</td>
+      </tr>
+      <tr>
+        <td class="sk-key">앱 (주력)</td>
+        <td>Flutter 2.0~3.38 · Dart · Riverpod · WebView · iOS / Android (1년 10개월 실무)</td>
+      </tr>
+      <tr>
+        <td class="sk-key">API / 인증</td>
+        <td>REST API · WebSocket · JWT (Access / Refresh Token) · HTTPS / SSL / TLS</td>
+      </tr>
+      <tr>
+        <td class="sk-key">백엔드 / 인프라</td>
+        <td>Spring Boot · MySQL · Docker · AWS (EC2, S3, Elastic IP) · React / TypeScript</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 학력 / 수료 -->
+  <div class="sec">
+    <div class="sec-title">학력 · 교육 · 저서</div>
+    <div class="edu-row">
+      <div><div class="edu-title">컴퓨터공학과 졸업 · 복수전공: 모빌리티AI·SW융합전공</div></div>
+    </div>
+    <div class="edu-row">
+      <div><div class="edu-title">정보통신산업진흥원 인공지능 기본과정 수료 &nbsp;·&nbsp; 네이버 부스트코스 &lt;DATA SCIENCE&gt; 코칭스터디 2023 수료</div></div>
+    </div>
+    <div class="edu-row">
+      <div><div class="edu-title">『개발자가 되기 위해 꼭 알아야 하는 IT 용어』 공동 저자 &nbsp;<a href="https://www.yes24.com/Product/Goods/109711067" style="font-size:10px;">(yes24)</a></div></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

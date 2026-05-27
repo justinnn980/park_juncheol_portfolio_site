@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 — LLM Engineer / 대웅제약 지원</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:    #0B1220;
+      --bg2:   #111B2E;
+      --bg3:   #182438;
+      --sur:   rgba(255,255,255,0.05);
+      --bdr:   rgba(255,255,255,0.10);
+      --bdr-a: rgba(16,185,129,0.30);
+      --text:  #E2E8F0;
+      --muted: #94A3B8;
+      --soft:  #64748B;
+      --em:    #10B981;
+      --em-d:  #059669;
+      --ind:   #818CF8;
+      --sky:   #38BDF8;
+      --grn:   #34D399;
+      --red:   #F87171;
+      --yel:   #FCD34D;
+      --r: 10px;
+      --sh: 0 0 0 1px rgba(255,255,255,0.05), 0 20px 50px rgba(0,0,0,0.55);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.65; overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    body::after {
+      content: ''; position: fixed; top: -200px; right: -100px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(16,185,129,0.055), transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(6,10,20,0.90); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--bdr);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      height: 56px; display: flex; align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand { font-size: 15px; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    .nav-tag {
+      padding: 2px 8px; border-radius: 4px;
+      background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.28);
+      color: var(--em); font-size: 11px; font-weight: 800;
+    }
+    .nav-links { display: flex; gap: 2px; }
+    .nav-links a {
+      padding: 6px 12px; border-radius: 6px;
+      color: var(--muted); font-size: 13px; font-weight: 600;
+      transition: color .15s, background .15s;
+    }
+    .nav-links a:hover { color: var(--em); background: rgba(16,185,129,0.08); }
+
+    /* LAYOUT */
+    .main { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 80px 0; border-top: 1px solid var(--bdr); }
+    .section:first-child { border-top: none; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .sec-num  { font-size: 11px; font-weight: 800; color: var(--em); letter-spacing: 1px; }
+    .sec-lbl  { font-size: 11px; font-weight: 700; color: var(--soft); letter-spacing: 1.5px; text-transform: uppercase; }
+    .sec-title { font-size: 36px; font-weight: 900; color: var(--text); letter-spacing: -0.5px; margin-bottom: 28px; line-height: 1.15; }
+
+    /* HERO */
+    .hero {
+      padding: 90px 0 80px;
+      display: grid; grid-template-columns: minmax(0,1fr) 420px;
+      gap: 60px; align-items: start;
+    }
+    .hero-role {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 20px; padding: 6px 14px;
+      border: 1px solid rgba(16,185,129,0.28); border-radius: 999px;
+      background: rgba(16,185,129,0.06); color: var(--em);
+      font-size: 12px; font-weight: 700;
+    }
+    .hero-role::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--em); animation: blink 2s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .hero-name {
+      font-size: 80px; font-weight: 900; line-height: 1;
+      letter-spacing: -2px; margin-bottom: 20px;
+      background: linear-gradient(135deg, #E2E8F0 30%, var(--em));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-lead { font-size: 16px; line-height: 1.82; color: var(--muted); max-width: 580px; margin-bottom: 24px; }
+    .profile-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    .ptag {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 10px; border: 1px solid var(--bdr); border-radius: 6px;
+      background: var(--sur); color: var(--muted); font-size: 12px; font-weight: 600;
+    }
+    .ptag span { color: var(--soft); font-size: 11px; }
+    .hero-actions { display: flex; gap: 10px; margin-bottom: 36px; }
+    .btn-p {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: var(--r);
+      background: linear-gradient(135deg, var(--em), var(--em-d));
+      color: #fff; font-size: 14px; font-weight: 800;
+      box-shadow: 0 4px 20px rgba(16,185,129,0.28);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn-p:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.38); }
+    .btn-g {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: var(--r);
+      border: 1px solid var(--bdr); background: var(--sur);
+      color: var(--text); font-size: 14px; font-weight: 700;
+      transition: border-color .15s, background .15s;
+    }
+    .btn-g:hover { border-color: var(--bdr-a); background: rgba(16,185,129,0.05); }
+    .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .stat { padding: 16px; border: 1px solid var(--bdr); border-radius: var(--r); background: var(--sur); }
+    .stat-n {
+      font-size: 24px; font-weight: 900; letter-spacing: -0.5px; line-height: 1.1;
+      background: linear-gradient(135deg, var(--em), var(--ind));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .stat-l { margin-top: 4px; color: var(--soft); font-size: 12px; font-weight: 600; }
+
+    /* Code panel */
+    .code-panel {
+      position: sticky; top: 76px;
+      border: 1px solid var(--bdr); border-radius: 14px;
+      overflow: hidden; background: #0D1117; box-shadow: var(--sh);
+    }
+    .code-bar {
+      display: flex; align-items: center; gap: 7px;
+      padding: 11px 16px; background: rgba(255,255,255,0.025);
+      border-bottom: 1px solid var(--bdr);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .code-fn { margin-left: 6px; font-size: 12px; color: var(--soft); font-weight: 600; font-family: 'SF Mono','Fira Code',monospace; }
+    .code-body { padding: 18px 20px; font-family: 'SF Mono','Fira Code','Consolas',monospace; font-size: 12.5px; line-height: 1.72; }
+    .cl { display: flex; }
+    .ln { width: 22px; flex-shrink: 0; color: #3D4452; text-align: right; margin-right: 16px; user-select: none; }
+    .cmt { color: #637777; }
+    .kw  { color: #C792EA; }
+    .tp  { color: #FFCB6B; }
+    .str { color: #C3E88D; }
+    .fn  { color: #82AAFF; }
+    .vr  { color: #F07178; }
+    .tc  { color: var(--em); }
+    .nm  { color: #F78C6C; }
+    .pl  { color: #A6ACCD; }
+    .cdiv{ margin: 7px 0; border: none; border-top: 1px solid rgba(255,255,255,0.06); }
+
+    /* SKILL GRID */
+    .skill-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .sk {
+      padding: 18px 20px; border: 1px solid var(--bdr); border-radius: 12px;
+      background: var(--bg2); transition: border-color .15s, transform .15s;
+    }
+    .sk:hover { border-color: var(--bdr-a); transform: translateY(-2px); }
+    .sk-icon  { font-size: 20px; margin-bottom: 10px; }
+    .sk-name  { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+    .sk-desc  { font-size: 12px; color: var(--muted); line-height: 1.6; }
+    .sk-tags  { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 10px; }
+    .sk-tag   { padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700;
+                background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.18); color: var(--em); }
+    .sk-tag.blue { background: rgba(56,189,248,0.08); border-color: rgba(56,189,248,0.18); color: var(--sky); }
+    .sk-tag.ind  { background: rgba(129,140,248,0.08); border-color: rgba(129,140,248,0.18); color: var(--ind); }
+
+    /* EXPERIENCE TIMELINE */
+    .exp-list { display: grid; gap: 12px; }
+    .exp-item {
+      display: grid; grid-template-columns: 170px 1fr;
+      border: 1px solid var(--bdr); border-radius: 12px; overflow: hidden;
+      background: var(--bg2); transition: border-color .15s;
+    }
+    .exp-item:hover { border-color: rgba(16,185,129,0.2); }
+    .exp-left {
+      padding: 18px 16px; border-right: 1px solid var(--bdr);
+      background: rgba(16,185,129,0.04);
+      display: flex; flex-direction: column; justify-content: center; gap: 4px;
+    }
+    .exp-co    { font-size: 12px; font-weight: 800; color: var(--em); }
+    .exp-period{ font-size: 11px; color: var(--soft); font-weight: 600; margin-top: 2px; }
+    .exp-dur   { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .exp-right { padding: 18px 20px; }
+    .exp-role  { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .exp-detail{ font-size: 12px; color: var(--muted); line-height: 1.7; }
+    .exp-tags  { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
+    .exp-tag   { padding: 2px 7px; border-radius: 4px; background: rgba(255,255,255,0.05); border: 1px solid var(--bdr); color: var(--soft); font-size: 10px; font-weight: 700; }
+    .exp-tag.hi{ background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.2); color: var(--em); }
+
+    /* PROBLEM CARDS */
+    .prob-list { display: grid; gap: 20px; }
+    .pc {
+      border: 1px solid var(--bdr); border-radius: 14px;
+      overflow: hidden; background: var(--bg2); transition: border-color .15s;
+    }
+    .pc:hover { border-color: rgba(16,185,129,0.22); }
+    .pc-head  { padding: 24px 28px 0; }
+    .pc-meta  { display: flex; align-items: center; gap: 7px; margin-bottom: 12px; flex-wrap: wrap; }
+    .tg       { padding: 3px 9px; border-radius: 4px; font-size: 11px; font-weight: 800; }
+    .tg-prob  { background: rgba(248,113,113,0.12); color: #F87171; border: 1px solid rgba(248,113,113,0.2); }
+    .tg-em    { background: rgba(16,185,129,0.10);  color: var(--em); border: 1px solid rgba(16,185,129,0.2); }
+    .tg-sky   { background: rgba(56,189,248,0.10);  color: var(--sky); border: 1px solid rgba(56,189,248,0.2); }
+    .tg-ind   { background: rgba(129,140,248,0.10); color: var(--ind); border: 1px solid rgba(129,140,248,0.2); }
+    .pc-title { font-size: 19px; font-weight: 900; color: var(--text); line-height: 1.35; margin-bottom: 14px; }
+    .pc-body  { padding: 0 28px; }
+    .sit, .sol{ font-size: 14px; line-height: 1.84; color: var(--muted); margin-bottom: 18px; }
+    .sl { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 4px; margin-right: 8px; background: rgba(16,185,129,0.10); color: var(--em); font-size: 11px; font-weight: 800; border: 1px solid rgba(16,185,129,0.2); }
+    .impact {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      padding: 14px 28px; background: rgba(16,185,129,0.04);
+      border-top: 1px solid rgba(16,185,129,0.10);
+    }
+    .imp { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 6px; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.18); color: var(--em); font-size: 12px; font-weight: 800; }
+
+    /* DIAGRAMS */
+    .diag { margin: 0 28px 18px; padding: 18px; border-radius: 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); overflow-x: auto; }
+    .dlbl { font-size: 10px; font-weight: 800; color: var(--soft); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+    .nd { padding: 8px 14px; border-radius: 7px; font-size: 12px; font-weight: 800; text-align: center; border: 1.5px solid; line-height: 1.35; white-space: nowrap; }
+    .nd small { display: block; font-size: 10px; font-weight: 600; opacity: .7; margin-top: 2px; }
+    .nd-t  { border-color: rgba(16,185,129,0.4);   background: rgba(16,185,129,0.08);   color: var(--em); }
+    .nd-b  { border-color: rgba(56,189,248,0.4);   background: rgba(56,189,248,0.08);   color: var(--sky); }
+    .nd-i  { border-color: rgba(129,140,248,0.4);  background: rgba(129,140,248,0.08);  color: var(--ind); }
+    .nd-g  { border-color: rgba(52,211,153,0.4);   background: rgba(52,211,153,0.08);   color: var(--grn); }
+    .nd-gr { border-color: rgba(148,163,184,0.3);  background: rgba(148,163,184,0.05);  color: var(--muted); }
+    .nd-r  { border-color: rgba(248,113,113,0.4);  background: rgba(248,113,113,0.08);  color: #F87171; }
+    .nd-y  { border-color: rgba(252,211,77,0.4);   background: rgba(252,211,77,0.08);   color: var(--yel); }
+    .fr  { display: flex; align-items: center; flex-wrap: nowrap; margin: 5px 0; }
+    .ard { color: var(--soft); font-size: 14px; line-height: 1.8; }
+    .fc  { display: flex; flex-direction: column; align-items: center; }
+    .ba  { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .ba-p{ padding: 14px; border-radius: 8px; }
+    .ba-b{ background: rgba(248,113,113,0.04); border: 1px solid rgba(248,113,113,0.15); }
+    .ba-a{ background: rgba(52,211,153,0.04);  border: 1px solid rgba(52,211,153,0.15); }
+    .ba-t{ font-size: 10px; font-weight: 900; letter-spacing: .5px; margin-bottom: 10px; }
+    .ba-b .ba-t { color: #F87171; }
+    .ba-a .ba-t { color: var(--grn); }
+    .vf  { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+    .vf .nd { align-self: stretch; text-align: left; white-space: normal; }
+    .vf .ard { margin-left: 12px; }
+
+    /* RAG FLOW */
+    .rag-flow { display: flex; flex-direction: column; gap: 6px; }
+    .rag-row  { display: flex; align-items: center; gap: 8px; }
+    .rag-label{ font-size: 10px; font-weight: 800; color: var(--soft); width: 80px; flex-shrink: 0; text-align: right; }
+
+    /* CERT */
+    .cert-list { display: grid; gap: 10px; }
+    .cert { display: grid; grid-template-columns: 190px 1fr; overflow: hidden; border: 1px solid var(--bdr); border-radius: var(--r); }
+    .cert-lbl { padding: 14px 16px; border-right: 1px solid var(--bdr); background: rgba(16,185,129,0.05); color: var(--em); font-size: 11px; font-weight: 800; display: flex; align-items: center; }
+    .cert-val { padding: 14px 18px; display: flex; align-items: center; font-size: 13px; color: var(--muted); }
+    .cert-val a { color: var(--em); text-decoration: underline; text-decoration-color: rgba(16,185,129,0.3); }
+
+    /* CONTACT */
+    .contact-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .clink { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid var(--bdr); border-radius: var(--r); background: var(--sur); color: var(--text); font-size: 14px; font-weight: 700; transition: border-color .15s, transform .15s; }
+    .clink:hover { border-color: var(--bdr-a); transform: translateY(-2px); }
+
+    footer { padding: 32px 24px; text-align: center; color: var(--soft); font-size: 12px; border-top: 1px solid var(--bdr); position: relative; z-index: 1; }
+
+    @media(max-width:900px) {
+      .hero { grid-template-columns: 1fr; padding: 60px 0; }
+      .hero-name { font-size: 52px; }
+      .skill-grid { grid-template-columns: repeat(2,1fr); }
+      .ba { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+    @media(max-width:600px) {
+      .hero-name { font-size: 40px; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .skill-grid { grid-template-columns: 1fr; }
+      .pc-head, .pc-body { padding-left: 18px; padding-right: 18px; }
+      .diag { margin-left: 18px; margin-right: 18px; }
+      .impact { padding-left: 18px; padding-right: 18px; }
+      .section { padding: 56px 0; }
+      .cert { grid-template-columns: 1fr; }
+      .cert-lbl { border-right: none; border-bottom: 1px solid var(--bdr); }
+      .exp-item { grid-template-columns: 1fr; }
+      .exp-left { border-right: none; border-bottom: 1px solid var(--bdr); }
+    }
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#intro">박준철 <span class="nav-tag">대웅제약 지원</span></a>
+    <div class="nav-links">
+      <a href="#skills">핵심 역량</a>
+      <a href="#experience">경험</a>
+      <a href="#problems">기술 과제</a>
+      <a href="#contact">연락처</a>
+    </div>
+  </div>
+</nav>
+
+<div class="main">
+
+  <!-- HERO -->
+  <section class="section" id="intro" style="border-top:none;">
+    <div class="hero">
+      <div>
+        <div class="hero-role">LLM Engineer · 대웅제약 지원</div>
+        <h1 class="hero-name">박준철</h1>
+        <p class="hero-lead">컴퓨터공학 + 모빌리티AI·SW 복수전공, AI 기본과정 수료, 데이터 사이언스 스터디를 거쳐 실서비스 소프트웨어 개발자로 성장했습니다. <strong style="color:var(--em);">API 통합·시스템 설계·데이터 파이프라인 이해</strong>를 바탕으로, 대웅제약 디지털 헬스케어 도메인에 LLM 기반 서비스를 설계하고 구현하는 엔지니어가 되겠습니다.</p>
+        <div class="profile-row">
+          <span class="ptag"><span>전공</span> 컴퓨터공학과</span>
+          <span class="ptag"><span>복수전공</span> 모빌리티AI·SW융합전공</span>
+          <span class="ptag"><span>개발 경력</span> (주)홈초이스 1년 10개월</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn-p" href="#skills">핵심 역량 보기</a>
+          <a class="btn-g" href="mailto:justinnn980@gmail.com">메일 보내기</a>
+        </div>
+        <div class="stats-row">
+          <div class="stat"><div class="stat-n">AI 복수전공</div><div class="stat-l">모빌리티AI·SW융합전공 이수</div></div>
+          <div class="stat"><div class="stat-n">5개 기관</div><div class="stat-l">AI 학습 데이터 구축 실무 경험</div></div>
+          <div class="stat"><div class="stat-n">E2E 설계</div><div class="stat-l">앱~백엔드~배포 전구간 구현</div></div>
+        </div>
+      </div>
+
+      <!-- Code panel -->
+      <div class="code-panel" aria-hidden="true">
+        <div class="code-bar">
+          <div class="dot" style="background:#FF5F57"></div>
+          <div class="dot" style="background:#FEBC2E"></div>
+          <div class="dot" style="background:#28C840"></div>
+          <span class="code-fn">rag_pipeline.py</span>
+        </div>
+        <div class="code-body">
+          <div class="cl"><span class="ln">1</span><span class="cmt"># RAG 파이프라인 — 문서 검색 + LLM 응답</span></div>
+          <div class="cl"><span class="ln">2</span><span class="kw">from </span><span class="tp">langchain</span><span class="kw"> import </span><span class="tp">RetrievalQA</span></div>
+          <div class="cl"><span class="ln">3</span><span class="kw">from </span><span class="tp">langchain_openai</span><span class="kw"> import </span><span class="fn">ChatOpenAI</span></div>
+          <div class="cl"><span class="ln">4</span><span class="pl">&nbsp;</span></div>
+          <div class="cl"><span class="ln">5</span><span class="kw">def </span><span class="fn">build_rag_chain</span><span class="pl">(</span><span class="vr">vectorstore</span><span class="pl">):</span></div>
+          <div class="cl"><span class="ln">6</span><span class="pl">  </span><span class="vr">llm</span><span class="pl"> = </span><span class="fn">ChatOpenAI</span><span class="pl">(</span></div>
+          <div class="cl"><span class="ln">7</span><span class="pl">    </span><span class="vr">model</span><span class="pl">=</span><span class="str">"gpt-4o"</span><span class="pl">,</span></div>
+          <div class="cl"><span class="ln">8</span><span class="pl">    </span><span class="vr">temperature</span><span class="pl">=</span><span class="nm">0</span></div>
+          <div class="cl"><span class="ln">9</span><span class="pl">  )</span></div>
+          <div class="cl"><span class="ln">10</span><span class="pl">  </span><span class="vr">retriever</span><span class="pl"> = </span><span class="vr">vectorstore</span><span class="pl">.</span></div>
+          <div class="cl"><span class="ln">11</span><span class="pl">    </span><span class="fn">as_retriever</span><span class="pl">(</span><span class="vr">k</span><span class="pl">=</span><span class="nm">5</span><span class="pl">)</span></div>
+          <div class="cl"><span class="ln">12</span><span class="pl">  </span><span class="kw">return </span><span class="tp">RetrievalQA</span><span class="pl">.</span><span class="fn">from_chain_type</span><span class="pl">(</span></div>
+          <div class="cl"><span class="ln">13</span><span class="pl">    </span><span class="vr">llm</span><span class="pl">=</span><span class="vr">llm</span><span class="pl">,</span></div>
+          <div class="cl"><span class="ln">14</span><span class="pl">    </span><span class="vr">retriever</span><span class="pl">=</span><span class="vr">retriever</span></div>
+          <div class="cl"><span class="ln">15</span><span class="pl">  )</span></div>
+          <hr class="cdiv"/>
+          <div class="cl"><span class="ln">17</span><span class="cmt"># 실시간 스트리밍 응답 — WebSocket 패턴 활용</span></div>
+          <div class="cl"><span class="ln">18</span><span class="kw">async def </span><span class="fn">stream_answer</span><span class="pl">(</span><span class="vr">query</span><span class="pl">: </span><span class="tp">str</span><span class="pl">):</span></div>
+          <div class="cl"><span class="ln">19</span><span class="pl">  </span><span class="kw">async for </span><span class="vr">chunk</span><span class="kw"> in </span><span class="fn">chain</span><span class="pl">.</span><span class="fn">astream</span><span class="pl">(</span><span class="vr">query</span><span class="pl">):</span></div>
+          <div class="cl"><span class="ln">20</span><span class="pl">    </span><span class="kw">yield </span><span class="vr">chunk</span><span class="pl">[</span><span class="str">"result"</span><span class="pl">]</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 핵심 역량 -->
+  <section class="section" id="skills">
+    <div class="eyebrow"><span class="sec-num">01</span><span class="sec-lbl">Core Competencies</span></div>
+    <h2 class="sec-title">핵심 역량</h2>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.7;">LLM 엔지니어에게 필요한 역량을 교육·실무 경험과 함께 정리했습니다.</p>
+    <div class="skill-grid">
+
+      <div class="sk">
+        <div class="sk-icon">🤖</div>
+        <div class="sk-name">AI / 머신러닝 이해</div>
+        <div class="sk-desc">모빌리티AI·SW융합전공 이수. 정보통신산업진흥원 AI 기본과정 수료. 네이버 부스트코스 DATA SCIENCE 스터디 수료. 모델 학습 데이터 구조와 품질 기준을 학문·실무 양면에서 이해.</div>
+        <div class="sk-tags">
+          <span class="sk-tag">AI 기본과정 수료</span>
+          <span class="sk-tag">Data Science</span>
+          <span class="sk-tag ind">복수전공 AI</span>
+        </div>
+      </div>
+
+      <div class="sk">
+        <div class="sk-icon">🔗</div>
+        <div class="sk-name">API 통합 · 시스템 설계</div>
+        <div class="sk-desc">REST API, WebSocket, JWT 인증, HTTPS 보안통신을 실서비스에서 직접 구현. LLM API 통합(OpenAI, Claude 등)에 동일하게 적용 가능한 API 클라이언트 설계 역량 보유.</div>
+        <div class="sk-tags">
+          <span class="sk-tag">REST API</span>
+          <span class="sk-tag">WebSocket</span>
+          <span class="sk-tag blue">JWT / OAuth</span>
+        </div>
+      </div>
+
+      <div class="sk">
+        <div class="sk-icon">📊</div>
+        <div class="sk-name">AI 학습 데이터 이해</div>
+        <div class="sk-desc">이스트에이드·다훈케이스비·SuperbAI·크라우드웍스·올로마인드 등 5개 기관에서 BBox·Polygon·Segmentation·Keypoint·Tracking 어노테이션 실무 수행. AI 모델이 요구하는 데이터 품질 기준 직접 경험.</div>
+        <div class="sk-tags">
+          <span class="sk-tag">5개 기관</span>
+          <span class="sk-tag">SuperbAI</span>
+          <span class="sk-tag ind">학습 데이터 구축</span>
+        </div>
+      </div>
+
+      <div class="sk">
+        <div class="sk-icon">⚙️</div>
+        <div class="sk-name">백엔드 · 인프라</div>
+        <div class="sk-desc">Spring Boot 기반 REST API 서버 설계 및 구현. MySQL, MyBatis 데이터 계층 설계. Docker 컨테이너 운영, AWS EC2·S3·Elastic IP 인프라 구성. LLM 서비스 백엔드 구축 즉시 가능.</div>
+        <div class="sk-tags">
+          <span class="sk-tag">Spring Boot</span>
+          <span class="sk-tag">Docker</span>
+          <span class="sk-tag blue">AWS EC2 / S3</span>
+        </div>
+      </div>
+
+      <div class="sk">
+        <div class="sk-icon">📱</div>
+        <div class="sk-name">크로스플랫폼 앱 개발</div>
+        <div class="sk-desc">Flutter 기반 iOS/Android 동시 개발 1년 10개월 실무. WebView + JavaScript Bridge로 웹 컴포넌트와 네이티브 레이어 통합. LLM 응답을 앱에 실시간 표시하는 구조 설계 경험.</div>
+        <div class="sk-tags">
+          <span class="sk-tag">Flutter</span>
+          <span class="sk-tag">Dart</span>
+          <span class="sk-tag blue">iOS / Android</span>
+        </div>
+      </div>
+
+      <div class="sk">
+        <div class="sk-icon">🔄</div>
+        <div class="sk-name">실시간 데이터 · 상태관리</div>
+        <div class="sk-desc">WebSocket으로 서버-클라이언트 실시간 데이터 동기화 구조 설계. Riverpod 기반 복잡한 상태관리 경험. LLM 스트리밍 응답 처리(Server-Sent Events, WebSocket)에 직접 전이 가능.</div>
+        <div class="sk-tags">
+          <span class="sk-tag">WebSocket</span>
+          <span class="sk-tag">Riverpod</span>
+          <span class="sk-tag ind">실시간 스트리밍</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 경험 -->
+  <section class="section" id="experience">
+    <div class="eyebrow"><span class="sec-num">02</span><span class="sec-lbl">Experience</span></div>
+    <h2 class="sec-title">경력 · 교육 경험</h2>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-co">(주)홈초이스</div>
+          <div class="exp-period">2024.02 ~ 2025.11</div>
+          <div class="exp-dur">1년 10개월</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Flutter 기반 iOS · Android 앱 개발 및 유지보수</div>
+          <div class="exp-detail">전국 디지털케이블TV VOD 공급 국내 1위 사업자 / OTT 서비스 "스카이이어스" (매출 340억). 매출 1조 LG헬로비전, 매출 3,500억 드라이브 앱 마이그레이션 2건 완료. API 통합·보안통신·성능 최적화·DRM 라이선스 검증 등 서비스 전반 개발.</div>
+          <div class="exp-tags">
+            <span class="exp-tag hi">Flutter</span>
+            <span class="exp-tag hi">React WebView</span>
+            <span class="exp-tag hi">Spring Boot</span>
+            <span class="exp-tag hi">AWS</span>
+            <span class="exp-tag hi">Docker</span>
+            <span class="exp-tag">Riverpod</span>
+            <span class="exp-tag">Multi DRM</span>
+            <span class="exp-tag">SSL/HTTPS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-co">AI 데이터 어노테이션</div>
+          <div class="exp-period">5개 기관</div>
+          <div class="exp-dur">프리랜서 / 계약직</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">AI 학습 데이터 구축 — BBox·Polygon·Segmentation·Keypoint·Object Tracking</div>
+          <div class="exp-detail">이스트에이드, 다훈케이스비, SuperbAI, 크라우드웍스, 올로마인드 등 5개 기관에서 AI 학습 데이터 어노테이션 실무 수행. AI 모델의 훈련 데이터 구조와 품질 기준을 직접 경험하며 데이터 파이프라인 전반 이해.</div>
+          <div class="exp-tags">
+            <span class="exp-tag hi">AI 학습 데이터</span>
+            <span class="exp-tag hi">SuperbAI</span>
+            <span class="exp-tag hi">크라우드웍스</span>
+            <span class="exp-tag">5가지 어노테이션 유형</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-co">모빌리티AI·SW융합전공</div>
+          <div class="exp-period">복수전공 이수</div>
+          <div class="exp-dur">컴퓨터공학과</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">컴퓨터공학 + AI/SW 융합 복수전공</div>
+          <div class="exp-detail">컴퓨터공학 이론 기반 위에 AI·머신러닝·모빌리티 소프트웨어 융합 전공 이수. 정보통신산업진흥원 인공지능 기본과정 수료, 네이버 부스트코스 DATA SCIENCE 코칭스터디 2023 수료로 LLM·AI 기술 기반 추가 강화.</div>
+          <div class="exp-tags">
+            <span class="exp-tag hi">AI 기본과정 수료</span>
+            <span class="exp-tag hi">Data Science</span>
+            <span class="exp-tag">컴퓨터공학 전공</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 기술 과제 -->
+  <section class="section" id="problems">
+    <div class="eyebrow"><span class="sec-num">03</span><span class="sec-lbl">Technical Deep-dives</span></div>
+    <h2 class="sec-title">기술 과제와 LLM 연결</h2>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:32px;line-height:1.7;">실무에서 해결한 기술 과제가 LLM 서비스 개발에 어떻게 연결되는지 정리했습니다.</p>
+
+    <div class="prob-list">
+
+      <!-- P1 -->
+      <div class="pc">
+        <div class="pc-head">
+          <div class="pc-meta">
+            <span class="tg tg-prob">과제</span>
+            <span class="tg tg-em">LLM API 통합 — API 클라이언트 설계</span>
+          </div>
+          <h3 class="pc-title">복잡한 외부 API를 앱에 안정적으로 통합하고, 인증 토큰 만료 시 자동 갱신 구조를 만들어야 했다</h3>
+        </div>
+        <div class="pc-body">
+          <p class="sit">OTT 서비스 앱에서 콘텐츠 API·DRM 라이선스 서버·결제 서버를 동시에 호출했습니다. JWT Access Token이 만료되면 사용자 경험을 끊지 않고 자동으로 Refresh Token을 통해 갱신해야 했습니다. LLM API(OpenAI, Anthropic)를 앱·서버에 통합하는 구조와 완전히 동일합니다.</p>
+        </div>
+        <div class="diag">
+          <div class="dlbl">JWT 자동 갱신 흐름 = LLM API 키 관리 패턴</div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center;">
+            <div class="nd nd-gr" style="min-width:180px;">API 요청</div>
+            <div class="ard">↓</div>
+            <div class="nd nd-y" style="min-width:180px;">401 Unauthorized<small>토큰 만료</small></div>
+            <div class="ard">↓ 자동 감지</div>
+            <div class="nd nd-t" style="min-width:180px;">Refresh Token 갱신<small>인터셉터 레이어</small></div>
+            <div class="ard">↓ 새 토큰 발급</div>
+            <div class="nd nd-g" style="min-width:180px;">원래 요청 재시도 — 사용자 경험 유지</div>
+          </div>
+        </div>
+        <div class="pc-body">
+          <p class="sol"><span class="sl">해결</span>Dio 인터셉터 레이어에서 401 감지 → Refresh Token 갱신 → 원래 요청 재시도 흐름을 구현했습니다. 사용자 입장에선 로그인 세션이 끊기지 않고, 시스템은 항상 유효한 토큰을 보장합니다. LLM API Key 교체, Rate Limit 처리, Fallback 모델 전환에 동일한 패턴을 적용할 수 있습니다.</p>
+        </div>
+        <div class="impact">
+          <span class="imp">토큰 만료 자동 처리 — 사용자 경험 무중단</span>
+          <span class="imp">LLM API 클라이언트 설계에 직접 전이</span>
+          <span class="imp">Rate Limit / Fallback 패턴 동일 구조</span>
+        </div>
+      </div>
+
+      <!-- P2 -->
+      <div class="pc">
+        <div class="pc-head">
+          <div class="pc-meta">
+            <span class="tg tg-prob">과제</span>
+            <span class="tg tg-sky">실시간 스트리밍 응답 — WebSocket 설계</span>
+          </div>
+          <h3 class="pc-title">서버의 처리 결과를 클라이언트에 실시간으로 전달하고, 충돌 없이 모든 사용자에게 동기화해야 했다</h3>
+        </div>
+        <div class="pc-body">
+          <p class="sit">"숫자 연결" 경매 게임에서 여러 사용자가 동시에 숫자를 올리면, 서버의 최종값을 모든 클라이언트에 즉시 전달해야 했습니다. <strong style="color:var(--em);">LLM 응답 스트리밍(Server-Sent Events, WebSocket)과 완전히 동일한 구조입니다.</strong> 클라이언트가 로컬 상태를 믿지 않고 서버 결과만 신뢰하는 설계가 핵심이었습니다.</p>
+        </div>
+        <div class="diag">
+          <div class="dlbl">WebSocket 실시간 동기화 = LLM 스트리밍 응답 패턴</div>
+          <div class="ba">
+            <div class="ba-p" style="background:rgba(56,189,248,0.04);border:1px solid rgba(56,189,248,0.15);">
+              <div class="ba-t" style="color:var(--sky);">WebSocket 경매 게임</div>
+              <div class="vf">
+                <div class="nd nd-gr">사용자 입력 이벤트</div>
+                <div class="ard">↓</div>
+                <div class="nd nd-t">서버 단일 상태 처리</div>
+                <div class="ard">↓ broadcast</div>
+                <div class="nd nd-g">모든 클라이언트 즉시 갱신</div>
+              </div>
+            </div>
+            <div class="ba-p" style="background:rgba(129,140,248,0.04);border:1px solid rgba(129,140,248,0.15);">
+              <div class="ba-t" style="color:var(--ind);">LLM 스트리밍 응답</div>
+              <div class="vf">
+                <div class="nd nd-gr">사용자 프롬프트 입력</div>
+                <div class="ard">↓</div>
+                <div class="nd nd-i">LLM 추론 중 (chunk 생성)</div>
+                <div class="ard">↓ stream</div>
+                <div class="nd nd-g">클라이언트 실시간 토큰 렌더링</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pc-body">
+          <p class="sol"><span class="sl">해결</span>서버에서 단일 상태를 관리하고 WebSocket으로 모든 클라이언트에 broadcast하는 구조를 설계했습니다. 클라이언트는 UI 반응만 담당하고 실제 데이터는 서버 결과 기준으로만 동기화합니다. LLM chunk 스트리밍에서도 동일하게: 서버에서 token을 생성할 때마다 SSE/WebSocket으로 전달하고 클라이언트는 append만 수행합니다.</p>
+        </div>
+        <div class="impact">
+          <span class="imp">실시간 동기화 구조 설계</span>
+          <span class="imp">LLM 스트리밍 응답 패턴과 동일</span>
+          <span class="imp">3일 기획~배포 End-to-End</span>
+        </div>
+      </div>
+
+      <!-- P3 -->
+      <div class="pc">
+        <div class="pc-head">
+          <div class="pc-meta">
+            <span class="tg tg-prob">과제</span>
+            <span class="tg tg-em">RAG 데이터 파이프라인 이해 — 어노테이션 경험</span>
+          </div>
+          <h3 class="pc-title">AI 모델이 원하는 데이터 품질·구조를 만드는 과정을 실무에서 직접 경험했다</h3>
+        </div>
+        <div class="pc-body">
+          <p class="sit">5개 AI 데이터 전문 기업에서 BBox·Polygon·Segmentation·Keypoint·Object Tracking 어노테이션을 수행하며, <strong style="color:var(--em);">AI 모델이 실제로 어떤 형식과 품질의 데이터를 필요로 하는지 직접 경험했습니다.</strong> RAG 시스템에서 문서를 청킹·임베딩하는 과정은 어노테이션 레이블 구조와 동일한 원리입니다.</p>
+        </div>
+        <div class="diag">
+          <div class="dlbl">어노테이션 데이터 구조 = RAG 문서 파이프라인 원리</div>
+          <div class="fr" style="gap:8px;justify-content:center;flex-wrap:wrap;">
+            <div class="nd nd-gr" style="min-width:100px;">원본 데이터<small>이미지/영상/문서</small></div>
+            <div class="ard">→</div>
+            <div class="nd nd-t" style="min-width:120px;">구조화 레이블링<small>어노테이션/청킹</small></div>
+            <div class="ard">→</div>
+            <div class="nd nd-b" style="min-width:110px;">임베딩/인덱싱<small>벡터 저장</small></div>
+            <div class="ard">→</div>
+            <div class="nd nd-g" style="min-width:100px;">모델 학습<small>/ 검색 활용</small></div>
+          </div>
+        </div>
+        <div class="pc-body">
+          <p class="sol"><span class="sl">연결</span>어노테이션 경험을 통해 비정형 데이터를 AI가 처리할 수 있는 구조로 변환하는 과정을 이해합니다. RAG 파이프라인에서 의약품 문서·임상 데이터를 청킹하고 임베딩하는 작업에 동일한 사고방식이 필요합니다. 데이터 품질이 모델 성능을 결정한다는 원칙을 실무에서 내면화했습니다.</p>
+        </div>
+        <div class="impact">
+          <span class="imp">AI 학습 데이터 구조 이해</span>
+          <span class="imp">RAG 청킹·임베딩 원리 연결</span>
+          <span class="imp">5개 기관 데이터 품질 관리 경험</span>
+        </div>
+      </div>
+
+      <!-- P4 -->
+      <div class="pc">
+        <div class="pc-head">
+          <div class="pc-meta">
+            <span class="tg tg-prob">과제</span>
+            <span class="tg tg-ind">End-to-End 시스템 설계 역량</span>
+          </div>
+          <h3 class="pc-title">도메인 분리·데이터 설계·Docker 배포까지 혼자 또는 소규모 팀으로 완성했다</h3>
+        </div>
+        <div class="pc-body">
+          <p class="sit">구독 통합 관리 서비스 "내일(Dama)"을 2인 팀으로 기획부터 배포까지 완성했습니다. User·Subscription·Community 도메인을 분리 설계하고, JWT 인증·MySQL 데이터 계층·Docker 컨테이너 환경까지 전구간을 책임졌습니다. LLM 기반 서비스도 프롬프트·API 통합·서버·배포를 일관되게 설계할 수 있습니다.</p>
+        </div>
+        <div class="pc-body" style="padding-bottom:18px;">
+          <p class="sol"><span class="sl">적용</span>LLM 서비스에서도 프롬프트 설계 → LLM API 통합 → 벡터 DB 연동 → API 서버 → Docker 배포 전 과정을 설계할 수 있습니다. 구현 역량이 있어 아이디어를 빠르게 프로토타입으로 만들고 검증할 수 있습니다.</p>
+        </div>
+        <div class="impact">
+          <span class="imp">기획~배포 End-to-End 경험</span>
+          <span class="imp">JWT + MySQL + Docker 풀스택</span>
+          <span class="imp">LLM 서비스 프로토타입 즉시 구현 가능</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 자격증 / 학력 -->
+  <section class="section" id="certs">
+    <div class="eyebrow"><span class="sec-num">04</span><span class="sec-lbl">Education &amp; Credentials</span></div>
+    <h2 class="sec-title">학력 · 수료 · 저서</h2>
+    <div class="cert-list">
+      <div class="cert"><div class="cert-lbl">학력</div><div class="cert-val">컴퓨터공학과 졸업 / 복수전공: 모빌리티AI·SW융합전공</div></div>
+      <div class="cert"><div class="cert-lbl">AI 기본과정 수료</div><div class="cert-val">정보통신산업진흥원 — 인공지능 기본과정 이수</div></div>
+      <div class="cert"><div class="cert-lbl">데이터사이언스 수료</div><div class="cert-val">네이버 부스트코스 &lt;DATA SCIENCE&gt; 코칭스터디 2023 수료</div></div>
+      <div class="cert"><div class="cert-lbl">저서</div><div class="cert-val"><a href="https://www.yes24.com/Product/Goods/109711067" target="_blank">개발자가 되기 위해 꼭 알아야 하는 IT 용어 (공동 저자)</a></div></div>
+    </div>
+  </section>
+
+  <!-- 연락처 -->
+  <section class="section" id="contact">
+    <div class="eyebrow"><span class="sec-num">05</span><span class="sec-lbl">Contact</span></div>
+    <h2 class="sec-title">연락처</h2>
+    <div class="contact-row">
+      <a class="clink" href="tel:010-2538-1519">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.81 19.79 19.79 0 01.06 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        010-2538-1519
+      </a>
+      <a class="clink" href="mailto:justinnn980@gmail.com">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        justinnn980@gmail.com
+      </a>
+      <a class="clink" href="mailto:juncheol123@naver.com">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        juncheol123@naver.com
+      </a>
+    </div>
+  </section>
+
+</div>
+<footer>박준철 · LLM Engineer · 대웅제약 지원 포트폴리오</footer>
+</body>
+</html>
