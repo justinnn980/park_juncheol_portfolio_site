@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 경력기술서 — CJ푸드빌 뚜레쥬르 App 운영 담당자</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --em:   #DC2626;
+      --em-l: #FEE2E2;
+      --text: #111827;
+      --sub:  #374151;
+      --muted:#6B7280;
+      --bdr:  #E5E7EB;
+      --bg-h: #FFF5F5;
+    }
+    html { font-size: 12.5px; }
+    body {
+      font-family: 'Noto Sans KR', -apple-system, 'Segoe UI', sans-serif;
+      color: var(--text); background: #fff; line-height: 1.55;
+    }
+    a { color: var(--em); text-decoration: none; }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      margin: 0 auto;
+      padding: 13mm 15mm 13mm 15mm;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    /* HEADER */
+    .hd { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 2px solid var(--text); }
+    .hd-name { font-size: 26px; font-weight: 900; letter-spacing: -1px; line-height: 1.1; margin-bottom: 3px; }
+    .hd-role { font-size: 11.5px; font-weight: 700; color: var(--em); margin-bottom: 6px; }
+    .hd-contacts { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hd-contact { font-size: 11px; color: var(--muted); }
+    .hd-summary {
+      margin-top: 8px; padding: 8px 12px;
+      background: var(--bg-h); border-left: 3px solid var(--em);
+      font-size: 11px; color: var(--sub); line-height: 1.65;
+    }
+
+    /* SECTION */
+    .sec { margin-bottom: 10px; }
+    .sec-title {
+      font-size: 10px; font-weight: 900; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--em);
+      border-bottom: 1px solid var(--bdr);
+      padding-bottom: 4px; margin-bottom: 7px;
+    }
+
+    /* CAREER */
+    .career-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1px; }
+    .career-co   { font-size: 13px; font-weight: 900; }
+    .career-period { font-size: 10.5px; color: var(--muted); font-weight: 600; }
+    .career-role { font-size: 11.5px; font-weight: 700; color: var(--sub); margin-bottom: 4px; }
+    .career-desc { font-size: 10.5px; color: var(--muted); margin-bottom: 5px; }
+    .ul { list-style: none; display: grid; gap: 2px; }
+    .ul li { font-size: 11px; color: var(--sub); padding-left: 13px; position: relative; line-height: 1.55; }
+    .ul li::before { content: '▸'; position: absolute; left: 0; color: var(--em); font-size: 9px; top: 2px; }
+    .ul li strong { color: var(--text); font-weight: 700; }
+
+    /* PROJECTS — 2-col */
+    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .proj { padding: 8px 10px; border: 1px solid var(--bdr); border-left: 3px solid var(--em); border-radius: 0 4px 4px 0; }
+    .proj-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+    .proj-title  { font-size: 12px; font-weight: 900; }
+    .proj-period { font-size: 10px; color: var(--muted); font-weight: 600; }
+    .proj-sub    { font-size: 10.5px; color: var(--em); font-weight: 700; margin-bottom: 4px; }
+    .tags { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 5px; }
+    .tag { padding: 1px 5px; border-radius: 3px; font-size: 9.5px; font-weight: 700; background: var(--em-l); color: var(--em); }
+    .tag.gray { background: #F3F4F6; color: var(--muted); }
+
+    /* SKILL TABLE */
+    .sk-table { width: 100%; border-collapse: collapse; }
+    .sk-table tr { border-bottom: 1px solid var(--bdr); }
+    .sk-table tr:last-child { border-bottom: none; }
+    .sk-table td { padding: 3.5px 6px; font-size: 11px; vertical-align: top; }
+    .sk-table .sk-key { width: 120px; font-weight: 700; color: var(--sub); white-space: nowrap; }
+
+    /* EDU */
+    .edu-row { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px solid var(--bdr); font-size: 11px; }
+    .edu-row:last-child { border-bottom: none; }
+    .edu-title { font-weight: 700; }
+    .edu-date  { color: var(--muted); font-size: 10.5px; flex-shrink: 0; margin-left: 8px; }
+
+    /* PRINT */
+    @media print {
+      html { font-size: 11.5px; }
+      body { background: #fff; }
+      .page { margin: 0; padding: 11mm 13mm 11mm 13mm; width: 100%; height: auto; }
+      .no-print { display: none !important; }
+    }
+
+    /* SCREEN */
+    @media screen {
+      body { background: #e5e7eb; padding: 32px 0; }
+      .page { box-shadow: 0 2px 20px rgba(0,0,0,0.12); }
+      .print-btn {
+        position: fixed; top: 20px; right: 20px; z-index: 100;
+        padding: 10px 20px; background: var(--em); color: #fff;
+        border: none; border-radius: 8px; font-size: 14px; font-weight: 700;
+        cursor: pointer; box-shadow: 0 4px 12px rgba(220,38,38,0.3);
+        font-family: inherit;
+      }
+      .print-btn:hover { background: #B91C1C; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨 PDF 저장 / 인쇄</button>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="hd">
+    <div class="hd-left">
+      <div class="hd-name">박준철</div>
+      <div class="hd-role">앱 서비스 기획·운영 · CJ푸드빌 뚜레쥬르 App 운영 담당자 지원</div>
+      <div class="hd-contacts">
+        <span class="hd-contact">📞 010-2538-1519</span>
+        <span class="hd-contact">✉ justinnn980@gmail.com</span>
+        <span class="hd-contact">🌐 <a href="https://justinnn980.github.io/park_juncheol_portfolio_site/resume_cjfoodville.html">포트폴리오 상세보기 →</a></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hd-summary" style="margin-bottom:10px;">
+    컴퓨터공학 + 모빌리티AI·SW융합전공. (주)홈초이스에서 매출 340억 OTT 서비스 앱을 1년 10개월간 기획·운영. <strong>LG헬로비전(매출 1조)·딜라이브(매출 3,500억) 마이그레이션 2건 기획·주도</strong>, FCP/LCP 지표 기반 사용자 행동 분석, 멤버십 구조 설계, WebView 기반 운영 구조 구축 경험 보유. 구독 서비스 커머스 구조(등록·결제·이력 관리) 직접 설계 경험 포함.
+  </div>
+
+  <!-- 경력 -->
+  <div class="sec">
+    <div class="sec-title">경력</div>
+    <div class="career-head">
+      <span class="career-co">(주)홈초이스</span>
+      <span class="career-period">2024.02 ~ 2025.11 &nbsp;(1년 10개월) · 앱 서비스 기획·운영</span>
+    </div>
+    <div class="career-desc">OTT 서비스 "오초이스" / 매출 340억 / LG헬로비전(매출 1조)·딜라이브(매출 3,500억) 마이그레이션 기획·주도 2건</div>
+    <ul class="ul">
+      <li>LG헬로비전·딜라이브 파트너사 앱 → 오초이스 전환 마이그레이션 기획 및 주도 — <strong>기존 사용자 행동 패턴 분석 후 신규 앱 여정 재설계, 전환 이탈 최소화</strong></li>
+      <li>FCP/LCP 지표 기반 병목 구간 분석 → Lazy Loading·스켈레톤 UI·CDN 적용으로 <strong>FCP 39% 단축, LCP 10.8% 개선</strong> — 구매 전환 직결 지표</li>
+      <li>셋톱박스 연동 멤버십 기능 설계 → 연결 상태·기기·콘텐츠 노출 단위 사용자 여정 분리, 상태 변화 즉시 반영</li>
+      <li>탐색 화면 WebView 전환으로 앱 재배포 없이 콘텐츠·배너·이벤트 즉시 반영 가능한 <strong>운영 구조 구축</strong></li>
+      <li>iOS/Android 앱스토어 출시·버전 관리, Firebase·Google Analytics 기반 지표 모니터링 운영</li>
+    </ul>
+  </div>
+
+  <!-- 프로젝트 -->
+  <div class="sec">
+    <div class="sec-title">프로젝트</div>
+    <div class="proj-grid">
+
+      <div class="proj">
+        <div class="proj-head">
+          <span class="proj-title">담아(Dama) — 구독 통합 관리 서비스</span>
+          <span class="proj-period">2026.01~02 · 3인 팀</span>
+        </div>
+        <div class="proj-sub">커머스 구조 설계 · 대시보드 기획·구현</div>
+        <div class="tags">
+          <span class="tag">Flutter</span><span class="tag">Spring Boot</span><span class="tag">JWT</span><span class="tag">MySQL</span><span class="tag">Docker</span>
+        </div>
+        <ul class="ul">
+          <li>구독 등록·수정·해지·조회 흐름 기준 도메인 분리 설계 (User / Subscription / Community)</li>
+          <li><strong>구독 현황·지출 통합 대시보드</strong> 기획·구현, Soft Delete로 이력 보존 — 뚜레쥬르 주문 이력·쿠폰 관리 동일 구조</li>
+        </ul>
+      </div>
+
+      <div class="proj">
+        <div class="proj-head">
+          <span class="proj-title">개인 커뮤니티 웹앱</span>
+          <span class="proj-period">2026.05~ · 솔로</span>
+        </div>
+        <div class="proj-sub">사용자 여정 설계 · ERD 기획 · 배포</div>
+        <div class="tags">
+          <span class="tag">Docker</span><span class="tag gray">Render</span><span class="tag gray">AI 에이전트 활용</span>
+        </div>
+        <ul class="ul">
+          <li>게시글 → 좋아요 → 팔로우 → 채팅으로 이어지는 <strong>사용자 여정 설계</strong>, ERD 및 피드 중심 구조 기획</li>
+          <li>AI 에이전트를 기획·설계·구현·배포 전 과정 활용, 단독으로 빠르게 실서비스 수준 구현</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 역량 -->
+  <div class="sec">
+    <div class="sec-title">핵심 역량</div>
+    <table class="sk-table">
+      <tr>
+        <td class="sk-key">서비스 기획·운영</td>
+        <td>앱 기반 회원 활성화·구매 전환 기획, 사용자 여정 분석·재설계, UX Flow 개선, 운영 구조 구축</td>
+      </tr>
+      <tr>
+        <td class="sk-key">지표·데이터 분석</td>
+        <td>Firebase Analytics · Google Analytics · FCP/LCP 성능 지표 · 퍼널 분석 · 지표 수립 및 모니터링</td>
+      </tr>
+      <tr>
+        <td class="sk-key">커머스·멤버십 설계</td>
+        <td>구독·결제·회원 서비스 설계, 도메인 분리, JWT 인증, Soft Delete 이력 관리, 통합 대시보드</td>
+      </tr>
+      <tr>
+        <td class="sk-key">개발·배포</td>
+        <td>Flutter · Spring Boot · AWS · Docker · iOS/Android 앱스토어 출시 · WebView 운영 구조</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 학력 / 수료 / 저서 -->
+  <div class="sec">
+    <div class="sec-title">학력 · 교육 · 저서</div>
+    <div class="edu-row">
+      <div><div class="edu-title">대전대학교 컴퓨터공학과 졸업 · 복수전공: 모빌리티AI·SW융합전공</div></div>
+      <div class="edu-date">2017.03 ~ 2024.02</div>
+    </div>
+    <div class="edu-row">
+      <div><div class="edu-title">정보통신산업진흥원 인공지능 기본과정 수료 &nbsp;·&nbsp; 네이버 부스트코스 &lt;DATA SCIENCE&gt; 코칭스터디 2023 수료</div></div>
+    </div>
+    <div class="edu-row">
+      <div><div class="edu-title">『개발자가 꼭 알아야 하는 IT 용어』 공동 저자 &nbsp;<a href="https://www.yes24.com/Product/Goods/109711067" style="font-size:10px;">(yes24)</a></div></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
