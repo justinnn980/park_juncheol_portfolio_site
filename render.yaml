@@ -4,19 +4,3 @@ services:
     env: static
     buildCommand: ""
     staticPublishPath: .
-    routes:
-      - type: rewrite
-        source: /primeplay.html
-        destination: /primeplay.html
-      - type: rewrite
-        source: /muchon.html
-        destination: /muchon.html
-      - type: rewrite
-        source: /madras-check.html
-        destination: /madras-check.html
-      - type: rewrite
-        source: /dippin.html
-        destination: /dippin.html
-      - type: rewrite
-        source: /*
-        destination: /index.html
