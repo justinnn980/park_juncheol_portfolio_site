@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>박준철 | 앱·백엔드 개발자</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:      #090d18;
+  --bg2:     #0d1221;
+  --card:    #101827;
+  --card2:   #161f30;
+  --primary: #3b82f6;
+  --accent:  #06b6d4;
+  --green:   #10b981;
+  --orange:  #f97316;
+  --purple:  #a855f7;
+  --text:    #f1f5f9;
+  --muted:   #94a3b8;
+  --border:  rgba(255,255,255,0.07);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, 'Apple SD Gothic Neo', 'Apple SD 산돌고딕 Neo', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── Navbar ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0 48px;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(9, 13, 24, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: color 0.2s;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--text); }
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+
+/* ── Hero ── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 48px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.hero-glow-1 {
+  width: 500px; height: 500px;
+  background: rgba(59,130,246,0.12);
+  top: -100px; left: -100px;
+}
+.hero-glow-2 {
+  width: 400px; height: 400px;
+  background: rgba(6,182,212,0.08);
+  bottom: 0; right: -80px;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 760px;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(6,182,212,0.08);
+  border: 1px solid rgba(6,182,212,0.25);
+  padding: 7px 18px;
+  border-radius: 100px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 28px;
+  animation: fadeUp 0.7s ease both;
+}
+
+.badge-dot {
+  width: 7px; height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: ping 2s cubic-bezier(0,0,0.2,1) infinite;
+}
+
+@keyframes ping {
+  0% { transform: scale(1); opacity: 1; }
+  75%, 100% { transform: scale(1.8); opacity: 0; }
+}
+
+.hero-name {
+  font-size: clamp(52px, 9vw, 88px);
+  font-weight: 900;
+  letter-spacing: -3px;
+  line-height: 1.0;
+  background: linear-gradient(160deg, #fff 20%, var(--accent) 60%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeUp 0.7s ease 0.1s both;
+}
+
+.hero-role {
+  margin-top: 20px;
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: var(--muted);
+  font-weight: 400;
+  animation: fadeUp 0.7s ease 0.2s both;
+}
+
+.hero-role strong { color: var(--accent); font-weight: 700; }
+
+.hero-desc {
+  margin-top: 18px;
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.8;
+  animation: fadeUp 0.7s ease 0.3s both;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.7s ease 0.4s both;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  box-shadow: 0 0 28px rgba(59,130,246,0.25);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(59,130,246,0.45);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 56px;
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+  animation: fadeUp 0.7s ease 0.5s both;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.stat-num {
+  font-size: 22px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-label {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  animation: fadeUp 1s ease 1s both;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: scrollDrop 1.5s ease infinite;
+}
+
+@keyframes scrollDrop {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Sections ── */
+section { padding: 96px 48px; }
+.alt-bg { background: var(--bg2); }
+
+.container { max-width: 1080px; margin: 0 auto; }
+
+.sec-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.sec-title {
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 56px;
+}
+
+.sec-title span {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Skills ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.skill-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 22px;
+  transition: all 0.3s;
+}
+
+.skill-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59,130,246,0.25);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+}
+
+.skill-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.skill-icon {
+  width: 38px; height: 38px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  flex-shrink: 0;
+}
+
+.skill-name {
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.tag {
+  padding: 4px 11px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-size: 11.5px;
+  color: var(--muted);
+  transition: all 0.2s;
+  cursor: default;
+}
+
+.tag:hover {
+  background: rgba(59,130,246,0.1);
+  border-color: rgba(59,130,246,0.3);
+  color: var(--text);
+}
+
+/* ── Experience ── */
+.exp-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.exp-company-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+.exp-top {
+  padding: 32px 36px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  background: linear-gradient(135deg, rgba(59,130,246,0.04), transparent);
+}
+
+.co-name {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.co-role {
+  margin-top: 5px;
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.co-info {
+  margin-top: 7px;
+  font-size: 12.5px;
+  color: var(--muted);
+  max-width: 480px;
+  line-height: 1.5;
+}
+
+.period-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(59,130,246,0.08);
+  border: 1px solid rgba(59,130,246,0.18);
+  border-radius: 100px;
+  font-size: 12.5px;
+  color: var(--primary);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.period-pill::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--primary);
+  border-radius: 50%;
+}
+
+.period-sub {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 6px;
+  text-align: right;
+}
+
+.exp-projects { padding: 8px 36px 36px; }
+
+.exp-proj {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+.exp-proj:last-child { border-bottom: none; }
+
+.proj-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.proj-num {
+  width: 26px; height: 26px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 900;
+  color: white;
+  flex-shrink: 0;
+}
+
+.proj-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  flex: 1;
+}
+
+.proj-dur {
+  font-size: 11.5px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.stacks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.s-badge {
+  padding: 3px 10px;
+  background: rgba(6,182,212,0.08);
+  border: 1px solid rgba(6,182,212,0.18);
+  border-radius: 6px;
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.bullet-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+
+.bullet-list li {
+  font-size: 13.5px;
+  color: var(--muted);
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.55;
+}
+
+.bullet-list li::before {
+  content: '›';
+  position: absolute;
+  left: 2px;
+  color: var(--primary);
+  font-size: 16px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.hl { color: var(--text); font-weight: 700; }
+
+/* ── Projects ── */
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 22px;
+}
+
+.proj-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 26px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.proj-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.proj-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(59,130,246,0.2);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+}
+
+.proj-card:hover::before { opacity: 1; }
+
+.card-1::before { background: linear-gradient(90deg, var(--primary), var(--accent)); }
+.card-2::before { background: linear-gradient(90deg, var(--accent), var(--green)); }
+.card-3::before { background: linear-gradient(90deg, var(--green), var(--purple)); }
+.card-4::before { background: linear-gradient(90deg, var(--orange), var(--primary)); }
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.card-icon {
+  width: 46px; height: 46px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+}
+
+.status {
+  font-size: 10.5px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-weight: 700;
+}
+
+.status-on  { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); color: var(--green); }
+.status-off { background: rgba(148,163,184,0.08); border: 1px solid rgba(148,163,184,0.15); color: var(--muted); }
+
+.card-name {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 14px;
+  flex: 1;
+}
+
+.card-points {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 16px;
+}
+
+.card-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.card-point::before {
+  content: '✓';
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+/* ── Education ── */
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.edu-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  transition: all 0.25s;
+}
+
+.edu-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(59,130,246,0.2);
+}
+
+.edu-emoji { font-size: 26px; margin-bottom: 10px; }
+.edu-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.edu-org   { font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.edu-sub   { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+
+/* ── Contact ── */
+#contact { text-align: center; }
+
+.contact-inner {
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.contact-desc {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.contact-links {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.c-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 26px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 700;
+  transition: all 0.25s;
+}
+
+.c-link:hover {
+  background: var(--card2);
+  border-color: rgba(59,130,246,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+}
+
+/* ── Footer ── */
+footer {
+  padding: 28px 48px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ── Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.delay-1 { transition-delay: 0.1s; }
+.reveal.delay-2 { transition-delay: 0.2s; }
+.reveal.delay-3 { transition-delay: 0.3s; }
+.reveal.delay-4 { transition-delay: 0.4s; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── Mobile ── */
+@media (max-width: 720px) {
+  nav { padding: 0 20px; }
+  .nav-links { gap: 18px; }
+  .nav-links a { font-size: 12px; }
+  section { padding: 64px 20px; }
+  #hero { padding: 80px 20px 48px; }
+  .exp-top { flex-direction: column; }
+  .period-sub { text-align: left; }
+  .hero-stats { flex-direction: row; flex-wrap: wrap; gap: 24px; }
+  .exp-projects { padding: 8px 20px 28px; }
+  .exp-top { padding: 24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <div class="nav-logo">박준철</div>
+  <ul class="nav-links">
+    <li><a href="#skills">스킬</a></li>
+    <li><a href="#experience">경력</a></li>
+    <li><a href="#projects">프로젝트</a></li>
+    <li><a href="#education">학력</a></li>
+    <li><a href="#contact">연락</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Flutter App Developer &amp; Backend Engineer
+    </div>
+
+    <h1 class="hero-name">박준철</h1>
+
+    <p class="hero-role">
+      <strong>모바일 앱</strong>부터 <strong>서버 설계</strong>까지, 서비스의 전 계층을 담당합니다
+    </p>
+
+    <p class="hero-desc">
+      LG HelloVision·d'Live 대기업 OTT 마이그레이션을 주도한 Flutter 개발자.<br>
+      Spring Boot 서버 설계부터 AWS 인프라 운영까지 함께 경험했습니다.
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary">프로젝트 보기 →</a>
+      <a href="mailto:justinnn980@gmail.com" class="btn btn-ghost">연락하기</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">1년 10개월</div>
+        <div class="stat-label">실무 경험</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2건</div>
+        <div class="stat-label">대기업 고객사 프로젝트</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">FCP 39%↓</div>
+        <div class="stat-label">성능 최적화 성과</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Flutter 3.38</div>
+        <div class="stat-label">최신 버전 대응</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills" class="alt-bg">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-tag">Tech Stack</div>
+      <div class="sec-title">기술 <span>스택</span></div>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card reveal delay-1">
+        <div class="skill-head">
+          <div class="skill-icon" style="background:rgba(59,130,246,0.12)">📱</div>
+          <div class="skill-name">모바일 (Flutter)</div>
+        </div>
+        <div class="tags">
+          <span class="tag">Flutter 2.0~3.38</span>
+          <span class="tag">iOS 빌드·인증서</span>
+          <span class="tag">Android 빌드</span>
+          <span class="tag">WebView</span>
+          <span class="tag">DRM NCG/Multi</span>
+          <span class="tag">Riverpod</span>
+          <span class="tag">Player 생명주기</span>
+          <span class="tag">Firebase</span>
+          <span class="tag">AdMob</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal delay-2">
+        <div class="skill-head">
+          <div class="skill-icon" style="background:rgba(6,182,212,0.12)">⚙️</div>
+          <div class="skill-name">백엔드</div>
+        </div>
+        <div class="tags">
+          <span class="tag">Java</span>
+          <span class="tag">Spring Boot</span>
+          <span class="tag">REST API</span>
+          <span class="tag">WebSocket</span>
+          <span class="tag">JWT Access/Refresh</span>
+          <span class="tag">도메인 분리 설계</span>
+          <span class="tag">Soft Delete</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal delay-3">
+        <div class="skill-head">
+          <div class="skill-icon" style="background:rgba(251,146,60,0.12)">☁️</div>
+          <div class="skill-name">인프라 / 배포</div>
+        </div>
+        <div class="tags">
+          <span class="tag">AWS EC2</span>
+          <span class="tag">Elastic IP</span>
+          <span class="tag">CDN</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Render</span>
+          <span class="tag">Linux</span>
+          <span class="tag">HTTPS / SSL</span>
+          <span class="tag">Git</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal delay-4">
+        <div class="skill-head">
+          <div class="skill-icon" style="background:rgba(16,185,129,0.12)">🗄️</div>
+          <div class="skill-name">데이터베이스 / 기타</div>
+        </div>
+        <div class="tags">
+          <span class="tag">MySQL</span>
+          <span class="tag">RDB 설계</span>
+          <span class="tag">React</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">FCP/LCP 분석</span>
+          <span class="tag">Google Analytics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-tag">Work Experience</div>
+      <div class="sec-title">경력 <span>사항</span></div>
+    </div>
+
+    <div class="exp-wrap reveal">
+      <div class="exp-company-card">
+        <div class="exp-top">
+          <div>
+            <div class="co-name">HomChoice Inc.</div>
+            <div class="co-role">앱 / 서버 개발자</div>
+            <div class="co-info">OTT 서비스 "OChoice" 운영사 · 연매출 340억<br>전국 디지털케이블TV VOD 공급 국내 유일 사업자</div>
+          </div>
+          <div>
+            <div class="period-pill">2024.02 ~ 2025.11</div>
+            <div class="period-sub">총 1년 10개월 · 정규직</div>
+          </div>
+        </div>
+
+        <div class="exp-projects">
+          <div class="exp-proj">
+            <div class="proj-head">
+              <div class="proj-num">1</div>
+              <div class="proj-title">LG HelloVision HelloTV → OChoice 앱 마이그레이션</div>
+              <div class="proj-dur">2025.02 ~ 2025.10 · 9개월</div>
+            </div>
+            <div class="stacks">
+              <span class="s-badge">Flutter</span>
+              <span class="s-badge">React</span>
+              <span class="s-badge">Spring Boot</span>
+              <span class="s-badge">AWS</span>
+              <span class="s-badge">Riverpod</span>
+              <span class="s-badge">WebView</span>
+            </div>
+            <ul class="bullet-list">
+              <li>HelloTV 콘텐츠 탐색 흐름을 화면 단위로 분해·재조합하여 신규 앱 아키텍처로 전환, 기존 사용자 경험 유지</li>
+              <li>영화 탐색 화면을 <span class="hl">React 웹 + Flutter WebView 구조로 분리</span>하여 앱 재배포 없이 콘텐츠 운영 가능한 구조 구축</li>
+              <li>Riverpod으로 셋톱박스 연결 상태·기기·콘텐츠 노출을 3개 Provider로 분리, 최대 3대 동시 연결 실시간 관리</li>
+              <li>FCP·LCP 지표 분석 후 CDN, Lazy Loading, 스켈레톤 UI 단계 적용 → <span class="hl">FCP 39% 단축, LCP 10.8% 개선</span></li>
+              <li>로드밸런싱 환경 방화벽 차단 문제를 Elastic IP 고정으로 해결, SSL 인증서 적용으로 <span class="hl">전 구간 HTTPS 전환</span></li>
+            </ul>
+          </div>
+
+          <div class="exp-proj">
+            <div class="proj-head">
+              <div class="proj-num">2</div>
+              <div class="proj-title">d'Live 모바일TV → OChoice 앱 마이그레이션</div>
+              <div class="proj-dur">2024.02 ~ 2024.11 · 10개월</div>
+            </div>
+            <div class="stacks">
+              <span class="s-badge">Flutter</span>
+              <span class="s-badge">Spring Boot</span>
+              <span class="s-badge">AWS</span>
+              <span class="s-badge">NCG DRM</span>
+              <span class="s-badge">Multi DRM</span>
+            </div>
+            <ul class="bullet-list">
+              <li>기존 사용자 시청 패턴(탐색→재생→종료) 분석 기반 인터페이스 설계, 앱 전환 후에도 일관된 UX 유지</li>
+              <li>쇼츠 메인 화면 플레이어 중복 실행 문제를 라이브러리 소스 직접 분석으로 근본 원인 파악 및 생명주기 수정 해결</li>
+              <li>Flutter 2 → 3 마이그레이션 전수 점검, 라이브러리 호환성 이슈 해결 및 안정적 업그레이드 완료</li>
+              <li><span class="hl">NCG DRM / Multi DRM 통합 재생 구조 설계</span>로 단일 UI·흐름에서 양 DRM 환경을 모두 지원</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" class="alt-bg">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-tag">Side Projects</div>
+      <div class="sec-title">개인 <span>프로젝트</span></div>
+    </div>
+
+    <div class="proj-grid">
+
+      <div class="proj-card card-1 reveal delay-1">
+        <div class="card-top">
+          <div class="card-icon" style="background:rgba(59,130,246,0.12)">🎮</div>
+          <span class="status status-on">진행 중</span>
+        </div>
+        <div class="card-name">숫자 대결</div>
+        <div class="card-desc">실시간 증감 게임. 기획부터 프론트, 백엔드, 배포까지 3일 내 단독 구현한 실시간 멀티플레이어 서비스.</div>
+        <div class="card-points">
+          <div class="card-point">서버 중심 단일 상태 관리 + WebSocket 브로드캐스트</div>
+          <div class="card-point">동시 입력 충돌 방지 — 서버 기준 최종 동기화</div>
+          <div class="card-point">풀스택 단독 구현 (Flutter + Spring Boot + Render)</div>
+        </div>
+        <div class="tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">Spring Boot</span>
+          <span class="tag">WebSocket</span>
+          <span class="tag">Render</span>
+        </div>
+      </div>
+
+      <div class="proj-card card-2 reveal delay-2">
+        <div class="card-top">
+          <div class="card-icon" style="background:rgba(6,182,212,0.12)">📋</div>
+          <span class="status status-off">완료</span>
+        </div>
+        <div class="card-name">담아 (Dama)</div>
+        <div class="card-desc">구독 통합 관리 앱. 단순 CRUD를 넘어 도메인 분리 설계와 JWT 인증 구조를 직접 구현한 백엔드 풀스택 프로젝트.</div>
+        <div class="card-points">
+          <div class="card-point">User / Subscription / Community 도메인 분리 설계</div>
+          <div class="card-point">JWT Stateless 인증 (Access + Refresh Token 사이클)</div>
+          <div class="card-point">Soft Delete + BaseEntity 데이터 이력 관리 정책</div>
+          <div class="card-point">Docker 기반 개발·배포 환경 통일화</div>
+        </div>
+        <div class="tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">Spring Boot</span>
+          <span class="tag">JWT</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Docker</span>
+        </div>
+      </div>
+
+      <div class="proj-card card-3 reveal delay-3">
+        <div class="card-top">
+          <div class="card-icon" style="background:rgba(16,185,129,0.12)">💬</div>
+          <span class="status status-on">진행 중</span>
+        </div>
+        <div class="card-name">커뮤니티 웹앱</div>
+        <div class="card-desc">게시글·좋아요·팔로우·채팅을 갖춘 소셜 커뮤니티 서비스. AI 에이전트를 설계·검증 도구로 활용한 단독 프로젝트.</div>
+        <div class="card-points">
+          <div class="card-point">기획 → ERD → 구현 → 배포 전 과정 단독 진행</div>
+          <div class="card-point">피드 중심 소셜 구조 (팔로우, 채팅, 좋아요)</div>
+          <div class="card-point">Claude Code / Codex 활용으로 개발 사이클 단축</div>
+        </div>
+        <div class="tags">
+          <span class="tag">Docker</span>
+          <span class="tag">Render</span>
+          <span class="tag">Claude Code</span>
+          <span class="tag">Codex</span>
+        </div>
+      </div>
+
+      <div class="proj-card card-4 reveal delay-4">
+        <div class="card-top">
+          <div class="card-icon" style="background:rgba(251,146,60,0.12)">⚡</div>
+          <span class="status status-off">완료</span>
+        </div>
+        <div class="card-name">3일만에 앱만들기</div>
+        <div class="card-desc">3일 이내 기획~배포 완성 챌린지. 빠른 실행력과 전 과정 단독 수행 능력을 검증한 반복 프로젝트.</div>
+        <div class="card-points">
+          <div class="card-point">기획 · 프론트 · 백엔드 · 배포 단독 수행</div>
+          <div class="card-point">빠른 반복 개발 및 실행력 검증</div>
+          <div class="card-point">개발 과정 블로그 연재 및 공유</div>
+        </div>
+        <div class="tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">Spring Boot</span>
+          <span class="tag">Render</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section id="education">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-tag">Education &amp; Certifications</div>
+      <div class="sec-title">학력 및 <span>수료</span></div>
+    </div>
+
+    <div class="edu-grid">
+      <div class="edu-card reveal delay-1">
+        <div class="edu-emoji">🎓</div>
+        <div class="edu-title">컴퓨터공학과</div>
+        <div class="edu-org">모빌리티AI·SW융합전공 복수전공</div>
+        <div class="edu-sub">컴퓨터 과학 기초와 AI·모빌리티 융합 분야 학습</div>
+      </div>
+      <div class="edu-card reveal delay-2">
+        <div class="edu-emoji">🤖</div>
+        <div class="edu-title">인공지능 기본과정 수료</div>
+        <div class="edu-org">정보통신산업진흥원 (NIPA)</div>
+        <div class="edu-sub">AI 기초 이론 및 실습 과정 이수</div>
+      </div>
+      <div class="edu-card reveal delay-3">
+        <div class="edu-emoji">📊</div>
+        <div class="edu-title">DATA SCIENCE 코치스터디 수료</div>
+        <div class="edu-org">네이버 부스트코스 · 2023</div>
+        <div class="edu-sub">데이터 사이언스 학습 및 코치 멘토링 활동</div>
+      </div>
+      <div class="edu-card reveal delay-4">
+        <div class="edu-emoji">✍️</div>
+        <div class="edu-title">공동 저자</div>
+        <div class="edu-org">『개발자가 되기 위해 꼭 알아야하는 IT 용어』</div>
+        <div class="edu-sub">yes24 출판 · IT 용어 해설서 공동 집필</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="alt-bg">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-tag">Contact</div>
+      <div class="sec-title" style="text-align:center">함께 <span>일해요</span></div>
+    </div>
+
+    <div class="contact-inner reveal">
+      <p class="contact-desc">
+        새로운 기회나 협업에 항상 열려 있습니다.<br>
+        메일 또는 블로그를 통해 언제든지 연락 주세요.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:justinnn980@gmail.com" class="c-link">
+          <span>✉️</span> justinnn980@gmail.com
+        </a>
+        <a href="https://justinnn980.tistory.com" target="_blank" class="c-link">
+          <span>✍️</span> 기술 블로그
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 박준철 &nbsp;·&nbsp; Flutter App Developer &amp; Backend Engineer
+</footer>
+
+<script>
+// Scroll reveal
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Active nav
+const sections = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('.nav-links a');
+
+const onScroll = () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+  links.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === `#${cur}`);
+  });
+};
+
+window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+
+</body>
+</html>

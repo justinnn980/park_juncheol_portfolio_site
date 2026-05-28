@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>박준철 이력서</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.65;
+      color: #1a1a1a;
+      background: #fff;
+      padding: 36px 44px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    /* ── 헤더 ── */
+    .header { border-bottom: 2.5px solid #1a1a1a; padding-bottom: 12px; margin-bottom: 18px; }
+    .header h1 { font-size: 24pt; font-weight: 700; letter-spacing: -0.5px; }
+    .header .title { font-size: 11pt; font-weight: 500; color: #444; margin: 2px 0 8px; }
+    .contact { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 9.5pt; color: #333; }
+    .contact a { color: #0d6b3d; text-decoration: none; }
+
+    /* ── 섹션 ── */
+    section { margin-bottom: 20px; }
+    section h2 {
+      font-size: 11.5pt; font-weight: 700;
+      border-bottom: 1.5px solid #ddd;
+      padding-bottom: 4px; margin-bottom: 10px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      color: #111;
+    }
+
+    /* ── 자기소개 ── */
+    .summary p { font-size: 10pt; color: #222; line-height: 1.8; }
+
+    /* ── 역량 리스트 ── */
+    .skills-list {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4px 20px; list-style: none;
+    }
+    .skills-list li { font-size: 10pt; padding-left: 14px; position: relative; }
+    .skills-list li::before { content: "▸"; position: absolute; left: 0; color: #0d6b3d; }
+
+    /* ── 테이블 ── */
+    table { width: 100%; border-collapse: collapse; font-size: 10pt; }
+    thead th {
+      background: #f5f5f5; font-weight: 600;
+      padding: 5px 10px; text-align: left;
+      border: 1px solid #ddd;
+    }
+    tbody td { padding: 5px 10px; border: 1px solid #e5e5e5; vertical-align: top; }
+    tbody tr:nth-child(even) td { background: #fafafa; }
+
+    /* ── 경력 블록 ── */
+    .exp-block { margin-bottom: 16px; }
+    .exp-header { display: flex; justify-content: space-between; align-items: baseline; }
+    .exp-header .company { font-size: 12pt; font-weight: 700; }
+    .exp-header .period { font-size: 9.5pt; color: #555; white-space: nowrap; }
+    .exp-role { font-size: 10.5pt; font-weight: 500; color: #333; margin: 1px 0 4px; }
+    .exp-desc { font-size: 9.5pt; color: #555; margin-bottom: 10px; }
+
+    /* ── 프로젝트 블록 ── */
+    .proj-block { margin-bottom: 14px; padding-left: 12px; border-left: 3px solid #0d6b3d; }
+    .proj-title { font-size: 10.5pt; font-weight: 700; color: #111; margin-bottom: 2px; }
+    .proj-sub { font-size: 9.5pt; color: #555; margin-bottom: 6px; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+    .tag {
+      background: #e6f4ee; color: #0d6b3d;
+      font-size: 8.5pt; padding: 1px 7px; border-radius: 10px;
+    }
+    ul.bullets { list-style: none; padding: 0; }
+    ul.bullets li {
+      font-size: 10pt; padding-left: 14px; position: relative;
+      margin-bottom: 4px; color: #222; line-height: 1.6;
+    }
+    ul.bullets li::before { content: "•"; position: absolute; left: 2px; color: #555; }
+    ul.bullets strong { color: #1a1a1a; }
+
+    /* ── 개인 프로젝트 ── */
+    .side-proj { margin-bottom: 12px; }
+    .side-proj-header { display: flex; justify-content: space-between; align-items: baseline; }
+    .side-proj-title { font-size: 10.5pt; font-weight: 700; }
+    .side-proj-period { font-size: 9.5pt; color: #555; }
+    .side-proj-tags { display: flex; flex-wrap: wrap; gap: 4px; margin: 3px 0 5px; }
+
+    /* ── 학력 / 수료 ── */
+    .edu-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+    .edu-school { font-size: 10.5pt; font-weight: 700; }
+    .edu-year { font-size: 9.5pt; color: #555; }
+    .edu-major { font-size: 10pt; color: #333; }
+    .cert-list { list-style: none; }
+    .cert-list li { font-size: 10pt; padding-left: 14px; position: relative; margin-bottom: 3px; }
+    .cert-list li::before { content: "▸"; position: absolute; left: 0; color: #0d6b3d; }
+    .cert-list a { color: #0d6b3d; text-decoration: none; }
+
+    @media print {
+      body { padding: 20px 32px; }
+      a { color: inherit !important; text-decoration: none; }
+      .proj-block { break-inside: avoid; }
+      .exp-block { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── 헤더 ── -->
+<div class="header">
+  <h1>박준철</h1>
+  <div class="title">모바일 앱 개발자 (Flutter)</div>
+  <div class="contact">
+    <span>📞 010-2538-1519</span>
+    <span>📧 <a href="mailto:justinnn980@gmail.com">justinnn980@gmail.com</a></span>
+    <span>🐙 <a href="https://github.com/justinnn980">github.com/justinnn980</a></span>
+    <span>✍ <a href="https://justinnn980.tistory.com/126">justinnn980.tistory.com</a></span>
+  </div>
+</div>
+
+<!-- ── 자기소개 ── -->
+<section class="summary">
+  <h2>자기소개</h2>
+  <p>
+    Flutter 기반 크로스플랫폼 모바일 앱 개발자로, 1년 10개월간 OTT 서비스 'OChoice'의 iOS/Android 앱 개발·운영을 담당했습니다.
+    매출 1조 LG HelloVision, 매출 3,500억 d'Live와의 대형 마이그레이션 프로젝트에서 DRM 연동, 플레이어 안정화,
+    성능 최적화(FCP 39% 단축·LCP 10.8% 개선)까지 앱 서비스의 전 과정을 직접 설계하고 구현했습니다.
+    문제가 발생하면 라이브러리 내부 구조까지 파고드는 꼼꼼함과, 지표를 기반으로 원인을 찾아 개선하는
+    계획적인 접근 방식으로 서비스 품질을 높여왔습니다.
+  </p>
+</section>
+
+<!-- ── 핵심 역량 ── -->
+<section>
+  <h2>핵심 역량</h2>
+  <ul class="skills-list">
+    <li>Flutter 기반 iOS/Android 앱 개발 및 유지보수 (1년 10개월 실무)</li>
+    <li>WebView, DRM(Multi DRM·NCG DRM), Player 연동 및 안정화</li>
+    <li>REST API 연동, 상태관리(Riverpod), 화면 전환 구현</li>
+    <li>FCP/LCP 지표 기반 앱 성능 분석 및 최적화</li>
+    <li>iOS/Android 앱 출시·버전 관리·배포·인증서 이슈 대응</li>
+    <li>Firebase, Google Analytics, AdMob 연동 및 운영</li>
+    <li>AWS EC2, Docker, Render 기반 배포 환경 구성</li>
+    <li>WebSocket 기반 실시간 통신 설계·구현</li>
+  </ul>
+</section>
+
+<!-- ── 기술 스택 ── -->
+<section>
+  <h2>기술 스택</h2>
+  <table>
+    <thead>
+      <tr><th style="width:140px">구분</th><th>기술</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>모바일 (주력)</td><td>Flutter 2.0~3.38, Dart, Riverpod, WebView, Video Player</td></tr>
+      <tr><td>플랫폼 대응</td><td>iOS (인증서·권한·빌드), Android (권한·빌드·배포)</td></tr>
+      <tr><td>연동·통신</td><td>REST API, WebSocket, JWT, DRM (Multi DRM / NCG DRM)</td></tr>
+      <tr><td>분석·수익화</td><td>Firebase, Google Analytics, AdMob</td></tr>
+      <tr><td>백엔드 (기본)</td><td>Spring Boot, MySQL</td></tr>
+      <tr><td>인프라</td><td>AWS EC2 / Elastic IP, Docker, Render, CDN</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ── 경력 ── -->
+<section>
+  <h2>경력</h2>
+
+  <div class="exp-block">
+    <div class="exp-header">
+      <span class="company">HomChoice Inc.</span>
+      <span class="period">2024.02 ~ 2025.11 · 1년 10개월</span>
+    </div>
+    <div class="exp-role">Flutter 앱 개발자 (iOS / Android)</div>
+    <div class="exp-desc">전국 디지털케이블TV 가입가구에 VOD를 공급하는 OTT 서비스 'OChoice' iOS·Android 앱 개발·유지보수 단독 담당 | 매출 340억</div>
+
+    <!-- 프로젝트 1 -->
+    <div class="proj-block">
+      <div class="proj-title">HelloTV → OChoice 앱 마이그레이션</div>
+      <div class="proj-sub">LG HelloVision (매출 1조) &nbsp;|&nbsp; 2025.02 ~ 2025.10 (9개월) &nbsp;|&nbsp; Flutter 개발 담당</div>
+      <div class="proj-tags">
+        <span class="tag">Flutter</span><span class="tag">Riverpod</span><span class="tag">WebView</span>
+        <span class="tag">AWS</span><span class="tag">CDN</span><span class="tag">SSL</span>
+      </div>
+      <ul class="bullets">
+        <li>기존 HelloTV 앱의 콘텐츠 탐색 흐름을 OChoice 앱 구조에 맞게 재설계 — 주요 화면 흐름을 유지하면서 사용자 이탈 최소화</li>
+        <li>영화 포스터 탐색 화면을 웹으로 분리하고 Flutter WebView로 연동 → <strong>앱 심사·재배포 없이 콘텐츠·배너 즉시 반영 가능한 운영 구조</strong> 구축</li>
+        <li>Riverpod으로 셋톱박스 3대의 연결 상태·선택 기기·콘텐츠 노출 상태를 분리 관리하여 멀티 디바이스 실시간 동기화 구현</li>
+        <li>FCP/LCP 지표 기반 병목 분석 후 HTML/JS 경량화, CDN 적용, Lazy Loading, 스켈레톤 UI 도입 → <strong>FCP 39% 단축, LCP 10.8% 개선</strong></li>
+        <li>EC2 Proxy 서버 Elastic IP 고정 및 SSL 인증서 적용으로 로드밸런싱 환경의 방화벽 차단 이슈 해결, 전체 통신 HTTPS 전환</li>
+      </ul>
+    </div>
+
+    <!-- 프로젝트 2 -->
+    <div class="proj-block">
+      <div class="proj-title">d'Live 모바일TV → OChoice 앱 마이그레이션</div>
+      <div class="proj-sub">d'Live (매출 3,500억) &nbsp;|&nbsp; 2024.02 ~ 2024.11 (10개월) &nbsp;|&nbsp; Flutter 개발 담당</div>
+      <div class="proj-tags">
+        <span class="tag">Flutter</span><span class="tag">Multi DRM</span><span class="tag">NCG DRM</span>
+        <span class="tag">Video Player</span><span class="tag">AWS</span>
+      </div>
+      <ul class="bullets">
+        <li>기존 사용자 시청 패턴 분석 후 콘텐츠 탐색~영상 재생까지 유사한 UX 흐름으로 인터페이스 재구성, 서비스 전환 시 사용자 불편 최소화</li>
+        <li>쇼츠형 화면에서 플레이어가 중복 실행되어 소리가 겹치는 문제 발생 → <strong>원본 라이브러리 구조 직접 분석</strong> 후 생명주기(생성·재생·종료) 분리 방식으로 안정화</li>
+        <li>NCG DRM(d'Live)과 Multi DRM(OChoice)이 혼용되는 환경에서 <strong>동일한 UI·시청 흐름으로 재생</strong>되도록 플레이어 커스터마이징, 서비스별 별도 구조 유지보수 부담 제거</li>
+        <li>Flutter 2 → 3 업그레이드 시 라이브러리 호환성·플레이어 동작 방식 전수 점검 후 안정적 마이그레이션 완료</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── 개인 프로젝트 ── -->
+<section>
+  <h2>프로젝트</h2>
+
+  <div class="side-proj">
+    <div class="side-proj-header">
+      <span class="side-proj-title">숫자 대결 - 실시간 증감 게임</span>
+      <span class="side-proj-period">2026.01 ~ 진행 중 &nbsp;|&nbsp; 개인</span>
+    </div>
+    <div class="side-proj-tags">
+      <span class="tag">Flutter</span><span class="tag">Spring Boot</span><span class="tag">WebSocket</span><span class="tag">Render</span>
+    </div>
+    <ul class="bullets">
+      <li>다중 사용자 동시 입력 시 데이터 충돌 문제를 해결하기 위해 서버 중심 단일 상태 관리 구조 설계, WebSocket으로 변경 값을 전체 클라이언트에 즉시 전파하여 실시간 동기화 구현</li>
+      <li>기획·Flutter 앱·Spring Boot 서버·배포 전 과정 <strong>3일 이내 단독 완료</strong></li>
+    </ul>
+  </div>
+
+  <div class="side-proj">
+    <div class="side-proj-header">
+      <span class="side-proj-title">담아(Dama) - 구독 통합 관리 서비스</span>
+      <span class="side-proj-period">2026.01 ~ 2026.02 &nbsp;|&nbsp; 팀 (개발자 2명, 디자이너 1명)</span>
+    </div>
+    <div class="side-proj-tags">
+      <span class="tag">Flutter</span><span class="tag">Spring Boot</span><span class="tag">JWT</span><span class="tag">MySQL</span><span class="tag">Docker</span>
+    </div>
+    <ul class="bullets">
+      <li>User·Subscription·Community 도메인 분리 설계, JWT Access/Refresh Token 기반 Stateless 인증 구현</li>
+      <li>Soft Delete·BaseEntity 적용으로 데이터 이력 관리 기준 통일, Docker로 팀 개발 환경 표준화</li>
+    </ul>
+  </div>
+
+  <div class="side-proj">
+    <div class="side-proj-header">
+      <span class="side-proj-title">개인 커뮤니티 웹앱</span>
+      <span class="side-proj-period">2026.05 ~ 진행 중 &nbsp;|&nbsp; 개인</span>
+    </div>
+    <div class="side-proj-tags">
+      <span class="tag">Docker</span><span class="tag">Render</span><span class="tag">Claude Code</span>
+    </div>
+    <ul class="bullets">
+      <li>게시글·좋아요·팔로우·채팅 기능의 피드형 커뮤니티 서비스 기획~배포 단독 진행, ERD·기능 흐름 선설계 후 확장 가능한 구조로 개발</li>
+      <li>AI 에이전트를 기획·설계·구현·배포 전 과정에 활용하여 개발 생산성 극대화</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── 학력 ── -->
+<section>
+  <h2>학력</h2>
+  <div class="edu-row">
+    <span class="edu-school">대전대학교</span>
+    <span class="edu-year">2024.02 졸업</span>
+  </div>
+  <div class="edu-major">컴퓨터공학과 / 모빌리티AI·SW융합전공 (복수전공)</div>
+</section>
+
+<!-- ── 자격증 및 수료 ── -->
+<section>
+  <h2>자격증 및 수료</h2>
+  <ul class="cert-list">
+    <li>정보통신산업진흥원 &nbsp;|&nbsp; 인공지능 기본과정 수료</li>
+    <li>네이버 부스트코스 &lt;DATA SCIENCE&gt; 코치스터디 2023 수료</li>
+    <li>공동 저자 &nbsp;|&nbsp; <a href="https://www.yes24.com/Product/Goods/109711067">『개발자가 되기 위해 꼭 알아야하는 IT 용어』</a></li>
+  </ul>
+</section>
+
+</body>
+</html>
