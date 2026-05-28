@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>박준철 | 풀스택 개발자 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080810;
+  --surface: #10101c;
+  --card: #16162a;
+  --card-hover: #1e1e38;
+  --border: #2a2a45;
+  --accent: #7c6ef5;
+  --accent2: #00d4c8;
+  --text: #e8e8f0;
+  --muted: #7878a0;
+  --white: #ffffff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── 스크롤바 ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 16px 5%;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: all .3s;
+}
+nav.scrolled {
+  background: rgba(8,8,16,.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 5%;
+}
+.nav-logo {
+  font-size: 1.2rem; font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 500;
+  transition: color .2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 80px 5% 60px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 40%, rgba(124,110,245,.15) 0%, transparent 70%);
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(124,110,245,.15); border: 1px solid rgba(124,110,245,.4);
+  color: var(--accent); padding: 6px 16px; border-radius: 20px;
+  font-size: .82rem; font-weight: 500; margin-bottom: 24px;
+}
+.hero-badge::before { content: '●'; font-size: .5rem; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900; line-height: 1.1;
+  margin-bottom: 20px; letter-spacing: -1px;
+}
+.hero h1 .name { color: var(--white); }
+.hero h1 .role {
+  display: block; font-size: clamp(1.8rem, 4vw, 3rem);
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-top: 4px;
+}
+.hero-sub {
+  font-size: 1.05rem; color: var(--muted); max-width: 600px; margin: 0 auto 36px;
+}
+.hero-metrics {
+  display: flex; justify-content: center; gap: 40px;
+  margin-bottom: 40px; flex-wrap: wrap;
+}
+.metric {
+  text-align: center;
+}
+.metric-val {
+  font-size: 1.8rem; font-weight: 900; color: var(--accent2);
+  line-height: 1;
+}
+.metric-label { font-size: .78rem; color: var(--muted); margin-top: 4px; }
+.hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  padding: 12px 28px; border-radius: 8px;
+  font-size: .9rem; font-weight: 600; text-decoration: none;
+  cursor: pointer; transition: all .25s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary {
+  background: var(--accent); color: var(--white);
+  box-shadow: 0 4px 20px rgba(124,110,245,.4);
+}
+.btn-primary:hover { background: #6a5de0; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(124,110,245,.5); }
+.btn-outline {
+  background: transparent; color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.scroll-hint {
+  position: absolute; bottom: 30px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--muted); font-size: .75rem;
+}
+.scroll-arrow { width: 20px; height: 20px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); animation: bounce .8s infinite alternate; }
+@keyframes bounce { from{transform:rotate(45deg) translateY(0)} to{transform:rotate(45deg) translateY(4px)} }
+
+/* ── SECTION COMMON ── */
+section { padding: 100px 5%; }
+.section-tag {
+  display: inline-block;
+  color: var(--accent); font-size: .8rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900;
+  color: var(--white); line-height: 1.2; margin-bottom: 16px;
+}
+.section-sub { color: var(--muted); font-size: 1rem; max-width: 560px; }
+.section-header { margin-bottom: 60px; }
+
+/* ── FADE IN ── */
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity .6s, transform .6s; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── ABOUT ── */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+}
+.about-text p { color: var(--muted); margin-bottom: 16px; line-height: 1.8; }
+.about-text p strong { color: var(--accent2); }
+.about-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+.stat-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 24px;
+  text-align: center; transition: border-color .3s;
+}
+.stat-card:hover { border-color: var(--accent); }
+.stat-card .num {
+  font-size: 2rem; font-weight: 900;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.stat-card .desc { font-size: .8rem; color: var(--muted); margin-top: 4px; }
+
+/* ── SKILLS ── */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.skill-group {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px;
+  transition: all .3s;
+}
+.skill-group:hover { border-color: var(--accent); transform: translateY(-4px); }
+.skill-group-icon { font-size: 1.6rem; margin-bottom: 12px; }
+.skill-group-title { font-weight: 700; color: var(--white); margin-bottom: 14px; font-size: .95rem; }
+.badge-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge {
+  background: rgba(124,110,245,.12); border: 1px solid rgba(124,110,245,.25);
+  color: var(--accent); padding: 4px 12px; border-radius: 20px;
+  font-size: .78rem; font-weight: 500;
+}
+.badge.teal { background: rgba(0,212,200,.1); border-color: rgba(0,212,200,.25); color: var(--accent2); }
+
+/* ── EXPERIENCE ── */
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before {
+  content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+  width: 2px; background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+}
+.timeline-item {
+  position: relative; margin-bottom: 48px;
+}
+.timeline-dot {
+  position: absolute; left: -35px; top: 6px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--accent); border: 3px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.exp-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 28px;
+  transition: border-color .3s;
+}
+.exp-card:hover { border-color: var(--accent); }
+.exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+.exp-company { font-size: 1.1rem; font-weight: 700; color: var(--white); }
+.exp-period { font-size: .82rem; color: var(--accent2); font-weight: 600; white-space: nowrap; }
+.exp-role { color: var(--accent); font-size: .88rem; font-weight: 600; margin-bottom: 8px; }
+.exp-desc { color: var(--muted); font-size: .85rem; margin-bottom: 14px; font-style: italic; }
+.exp-list { list-style: none; }
+.exp-list li {
+  color: var(--muted); font-size: .88rem; padding: 4px 0 4px 18px;
+  position: relative;
+}
+.exp-list li::before {
+  content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: .75rem;
+}
+.exp-list li strong { color: var(--accent2); }
+
+/* ── PROJECTS ── */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+.project-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden;
+  transition: all .3s; cursor: pointer;
+}
+.project-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: 0 16px 40px rgba(124,110,245,.2); }
+.project-top {
+  padding: 24px 24px 0;
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.project-emoji { font-size: 2.2rem; }
+.project-badge {
+  font-size: .72rem; font-weight: 700; padding: 4px 10px; border-radius: 20px;
+  background: rgba(124,110,245,.15); color: var(--accent); border: 1px solid rgba(124,110,245,.3);
+}
+.project-badge.team { background: rgba(0,212,200,.1); color: var(--accent2); border-color: rgba(0,212,200,.3); }
+.project-body { padding: 16px 24px 20px; }
+.project-title { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.project-period { font-size: .78rem; color: var(--muted); margin-bottom: 10px; }
+.project-desc { font-size: .85rem; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.tag {
+  background: rgba(255,255,255,.05); color: var(--muted);
+  padding: 3px 10px; border-radius: 4px; font-size: .75rem;
+}
+.project-results {
+  background: rgba(0,212,200,.06); border: 1px solid rgba(0,212,200,.2);
+  border-radius: 8px; padding: 10px 14px;
+}
+.project-results p { font-size: .82rem; color: var(--accent2); margin: 0; }
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.75); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center; padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; max-width: 640px; width: 100%;
+  max-height: 80vh; overflow-y: auto; padding: 36px;
+  position: relative;
+}
+.modal-close {
+  position: absolute; top: 16px; right: 20px;
+  background: none; border: none; color: var(--muted);
+  font-size: 1.4rem; cursor: pointer; transition: color .2s;
+}
+.modal-close:hover { color: var(--white); }
+.modal h2 { font-size: 1.3rem; color: var(--white); margin-bottom: 8px; }
+.modal-period { font-size: .82rem; color: var(--accent2); margin-bottom: 16px; }
+.modal-section { margin-bottom: 20px; }
+.modal-section h3 { font-size: .85rem; color: var(--accent); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+.modal-section ul { list-style: none; }
+.modal-section ul li { font-size: .88rem; color: var(--muted); padding: 5px 0 5px 18px; position: relative; }
+.modal-section ul li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); }
+.modal-section ul li strong { color: var(--accent2); }
+
+/* ── EDUCATION ── */
+.edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.edu-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 22px;
+  transition: border-color .3s;
+}
+.edu-card:hover { border-color: var(--accent); }
+.edu-icon { font-size: 1.6rem; margin-bottom: 10px; }
+.edu-title { font-weight: 700; color: var(--white); font-size: .92rem; margin-bottom: 4px; }
+.edu-sub { color: var(--muted); font-size: .82rem; }
+
+/* ── CONTACT ── */
+.contact-wrap {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+}
+.contact-links { display: flex; flex-direction: column; gap: 14px; }
+.contact-link {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 20px;
+  text-decoration: none; color: var(--text);
+  transition: all .3s;
+}
+.contact-link:hover { border-color: var(--accent); transform: translateX(6px); }
+.contact-link-icon { font-size: 1.2rem; width: 36px; text-align: center; }
+.contact-link-label { font-size: .78rem; color: var(--muted); }
+.contact-link-val { font-size: .9rem; font-weight: 600; color: var(--white); }
+.cta-box {
+  background: linear-gradient(135deg, rgba(124,110,245,.2), rgba(0,212,200,.1));
+  border: 1px solid rgba(124,110,245,.3);
+  border-radius: 20px; padding: 40px;
+  text-align: center;
+}
+.cta-box h3 { font-size: 1.4rem; color: var(--white); margin-bottom: 10px; }
+.cta-box p { color: var(--muted); margin-bottom: 24px; font-size: .92rem; }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center; padding: 30px 5%;
+  border-top: 1px solid var(--border);
+  color: var(--muted); font-size: .82rem;
+}
+footer span { color: var(--accent); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .about-grid, .contact-wrap { grid-template-columns: 1fr; }
+  .hero-metrics { gap: 24px; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">JC.dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">소개</a></li>
+    <li><a href="#skills">기술</a></li>
+    <li><a href="#experience">경력</a></li>
+    <li><a href="#projects">프로젝트</a></li>
+    <li><a href="#contact">연락</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div>
+    <div class="hero-badge">즉시 출근 가능 · 풀스택 개발자</div>
+    <h1>
+      <span class="name">박 준 철</span>
+      <span class="role">Web & App Fullstack</span>
+    </h1>
+    <p class="hero-sub">
+      Flutter 앱부터 React 프론트, Spring Boot 백엔드, AWS 인프라까지<br>
+      서비스 전 영역을 직접 구현하는 개발자입니다.
+    </p>
+    <div class="hero-metrics">
+      <div class="metric">
+        <div class="metric-val">1년10개월</div>
+        <div class="metric-label">Flutter 실무 경험</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">▼39%</div>
+        <div class="metric-label">FCP 개선 달성</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">1조+</div>
+        <div class="metric-label">고객사 매출 규모</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">5+</div>
+        <div class="metric-label">실 서비스 프로젝트</div>
+      </div>
+    </div>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-primary">🚀 프로젝트 보기</a>
+      <a href="#contact" class="btn btn-outline">📬 연락하기</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>스크롤</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header fade-in">
+    <span class="section-tag">About</span>
+    <h2 class="section-title">누구인가요?</h2>
+  </div>
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p>
+        안녕하세요, <strong>웹·앱 풀스택 개발자 박준철</strong>입니다.
+        컴퓨터공학과와 모빌리티AI·SW융합전공을 복수전공하고,
+        (주)홈초이스에서 1년 10개월간 Flutter 기반 OTT 앱 개발 실무를 쌓았습니다.
+      </p>
+      <p>
+        <strong>LG헬로비전(매출 1조)</strong>과 <strong>딜라이브(매출 3,500억)</strong>를
+        고객사로 둔 실제 운영 서비스를 담당하며, DRM 전환·성능 최적화·인프라 보안 강화까지
+        서비스 전반을 주도적으로 해결했습니다.
+      </p>
+      <p>
+        단순 기능 구현에 그치지 않고, 지표 기반 성능 분석으로
+        <strong>FCP 39% 단축, LCP 10.8% 개선</strong>을 달성하는 등
+        데이터로 증명하는 개발 방식을 지향합니다.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="num">1년10개월</div>
+        <div class="desc">Flutter 실무 경험</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">2개</div>
+        <div class="desc">대기업 고객사 앱<br>마이그레이션</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">FCP-39%</div>
+        <div class="desc">성능 최적화 달성</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">풀스택</div>
+        <div class="desc">앱·웹·백엔드·인프라</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header fade-in">
+    <span class="section-tag">Skills</span>
+    <h2 class="section-title">기술 스택</h2>
+    <p class="section-sub">실무와 프로젝트에서 직접 사용한 기술들입니다.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group fade-in">
+      <div class="skill-group-icon">📱</div>
+      <div class="skill-group-title">모바일 앱</div>
+      <div class="badge-row">
+        <span class="badge">Flutter 3.x</span>
+        <span class="badge">Dart</span>
+        <span class="badge">Riverpod</span>
+        <span class="badge">WebView</span>
+        <span class="badge">DRM</span>
+        <span class="badge">iOS / Android</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-icon">🌐</div>
+      <div class="skill-group-title">웹 프론트엔드</div>
+      <div class="badge-row">
+        <span class="badge teal">React</span>
+        <span class="badge teal">JavaScript</span>
+        <span class="badge teal">HTML / CSS</span>
+        <span class="badge teal">WebSocket</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-icon">⚙️</div>
+      <div class="skill-group-title">백엔드</div>
+      <div class="badge-row">
+        <span class="badge">Spring Boot</span>
+        <span class="badge">REST API</span>
+        <span class="badge">JWT</span>
+        <span class="badge">MyBatis</span>
+        <span class="badge">WebSocket</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-icon">🗄️</div>
+      <div class="skill-group-title">DB / 인프라</div>
+      <div class="badge-row">
+        <span class="badge teal">MySQL</span>
+        <span class="badge teal">AWS EC2</span>
+        <span class="badge teal">Docker</span>
+        <span class="badge teal">Render</span>
+        <span class="badge teal">CDN</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-icon">📊</div>
+      <div class="skill-group-title">데이터 / 분석</div>
+      <div class="badge-row">
+        <span class="badge">Python</span>
+        <span class="badge">Pandas</span>
+        <span class="badge">Selenium</span>
+        <span class="badge">YOLOv5</span>
+        <span class="badge">Firebase</span>
+        <span class="badge">Google Analytics</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-icon">🛠️</div>
+      <div class="skill-group-title">협업 / 도구</div>
+      <div class="badge-row">
+        <span class="badge teal">Git / GitHub</span>
+        <span class="badge teal">Slack</span>
+        <span class="badge teal">AdMob</span>
+        <span class="badge teal">Claude Code</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header fade-in">
+    <span class="section-tag">Experience</span>
+    <h2 class="section-title">경력</h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <span class="exp-company">(주)홈초이스</span>
+          <span class="exp-period">2024.02 ~ 2025.11 · 1년 10개월</span>
+        </div>
+        <div class="exp-role">Flutter 앱 개발자 · 정규직 | 서울</div>
+        <div class="exp-desc">전국 디지털케이블TV VOD 공급 및 OTT 서비스 "오초이스" 운영사 (매출 340억). LG헬로비전·딜라이브 대형 고객사 보유 B2B 미디어 플랫폼.</div>
+        <ul class="exp-list">
+          <li>Flutter 기반 iOS/Android 앱 개발 및 유지보수 전담</li>
+          <li>LG헬로비전 헬로tv 앱을 오초이스 앱으로 마이그레이션 및 React 웹 전환 주도</li>
+          <li>딜라이브 모바일TV를 오초이스 앱으로 마이그레이션, DRM(NCG → Multi DRM) 통합 처리</li>
+          <li><strong>FCP 39% 단축 / LCP 10.8% 개선</strong> — 성능 지표 기반 최적화</li>
+          <li>AWS EC2 Elastic IP 도입 및 HTTPS(SSL) 전환으로 통신 보안 강화</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header fade-in">
+    <span class="section-tag">Projects</span>
+    <h2 class="section-title">주요 프로젝트</h2>
+    <p class="section-sub">카드를 클릭하면 상세 내용을 볼 수 있습니다.</p>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card fade-in" onclick="openModal('p1')">
+      <div class="project-top">
+        <span class="project-emoji">📺</span>
+        <span class="project-badge team">팀 · 4명</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">헬로tv → 오초이스 마이그레이션 + 웹 전환</div>
+        <div class="project-period">2025.02 ~ 2025.10 · 9개월 | LG헬로비전(매출 1조)</div>
+        <div class="project-desc">Flutter 앱 마이그레이션과 동시에 콘텐츠 탐색 화면을 React 웹으로 분리, 앱 배포 없이 콘텐츠를 즉시 반영할 수 있는 운영 구조 구축</div>
+        <div class="project-tags">
+          <span class="tag">Flutter</span><span class="tag">React</span>
+          <span class="tag">Spring Boot</span><span class="tag">AWS</span>
+          <span class="tag">Riverpod</span><span class="tag">WebView</span>
+        </div>
+        <div class="project-results"><p>🎯 FCP 39% 단축 · LCP 10.8% 개선 · HTTPS 전환</p></div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in" onclick="openModal('p2')">
+      <div class="project-top">
+        <span class="project-emoji">📡</span>
+        <span class="project-badge team">팀 · 4명</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">딜라이브 모바일TV → 오초이스 앱 마이그레이션</div>
+        <div class="project-period">2024.02 ~ 2024.11 · 10개월 | 딜라이브(매출 3,500억)</div>
+        <div class="project-desc">이종 DRM 환경(NCG → Multi DRM) 통합, Flutter 2→3 업그레이드, 플레이어 생명주기 안정화를 통해 서비스 전환 이탈률 최소화</div>
+        <div class="project-tags">
+          <span class="tag">Flutter</span><span class="tag">Spring Boot</span>
+          <span class="tag">AWS</span><span class="tag">DRM</span>
+        </div>
+        <div class="project-results"><p>🎯 DRM 통합 · Flutter 3 안정화 · 재생 장애 0건</p></div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in" onclick="openModal('p3')">
+      <div class="project-top">
+        <span class="project-emoji">🎮</span>
+        <span class="project-badge">개인</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">숫자 대결 — 실시간 증감 게임</div>
+        <div class="project-period">2026.01 ~ 진행 중 | 개인 프로젝트</div>
+        <div class="project-desc">다중 사용자 동시 입력을 서버 중심 상태 관리로 처리, WebSocket 기반 실시간 동기화. 기획~배포 전 과정 3일 내 단독 완성</div>
+        <div class="project-tags">
+          <span class="tag">Flutter</span><span class="tag">Spring Boot</span>
+          <span class="tag">WebSocket</span><span class="tag">Render</span>
+        </div>
+        <div class="project-results"><p>🎯 서버 중심 상태관리 · 실시간 다중 사용자 처리</p></div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in" onclick="openModal('p4')">
+      <div class="project-top">
+        <span class="project-emoji">📦</span>
+        <span class="project-badge team">팀 · 3명</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">담아(Dama) — 구독 통합 관리 서비스</div>
+        <div class="project-period">2026.01 ~ 2026.02 · 2개월</div>
+        <div class="project-desc">도메인 기반 분리 설계(User/Subscription/Community), JWT 인증, Soft Delete 정책을 적용한 확장 가능한 구독 관리 백엔드</div>
+        <div class="project-tags">
+          <span class="tag">Flutter</span><span class="tag">Spring Boot</span>
+          <span class="tag">JWT</span><span class="tag">MySQL</span><span class="tag">Docker</span>
+        </div>
+        <div class="project-results"><p>🎯 도메인 설계 · JWT 인증 · Docker 환경 표준화</p></div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in" onclick="openModal('p5')">
+      <div class="project-top">
+        <span class="project-emoji">💬</span>
+        <span class="project-badge">개인</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">개인 커뮤니티 웹앱</div>
+        <div class="project-period">2026.05 ~ 진행 중 | 개인 프로젝트</div>
+        <div class="project-desc">게시글·좋아요·팔로우·채팅 기능을 포함한 커뮤니티 서비스. AI 에이전트(Claude Code, Codex)를 기획·설계·구현·배포 전 과정에 적극 활용</div>
+        <div class="project-tags">
+          <span class="tag">Docker</span><span class="tag">Render</span>
+          <span class="tag">Claude Code</span><span class="tag">Codex</span>
+        </div>
+        <div class="project-results"><p>🎯 AI 활용 개발 · ERD 선설계 · 실 배포 완료</p></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header fade-in">
+    <span class="section-tag">Education & Certs</span>
+    <h2 class="section-title">학력 및 수료</h2>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card fade-in">
+      <div class="edu-icon">🎓</div>
+      <div class="edu-title">컴퓨터공학과</div>
+      <div class="edu-sub">복수전공: 모빌리티AI·SW융합전공<br>2017 ~ 2024 졸업</div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-icon">🤖</div>
+      <div class="edu-title">인공지능 기본과정 수료</div>
+      <div class="edu-sub">정보통신산업진흥원</div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-icon">📊</div>
+      <div class="edu-title">Data Science 코치스터디 수료</div>
+      <div class="edu-sub">네이버 부스트코스 · 2023</div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-icon">📚</div>
+      <div class="edu-title">IT 용어 도서 공동 저자</div>
+      <div class="edu-sub">『개발자가 되기 위해 꼭 알아야 하는 IT 용어』<br>비제이퍼블릭 · Yes24</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header fade-in">
+    <span class="section-tag">Contact</span>
+    <h2 class="section-title">연락하기</h2>
+  </div>
+  <div class="contact-wrap fade-in">
+    <div class="contact-links">
+      <a href="tel:010-2538-1519" class="contact-link">
+        <span class="contact-link-icon">📞</span>
+        <div>
+          <div class="contact-link-label">전화</div>
+          <div class="contact-link-val">010-2538-1519</div>
+        </div>
+      </a>
+      <a href="mailto:justinnn980@gmail.com" class="contact-link">
+        <span class="contact-link-icon">✉️</span>
+        <div>
+          <div class="contact-link-label">이메일</div>
+          <div class="contact-link-val">justinnn980@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://github.com/justinnn980" target="_blank" class="contact-link">
+        <span class="contact-link-icon">🐙</span>
+        <div>
+          <div class="contact-link-label">GitHub</div>
+          <div class="contact-link-val">github.com/justinnn980</div>
+        </div>
+      </a>
+      <a href="https://justinnn980.tistory.com" target="_blank" class="contact-link">
+        <span class="contact-link-icon">📝</span>
+        <div>
+          <div class="contact-link-label">기술 블로그</div>
+          <div class="contact-link-val">justinnn980.tistory.com</div>
+        </div>
+      </a>
+    </div>
+    <div class="cta-box">
+      <h3>함께 일해요 👋</h3>
+      <p>Flutter 앱부터 풀스택 개발까지<br>즉시 출근 가능하며 장기 근무를 희망합니다.<br>편하게 연락 주세요!</p>
+      <a href="mailto:justinnn980@gmail.com" class="btn btn-primary">이메일 보내기 →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <span>박준철</span> · Web & App Fullstack Developer · Made with ❤️</p>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-p1" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect('p1')">✕</button>
+    <h2>📺 헬로tv → 오초이스 마이그레이션 + 웹 전환</h2>
+    <div class="modal-period">2025.02 ~ 2025.10 (9개월) · Flutter, React, Spring Boot, AWS · 팀 4명</div>
+    <div class="modal-section">
+      <h3>목표</h3>
+      <p style="font-size:.88rem;color:var(--muted)">LG헬로비전 헬로tv 앱을 오초이스로 안정적으로 전환하고, 영화 탐색 페이지를 웹으로 분리하여 앱 배포 없이 콘텐츠를 빠르게 반영할 수 있는 구조 구축.</p>
+    </div>
+    <div class="modal-section">
+      <h3>주요 경험</h3>
+      <ul>
+        <li>React 기반 웹 분리 + WebView 연동 → <strong>앱 심사 없이 콘텐츠 즉시 반영</strong> 가능한 운영 구조</li>
+        <li>Riverpod으로 셋톱박스 페어링 상태(최대 3대) 분리 관리, 실시간 콘텐츠 UI 연동</li>
+        <li>HTML/JS 경량화, CDN 적용, 스켈레톤 UI, Lazy Loading → <strong>FCP 39% 단축 / LCP 10.8% 개선</strong></li>
+        <li>EC2 Proxy Elastic IP 고정 + HTTPS(SSL) 전환으로 로드밸런싱 환경 방화벽 차단 문제 해결</li>
+      </ul>
+    </div>
+    <div class="modal-section">
+      <h3>성과</h3>
+      <ul>
+        <li>앱 배포 의존 구조 → 웹 기반 운영으로 전환, <strong>운영 대응 속도 대폭 향상</strong></li>
+        <li>성능 지표 기반 최적화로 사용자 콘텐츠 탐색 경험 개선</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-p2" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect('p2')">✕</button>
+    <h2>📡 딜라이브 모바일TV → 오초이스 앱 마이그레이션</h2>
+    <div class="modal-period">2024.02 ~ 2024.11 (10개월) · Flutter, Spring Boot, AWS · 팀 4명</div>
+    <div class="modal-section">
+      <h3>주요 경험</h3>
+      <ul>
+        <li>NCG DRM ↔ Multi DRM 이종 환경: 플레이어 커스터마이징으로 <strong>동일 UI·시청 흐름 유지</strong></li>
+        <li>Flutter 2 → 3 업그레이드: 라이브러리 의존성 전면 재검토 및 플레이어 호환성 안정화</li>
+        <li>쇼츠형 화면 플레이어 <strong>생명주기 분석</strong>으로 음성 중복 재생 문제 근본 해결</li>
+        <li>재생 장애 = 사용자 이탈, Player/DRM/버전 호환성을 함께 검토하여 안정적 전환 완수</li>
+      </ul>
+    </div>
+    <div class="modal-section">
+      <h3>성과</h3>
+      <ul>
+        <li>이종 DRM·버전 변경 환경에서도 <strong>서비스 무중단 전환</strong> 완료</li>
+        <li>기존 사용자 시청 흐름 유지로 서비스 전환 불편 최소화</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-p3" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect('p3')">✕</button>
+    <h2>🎮 숫자 대결 — 실시간 증감 게임</h2>
+    <div class="modal-period">2026.01 ~ 진행 중 · Flutter, Spring Boot, WebSocket, Render · 개인</div>
+    <div class="modal-section">
+      <h3>주요 경험</h3>
+      <ul>
+        <li>다중 사용자 동시 입력 시 데이터 불일치 방지 → <strong>서버 중심 단일 상태 관리 구조</strong> 설계</li>
+        <li>WebSocket 양방향 통신으로 모든 클라이언트에 변경값 즉시 전파</li>
+        <li>Polling 대신 WebSocket 선택 이유: 실시간성·불필요한 요청 최소화</li>
+        <li><strong>기획~프론트~백엔드~배포 전 과정 3일 내 단독 완성</strong></li>
+      </ul>
+    </div>
+    <div class="modal-section">
+      <h3>성과</h3>
+      <ul>
+        <li>서버 중심 상태관리, WebSocket 실시간 통신, 동시 사용자 처리 구조 직접 설계·구현</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-p4" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect('p4')">✕</button>
+    <h2>📦 담아(Dama) — 구독 통합 관리 서비스</h2>
+    <div class="modal-period">2026.01 ~ 2026.02 (2개월) · Flutter, Spring Boot, JWT, MySQL, Docker · 팀 3명</div>
+    <div class="modal-section">
+      <h3>주요 경험</h3>
+      <ul>
+        <li>User / Subscription / Community <strong>도메인 기반 분리 설계</strong>로 확장 가능한 구조</li>
+        <li>JWT Access Token + Refresh Token <strong>Stateless 인증 흐름</strong> 구현</li>
+        <li><strong>Soft Delete + BaseEntity</strong> 적용으로 데이터 이력 관리 및 복구 가능 구조</li>
+        <li>Docker로 개발 환경 표준화, 팀 단위 실행 환경 일관성 확보</li>
+      </ul>
+    </div>
+    <div class="modal-section">
+      <h3>성과</h3>
+      <ul>
+        <li>인증 흐름, 도메인 설계, 데이터 관리 정책, Docker 환경 구성 경험 축적</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-p5" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect('p5')">✕</button>
+    <h2>💬 개인 커뮤니티 웹앱</h2>
+    <div class="modal-period">2026.05 ~ 진행 중 · Docker, Render, Claude Code, Codex · 개인</div>
+    <div class="modal-section">
+      <h3>주요 경험</h3>
+      <ul>
+        <li>게시글·좋아요·팔로우·채팅 기능을 포함한 커뮤니티 서비스 <strong>기획~배포 단독 수행</strong></li>
+        <li>ERD 선설계 후 도메인별 기능 구현, 피드 중심 구조 설계</li>
+        <li>AI 에이전트(Claude Code, Codex)를 <strong>기획·설계·구현·배포 전 과정</strong>에 적극 활용</li>
+        <li>Docker + Render로 실 배포 환경 구성</li>
+      </ul>
+    </div>
+    <div class="modal-section">
+      <h3>성과</h3>
+      <ul>
+        <li>AI 도구를 단순 코드 생성이 아닌 개발 생산성 향상 도구로 활용하는 방식 정립</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+// NAV scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+  updateActiveNav();
+});
+
+// Active nav link
+function updateActiveNav() {
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  links.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+
+// Fade in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Modal
+function openModal(id) {
+  document.getElementById('modal-' + id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+  if (e.target.classList.contains('modal-overlay')) {
+    e.target.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+function closeModalDirect(id) {
+  document.getElementById('modal-' + id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.open').forEach(m => {
+      m.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  }
+});
+
+// Counter animation
+function animateCounter(el, target, suffix='') {
+  let current = 0;
+  const step = target / 50;
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) { current = target; clearInterval(timer); }
+    el.textContent = Math.floor(current) + suffix;
+  }, 30);
+}
+const heroObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('.metric-val').forEach(el => {
+        const text = el.textContent;
+        if (text.includes('1년')) return;
+        if (text.includes('조')) animateCounter(el, 1, '조+');
+        if (text.includes('39')) animateCounter(el, 39, '%');
+        if (text.includes('+')) animateCounter(el, 5, '+');
+      });
+    }
+  });
+}, {threshold: 0.5});
+const metricsEl = document.querySelector('.hero-metrics');
+if (metricsEl) heroObserver.observe(metricsEl);
+</script>
+</body>
+</html>
