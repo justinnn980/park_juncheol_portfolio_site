@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>박준철 | 웹 프론트엔드·퍼블리싱 개발자 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --surface: #f0f9ff;
+  --card: #ffffff;
+  --border: #bae6fd;
+  --border-gray: #e2e8f0;
+  --accent: #0369a1;
+  --accent-light: #f0f9ff;
+  --accent-mid: #bae6fd;
+  --text: #111827;
+  --sub: #374151;
+  --muted: #6b7280;
+  --muted2: #9ca3af;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans KR', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 6%;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: all .3s;
+}
+nav.scrolled {
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-gray);
+  padding: 13px 6%;
+  box-shadow: 0 1px 16px rgba(0,0,0,.06);
+}
+.nav-logo { font-size: 1.1rem; font-weight: 800; color: var(--accent); letter-spacing: -.5px; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: .88rem; font-weight: 500; transition: color .2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--accent); }
+.nav-cta { background: var(--accent); color: #fff !important; padding: 7px 18px; border-radius: 7px; font-size: .82rem !important; }
+.nav-cta:hover { background: #075985 !important; }
+
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 120px 6% 80px;
+  position: relative; overflow: hidden;
+}
+.hero-inner { max-width: 740px; text-align: center; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent-light); border: 1px solid var(--accent-mid);
+  color: var(--accent); padding: 6px 16px; border-radius: 20px;
+  font-size: .8rem; font-weight: 600; margin-bottom: 28px;
+}
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+.hero h1 { font-size: clamp(2.6rem, 6vw, 4.2rem); font-weight: 900; line-height: 1.15; color: var(--text); margin-bottom: 8px; letter-spacing: -1.5px; }
+.hero-role { font-size: clamp(1.1rem, 2.5vw, 1.35rem); color: var(--accent); font-weight: 700; margin-bottom: 20px; }
+.hero-sub { font-size: 1rem; color: var(--muted); max-width: 580px; margin: 0 auto 40px; line-height: 1.8; }
+.hero-metrics {
+  display: flex; justify-content: center; gap: 0; margin-bottom: 44px;
+  border: 1px solid var(--border-gray); border-radius: 14px;
+  overflow: hidden; background: var(--surface);
+}
+.metric { flex: 1; padding: 20px 12px; text-align: center; border-right: 1px solid var(--border-gray); }
+.metric:last-child { border-right: none; }
+.metric-val { font-size: 1.4rem; font-weight: 900; color: var(--accent); line-height: 1; }
+.metric-label { font-size: .7rem; color: var(--muted2); margin-top: 5px; font-weight: 500; }
+.hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn { padding: 13px 28px; border-radius: 9px; font-size: .9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 14px rgba(3,105,161,.3); }
+.btn-primary:hover { background: #075985; transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--sub); border: 1.5px solid var(--border-gray); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--muted2); font-size: .72rem; }
+.scroll-arrow { width: 18px; height: 18px; border-right: 2px solid var(--muted2); border-bottom: 2px solid var(--muted2); transform: rotate(45deg); animation: bounce .8s infinite alternate; }
+@keyframes bounce { from{transform:rotate(45deg) translateY(0)} to{transform:rotate(45deg) translateY(5px)} }
+.hero-bg { position: absolute; top: -20%; right: -10%; width: 50%; height: 130%; background: radial-gradient(ellipse, rgba(3,105,161,.04) 0%, transparent 70%); pointer-events: none; }
+
+section { padding: 100px 6%; max-width: 1100px; margin: 0 auto; }
+.section-label { font-size: .72rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.section-title { font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 900; color: var(--text); line-height: 1.2; margin-bottom: 12px; }
+.section-sub { color: var(--muted); font-size: .95rem; max-width: 520px; }
+.section-header { margin-bottom: 56px; }
+.divider { width: 40px; height: 3px; background: var(--accent); border-radius: 2px; margin: 16px 0 20px; }
+
+.fade-in { opacity: 0; transform: translateY(24px); transition: opacity .55s, transform .55s; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+.fit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.fit-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 22px 20px; display: flex; gap: 14px; align-items: flex-start; transition: all .25s; }
+.fit-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(3,105,161,.08); }
+.fit-icon { width: 40px; height: 40px; min-width: 40px; border-radius: 10px; background: var(--accent-light); border: 1px solid var(--accent-mid); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.fit-title { font-weight: 800; color: var(--text); font-size: .9rem; margin-bottom: 5px; }
+.fit-desc { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+.fit-desc strong { color: var(--accent); font-weight: 700; }
+
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.about-text p { color: var(--sub); margin-bottom: 16px; line-height: 1.85; font-size: .96rem; }
+.about-text strong { color: var(--accent); font-weight: 700; }
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.stat-card { background: var(--surface); border: 1px solid var(--border-gray); border-radius: 12px; padding: 22px 18px; text-align: center; transition: all .25s; }
+.stat-card:hover { border-color: var(--accent); background: var(--accent-light); }
+.stat-card .num { font-size: 1.45rem; font-weight: 900; color: var(--accent); line-height: 1; }
+.stat-card .desc { font-size: .74rem; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.skill-group { background: var(--surface); border: 1px solid var(--border-gray); border-radius: 14px; padding: 22px 20px; transition: all .25s; }
+.skill-group:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(3,105,161,.08); }
+.skill-group-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.skill-group-icon { width: 36px; height: 36px; border-radius: 9px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+.skill-group-title { font-weight: 700; color: var(--text); font-size: .9rem; }
+.badge-row { display: flex; flex-wrap: wrap; gap: 7px; }
+.badge { background: #fff; border: 1px solid var(--border-gray); color: var(--sub); padding: 4px 11px; border-radius: 6px; font-size: .75rem; font-weight: 500; transition: all .2s; }
+.badge:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.badge.primary { background: var(--accent-light); border-color: var(--accent-mid); color: var(--accent); }
+.badge.learning { background: #fefce8; border-color: #fde68a; color: #92400e; }
+
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--accent), var(--border-gray)); }
+.timeline-item { position: relative; margin-bottom: 40px; }
+.timeline-dot { position: absolute; left: -35px; top: 8px; width: 13px; height: 13px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); }
+.exp-card { background: var(--surface); border: 1px solid var(--border-gray); border-radius: 14px; padding: 28px 26px; transition: all .25s; }
+.exp-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(3,105,161,.07); }
+.exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+.exp-company { font-size: 1.08rem; font-weight: 800; color: var(--text); }
+.exp-period { font-size: .78rem; color: var(--accent); font-weight: 600; background: var(--accent-light); padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+.exp-role { color: var(--accent); font-size: .86rem; font-weight: 600; margin-bottom: 8px; }
+.exp-desc { color: var(--muted); font-size: .84rem; margin-bottom: 14px; line-height: 1.6; }
+.exp-list { list-style: none; }
+.exp-list li { color: var(--sub); font-size: .87rem; padding: 5px 0 5px 20px; position: relative; line-height: 1.6; }
+.exp-list li::before { content: ''; position: absolute; left: 6px; top: 13px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.exp-list li strong { color: var(--accent); font-weight: 700; }
+
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+.project-card { background: var(--card); border: 1px solid var(--border-gray); border-radius: 16px; overflow: hidden; transition: all .25s; cursor: pointer; }
+.project-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 12px 36px rgba(3,105,161,.1); }
+.project-top { padding: 22px 22px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+.project-emoji { width: 48px; height: 48px; border-radius: 12px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+.project-badge { font-size: .7rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; background: #f8fafc; color: var(--muted); border: 1px solid var(--border-gray); }
+.project-badge.team { background: var(--accent-light); color: var(--accent); border-color: var(--accent-mid); }
+.project-body { padding: 16px 22px 20px; }
+.project-title { font-size: .97rem; font-weight: 800; color: var(--text); margin-bottom: 4px; line-height: 1.4; }
+.project-period { font-size: .75rem; color: var(--muted2); margin-bottom: 10px; }
+.project-desc { font-size: .84rem; color: var(--sub); line-height: 1.65; margin-bottom: 14px; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+.tag { background: #f8fafc; border: 1px solid var(--border-gray); color: var(--muted); padding: 3px 9px; border-radius: 5px; font-size: .72rem; }
+.project-results { background: var(--accent-light); border: 1px solid var(--accent-mid); border-radius: 8px; padding: 9px 13px; }
+.project-results p { font-size: .8rem; color: var(--accent); margin: 0; font-weight: 600; }
+.project-arrow { float: right; color: var(--muted2); font-size: .8rem; margin-top: 10px; transition: all .2s; }
+.project-card:hover .project-arrow { color: var(--accent); transform: translateX(3px); }
+
+.modal-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.45); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--bg); border: 1px solid var(--border-gray); border-radius: 20px; max-width: 660px; width: 100%; max-height: 82vh; overflow-y: auto; padding: 36px 34px; position: relative; box-shadow: 0 24px 64px rgba(0,0,0,.12); }
+.modal-close { position: absolute; top: 16px; right: 18px; background: #f8fafc; border: 1px solid var(--border-gray); color: var(--muted); font-size: 1rem; cursor: pointer; transition: all .2s; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.modal-close:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.modal-emoji { font-size: 2rem; margin-bottom: 10px; }
+.modal h2 { font-size: 1.2rem; color: var(--text); margin-bottom: 6px; font-weight: 800; line-height: 1.3; }
+.modal-period { font-size: .78rem; color: var(--accent); margin-bottom: 22px; font-weight: 600; background: var(--accent-light); display: inline-block; padding: 3px 10px; border-radius: 20px; }
+.modal-section { margin-bottom: 22px; }
+.modal-section h3 { font-size: .74rem; color: var(--accent); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border-gray); }
+.modal-section ul { list-style: none; }
+.modal-section ul li { font-size: .87rem; color: var(--sub); padding: 5px 0 5px 18px; position: relative; line-height: 1.65; }
+.modal-section ul li::before { content: ''; position: absolute; left: 5px; top: 13px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.modal-section ul li strong { color: var(--accent); font-weight: 700; }
+.modal-section p { font-size: .87rem; color: var(--sub); line-height: 1.7; }
+
+.edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.edu-card { background: var(--surface); border: 1px solid var(--border-gray); border-radius: 13px; padding: 22px; transition: all .25s; display: flex; gap: 14px; align-items: flex-start; }
+.edu-card:hover { border-color: var(--accent); background: var(--accent-light); }
+.edu-icon { width: 40px; height: 40px; min-width: 40px; border-radius: 10px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; border: 1px solid var(--accent-mid); }
+.edu-title { font-weight: 700; color: var(--text); font-size: .9rem; margin-bottom: 4px; }
+.edu-sub { color: var(--muted); font-size: .78rem; line-height: 1.5; }
+
+.contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.contact-links { display: flex; flex-direction: column; gap: 12px; }
+.contact-link { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border-gray); border-radius: 12px; padding: 15px 18px; text-decoration: none; color: var(--text); transition: all .2s; }
+.contact-link:hover { border-color: var(--accent); background: var(--accent-light); transform: translateX(4px); }
+.contact-link-icon { width: 38px; height: 38px; border-radius: 9px; background: var(--accent-light); border: 1px solid var(--accent-mid); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+.contact-link-label { font-size: .73rem; color: var(--muted2); margin-bottom: 1px; }
+.contact-link-val { font-size: .88rem; font-weight: 700; color: var(--text); }
+.cta-box { background: var(--accent); border-radius: 18px; padding: 40px 34px; text-align: center; color: #fff; }
+.cta-box h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; }
+.cta-box p { font-size: .9rem; opacity: .85; margin-bottom: 26px; line-height: 1.7; }
+.btn-white { background: #fff; color: var(--accent); border: none; padding: 12px 26px; border-radius: 9px; font-size: .88rem; font-weight: 700; text-decoration: none; display: inline-block; transition: all .2s; }
+.btn-white:hover { background: #f0f9ff; transform: translateY(-2px); }
+
+footer { text-align: center; padding: 30px 5%; border-top: 1px solid var(--border-gray); color: var(--muted2); font-size: .8rem; background: var(--surface); }
+footer span { color: var(--accent); font-weight: 600; }
+
+@media (max-width: 768px) {
+  .about-grid, .contact-wrap { grid-template-columns: 1fr; gap: 36px; }
+  .hero-metrics { flex-direction: column; gap: 0; border: none; background: none; }
+  .metric { border: 1px solid var(--border-gray); border-radius: 10px; margin-bottom: 8px; background: var(--surface); }
+  .nav-links { display: none; }
+  section { padding: 70px 5%; }
+  .modal { padding: 26px 22px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">박준철.dev</div>
+  <ul class="nav-links">
+    <li><a href="#fit">접점</a></li>
+    <li><a href="#skills">기술</a></li>
+    <li><a href="#experience">경력</a></li>
+    <li><a href="#projects">프로젝트</a></li>
+    <li><a href="#contact" class="nav-cta">연락하기</a></li>
+  </ul>
+</nav>
+
+<div style="background:var(--bg); padding-top:0; position:relative; overflow:hidden;">
+  <div class="hero-bg"></div>
+  <section class="hero" style="max-width:none; padding-left:6%; padding-right:6%;">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        즉시 출근 가능 · 신입/경력
+      </div>
+      <h1>박 준 철</h1>
+      <div class="hero-role">웹 프론트엔드 · 퍼블리싱 개발자</div>
+      <p class="hero-sub">
+        실서비스 웹 개발 1년 10개월 경력.<br>
+        HTML/CSS/JS 구조를 직접 분석하고, 검색엔진 크롤러 관점으로 SEO를 이해하며<br>
+        새로운 기술을 빠르게 학습해 실무에 적용하는 개발자입니다.
+      </p>
+      <div class="hero-metrics">
+        <div class="metric">
+          <div class="metric-val">1년 10개월</div>
+          <div class="metric-label">실서비스 웹 개발 경력</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">HTML/DOM</div>
+          <div class="metric-label">구조 분석 & 크롤러 경험</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">SEO</div>
+          <div class="metric-label">검색엔진 최적화 이해</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">Claude Code</div>
+          <div class="metric-label">AI 도구 개발 생산성 향상</div>
+        </div>
+      </div>
+      <div class="hero-btns">
+        <a href="#fit" class="btn btn-primary">공고와의 접점 보기 →</a>
+        <a href="#contact" class="btn btn-outline">연락하기</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>스크롤</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+</div>
+
+<!-- FIT -->
+<section id="fit" style="background:var(--surface); max-width:none; padding-left:6%; padding-right:6%;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <div class="section-label">Why Here</div>
+      <h2 class="section-title">모집조건과 저의 경험</h2>
+      <div class="divider"></div>
+      <p class="section-sub">공고의 담당업무·모집조건과 실제 경험을 직접 연결했습니다.</p>
+    </div>
+    <div class="fit-grid">
+      <div class="fit-card fade-in">
+        <div class="fit-icon">🔍</div>
+        <div>
+          <div class="fit-title">검색엔진 최적화 — 크롤러로 직접 경험</div>
+          <div class="fit-desc">Selenium으로 검색엔진 크롤러처럼 웹을 탐색하며 <strong>robots.txt, 동적 페이지 로딩, CSS 선택자, XPath</strong>를 직접 분석했습니다. SEO를 이론이 아닌 크롤러 관점에서 실제로 이해합니다.</div>
+        </div>
+      </div>
+      <div class="fit-card fade-in">
+        <div class="fit-icon">🌐</div>
+        <div>
+          <div class="fit-title">실서비스 웹 개발 & 유지보수</div>
+          <div class="fit-desc">홈초이스 OTT 서비스에서 1년 10개월간 <strong>실서비스 웹 API 개발과 페이지 기능 유지보수</strong>를 담당했습니다. 홈페이지 구축 및 유지보수 경험을 실무에서 쌓았습니다.</div>
+        </div>
+      </div>
+      <div class="fit-card fade-in">
+        <div class="fit-icon">🔒</div>
+        <div>
+          <div class="fit-title">HTTPS/SSL — 직접 적용 경험</div>
+          <div class="fit-desc">운영 서비스에 <strong>SSL 인증서를 직접 Proxy 서버에 적용</strong>하여 전체 서비스를 HTTPS로 전환했습니다. 웹 서비스 운영환경 구축을 실무에서 경험했습니다.</div>
+        </div>
+      </div>
+      <div class="fit-card fade-in">
+        <div class="fit-icon">📖</div>
+        <div>
+          <div class="fit-title">PHP/그누보드 — 빠르게 적응 가능</div>
+          <div class="fit-desc">Java, Python, Kotlin, Flutter 등 다양한 언어를 실무와 프로젝트에서 빠르게 습득해온 경험이 있습니다. <strong>PHP와 그누보드 환경에서도 빠르게 실무에 기여</strong>할 수 있다고 확신합니다.</div>
+        </div>
+      </div>
+      <div class="fit-card fade-in">
+        <div class="fit-icon">🤖</div>
+        <div>
+          <div class="fit-title">AI 도구로 생산성 향상</div>
+          <div class="fit-desc"><strong>Claude Code</strong>를 일상적으로 활용해 개발 생산성을 높이고 있습니다. 반복적인 작업을 자동화하고, 새로운 기술 습득 속도를 높이는 데 AI 도구를 적극 활용합니다.</div>
+        </div>
+      </div>
+      <div class="fit-card fade-in">
+        <div class="fit-icon">⚡</div>
+        <div>
+          <div class="fit-title">서버-클라이언트 구조 이해</div>
+          <div class="fit-desc">백엔드 API 설계 경험을 바탕으로 <strong>서버와 클라이언트가 어떻게 연동되는지</strong>를 깊이 이해합니다. 프론트엔드 개발에서 API 연동 문제를 직접 분석하고 해결할 수 있습니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header fade-in">
+    <div class="section-label">About</div>
+    <h2 class="section-title">안녕하세요, 박준철입니다</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p>
+        컴퓨터공학과와 <strong>모빌리티AI·SW융합전공</strong>을 복수전공하고,
+        (주)홈초이스에서 1년 10개월간 실서비스 웹 API 개발과 페이지 유지보수를 담당했습니다.
+      </p>
+      <p>
+        Selenium으로 검색엔진 크롤러처럼 동작하는 데이터 수집 파이프라인을 직접 만들면서
+        <strong>HTML 구조, DOM 탐색, CSS 선택자, robots.txt, 동적 페이지 처리</strong>를 실전으로 익혔습니다.
+        이 경험이 SEO 최적화와 직접 연결됩니다.
+      </p>
+      <p>
+        새로운 기술을 배우는 것에 거리낌이 없습니다.
+        Java로 시작해 Kotlin, Python, Flutter까지 각각 다른 패러다임의 기술을 빠르게 습득해왔습니다.
+        <strong>PHP와 그누보드</strong> 환경도 빠르게 적응해 실무에 기여할 수 있습니다.
+      </p>
+      <p>
+        <strong>Claude Code</strong>를 핵심 파트너로 활용하며 개발 생산성을 높이고,
+        주어진 업무를 책임감 있게 끝까지 마무리하는 것을 중요하게 생각합니다.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="num">1년 10개월</div>
+        <div class="desc">실서비스 웹 개발<br>유지보수 경력</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">SEO</div>
+        <div class="desc">크롤러로 직접 경험한<br>검색엔진 최적화</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">HTTPS</div>
+        <div class="desc">SSL 인증서 직접<br>적용·운영 경험</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">빠른 학습</div>
+        <div class="desc">다양한 스택<br>빠른 실무 적용</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background:var(--surface); max-width:none; padding-left:6%; padding-right:6%;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <div class="section-label">Skills</div>
+      <h2 class="section-title">기술 스택</h2>
+      <div class="divider"></div>
+      <p class="section-sub">담당업무 기술스택을 기준으로 정렬했습니다.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group fade-in">
+        <div class="skill-group-header">
+          <div class="skill-group-icon">🌐</div>
+          <div class="skill-group-title">웹 프론트엔드 · 퍼블리싱</div>
+        </div>
+        <div class="badge-row">
+          <span class="badge primary">HTML5</span>
+          <span class="badge primary">CSS</span>
+          <span class="badge primary">JavaScript</span>
+          <span class="badge primary">jQuery</span>
+          <span class="badge">Selenium 4</span>
+          <span class="badge">CSS 선택자 / XPath</span>
+          <span class="badge learning">PHP (학습중)</span>
+          <span class="badge learning">그누보드 (학습중)</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-header">
+          <div class="skill-group-icon">🔍</div>
+          <div class="skill-group-title">SEO · 웹 구조 분석</div>
+        </div>
+        <div class="badge-row">
+          <span class="badge primary">검색엔진 크롤러 구현</span>
+          <span class="badge primary">DOM 탐색 · 분석</span>
+          <span class="badge">robots.txt 이해</span>
+          <span class="badge">동적 페이지 처리</span>
+          <span class="badge">HTTPS / SSL</span>
+          <span class="badge">웹 접근성 구조 이해</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-header">
+          <div class="skill-group-icon">⚙️</div>
+          <div class="skill-group-title">서버 · 백엔드</div>
+        </div>
+        <div class="badge-row">
+          <span class="badge">Java</span>
+          <span class="badge">Kotlin</span>
+          <span class="badge">Spring Boot</span>
+          <span class="badge">REST API</span>
+          <span class="badge">MySQL</span>
+          <span class="badge">PostgreSQL</span>
+          <span class="badge">Redis</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-header">
+          <div class="skill-group-icon">☁️</div>
+          <div class="skill-group-title">인프라 · 배포</div>
+        </div>
+        <div class="badge-row">
+          <span class="badge primary">AWS EC2</span>
+          <span class="badge primary">AWS S3</span>
+          <span class="badge">Docker</span>
+          <span class="badge">GitHub Actions</span>
+          <span class="badge">Render</span>
+          <span class="badge">Elastic IP</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-header">
+          <div class="skill-group-icon">🤖</div>
+          <div class="skill-group-title">AI 도구 · 자동화</div>
+        </div>
+        <div class="badge-row">
+          <span class="badge primary">Claude Code</span>
+          <span class="badge primary">Codex</span>
+          <span class="badge">Cron Job 자동화</span>
+          <span class="badge">Docker 컨테이너화</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-header">
+          <div class="skill-group-icon">📊</div>
+          <div class="skill-group-title">데이터 · 분석</div>
+        </div>
+        <div class="badge-row">
+          <span class="badge">Python 3</span>
+          <span class="badge">Pandas</span>
+          <span class="badge">YOLOv5</span>
+          <span class="badge">OpenCV</span>
+          <span class="badge">Scikit-learn</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header fade-in">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title">경력</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <span class="exp-company">(주)홈초이스</span>
+          <span class="exp-period">2024.02 ~ 2025.11 · 1년 10개월</span>
+        </div>
+        <div class="exp-role">웹 서비스 개발자 · 정규직 | 서울</div>
+        <div class="exp-desc">
+          전국 디지털케이블TV OTT 서비스 "오초이스" 운영 (매출 340억).
+          LG헬로비전(매출 1조)·딜라이브(매출 3,500억) 등 복수 외부 파트너 연동 담당.
+        </div>
+        <ul class="exp-list">
+          <li>OTT 서비스 <strong>웹 API 개발 및 페이지 기능 유지보수</strong> 전담 (1년 10개월)</li>
+          <li>사업자별 인증 방식·암호화 구조 분리 관리로 <strong>홈페이지 기능 안정성 유지</strong></li>
+          <li><strong>HTTPS 전환 및 SSL 인증서 직접 적용</strong> — Proxy 서버에 와일드카드 SSL 구성, 전체 구간 보안 완성</li>
+          <li>로드밸런싱 환경 Proxy IP 문제 — Elastic IP 도입으로 <strong>방화벽 차단 원인 분석 후 직접 해결</strong></li>
+          <li>콘텐츠 배포 파이프라인 자동화 — Quartz 배치로 업로드~배포 전 과정 자동 처리</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:var(--surface); max-width:none; padding-left:6%; padding-right:6%;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <div class="section-label">Projects</div>
+      <h2 class="section-title">주요 프로젝트</h2>
+      <div class="divider"></div>
+      <p class="section-sub">카드를 클릭하면 상세 내용을 확인할 수 있습니다.</p>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card fade-in" onclick="openModal('p1')">
+        <div class="project-top">
+          <div class="project-emoji">🔍</div>
+          <span class="project-badge">개인 프로젝트</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">웹 크롤러 기반 콘텐츠 데이터 자동 수집 파이프라인</div>
+          <div class="project-period">2024.10 ~ 2025.10 · 1년 | 개인 프로젝트</div>
+          <div class="project-desc">동적 웹페이지의 HTML 구조를 분석해 콘텐츠 메타데이터 1,000건 이상을 자동 수집하는 파이프라인. CSS 선택자·XPath 직접 분석, 무한 스크롤 처리, Cron Job 자동화까지 구현.</div>
+          <div class="project-tags">
+            <span class="tag">Python 3</span><span class="tag">Selenium 4</span>
+            <span class="tag">HTML/DOM 분석</span><span class="tag">CSS 선택자</span>
+            <span class="tag">Pandas</span><span class="tag">Docker</span><span class="tag">Render Cron</span>
+          </div>
+          <div class="project-results"><p>SEO 크롤러 관점 DOM 분석 · 하루 1회 완전 자동화 · 수집 실패율 대폭 감소</p></div>
+          <div class="project-arrow">자세히 보기 →</div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in" onclick="openModal('p2')">
+        <div class="project-top">
+          <div class="project-emoji">🌐</div>
+          <span class="project-badge team">팀 · 4명</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">오초이스 OTT 서비스 웹 개발 및 유지보수</div>
+          <div class="project-period">2024.02 ~ 2025.10 · 1년 10개월 | (주)홈초이스</div>
+          <div class="project-desc">실서비스 OTT 웹 API 개발과 페이지 유지보수. HTTPS 전환, SSL 인증서 적용, Proxy 서버 구성 등 웹서비스 운영환경 전반을 직접 담당했습니다.</div>
+          <div class="project-tags">
+            <span class="tag">Java 17</span><span class="tag">Spring Boot</span>
+            <span class="tag">MySQL</span><span class="tag">DynamoDB</span>
+            <span class="tag">AWS EC2/S3/EB</span><span class="tag">HTTPS/SSL</span>
+          </div>
+          <div class="project-results"><p>HTTPS 전환 완성 · SSL 직접 적용 · 방화벽 문제 해결 · 서비스 안정 운영</p></div>
+          <div class="project-arrow">자세히 보기 →</div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in" onclick="openModal('p3')">
+        <div class="project-top">
+          <div class="project-emoji">📋</div>
+          <span class="project-badge">개인 프로젝트</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Study Tracker API — REST API & Swagger 문서화</div>
+          <div class="project-period">2025 | 개인 프로젝트</div>
+          <div class="project-desc">JWT 인증부터 Redis 캐싱, CI/CD 배포까지 백엔드 실무 흐름 전체 구현. Swagger로 API 명세 작성, GitHub Actions 자동 배포. 서버-클라이언트 구조를 직접 설계한 경험.</div>
+          <div class="project-tags">
+            <span class="tag">Java 21</span><span class="tag">Spring Boot</span>
+            <span class="tag">JWT</span><span class="tag">Redis</span>
+            <span class="tag">Swagger</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span>
+          </div>
+          <div class="project-results"><p>Swagger API 문서 · CI/CD 자동화 · 테스트 60건 · 실서비스 배포</p></div>
+          <div class="project-arrow">자세히 보기 →</div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in" onclick="openModal('p4')">
+        <div class="project-top">
+          <div class="project-emoji">📦</div>
+          <span class="project-badge team">팀 · 3명</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">내마(Dama) — 서비스 기획부터 UI 설계까지</div>
+          <div class="project-period">2026.01 ~ 2026.02 · 2개월</div>
+          <div class="project-desc">디자이너와 협업하여 서비스 전반의 UI 흐름을 함께 설계한 경험. 구독 비용 분석, D-3 결제 알림 등 사용자 중심 기능을 직접 기획하고 구현.</div>
+          <div class="project-tags">
+            <span class="tag">Kotlin</span><span class="tag">Spring Boot</span>
+            <span class="tag">Flutter</span><span class="tag">JWT</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span>
+          </div>
+          <div class="project-results"><p>디자이너 협업 · UI 흐름 공동 설계 · 사용자 중심 기능 기획·구현</p></div>
+          <div class="project-arrow">자세히 보기 →</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDU -->
+<section id="education">
+  <div class="section-header fade-in">
+    <div class="section-label">Education & Certs</div>
+    <h2 class="section-title">학력 및 수료</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card fade-in">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-title">컴퓨터공학과</div>
+        <div class="edu-sub">복수전공: 모빌리티AI·SW융합전공</div>
+      </div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-icon">🤖</div>
+      <div>
+        <div class="edu-title">인공지능 기본과정 수료</div>
+        <div class="edu-sub">정보통신산업진흥원</div>
+      </div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-icon">📊</div>
+      <div>
+        <div class="edu-title">Data Science 코치스터디 수료</div>
+        <div class="edu-sub">네이버 부스트코스 · 2023</div>
+      </div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-icon">📚</div>
+      <div>
+        <div class="edu-title">IT 용어 도서 공동 저자</div>
+        <div class="edu-sub">『개발자가 되기 위해 꼭 알아야하는 IT 용어』</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--surface); max-width:none; padding-left:6%; padding-right:6%;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">연락하기</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="contact-wrap fade-in">
+      <div class="contact-links">
+        <a href="tel:010-2538-1519" class="contact-link">
+          <div class="contact-link-icon">📞</div>
+          <div>
+            <div class="contact-link-label">전화</div>
+            <div class="contact-link-val">010-2538-1519</div>
+          </div>
+        </a>
+        <a href="mailto:justinnn980@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉️</div>
+          <div>
+            <div class="contact-link-label">이메일</div>
+            <div class="contact-link-val">justinnn980@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://github.com/justinnn980" target="_blank" class="contact-link">
+          <div class="contact-link-icon">🐙</div>
+          <div>
+            <div class="contact-link-label">GitHub</div>
+            <div class="contact-link-val">github.com/justinnn980</div>
+          </div>
+        </a>
+        <a href="https://justinnn980.tistory.com" target="_blank" class="contact-link">
+          <div class="contact-link-icon">📝</div>
+          <div>
+            <div class="contact-link-label">기술 블로그</div>
+            <div class="contact-link-val">justinnn980.tistory.com</div>
+          </div>
+        </a>
+      </div>
+      <div class="cta-box">
+        <h3>함께 일하고 싶습니다</h3>
+        <p>HTML/CSS/JS 웹 개발과 SEO 최적화,<br>홈페이지 구축 및 유지보수까지<br>책임감 있게 끝까지 마무리하는<br>개발자로 기여하겠습니다.</p>
+        <a href="mailto:justinnn980@gmail.com" class="btn-white">이메일 보내기 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <span>박준철</span> · Web Frontend Developer · Built with Claude Code</p>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-p1" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect('p1')">✕</button>
+    <div class="modal-emoji">🔍</div>
+    <h2>웹 크롤러 기반 콘텐츠 데이터 자동 수집 파이프라인</h2>
+    <div class="modal-period">2024.10 ~ 2025.10 · Python 3, Selenium 4, Pandas, Docker, Render Cron Job · 개인</div>
+    <div class="modal-section">
+      <h3>SEO와의 연결</h3>
+      <p>검색엔진 크롤러가 웹 페이지를 탐색하는 방식 그대로 Selenium을 활용해 동적 페이지를 분석했습니다. robots.txt 구조, 동적 로딩 처리, CSS 선택자와 XPath 활용은 SEO 최적화와 직결되는 경험입니다.</p>
+    </div>
+    <div class="modal-section">
+      <h3>주요 구현</h3>
+      <ul>
+        <li><strong>HTML 구조 분석</strong>: 동적 JavaScript 렌더링 페이지의 HTML 구조를 직접 분석, CSS 선택자·XPath로 콘텐츠 메타데이터 1,000건 이상 추출</li>
+        <li><strong>무한 스크롤 처리</strong>: execute_script 기반 동적 DOM 로딩 대기 시간 조정으로 수집 실패율 대폭 감소</li>
+        <li><strong>완전 자동화</strong>: Render Cron Job으로 하루 1회 자동 실행, Docker 컨테이너화로 환경 일관성 확보</li>
+        <li><strong>웹 접근성 구조 이해</strong>: 웹 접근성 기준의 마크업 구조가 크롤러 수집 효율에 미치는 영향을 직접 경험</li>
+      </ul>
+    </div>
+    <div class="modal-section">
+      <h3>성과</h3>
+      <ul>
+        <li>수동으로 하던 콘텐츠 데이터 수집 작업을 100% 자동화</li>
+        <li>검색엔진 크롤러 관점으로 웹 구조를 이해하는 실전 경험 축적</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-p2" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect('p2')">✕</button>
+    <div class="modal-emoji">🌐</div>
+    <h2>오초이스 OTT 서비스 웹 개발 및 유지보수</h2>
+    <div class="modal-period">2024.02 ~ 2025.10 (1년 10개월) · Java 17, Spring Boot, MySQL, DynamoDB, AWS · 팀 4명</div>
+    <div class="modal-section">
+      <h3>주요 경험</h3>
+      <ul>
+        <li><strong>실서비스 웹 API 개발·유지보수</strong>: LG헬로비전·딜라이브·HCN 등 복수 외부 파트너 연동 API 설계 및 1년 10개월 운영</li>
+        <li><strong>HTTPS 전환 및 SSL 인증서 적용</strong>: 기존 서비스 SSL 미적용 문제 발견 → 와일드카드 SSL 인증서를 Proxy 서버에 직접 적용하여 전체 서비스 HTTPS 완성</li>
+        <li><strong>Elastic IP 기반 Proxy 구성</strong>: 로드밸런싱 환경에서 IP 변경으로 방화벽 차단 문제 발생 → EC2 Elastic IP 도입으로 고정 IP 구조 재구성, 안정적 운영 환경 구축</li>
+        <li><strong>홈페이지 기능 안정성</strong>: 사업자별 인증 방식·암호화 구조(AES-256/AES-128)를 분리 관리하여 서비스 안정성 유지</li>
+      </ul>
+    </div>
+    <div class="modal-section">
+      <h3>성과</h3>
+      <ul>
+        <li>운영 중 발생한 인프라·보안 이슈를 보고 없이 스스로 원인 분석하고 해결</li>
+        <li>1년 10개월간 실서비스 웹 개발·유지보수 경험 축적</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-p3" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect('p3')">✕</button>
+    <div class="modal-emoji">📋</div>
+    <h2>Study Tracker API — REST API & Swagger 문서화</h2>
+    <div class="modal-period">2025 · Java 21, Spring Boot, Redis, PostgreSQL, Docker, GitHub Actions, Render · 개인</div>
+    <div class="modal-section">
+      <h3>Swagger 문서</h3>
+      <p><a href="https://study-tracker-api-7stm.onrender.com/swagger-ui/index.html" target="_blank" rel="noreferrer" style="color:var(--accent); font-weight:700;">study-tracker-api-7stm.onrender.com/swagger-ui</a></p>
+    </div>
+    <div class="modal-section">
+      <h3>주요 구현</h3>
+      <ul>
+        <li><strong>REST API 설계 및 Swagger 문서화</strong>: API 명세를 직접 작성하고 서버-클라이언트 연동 구조를 설계. 홈페이지 개발 시 필요한 API 연동 구조를 깊이 이해</li>
+        <li><strong>CI/CD 자동화</strong>: GitHub Actions로 main push 시 자동 테스트·빌드·배포. 반복 작업 완전 자동화</li>
+        <li><strong>Redis 캐싱</strong>: 통계 API 성능 최적화, TTL 기반 캐시 무효화 설계</li>
+        <li><strong>단위/통합 테스트 60건</strong>: MockMvc, Mockito, JUnit 5 활용</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-p4" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect('p4')">✕</button>
+    <div class="modal-emoji">📦</div>
+    <h2>내마(Dama) — 서비스 기획부터 UI 설계까지</h2>
+    <div class="modal-period">2026.01 ~ 2026.02 (2개월) · Kotlin, Spring Boot, Flutter, JWT, PostgreSQL, Docker · 팀 3명</div>
+    <div class="modal-section">
+      <h3>주요 경험</h3>
+      <ul>
+        <li><strong>디자이너 협업 UI 설계</strong>: 디자이너와 함께 서비스 전반의 UI 흐름을 설계. 사용자 경험을 중심으로 화면 구성을 공동으로 결정</li>
+        <li><strong>사용자 중심 기능 기획</strong>: 구독 비용 분석, 지난달 대비 증감 표시, D-3 결제 알림 등 실제 사용자 니즈를 직접 기획하고 구현</li>
+        <li><strong>보안 설계</strong>: Refresh Token Rotation으로 토큰 재사용 공격 차단. 타 사용자 리소스 접근 시 404 반환으로 존재 여부 노출 방지</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+  updateActiveNav();
+});
+function updateActiveNav() {
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+  links.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 70); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+function openModal(id) { document.getElementById('modal-' + id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeModal(e) { if (e.target.classList.contains('modal-overlay')) { e.target.classList.remove('open'); document.body.style.overflow = ''; } }
+function closeModalDirect(id) { document.getElementById('modal-' + id).classList.remove('open'); document.body.style.overflow = ''; }
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { document.querySelectorAll('.modal-overlay.open').forEach(m => { m.classList.remove('open'); document.body.style.overflow = ''; }); }
+});
+</script>
+</body>
+</html>
