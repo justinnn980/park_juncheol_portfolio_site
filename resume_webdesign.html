@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>박준철 | 웹 UI 개발자</title>
+  <link rel="stylesheet" href="resume.css?v=20260512-store" />
+  <style>
+    :root {
+      --accent: #7c3aed;
+      --accent-strong: #6d28d9;
+      --accent-soft: rgba(124,58,237,0.12);
+      --accent-rgb: 124,58,237;
+    }
+
+    .eyebrow { border-color: rgba(124,58,237,0.24); color: #6d28d9; background: rgba(124,58,237,0.08); }
+    .section-title p { color: #6d28d9; }
+    .company-label { color: #6d28d9; }
+    .project-number { background: rgba(124,58,237,0.1); border-color: rgba(124,58,237,0.22); color: #6d28d9; }
+    .certificate-list span { color: #6d28d9; background: rgba(124,58,237,0.08); }
+    .primary-button { background: linear-gradient(135deg, #7c3aed, #6d28d9); box-shadow: 0 4px 20px rgba(124,58,237,0.32); }
+    .primary-button:hover { background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: 0 8px 28px rgba(124,58,237,0.42); }
+    .hero-metrics dt { background: linear-gradient(135deg, #6d28d9, #db2777); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .experience-card::before { background: linear-gradient(180deg, #8b5cf6 0%, #ec4899 100%); }
+    .nav-links a.is-active { color: #6d28d9; background: rgba(124,58,237,0.1); }
+    .project-detail li::before { background: #8b5cf6; }
+    .contact-links a:hover { background: rgba(124,58,237,0.1); border-color: rgba(124,58,237,0.28); color: #6d28d9; }
+    .skill-card:nth-child(1)::before { background: linear-gradient(90deg, #8b5cf6, #ec4899); }
+    .skill-card:nth-child(2)::before { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+    .skill-card:nth-child(3)::before { background: linear-gradient(90deg, #06b6d4, #6366f1); }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="intro">
+    <nav class="nav" aria-label="주요 메뉴">
+      <a class="brand" href="#intro">박준철 <span class="version-tag">Web UI</span></a>
+      <div class="nav-links">
+        <a href="index.html">포트폴리오</a>
+        <a href="#skills">스킬</a>
+        <a href="#experience">경력</a>
+        <a href="#videos">프로젝트</a>
+        <a href="#certificates">수료증</a>
+        <a href="#contact">연락처</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">React · TypeScript · UI/UX · Performance</p>
+        <h1>박준철</h1>
+        <p class="hero-lead">
+          브랜드 아이덴티티를 화면으로 구현하고 사용자 체감 속도를 수치로 개선한 웹 UI 개발자입니다.
+        </p>
+        <dl class="profile-list">
+          <div>
+            <dt>전공</dt>
+            <dd>컴퓨터공학과</dd>
+          </div>
+          <div>
+            <dt>복수전공</dt>
+            <dd>모빌리티AI/SW융합전공</dd>
+          </div>
+        </dl>
+        <div class="hero-actions">
+          <a class="primary-button" href="#videos">프로젝트 보기</a>
+          <a class="ghost-button" href="mailto:justinnn980@gmail.com">메일 보내기</a>
+        </div>
+        <dl class="hero-metrics" aria-label="주요 성과">
+          <div>
+            <dt>FCP −39%</dt>
+            <dd>초기 렌더링 체감 속도 개선</dd>
+          </div>
+          <div>
+            <dt>1,000+</dt>
+            <dd>콘텐츠 포스터 이미지 최적화</dd>
+          </div>
+          <div>
+            <dt>1년 10개월</dt>
+            <dd>OTT 서비스 실서비스 운영</dd>
+          </div>
+        </dl>
+      </div>
+      <aside class="hero-panel" aria-label="핵심 역량 요약">
+        <div class="panel-topline">
+          <span>Web UI Stack</span>
+          <strong>2026</strong>
+        </div>
+        <div class="panel-main">
+          <p>UI pipeline</p>
+          <strong>Design System → React Component → Performance → Deploy</strong>
+        </div>
+        <div class="panel-grid">
+          <span>React 18</span>
+          <span>TypeScript</span>
+          <span>CSS3</span>
+          <span>Flutter</span>
+        </div>
+      </aside>
+    </section>
+  </header>
+
+  <main>
+    <section class="section" id="skills">
+      <div class="section-title">
+        <p>Skills</p>
+        <h2>스킬</h2>
+      </div>
+
+      <div class="skill-grid">
+        <article class="skill-card">
+          <span>Web UI 개발</span>
+          <p>React 18 / TypeScript 기반 컴포넌트 설계, 스켈레톤 UI, Lazy Loading, 이미지 최적화로 사용자 체감 성능 개선</p>
+          <div class="skill-tags">
+            <small>React 18</small>
+            <small>TypeScript</small>
+            <small>HTML5</small>
+            <small>CSS3</small>
+            <small>Vite</small>
+          </div>
+        </article>
+        <article class="skill-card">
+          <span>Mobile UI</span>
+          <p>Flutter 3 기반 Android / iOS 실서비스 UI 구현. WebView 연동으로 앱과 웹의 콘텐츠 흐름 통합</p>
+          <div class="skill-tags">
+            <small>Flutter 3</small>
+            <small>Android</small>
+            <small>iOS</small>
+            <small>WebView</small>
+          </div>
+        </article>
+        <article class="skill-card">
+          <span>Design & Deploy</span>
+          <p>디자이너와 협업해 Figma 시안을 화면으로 구현. AWS S3, Docker, Render 기반 정적 배포 운영 경험</p>
+          <div class="skill-tags">
+            <small>Figma 협업</small>
+            <small>AWS S3</small>
+            <small>Docker</small>
+            <small>Render</small>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-title">
+        <p>Experience</p>
+        <h2>경력</h2>
+      </div>
+
+      <article class="experience-card">
+        <div class="experience-heading">
+          <div>
+            <span class="company-label">회사</span>
+            <h3>(주)홈초이스</h3>
+          </div>
+          <p>2024.02.19 ~ 2025.11.03 · 1년 10개월</p>
+        </div>
+        <p>
+          전국 디지털케이블TV 가입자 VOD 전용 프로그램을 공급하는 국내 1위 사업자이자
+          OTT 서비스 <a href="https://www.ochoice.co.kr/page/intro.php" target="_blank" rel="noreferrer">"오초이스"</a>를 운영하는 회사입니다.
+          매출 340억 1,850만원(25년) 규모 환경에서 웹 UI 개발·이관·운영을 담당했습니다.
+        </p>
+        <div class="experience-meta">
+          <span>주요업무: 웹 UI 개발 및 이관, OTT 앱 웹뷰 전환, 화면 성능 최적화, 디자이너 협업</span>
+          <span>기술: React 18 · TypeScript · Flutter 3 · AWS S3</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="videos">
+      <div class="section-title">
+        <p>Projects</p>
+        <h2>프로젝트 경험</h2>
+      </div>
+
+      <div class="project-list">
+        <article class="project-card">
+          <div class="project-summary">
+            <span class="project-number">01</span>
+            <div class="project-summary-text">
+              <h3>OTT 앱 마이그레이션 및 웹 UI 전환</h3>
+              <p>
+                콘텐츠 포스터가 많은 영화 상세 화면을 React 기반 웹으로 전환해
+                앱 배포 없이 운영팀이 실시간으로 콘텐츠를 수정·반영할 수 있는 구조를 구축했습니다.
+              </p>
+            </div>
+          </div>
+          <div class="project-detail">
+            <dl>
+              <div>
+                <dt>기간 및 참여인원</dt>
+                <dd>2024.02 ~ 2025.10 · 1년 10개월 / 시니어 1명, 개발자 2명, 디자이너 1명</dd>
+              </div>
+              <div>
+                <dt>협력사</dt>
+                <dd>LG헬로비전 (매출 1조), 드라이브 모바일TV (매출 3,500억)</dd>
+              </div>
+              <div>
+                <dt>기술</dt>
+                <dd>React 18, TypeScript, HTML5, CSS3, Flutter 3, AWS S3</dd>
+              </div>
+            </dl>
+            <ul>
+              <li>스켈레톤 UI 적용과 Lazy Loading으로 불필요한 리소스 사전 로딩을 차단해 <strong>FCP 39%, LCP 10.8% 개선</strong></li>
+              <li>포스터 이미지 리사이징 및 포맷 최적화로 1,000건 이상의 이미지 자산 관리, 페이지 렌더링 속도와 시각적 품질 동시 개선</li>
+              <li>콘텐츠 변경 시 앱 재배포 없이 웹 화면만 수정해 반영하는 구조를 구성해 프로모션·이벤트 등 이관 요구사항 즉각 대응 가능</li>
+              <li>디자이너와 협업해 브랜드 일관성을 유지하면서 컴포넌트 단위로 화면 품질 기준을 관리하는 경험 획득</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-summary">
+            <span class="project-number">02</span>
+            <div class="project-summary-text">
+              <h3>숫자 대결 — 실시간 증가 게임</h3>
+              <p>
+                기획부터 UI 디자인, 프론트엔드, 백엔드, 배포까지 전 과정을 3일 내 단독으로 완성한 실시간 게임 서비스입니다.
+              </p>
+            </div>
+          </div>
+          <div class="project-detail">
+            <dl>
+              <div>
+                <dt>기간 및 참여인원</dt>
+                <dd>2026.01 ~ / 개인</dd>
+              </div>
+              <div>
+                <dt>기술</dt>
+                <dd>Flutter, Spring Boot, WebSocket, Render</dd>
+              </div>
+            </dl>
+            <ul>
+              <li>화면 구조를 직접 설계하고 사용자 인터랙션을 구현해 기획 의도를 화면으로 빠르게 연결하는 과정을 경험</li>
+              <li>WebSocket 기반 실시간 통신을 UI에 반영해 게임 상태 변화가 지연 없이 화면에 표시되도록 구성</li>
+              <li>배포 가능한 웹성 구조로 완성해 Render 환경에서 실서비스로 운영</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-summary">
+            <span class="project-number">03</span>
+            <div class="project-summary-text">
+              <h3>SECT — 커뮤니티 서비스 UI/UX 설계</h3>
+              <p>
+                팔로우/팔로워, 게시글 작성, 좋아요, 채팅 등 커뮤니티 핵심 기능의 UI/UX 구조를 설계하고
+                AI 에이전트를 활용해 빠르게 반복 작업을 효율화한 진행 중 프로젝트입니다.
+              </p>
+            </div>
+          </div>
+          <div class="project-detail">
+            <dl>
+              <div>
+                <dt>기간 및 참여인원</dt>
+                <dd>2026.05 ~ 진행 중 / 개인</dd>
+              </div>
+              <div>
+                <dt>기술</dt>
+                <dd>Claude Code, Codex, Docker, Render</dd>
+              </div>
+            </dl>
+            <ul>
+              <li>팔로우/팔로워, 게시글, 좋아요, 채팅 등 커뮤니티 핵심 기능의 UI/UX 구조를 직접 설계</li>
+              <li>AI 에이전트를 활용해 UI 흐름 및 기능 구현 방향을 빠르게 정리하고 반복 수정을 효율화</li>
+              <li>배포 가능한 웹성 구조로 구성해 실제 사용자 접근 가능한 서비스로 출시 준비 중</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-summary">
+            <span class="project-number">04</span>
+            <div class="project-summary-text">
+              <h3>CCTV 실시간 낙상 감지 모니터링 UI</h3>
+              <p>
+                YOLOv5 기반 낙상 감지 결과를 실시간 영상, 이벤트 로그, 알림으로 분리해 보여주는
+                PyQt5 모니터링 화면을 설계하고 구현했습니다.
+              </p>
+            </div>
+          </div>
+          <div class="project-detail">
+            <dl>
+              <div>
+                <dt>기간 및 참여인원</dt>
+                <dd>2023.05 ~ 2023.07 · 2개월 / 5명</dd>
+              </div>
+              <div>
+                <dt>기술</dt>
+                <dd>Python 3, YOLOv5, OpenCV, PyQt5</dd>
+              </div>
+            </dl>
+            <ul>
+              <li>실시간 영상, 감지 이벤트 로그, 낙상 알림을 분리한 화면 구조를 담당해 운영자가 상황을 한눈에 파악 가능하도록 설계</li>
+              <li>오탐율 30% → 10% 이하로 개선. AI 기반 서비스에서 사용자 인터페이스와 데이터 시각화를 함께 구현한 경험 획득</li>
+              <li>이벤트 발생과 UI 갱신의 분리 구조로 React 상태 업데이트·컴포넌트 분리 방식으로 확장 가능한 아키텍처 경험</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="certificates">
+      <div class="section-title">
+        <p>Certificates</p>
+        <h2>수료증 및 저서</h2>
+      </div>
+
+      <div class="certificate-list">
+        <article>
+          <span>정보통신산업진흥원</span>
+          <p>인공지능 기본과정 수료</p>
+        </article>
+        <article>
+          <span>네이버</span>
+          <p>부스트코스 &lt;DATA SCIENCE&gt; 코치스터디 2023 수료</p>
+        </article>
+        <article>
+          <span>저서</span>
+          <p>
+            <a href="https://www.yes24.com/Product/Goods/109711067" target="_blank" rel="noreferrer">
+              개발자가 되기 위해 꼭 알아야하는 IT 용어 - 공동 저자
+            </a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="section-title">
+        <p>Contact</p>
+        <h2>연락처</h2>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:justinnn980@gmail.com">Email</a>
+        <a href="https://github.com/justinnn980" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://justinnn980.tistory.com/" target="_blank" rel="noreferrer">블로그</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="currentYear">2026</span> 박준철. All rights reserved.</p>
+  </footer>
+
+  <script src="resume.js"></script>
+</body>
+</html>
