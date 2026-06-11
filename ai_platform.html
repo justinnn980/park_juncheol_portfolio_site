@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>박준철 | AI 플랫폼 개발자 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --surface: #f8f9fb;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --border-gray: #edf0f5;
+  --accent: #1a2744;
+  --accent2: #e8630a;
+  --accent-light: #f0f3fa;
+  --accent-mid: #c8d3eb;
+  --orange-light: #fff5ee;
+  --orange-mid: #ffc9a0;
+  --text: #0f1623;
+  --sub: #2d3a52;
+  --muted: #5a6a85;
+  --muted2: #9aabbf;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans KR', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 2px; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 6%;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: all .3s;
+}
+nav.scrolled {
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-gray);
+  padding: 13px 6%;
+  box-shadow: 0 1px 18px rgba(26,39,68,.07);
+}
+.nav-logo { font-size: 1.05rem; font-weight: 900; color: var(--accent); letter-spacing: -.5px; display: flex; align-items: center; gap: 8px; }
+.nav-logo-orange { color: var(--accent2); }
+.nav-links { display: flex; gap: 30px; list-style: none; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: .85rem; font-weight: 500; transition: color .2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--accent); }
+.nav-cta { background: var(--accent2) !important; color: #fff !important; padding: 7px 18px; border-radius: 7px; font-size: .82rem !important; }
+.nav-cta:hover { background: #c4500a !important; }
+
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 120px 6% 80px;
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, #fff8f4 0%, #ffffff 55%);
+}
+.hero-inner { max-width: 780px; text-align: center; position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--orange-light); border: 1px solid var(--orange-mid);
+  color: var(--accent2); padding: 6px 16px; border-radius: 20px;
+  font-size: .8rem; font-weight: 700; margin-bottom: 28px;
+}
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+.hero h1 { font-size: clamp(2.8rem, 6vw, 4.4rem); font-weight: 900; line-height: 1.12; color: var(--text); margin-bottom: 8px; letter-spacing: -2px; }
+.hero-role { font-size: clamp(1.05rem, 2.2vw, 1.28rem); color: var(--accent2); font-weight: 700; margin-bottom: 20px; }
+.hero-sub { font-size: .98rem; color: var(--muted); max-width: 620px; margin: 0 auto 40px; line-height: 1.88; }
+.hero-sub strong { color: var(--accent); font-weight: 700; }
+.hero-metrics {
+  display: flex; justify-content: center; gap: 0; margin-bottom: 44px;
+  border: 1px solid var(--border-gray); border-radius: 16px;
+  overflow: hidden; background: #fff;
+  box-shadow: 0 4px 24px rgba(26,39,68,.06);
+}
+.metric { flex: 1; padding: 20px 12px; text-align: center; border-right: 1px solid var(--border-gray); }
+.metric:last-child { border-right: none; }
+.metric-val { font-size: 1.28rem; font-weight: 900; color: var(--accent); line-height: 1; }
+.metric-val.orange { color: var(--accent2); }
+.metric-label { font-size: .7rem; color: var(--muted2); margin-top: 5px; font-weight: 500; }
+.hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn { padding: 13px 28px; border-radius: 9px; font-size: .9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 16px rgba(26,39,68,.25); }
+.btn-primary:hover { background: #0d1a35; transform: translateY(-2px); }
+.btn-orange { background: var(--accent2); color: #fff; box-shadow: 0 4px 16px rgba(232,99,10,.25); }
+.btn-orange:hover { background: #c4500a; transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--sub); border: 1.5px solid var(--border-gray); }
+.btn-outline:hover { border-color: var(--accent2); color: var(--accent2); transform: translateY(-2px); }
+.scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--muted2); font-size: .72rem; }
+.scroll-arrow { width: 18px; height: 18px; border-right: 2px solid var(--muted2); border-bottom: 2px solid var(--muted2); transform: rotate(45deg); animation: bounce .8s infinite alternate; }
+@keyframes bounce { from{transform:rotate(45deg) translateY(0)} to{transform:rotate(45deg) translateY(5px)} }
+.hero-deco { position: absolute; top: -10%; right: -8%; width: 55%; height: 130%; background: radial-gradient(ellipse, rgba(232,99,10,.04) 0%, transparent 70%); pointer-events: none; }
+.hero-deco2 { position: absolute; bottom: -10%; left: -8%; width: 40%; height: 80%; background: radial-gradient(ellipse, rgba(26,39,68,.04) 0%, transparent 70%); pointer-events: none; }
+
+.target-banner {
+  background: linear-gradient(135deg, var(--accent2) 0%, #c4500a 100%);
+  color: #fff;
+  padding: 16px 6%;
+  text-align: center;
+  font-size: .88rem;
+  font-weight: 500;
+}
+.target-banner strong { color: #ffe0cc; font-weight: 700; }
+
+section { padding: 100px 6%; max-width: 1100px; margin: 0 auto; }
+.section-label { font-size: .72rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px; }
+.section-title { font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 900; color: var(--text); line-height: 1.2; margin-bottom: 12px; }
+.section-sub { color: var(--muted); font-size: .95rem; max-width: 560px; }
+.section-header { margin-bottom: 56px; }
+.divider { width: 40px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; margin: 16px 0 20px; }
+.fade-in { opacity: 0; transform: translateY(24px); transition: opacity .55s, transform .55s; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── ITEM LABEL BADGES ── */
+.item-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--orange-light); border: 1px solid var(--orange-mid);
+  color: var(--accent2); padding: 4px 12px; border-radius: 20px;
+  font-size: .72rem; font-weight: 800; margin-bottom: 10px;
+  letter-spacing: .5px;
+}
+.item-badge.blue {
+  background: var(--accent-light); border-color: var(--accent-mid);
+  color: var(--accent);
+}
+
+/* ── SECTION 1: 역량과 강점 ── */
+.strength-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+.strength-card {
+  background: var(--bg); border: 1.5px solid var(--border); border-radius: 16px;
+  padding: 24px 22px; display: flex; gap: 16px; align-items: flex-start;
+  transition: all .25s;
+}
+.strength-card:hover { border-color: var(--accent2); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(232,99,10,.09); }
+.strength-card.highlight { border-color: var(--accent2); background: var(--orange-light); }
+.str-icon { width: 46px; height: 46px; min-width: 46px; border-radius: 12px; background: var(--orange-light); border: 1px solid var(--orange-mid); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+.strength-card.blue .str-icon { background: var(--accent-light); border-color: var(--accent-mid); }
+.str-match { font-size: .68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent2); margin-bottom: 4px; }
+.strength-card.blue .str-match { color: var(--accent); }
+.str-title { font-weight: 800; color: var(--text); font-size: .92rem; margin-bottom: 6px; line-height: 1.45; }
+.str-desc { font-size: .83rem; color: var(--muted); line-height: 1.68; }
+.str-desc strong { color: var(--accent); font-weight: 700; }
+.strength-card.highlight .str-desc strong { color: var(--accent2); }
+
+/* ── SECTION 2: 실패 경험 ── */
+.failure-wrap { display: grid; gap: 20px; }
+.failure-card {
+  background: var(--surface); border: 1.5px solid var(--border); border-radius: 18px;
+  overflow: hidden; transition: all .25s;
+}
+.failure-card:hover { border-color: var(--accent2); box-shadow: 0 6px 24px rgba(232,99,10,.08); }
+.failure-head { padding: 28px 30px 0; }
+.failure-phase-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.phase-tag { padding: 4px 12px; border-radius: 6px; font-size: .72rem; font-weight: 800; }
+.phase-prob { background: rgba(239,68,68,.1); color: #dc2626; border: 1px solid rgba(239,68,68,.2); }
+.phase-cause { background: rgba(245,158,11,.1); color: #d97706; border: 1px solid rgba(245,158,11,.2); }
+.phase-fix { background: rgba(16,185,129,.1); color: #059669; border: 1px solid rgba(16,185,129,.2); }
+.phase-lesson { background: rgba(99,102,241,.1); color: #4f46e5; border: 1px solid rgba(99,102,241,.2); }
+.failure-title { font-size: 1.15rem; font-weight: 900; color: var(--text); margin-bottom: 20px; line-height: 1.4; }
+.failure-body { padding: 0 30px; }
+.failure-step { margin-bottom: 18px; }
+.step-label { font-size: .7rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.step-label.prob { color: #dc2626; }
+.step-label.cause { color: #d97706; }
+.step-label.fix { color: #059669; }
+.step-label.lesson { color: #4f46e5; }
+.step-text { font-size: .88rem; color: var(--sub); line-height: 1.78; }
+.step-text strong { color: var(--accent); font-weight: 700; }
+.failure-result { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 30px; background: linear-gradient(135deg, rgba(16,185,129,.04), rgba(232,99,10,.04)); border-top: 1px solid var(--border); }
+.fr-item { display: inline-flex; align-items: center; gap: 5px; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 6px 13px; font-size: .78rem; font-weight: 600; color: var(--sub); }
+
+/* ── SECTION 3: 협업 역할 ── */
+.collab-header-card {
+  background: var(--surface); border: 1.5px solid var(--border); border-radius: 16px;
+  padding: 28px 30px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;
+}
+.collab-project-name { font-size: 1.3rem; font-weight: 900; color: var(--text); margin-bottom: 4px; }
+.collab-sub { font-size: .85rem; color: var(--muted); }
+.collab-tag { background: var(--orange-light); border: 1px solid var(--orange-mid); color: var(--accent2); padding: 5px 14px; border-radius: 20px; font-size: .78rem; font-weight: 700; white-space: nowrap; }
+.collab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.collab-card {
+  background: var(--bg); border: 1.5px solid var(--border); border-radius: 16px;
+  overflow: hidden; transition: all .25s;
+}
+.collab-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(26,39,68,.08); }
+.collab-card.mine { border-color: var(--accent2); }
+.collab-card-head {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.collab-card.mine .collab-card-head { background: linear-gradient(135deg, var(--orange-light), #fff); }
+.collab-card.partner .collab-card-head { background: var(--surface); }
+.collab-who { font-weight: 800; font-size: .9rem; color: var(--text); }
+.collab-pct { font-size: .8rem; font-weight: 900; color: var(--accent2); background: var(--orange-light); border: 1px solid var(--orange-mid); padding: 3px 10px; border-radius: 20px; }
+.collab-card.partner .collab-pct { color: var(--accent); background: var(--accent-light); border-color: var(--accent-mid); }
+.collab-list { list-style: none; padding: 16px 20px; }
+.collab-list li { font-size: .84rem; color: var(--sub); padding: 6px 0 6px 18px; position: relative; border-bottom: 1px solid var(--border-gray); line-height: 1.65; }
+.collab-list li:last-child { border-bottom: none; }
+.collab-list li::before { content: ''; position: absolute; left: 5px; top: 14px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent2); }
+.collab-card.partner .collab-list li::before { background: var(--accent); }
+.collab-list li strong { color: var(--accent); font-weight: 700; }
+.collab-bar-wrap { margin-top: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+.collab-bar-label { font-size: .78rem; color: var(--muted); margin-bottom: 10px; font-weight: 600; }
+.collab-bar { height: 10px; border-radius: 5px; background: var(--border); overflow: hidden; }
+.collab-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent)); border-radius: 5px; }
+.collab-bar-pcts { display: flex; justify-content: space-between; margin-top: 6px; font-size: .72rem; font-weight: 700; }
+.collab-bar-mine { color: var(--accent2); }
+.collab-bar-partner { color: var(--accent); }
+
+/* ── SECTION 4: 대표 프로젝트 ── */
+.flagship-card {
+  background: var(--surface); border: 2px solid var(--accent2); border-radius: 20px;
+  overflow: hidden; margin-bottom: 24px;
+}
+.flagship-head {
+  padding: 32px 36px;
+  background: linear-gradient(135deg, var(--orange-light), #fff);
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;
+}
+.flagship-title-wrap {}
+.flagship-emoji { font-size: 2rem; margin-bottom: 8px; }
+.flagship-name { font-size: 1.5rem; font-weight: 900; color: var(--text); margin-bottom: 6px; }
+.flagship-stack { font-size: .82rem; color: var(--muted); }
+.flagship-github {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent); color: #fff; padding: 10px 20px; border-radius: 10px;
+  font-size: .84rem; font-weight: 700; text-decoration: none;
+  transition: all .2s; white-space: nowrap;
+}
+.flagship-github:hover { background: #0d1a35; transform: translateY(-2px); }
+.flagship-body { padding: 28px 36px; }
+.flagship-why { font-size: .95rem; color: var(--sub); line-height: 1.85; margin-bottom: 24px; }
+.flagship-why strong { color: var(--accent2); font-weight: 700; }
+.flagship-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.feature-item {
+  background: #fff; border: 1px solid var(--border); border-radius: 12px;
+  padding: 16px 18px; transition: all .2s;
+}
+.feature-item:hover { border-color: var(--accent2); }
+.feature-icon { font-size: 1.2rem; margin-bottom: 8px; }
+.feature-title { font-weight: 700; font-size: .86rem; color: var(--text); margin-bottom: 4px; }
+.feature-desc { font-size: .8rem; color: var(--muted); line-height: 1.6; }
+.flagship-metrics { display: flex; flex-wrap: wrap; gap: 10px; }
+.f-metric { display: inline-flex; align-items: center; gap: 6px; background: var(--orange-light); border: 1px solid var(--orange-mid); border-radius: 8px; padding: 7px 14px; font-size: .8rem; font-weight: 700; color: var(--accent2); }
+
+/* ── SECTION 5: AI 도구 활용 ── */
+.ai-tools-grid { display: grid; gap: 20px; }
+.ai-tool-card {
+  background: var(--surface); border: 1.5px solid var(--border); border-radius: 18px;
+  overflow: hidden; transition: all .25s;
+}
+.ai-tool-card:hover { border-color: var(--accent2); box-shadow: 0 8px 28px rgba(232,99,10,.08); }
+.ai-tool-head { padding: 22px 26px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; }
+.ai-tool-title { font-size: 1.05rem; font-weight: 900; color: var(--text); margin-bottom: 4px; }
+.ai-tool-subtitle { font-size: .82rem; color: var(--muted); }
+.ai-result-badge { background: linear-gradient(135deg, var(--accent2), #c4500a); color: #fff; padding: 5px 14px; border-radius: 20px; font-size: .76rem; font-weight: 800; white-space: nowrap; }
+.ai-tool-body { padding: 22px 26px; }
+.ai-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+.ai-flow-step { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 6px 14px; font-size: .78rem; font-weight: 600; color: var(--sub); }
+.ai-flow-step.highlight { background: var(--orange-light); border-color: var(--orange-mid); color: var(--accent2); font-weight: 700; }
+.ai-flow-arrow { color: var(--muted2); font-weight: 700; font-size: .85rem; }
+.ai-detail { font-size: .87rem; color: var(--sub); line-height: 1.78; }
+.ai-detail strong { color: var(--accent2); font-weight: 700; }
+.ai-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+.ai-cmp-box { padding: 14px 16px; border-radius: 10px; }
+.ai-cmp-box.before { background: rgba(239,68,68,.04); border: 1px solid rgba(239,68,68,.15); }
+.ai-cmp-box.after { background: rgba(16,185,129,.04); border: 1px solid rgba(16,185,129,.15); }
+.ai-cmp-label { font-size: .7rem; font-weight: 900; letter-spacing: 1px; margin-bottom: 8px; }
+.ai-cmp-box.before .ai-cmp-label { color: #dc2626; }
+.ai-cmp-box.after .ai-cmp-label { color: #059669; }
+.ai-cmp-text { font-size: .83rem; color: var(--sub); line-height: 1.6; }
+
+/* ── SKILLS ── */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 14px; }
+.skill-group { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 18px; transition: all .25s; }
+.skill-group:hover { border-color: var(--accent2); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(232,99,10,.07); }
+.skill-group.core { border-color: var(--accent2); background: var(--orange-light); }
+.skill-group-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.skill-group-icon { width: 36px; height: 36px; border-radius: 9px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.05rem; }
+.skill-group.core .skill-group-icon { background: var(--accent2); border-color: var(--accent2); }
+.skill-group-title { font-weight: 700; color: var(--text); font-size: .88rem; }
+.badge-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.badge { background: #fff; border: 1px solid var(--border); color: var(--sub); padding: 4px 10px; border-radius: 6px; font-size: .74rem; font-weight: 500; transition: all .2s; }
+.badge:hover { border-color: var(--accent2); color: var(--accent2); }
+.badge.primary { background: var(--orange-light); border-color: var(--orange-mid); color: #b84e00; font-weight: 600; }
+.badge.blue { background: var(--accent-light); border-color: var(--accent-mid); color: var(--accent); font-weight: 600; }
+
+/* ── CONTACT ── */
+.contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.contact-links { display: flex; flex-direction: column; gap: 12px; }
+.contact-link { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 15px 18px; text-decoration: none; color: var(--text); transition: all .2s; }
+.contact-link:hover { border-color: var(--accent2); background: var(--orange-light); transform: translateX(4px); }
+.contact-link-icon { width: 38px; height: 38px; border-radius: 9px; background: var(--orange-light); border: 1px solid var(--orange-mid); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+.contact-link-label { font-size: .72rem; color: var(--muted2); margin-bottom: 1px; }
+.contact-link-val { font-size: .88rem; font-weight: 700; color: var(--text); }
+.cta-box { background: linear-gradient(135deg, var(--accent2) 0%, #c4500a 100%); border-radius: 18px; padding: 40px 34px; text-align: center; color: #fff; }
+.cta-box h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 10px; }
+.cta-box p { font-size: .9rem; opacity: .85; margin-bottom: 26px; line-height: 1.75; }
+.btn-white { background: #fff; color: var(--accent2); border: none; padding: 12px 26px; border-radius: 9px; font-size: .88rem; font-weight: 700; text-decoration: none; display: inline-block; transition: all .2s; }
+.btn-white:hover { background: var(--orange-light); transform: translateY(-2px); }
+
+footer { text-align: center; padding: 30px 5%; border-top: 1px solid var(--border); color: var(--muted2); font-size: .8rem; background: var(--surface); }
+footer span { color: var(--accent2); font-weight: 600; }
+
+@media (max-width: 768px) {
+  .contact-wrap, .collab-grid, .ai-comparison { grid-template-columns: 1fr; gap: 24px; }
+  .hero-metrics { flex-direction: column; gap: 0; border: none; background: none; box-shadow: none; }
+  .metric { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; background: var(--surface); }
+  .nav-links { display: none; }
+  section { padding: 70px 5%; }
+  .flagship-head, .flagship-body { padding: 22px 20px; }
+  .failure-head, .failure-body { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">박준철<span class="nav-logo-orange">.ai</span></div>
+  <ul class="nav-links">
+    <li><a href="#strength">역량과 강점</a></li>
+    <li><a href="#failure">실패 경험</a></li>
+    <li><a href="#collab">협업 역할</a></li>
+    <li><a href="#flagship">대표 프로젝트</a></li>
+    <li><a href="#aitools">AI 도구 활용</a></li>
+    <li><a href="#contact" class="nav-cta">연락하기</a></li>
+  </ul>
+</nav>
+
+<div class="target-banner">
+  <strong>AI 플랫폼 개발자 산업기능요원(보충역)</strong> 지원을 위해 제작된 포트폴리오입니다
+</div>
+
+<div style="position:relative; overflow:hidden;">
+  <div class="hero-deco"></div>
+  <div class="hero-deco2"></div>
+  <section class="hero" style="max-width:none; padding-left:6%; padding-right:6%;">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        AI 서비스 개발 · 백엔드 · Python · REST API
+      </div>
+      <h1>박 준 철</h1>
+      <div class="hero-role">AI 플랫폼 개발자 · 백엔드 엔지니어</div>
+      <p class="hero-sub">
+        <strong>실서비스 백엔드 API 설계·운영 1년 10개월</strong>과<br>
+        <strong>Python 자동화 파이프라인, AI 어노테이션, AI 에이전트 활용 개발</strong> 경험으로<br>
+        AI API 활용 서비스 개발과 사내 업무 자동화 도구 구축에 기여하겠습니다.
+      </p>
+      <div class="hero-metrics">
+        <div class="metric">
+          <div class="metric-val orange">1년 10개월</div>
+          <div class="metric-label">실서비스 백엔드 경력</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">5개 기관</div>
+          <div class="metric-label">AI 어노테이션 실무</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val orange">Python</div>
+          <div class="metric-label">자동화 파이프라인 운영</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">AI 에이전트</div>
+          <div class="metric-label">Claude Code · Codex 개발 활용</div>
+        </div>
+      </div>
+      <div class="hero-btns">
+        <a href="#strength" class="btn btn-orange">역량과 강점 보기 →</a>
+        <a href="#flagship" class="btn btn-primary">대표 프로젝트 보기</a>
+        <a href="#contact" class="btn btn-outline">연락하기</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>스크롤</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ────────────────────────────────────────────────── -->
+<!-- SECTION 1: 역량과 강점 -->
+<!-- ────────────────────────────────────────────────── -->
+<section id="strength" style="background:var(--surface); max-width:none; padding-left:6%; padding-right:6%;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <div class="item-badge">필수 항목 01</div>
+      <div class="section-label">Strengths</div>
+      <h2 class="section-title">지원 직무와 저의 역량</h2>
+      <div class="divider"></div>
+      <p class="section-sub">지원 직무 4가지와 저의 실제 경험을 직접 연결했습니다.</p>
+    </div>
+    <div class="strength-grid">
+
+      <div class="strength-card highlight fade-in">
+        <div class="str-icon">🤖</div>
+        <div>
+          <div class="str-match">담당업무 · AI API 활용 서비스 개발</div>
+          <div class="str-title">LLM API 통합 패턴 — 토큰 갱신·Rate Limit·Fallback 설계 이해</div>
+          <div class="str-desc">
+            홈초이스에서 JWT Access Token 만료 시 사용자 경험을 끊지 않고 자동 갱신하는 인터셉터 레이어를 설계했습니다.
+            <strong>이 패턴은 LLM API Key 관리·Rate Limit 대응·Fallback 모델 전환에 완전히 동일하게 적용됩니다.</strong>
+            REST API 백엔드에 LLM API(OpenAI, Anthropic 등)를 통합하는 구조를 직접 설계 가능합니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="strength-card highlight fade-in">
+        <div class="str-icon">⚙️</div>
+        <div>
+          <div class="str-match">담당업무 · 사내 업무 자동화 도구 개발</div>
+          <div class="str-title">Quartz 배치 6개 Job + Python Selenium 파이프라인 — 완전 자동화 운영</div>
+          <div class="str-desc">
+            홈초이스에서 콘텐츠 배포·인코딩·업로드·검증을 <strong>Quartz Job 6개(5분 주기)</strong>로 완전 자동화했습니다.
+            퇴직 후에는 <strong>Python + Selenium + Docker + Render Cron</strong>으로 콘텐츠 메타데이터 1,000건 이상을 매일 자동 수집하는 파이프라인을 단독 구축·운영합니다.
+            사내 업무 자동화 도구를 설계하고 운영하는 역량이 실무에서 검증되었습니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="strength-card blue fade-in">
+        <div class="str-icon">🐍</div>
+        <div>
+          <div class="str-match">자격요건 · Python / JavaScript 기반 개발</div>
+          <div class="str-title">Python 자동화 스크립트 · JavaScript 웹앱 — 양쪽 실무 경험</div>
+          <div class="str-desc">
+            Python으로 Selenium 크롤러, Docker 컨테이너 자동화, 데이터 파이프라인을 구현했습니다.
+            홈초이스 재직 중에는 <strong>React WebView + JavaScript</strong>로 웹 컴포넌트와 Flutter 네이티브 레이어를 통합했습니다.
+            두 언어 모두 AI 서비스 개발에서 즉시 활용 가능한 수준입니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="strength-card blue fade-in">
+        <div class="str-icon">🔌</div>
+        <div>
+          <div class="str-match">자격요건 · REST API 기반 서비스 개발</div>
+          <div class="str-title">REST API 설계·운영 1년 10개월 — 대규모 외부 시스템 연동 포함</div>
+          <div class="str-desc">
+            LG헬로비전(가입자 343만), 드라이브(매출 3,500억) 등 <strong>인증 구조가 다른 대규모 외부 시스템을 단일 확장 가능한 REST API 구조로 연동</strong>하고 운영했습니다.
+            Study Tracker API·다마(Dama) 프로젝트에서 JWT 인증, CQRS, Redis 캐싱까지 직접 설계·구현했습니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="strength-card fade-in">
+        <div class="str-icon">📊</div>
+        <div>
+          <div class="str-match">우대사항 · AI API(LLM 등) 활용 경험</div>
+          <div class="str-title">AI 어노테이션 5개 기관 — AI 학습 데이터 품질 기준 직접 이해</div>
+          <div class="str-desc">
+            이스트에이드·SuperbAI·크라우드웍스 등 5개 기관에서 BBox·Polygon·Segmentation·Keypoint·Object Tracking 실무 수행.
+            <strong>AI 모델이 어떤 형식과 품질의 데이터를 필요로 하는지 직접 이해</strong>했습니다.
+            RAG 파이프라인의 문서 청킹·임베딩 원리와 동일한 구조적 사고방식을 보유합니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="strength-card fade-in">
+        <div class="str-icon">💡</div>
+        <div>
+          <div class="str-match">담당업무 · 데이터 기반 기능 설계 및 프로토타입 개발</div>
+          <div class="str-title">AI 에이전트로 기획→설계→구현→배포 전 과정 3일 내 완결</div>
+          <div class="str-desc">
+            실시간 WebSocket 숫자 동기화 게임을 기획부터 배포까지 <strong>3일 내에 단독으로 완결</strong>했습니다.
+            커뮤니티 웹앱(게시글/좋아요/팔로우/채팅) 또한 <strong>Claude Code·Codex AI 에이전트를 활용</strong>해 빠르게 프로토타입을 구현하고 실서비스 수준으로 완성했습니다.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ────────────────────────────────────────────────── -->
+<!-- SECTION 2: 실패 경험 & 개선 방향 -->
+<!-- ────────────────────────────────────────────────── -->
+<section id="failure">
+  <div class="section-header fade-in">
+    <div class="item-badge">필수 항목 02</div>
+    <div class="section-label">Failure & Growth</div>
+    <h2 class="section-title">실패에서 배운 것</h2>
+    <div class="divider"></div>
+    <p class="section-sub">실제 운영 장애와 설계 실수에서 얻은 교훈입니다.</p>
+  </div>
+  <div class="failure-wrap">
+
+    <!-- 실패 케이스 1 -->
+    <div class="failure-card fade-in">
+      <div class="failure-head">
+        <div class="failure-phase-row">
+          <span class="phase-tag phase-prob">상황</span>
+          <span class="phase-tag phase-cause">원인</span>
+          <span class="phase-tag phase-fix">개선</span>
+          <span class="phase-tag phase-lesson">교훈</span>
+        </div>
+        <div class="failure-title">운영 인프라 설계 실수 — Proxy 서버 IP 변경으로 대형 파트너사 연동이 반복 중단됐다</div>
+      </div>
+      <div class="failure-body">
+        <div class="failure-step">
+          <div class="step-label prob">상황 (Situation)</div>
+          <div class="step-text">
+            홈초이스에서 LG헬로비전(가입자 343만) 파트너사 연동 API를 운영하던 중,
+            어느 날부터 <strong>외부 SO 서버의 방화벽이 우리 Proxy 서버를 차단</strong>하는 장애가 반복 발생했습니다.
+            매번 파트너사에 IP 화이트리스트 등록을 요청해야 했고, 일주일 이상 서비스가 중단되는 상황이 세 차례 이어졌습니다.
+          </div>
+        </div>
+        <div class="failure-step">
+          <div class="step-label cause">원인 (Root Cause)</div>
+          <div class="step-text">
+            원인은 <strong>AWS 로드밸런서 환경에서 EC2 인스턴스 재시작 시 Proxy 서버의 Public IP가 자동으로 변경된다</strong>는 점을 초기 설계 시 전혀 고려하지 않은 것이었습니다.
+            파트너사의 방화벽은 고정 IP만 허용하는데, 저는 IP가 변경될 수 있다는 인프라 특성을 숙지하지 못한 채 설계했습니다.
+            그 결과 배포·재시작마다 화이트리스트 재등록 절차가 필요한 구조가 반복되었습니다.
+          </div>
+        </div>
+        <div class="failure-step">
+          <div class="step-label fix">개선 방향 (Solution)</div>
+          <div class="step-text">
+            원인을 파악한 뒤 <strong>EC2 기반 Proxy 서버에 Elastic IP를 할당하여 고정 IP 구조로 재설계</strong>했습니다.
+            이후 파트너사 방화벽 등록을 단 한 번 진행했고, 이후 재시작·배포에도 IP가 변하지 않아 동일 장애가 완전히 사라졌습니다.
+            추가로 Proxy 서버의 SSL 인증서 미적용으로 통신 실패가 발생했던 문제도 발견해 전 구간 HTTPS 전환까지 단독으로 수행했습니다.
+          </div>
+        </div>
+        <div class="failure-step">
+          <div class="step-label lesson">교훈 (Lesson)</div>
+          <div class="step-text">
+            이 경험 이후, <strong>외부 시스템과 연동하는 서비스를 설계할 때는 반드시 인프라 환경 특성(IP 변동성, 네트워크 정책)을 먼저 리스트업</strong>합니다.
+            특히 AI API 서비스처럼 외부 LLM API와의 통신이 핵심인 시스템에서는, API Key 관리·IP 정책·Rate Limit 등 외부 의존성의 변동 조건을 설계 단계에서 명시적으로 다루는 습관이 생겼습니다.
+          </div>
+        </div>
+      </div>
+      <div class="failure-result">
+        <span class="fr-item">🔧 Elastic IP 재설계</span>
+        <span class="fr-item">🔒 HTTPS 전환 완료</span>
+        <span class="fr-item">✅ 동일 장애 재발 없음</span>
+        <span class="fr-item">📋 인프라 의존성 설계 체크리스트화</span>
+      </div>
+    </div>
+
+    <!-- 실패 케이스 2 -->
+    <div class="failure-card fade-in">
+      <div class="failure-head">
+        <div class="failure-phase-row">
+          <span class="phase-tag phase-prob">상황</span>
+          <span class="phase-tag phase-cause">원인</span>
+          <span class="phase-tag phase-fix">개선</span>
+          <span class="phase-tag phase-lesson">교훈</span>
+        </div>
+        <div class="failure-title">Study Tracker API — ORM 기본 설정을 믿었다가 N+1 문제로 쿼리 1,000건 이상 발생</div>
+      </div>
+      <div class="failure-body">
+        <div class="failure-step">
+          <div class="step-label prob">상황 (Situation)</div>
+          <div class="step-text">
+            Study Tracker API에서 사용자의 학습 목록을 조회할 때,
+            <strong>로컬에서는 문제없어 보였지만 데이터를 100건 이상 넣고 나서야 쿼리가 수백 건 발생</strong>하고 있음을 발견했습니다.
+            API 응답 시간이 데이터 건수에 비례해 선형으로 증가하는 명백한 성능 문제였습니다.
+          </div>
+        </div>
+        <div class="failure-step">
+          <div class="step-label cause">원인 (Root Cause)</div>
+          <div class="step-text">
+            원인은 <strong>Spring Data JPA의 기본 Lazy Loading 전략을 그대로 사용</strong>해 N+1 문제가 발생한 것이었습니다.
+            설계 단계에서 "JPA가 알아서 최적화해줄 것"이라고 가정한 채 조회 쿼리를 설계했고, 실제 발생 쿼리 수를 측정하지 않은 것이 실수였습니다.
+          </div>
+        </div>
+        <div class="failure-step">
+          <div class="step-label fix">개선 방향 (Solution)</div>
+          <div class="step-text">
+            JPQL Fetch Join과 <strong>복합 인덱스 2개(user_id,id / user_id,completed,id)</strong>를 직접 설계해 N+1을 해결했습니다.
+            추가로 <strong>@Cacheable/@CacheEvict + Redis TTL 60초</strong>로 반복 조회를 캐싱해 DB 부하를 대폭 줄였습니다.
+            이후 P99 응답 시간이 의미 있게 개선된 것을 직접 측정하고 확인했습니다.
+          </div>
+        </div>
+        <div class="failure-step">
+          <div class="step-label lesson">교훈 (Lesson)</div>
+          <div class="step-text">
+            이후 모든 데이터 조회 API를 설계할 때 <strong>"몇 건일 때 쿼리가 몇 개 발생하는가"를 먼저 측정</strong>하는 습관이 생겼습니다.
+            AI 플랫폼에서 LLM 응답 로그나 대화 기록을 조회하는 API도 동일한 문제가 발생할 수 있습니다.
+            초기에 쿼리 수와 인덱스를 함께 설계하는 것이 훨씬 효율적임을 몸으로 배웠습니다.
+          </div>
+        </div>
+      </div>
+      <div class="failure-result">
+        <span class="fr-item">🗄️ Fetch Join으로 N+1 해결</span>
+        <span class="fr-item">📈 복합 인덱스 2개 설계</span>
+        <span class="fr-item">⚡ Redis 캐싱으로 DB 부하 제거</span>
+        <span class="fr-item">📐 쿼리 수 측정 습관화</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ────────────────────────────────────────────────── -->
+<!-- SECTION 3: 협업 역할 -->
+<!-- ────────────────────────────────────────────────── -->
+<section id="collab" style="background:var(--surface); max-width:none; padding-left:6%; padding-right:6%;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <div class="item-badge">필수 항목 03</div>
+      <div class="section-label">Collaboration</div>
+      <h2 class="section-title">협업 프로젝트 — 역할과 기여범위</h2>
+      <div class="divider"></div>
+      <p class="section-sub">2인 팀 프로젝트에서의 역할 분담과 기여 범위를 투명하게 정리했습니다.</p>
+    </div>
+
+    <div class="collab-header-card fade-in">
+      <div>
+        <div class="collab-project-name">다마(Dama) — 구독 통합 관리 서비스</div>
+        <div class="collab-sub">2026.01 – 2026.02 · Kotlin · Spring Boot · QueryDSL · DDD · Docker · 2인 팀</div>
+      </div>
+      <span class="collab-tag">팀 프로젝트 (2인)</span>
+    </div>
+
+    <div class="collab-grid fade-in">
+
+      <div class="collab-card mine">
+        <div class="collab-card-head">
+          <div class="collab-who">박준철 (나)</div>
+          <span class="collab-pct">기여 약 65%</span>
+        </div>
+        <ul class="collab-list">
+          <li><strong>전체 아키텍처 설계</strong> — DDD 기반 User 컨텍스트 / Subscription 컨텍스트 경계 설정</li>
+          <li><strong>인증·보안 시스템 구현</strong> — Spring Security, JWT, Refresh Token Rotation (HMAC-SHA256 해시 저장, 탈취 토큰 즉시 차단)</li>
+          <li><strong>보안 설계</strong> — 타 사용자 리소스 404 마스킹으로 존재 여부 미노출</li>
+          <li><strong>인프라 구성</strong> — Docker Compose, GitHub Actions CI/CD 파이프라인 구성</li>
+          <li><strong>Swagger API 문서화</strong> — 팀 내 API 명세 공유 체계 구축</li>
+          <li><strong>코드 리뷰 주도</strong> — PR 리뷰·머지 기준 정의 및 코드 품질 관리</li>
+        </ul>
+      </div>
+
+      <div class="collab-card partner">
+        <div class="collab-card-head">
+          <div class="collab-who">동료 (팀원)</div>
+          <span class="collab-pct">기여 약 35%</span>
+        </div>
+        <ul class="collab-list">
+          <li><strong>구독 도메인 CRUD</strong> — 구독 등록·수정·삭제·조회 API 구현</li>
+          <li><strong>QueryDSL 최적화</strong> — 구독 목록 필터·정렬 동적 쿼리 작성으로 조회 성능 개선</li>
+          <li><strong>알림 스케줄러</strong> — 결제일 D-3 이메일 알림 스케줄러 구현</li>
+          <li><strong>단위 테스트</strong> — 구독 도메인 서비스 레이어 테스트 작성</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="collab-bar-wrap fade-in">
+      <div class="collab-bar-label">전체 코드베이스 기여도</div>
+      <div class="collab-bar">
+        <div class="collab-bar-fill" style="width:65%;"></div>
+      </div>
+      <div class="collab-bar-pcts">
+        <span class="collab-bar-mine">박준철 65% — 아키텍처·인증·보안·인프라</span>
+        <span class="collab-bar-partner">팀원 35% — 구독 CRUD·QueryDSL·스케줄러</span>
+      </div>
+    </div>
+
+    <div style="margin-top:20px; background:#fff; border:1.5px solid var(--border); border-radius:14px; padding:22px 24px;" class="fade-in">
+      <div class="section-label" style="margin-bottom:8px;">협업 방식</div>
+      <p style="font-size:.88rem; color:var(--sub); line-height:1.85;">
+        GitHub Flow를 기반으로 기능별 브랜치를 분리해 작업했고, 모든 머지는 PR + 코드 리뷰 후 진행했습니다.
+        <strong style="color:var(--accent);">아키텍처 설계와 보안 컴포넌트는 제가 주도</strong>하되, 방향 결정은 매일 간단한 싱크 미팅으로 팀원과 공유했습니다.
+        팀원이 QueryDSL 쿼리 성능에서 막혔을 때 함께 인덱스 설계를 검토하며 문제를 해결했습니다.
+        결과적으로 두 사람 모두 서비스 전체 구조를 이해하고 있어, 서로의 영역에서 문제가 생겼을 때 빠르게 협력할 수 있었습니다.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ────────────────────────────────────────────────── -->
+<!-- SECTION 4: 대표 프로젝트 -->
+<!-- ────────────────────────────────────────────────── -->
+<section id="flagship">
+  <div class="section-header fade-in">
+    <div class="item-badge">필수 항목 04</div>
+    <div class="section-label">Flagship Project</div>
+    <h2 class="section-title">가장 자신 있는 프로젝트</h2>
+    <div class="divider"></div>
+    <p class="section-sub">백엔드 역량의 핵심을 집약한 개인 프로젝트입니다.</p>
+  </div>
+
+  <div class="flagship-card fade-in">
+    <div class="flagship-head">
+      <div class="flagship-title-wrap">
+        <div class="flagship-emoji">📚</div>
+        <div class="flagship-name">Study Tracker API</div>
+        <div class="flagship-stack">Java 21 · Spring Boot · PostgreSQL · Redis · Docker · GitHub Actions · Render</div>
+      </div>
+      <a href="https://github.com/juncheolbe/study-tracker" target="_blank" class="flagship-github">
+        ⬡ GitHub Repo 바로가기 →
+      </a>
+    </div>
+    <div class="flagship-body">
+      <p class="flagship-why">
+        이 프로젝트를 대표 프로젝트로 선택한 이유는, <strong>AI 플랫폼 서비스 백엔드에 필요한 핵심 기술(인증, 캐싱, 무결성, 보안 설계, 테스트, 배포)을 모두 직접 설계·구현한 유일한 프로젝트</strong>이기 때문입니다.
+        특히 JWT를 라이브러리 없이 HMAC-SHA256으로 직접 서명·검증하는 구현은 LLM API 토큰 관리의 보안 설계와 동일한 사고방식에서 출발했습니다.
+        <strong>Redis 캐싱, 복합 인덱스, CQRS 패턴, 멱등성 키</strong>까지, 대규모 AI 서비스 백엔드에 필요한 구조적 기반을 이 프로젝트에 응축해 구현했습니다.
+      </p>
+
+      <div class="flagship-features">
+        <div class="feature-item">
+          <div class="feature-icon">🔐</div>
+          <div class="feature-title">JWT 직접 구현</div>
+          <div class="feature-desc">HMAC-SHA256 서명·검증 직접 구현. 타이밍 공격 방어(MessageDigest.isEqual). 라이브러리 없이 토큰 보안 원리 이해.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <div class="feature-title">Redis 캐싱</div>
+          <div class="feature-desc">@Cacheable/@CacheEvict + TTL 60초. 반복 쿼리 캐싱으로 DB 부하 제거. AI 서비스의 LLM 응답 캐싱 구조와 동일한 패턴.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔑</div>
+          <div class="feature-title">멱등성 키</div>
+          <div class="feature-desc">Idempotency-Key를 Redis TTL로 저장. 중복 요청 409 차단. LLM API의 중복 호출 방지 구조와 동일.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🏗️</div>
+          <div class="feature-title">CQRS 패턴</div>
+          <div class="feature-desc">쓰기(UserService) / 읽기(UserQueryService) 책임 분리. 복합 인덱스 2개(user_id,id / user_id,completed,id) 직접 설계.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🧪</div>
+          <div class="feature-title">테스트 60건</div>
+          <div class="feature-desc">MockMvc + Mockito + JUnit5 단위·통합 테스트 60건. GitHub Actions CI에서 자동 실행. PR 머지 전 테스트 통과 보장.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🚀</div>
+          <div class="feature-title">Docker · CI/CD</div>
+          <div class="feature-desc">Docker 컨테이너화 + Render 배포. GitHub Actions로 push 시 자동 테스트·배포. 실서비스 수준의 배포 파이프라인.</div>
+        </div>
+      </div>
+
+      <div class="flagship-metrics">
+        <span class="f-metric">🔐 JWT 직접 구현 (HMAC-SHA256)</span>
+        <span class="f-metric">⚡ Redis TTL 캐싱</span>
+        <span class="f-metric">🔑 멱등성 키 Redis 저장</span>
+        <span class="f-metric">📐 복합 인덱스 2개 설계</span>
+        <span class="f-metric">🧪 테스트 60건 자동화</span>
+        <span class="f-metric">🚀 Docker + Render 배포</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 추가 프로젝트 요약 -->
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; margin-top:20px;">
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px;" class="fade-in">
+      <div style="font-size:1.3rem; margin-bottom:8px;">🔄</div>
+      <div style="font-weight:800; font-size:.92rem; color:var(--text); margin-bottom:4px;">하이브라인 콘텐츠 수집 파이프라인</div>
+      <div style="font-size:.78rem; color:var(--muted2); margin-bottom:10px;">Python · Selenium · Docker · Render Cron Job</div>
+      <div style="font-size:.83rem; color:var(--sub); line-height:1.7;">콘텐츠 메타데이터 1,000건 이상을 <strong>하루 1회 완전 자동 수집</strong>하는 파이프라인. Docker 컨테이너화로 환경 독립성 확보. Render Cron으로 서버리스 스케줄 실행.</div>
+    </div>
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px;" class="fade-in">
+      <div style="font-size:1.3rem; margin-bottom:8px;">🎮</div>
+      <div style="font-weight:800; font-size:.92rem; color:var(--text); margin-bottom:4px;">실시간 숫자 동기화 게임</div>
+      <div style="font-size:.78rem; color:var(--muted2); margin-bottom:10px;">Spring Boot · STOMP WebSocket · 3일 단독 개발·배포</div>
+      <div style="font-size:.83rem; color:var(--sub); line-height:1.7;">서버 단일 상태 관리 지점으로 동시성 문제 해결. WebSocket 실시간 broadcast 구조는 <strong>LLM 스트리밍 응답(SSE/WebSocket)과 완전히 동일한 패턴</strong>입니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────────────────────────────────────────────── -->
+<!-- SECTION 5: AI 도구 활용 생산성 개선 -->
+<!-- ────────────────────────────────────────────────── -->
+<section id="aitools" style="background:var(--surface); max-width:none; padding-left:6%; padding-right:6%;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <div class="item-badge">필수 항목 05</div>
+      <div class="section-label">AI Tools & Productivity</div>
+      <h2 class="section-title">AI 도구로 생산성을 높인 경험</h2>
+      <div class="divider"></div>
+      <p class="section-sub">AI 도구를 단순 보조 수단이 아닌, 개발 워크플로우의 핵심으로 활용했습니다.</p>
+    </div>
+    <div class="ai-tools-grid">
+
+      <!-- 사례 1 -->
+      <div class="ai-tool-card fade-in">
+        <div class="ai-tool-head">
+          <div>
+            <div class="ai-tool-title">Claude Code · Codex — 커뮤니티 웹앱 기획부터 배포까지</div>
+            <div class="ai-tool-subtitle">AI 에이전트를 활용해 혼자 2~3주 걸릴 작업을 3~4일에 완결</div>
+          </div>
+          <span class="ai-result-badge">개발 기간 80% 단축</span>
+        </div>
+        <div class="ai-tool-body">
+          <div class="ai-flow">
+            <span class="ai-flow-step highlight">요구사항 분석 (AI)</span>
+            <span class="ai-flow-arrow">→</span>
+            <span class="ai-flow-step highlight">ERD 설계 (AI)</span>
+            <span class="ai-flow-arrow">→</span>
+            <span class="ai-flow-step highlight">CRUD API 구현 (AI)</span>
+            <span class="ai-flow-arrow">→</span>
+            <span class="ai-flow-step highlight">오류 수정 (AI)</span>
+            <span class="ai-flow-arrow">→</span>
+            <span class="ai-flow-step">Docker + Render 배포</span>
+          </div>
+          <p class="ai-detail">
+            게시글·좋아요·팔로우·실시간 채팅 기능을 가진 커뮤니티 웹앱을
+            <strong>Claude Code와 OpenAI Codex AI 에이전트를 기획·설계·구현·배포 전 과정에 투입</strong>하여 구현했습니다.
+            AI가 ERD를 초안을 제안하면 제가 비즈니스 요구사항 관점에서 피드백하고, AI가 코드를 생성하면 저는 아키텍처 일관성과 보안을 검토하는 방식으로 협업했습니다.
+            LLM이 오류를 감지·분석·수정하는 흐름을 직접 운영하면서, <strong>AI 플랫폼에서 셀프 힐링 엔진이 동작하는 방식을 실질적으로 이해</strong>하게 되었습니다.
+          </p>
+          <div class="ai-comparison">
+            <div class="ai-cmp-box before">
+              <div class="ai-cmp-label">AI 없이 혼자 개발 시</div>
+              <div class="ai-cmp-text">ERD 설계 2일 + API 구현 10일 + 디버깅 3일 + 배포 1일 = <strong>약 2~3주</strong></div>
+            </div>
+            <div class="ai-cmp-box after">
+              <div class="ai-cmp-label">AI 에이전트 활용 시</div>
+              <div class="ai-cmp-text">ERD 설계 0.5일 + API 구현 2일 + 디버깅 0.5일 + 배포 0.5일 = <strong>약 3~4일</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 사례 2 -->
+      <div class="ai-tool-card fade-in">
+        <div class="ai-tool-head">
+          <div>
+            <div class="ai-tool-title">Python + AI — 하이브라인 콘텐츠 수집 파이프라인 자동화</div>
+            <div class="ai-tool-subtitle">Selenium 크롤러 스크립트 및 예외 처리 로직 AI 협업으로 설계</div>
+          </div>
+          <span class="ai-result-badge">운영 가용성 100%</span>
+        </div>
+        <div class="ai-tool-body">
+          <div class="ai-flow">
+            <span class="ai-flow-step">크롤링 요구사항 정의</span>
+            <span class="ai-flow-arrow">→</span>
+            <span class="ai-flow-step highlight">AI로 Selenium 패턴 생성</span>
+            <span class="ai-flow-arrow">→</span>
+            <span class="ai-flow-step highlight">예외 처리·재시도 로직 AI 설계</span>
+            <span class="ai-flow-arrow">→</span>
+            <span class="ai-flow-step">Docker + Render Cron 배포</span>
+          </div>
+          <p class="ai-detail">
+            콘텐츠 메타데이터 1,000건 이상을 매일 자동 수집하는 파이프라인을 구축할 때,
+            <strong>JavaScript 동적 렌더링 페이지 크롤링 패턴, 네트워크 타임아웃 예외 처리, 재시도 로직</strong>을
+            AI와 함께 설계했습니다.
+            직접 모든 케이스를 예상하는 대신, AI가 생성한 패턴을 검토·수정·적용하는 방식으로 빠르게 안정적인 스크립트를 완성했습니다.
+            Docker 컨테이너화와 Render Cron 스케줄 설정도 AI와 함께 최적 구성을 찾아냈고, 출시 이후 <strong>1년 이상 무중단 운영</strong>을 유지하고 있습니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- 사례 3 -->
+      <div class="ai-tool-card fade-in">
+        <div class="ai-tool-head">
+          <div>
+            <div class="ai-tool-title">AI 코드 리뷰 · 리팩토링 — 개발 품질과 속도 동시 향상</div>
+            <div class="ai-tool-subtitle">PR 리뷰·버그 탐지·리팩토링 제안을 AI와 함께 수행</div>
+          </div>
+          <span class="ai-result-badge">코드 리뷰 효율 3배</span>
+        </div>
+        <div class="ai-tool-body">
+          <div class="ai-flow">
+            <span class="ai-flow-step">코드 작성</span>
+            <span class="ai-flow-arrow">→</span>
+            <span class="ai-flow-step highlight">AI 1차 리뷰 (버그·보안)</span>
+            <span class="ai-flow-arrow">→</span>
+            <span class="ai-flow-step highlight">AI 리팩토링 제안</span>
+            <span class="ai-flow-arrow">→</span>
+            <span class="ai-flow-step">최종 코드 반영</span>
+          </div>
+          <p class="ai-detail">
+            다마(Dama) 팀 프로젝트와 Study Tracker API에서 코드를 완성한 후 AI에게 1차 리뷰를 받고,
+            <strong>보안 취약점(SQL 인젝션 가능성, 토큰 검증 누락)과 성능 개선 포인트(불필요한 DB 조회, 중복 로직)</strong>를 조기에 발견했습니다.
+            특히 Refresh Token 탈취 시나리오는 AI와 함께 공격 경로를 시뮬레이션하며 설계를 강화했습니다.
+            AI 리뷰를 통해 팀원에게 구체적인 개선 이유를 설명하는 PR 코멘트 품질도 높아졌습니다.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ────────────────────────────────────────────────── -->
+<!-- SKILLS -->
+<!-- ────────────────────────────────────────────────── -->
+<section id="skills">
+  <div class="section-header fade-in">
+    <div class="section-label">Skills</div>
+    <h2 class="section-title">기술 스택</h2>
+    <div class="divider"></div>
+    <p class="section-sub">AI 플랫폼 개발자 직무 요건 기준으로 정렬했습니다.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group core fade-in">
+      <div class="skill-group-header">
+        <div class="skill-group-icon">🤖</div>
+        <div class="skill-group-title">AI · LLM 연관 (핵심)</div>
+      </div>
+      <div class="badge-row">
+        <span class="badge primary">Python</span>
+        <span class="badge primary">Selenium</span>
+        <span class="badge primary">OpenAI API</span>
+        <span class="badge primary">LLM 스트리밍</span>
+        <span class="badge primary">AI 어노테이션</span>
+        <span class="badge primary">Claude Code</span>
+        <span class="badge primary">Codex</span>
+        <span class="badge primary">RAG 파이프라인 이해</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-header">
+        <div class="skill-group-icon">☕</div>
+        <div class="skill-group-title">백엔드 · API</div>
+      </div>
+      <div class="badge-row">
+        <span class="badge blue">Java 17/21</span>
+        <span class="badge blue">Kotlin</span>
+        <span class="badge blue">Spring Boot</span>
+        <span class="badge blue">Spring Security</span>
+        <span class="badge blue">REST API</span>
+        <span class="badge blue">JWT</span>
+        <span class="badge blue">WebSocket (STOMP)</span>
+        <span class="badge">QueryDSL</span>
+        <span class="badge">JPA</span>
+        <span class="badge">MyBatis</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-header">
+        <div class="skill-group-icon">⚡</div>
+        <div class="skill-group-title">자동화 · 배치</div>
+      </div>
+      <div class="badge-row">
+        <span class="badge blue">Python 자동화 스크립트</span>
+        <span class="badge blue">Quartz Scheduler</span>
+        <span class="badge blue">Render Cron Job</span>
+        <span class="badge">GitHub Actions CI/CD</span>
+        <span class="badge">Docker</span>
+        <span class="badge">AWS S3 / EC2</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-header">
+        <div class="skill-group-icon">🗄️</div>
+        <div class="skill-group-title">데이터베이스 · 캐시</div>
+      </div>
+      <div class="badge-row">
+        <span class="badge blue">PostgreSQL</span>
+        <span class="badge blue">MySQL</span>
+        <span class="badge blue">Redis (캐싱·멱등성)</span>
+        <span class="badge">복합 인덱스 설계</span>
+        <span class="badge">CQRS</span>
+        <span class="badge">DDD</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-header">
+        <div class="skill-group-icon">📱</div>
+        <div class="skill-group-title">프론트엔드 · 앱</div>
+      </div>
+      <div class="badge-row">
+        <span class="badge">JavaScript</span>
+        <span class="badge">React WebView</span>
+        <span class="badge">Flutter</span>
+        <span class="badge">Dart</span>
+        <span class="badge">Riverpod</span>
+        <span class="badge">iOS / Android</span>
+      </div>
+    </div>
+    <div class="skill-group fade-in">
+      <div class="skill-group-header">
+        <div class="skill-group-icon">🎓</div>
+        <div class="skill-group-title">AI 교육 · 경험</div>
+      </div>
+      <div class="badge-row">
+        <span class="badge blue">모빌리티AI·SW융합전공 (복수전공)</span>
+        <span class="badge blue">NIPA AI 기본과정 수료</span>
+        <span class="badge blue">네이버 부스트코스 DS 2023</span>
+        <span class="badge">YOLOv5 낙상감지</span>
+        <span class="badge">TFLite MoveNet</span>
+        <span class="badge">랜덤포레스트</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────────────────────────────────────────────── -->
+<!-- CONTACT -->
+<!-- ────────────────────────────────────────────────── -->
+<section id="contact" style="background:var(--surface); max-width:none; padding-left:6%; padding-right:6%;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">연락처</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="contact-wrap fade-in">
+      <div class="contact-links">
+        <a href="mailto:justinnn980@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉️</div>
+          <div>
+            <div class="contact-link-label">이메일</div>
+            <div class="contact-link-val">justinnn980@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://github.com/juncheolbe" target="_blank" class="contact-link">
+          <div class="contact-link-icon">⬡</div>
+          <div>
+            <div class="contact-link-label">GitHub</div>
+            <div class="contact-link-val">github.com/juncheolbe</div>
+          </div>
+        </a>
+        <a href="https://park-juncheol-portfolio-site.onrender.com/" target="_blank" class="contact-link">
+          <div class="contact-link-icon">🌐</div>
+          <div>
+            <div class="contact-link-label">포트폴리오 사이트</div>
+            <div class="contact-link-val">park-juncheol-portfolio-site.onrender.com</div>
+          </div>
+        </a>
+      </div>
+      <div class="cta-box">
+        <h3>즉시 합류 가능합니다</h3>
+        <p>AI API 활용 서비스 개발과 업무 자동화 도구 구축에 실무 역량을 바로 투입할 수 있습니다. 함께 만들어갈 AI 플랫폼이 기대됩니다.</p>
+        <a href="mailto:justinnn980@gmail.com" class="btn-white">이메일로 연락하기 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>박준철</span> · AI 플랫폼 개발자 포트폴리오 · 2026
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+const links = document.querySelectorAll('.nav-links a[href^="#"]');
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 180) cur = s.id; });
+  links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === `#${cur}`));
+});
+</script>
+</body>
+</html>
