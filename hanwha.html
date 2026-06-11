@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>박준철 | 백엔드 개발자 포트폴리오 — 한화생명 지원</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --surface: #f8fafd;
+  --card: #ffffff;
+  --border: #dde6f0;
+  --border-gray: #e8eef5;
+  --accent: #1a3a5c;
+  --accent2: #f57c00;
+  --accent-light: #f0f5fb;
+  --accent-mid: #c5d8ec;
+  --orange-light: #fff4e6;
+  --orange-mid: #ffd8a8;
+  --text: #0f1f30;
+  --sub: #2d4059;
+  --muted: #5c7a99;
+  --muted2: #8fa5bd;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans KR', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 6%;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: all .3s;
+}
+nav.scrolled {
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-gray);
+  padding: 13px 6%;
+  box-shadow: 0 1px 18px rgba(26,58,92,.07);
+}
+.nav-logo { font-size: 1.05rem; font-weight: 900; color: var(--accent); letter-spacing: -.5px; display: flex; align-items: center; gap: 8px; }
+.nav-logo-orange { color: var(--accent2); }
+.nav-links { display: flex; gap: 30px; list-style: none; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: .85rem; font-weight: 500; transition: color .2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--accent); }
+.nav-cta { background: var(--accent); color: #fff !important; padding: 7px 18px; border-radius: 7px; font-size: .82rem !important; }
+.nav-cta:hover { background: #0f2540 !important; }
+
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 120px 6% 80px;
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, #f0f5fb 0%, #ffffff 60%);
+}
+.hero-inner { max-width: 760px; text-align: center; position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--orange-light); border: 1px solid var(--orange-mid);
+  color: var(--accent2); padding: 6px 16px; border-radius: 20px;
+  font-size: .8rem; font-weight: 700; margin-bottom: 28px;
+}
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+.hero h1 { font-size: clamp(2.8rem, 6vw, 4.4rem); font-weight: 900; line-height: 1.12; color: var(--text); margin-bottom: 8px; letter-spacing: -2px; }
+.hero-role { font-size: clamp(1.1rem, 2.5vw, 1.35rem); color: var(--accent); font-weight: 700; margin-bottom: 20px; }
+.hero-sub { font-size: 1rem; color: var(--muted); max-width: 600px; margin: 0 auto 40px; line-height: 1.85; }
+.hero-sub strong { color: var(--accent); font-weight: 700; }
+.hero-metrics {
+  display: flex; justify-content: center; gap: 0; margin-bottom: 44px;
+  border: 1px solid var(--border-gray); border-radius: 16px;
+  overflow: hidden; background: #fff;
+  box-shadow: 0 4px 24px rgba(26,58,92,.06);
+}
+.metric { flex: 1; padding: 20px 12px; text-align: center; border-right: 1px solid var(--border-gray); }
+.metric:last-child { border-right: none; }
+.metric-val { font-size: 1.3rem; font-weight: 900; color: var(--accent); line-height: 1; }
+.metric-val.orange { color: var(--accent2); }
+.metric-label { font-size: .7rem; color: var(--muted2); margin-top: 5px; font-weight: 500; }
+.hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn { padding: 13px 28px; border-radius: 9px; font-size: .9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 16px rgba(26,58,92,.25); }
+.btn-primary:hover { background: #0f2540; transform: translateY(-2px); }
+.btn-orange { background: var(--accent2); color: #fff; box-shadow: 0 4px 16px rgba(245,124,0,.25); }
+.btn-orange:hover { background: #e65100; transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--sub); border: 1.5px solid var(--border-gray); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--muted2); font-size: .72rem; }
+.scroll-arrow { width: 18px; height: 18px; border-right: 2px solid var(--muted2); border-bottom: 2px solid var(--muted2); transform: rotate(45deg); animation: bounce .8s infinite alternate; }
+@keyframes bounce { from{transform:rotate(45deg) translateY(0)} to{transform:rotate(45deg) translateY(5px)} }
+.hero-deco { position: absolute; top: -10%; right: -8%; width: 55%; height: 130%; background: radial-gradient(ellipse, rgba(245,124,0,.04) 0%, transparent 70%); pointer-events: none; }
+.hero-deco2 { position: absolute; bottom: -10%; left: -8%; width: 40%; height: 80%; background: radial-gradient(ellipse, rgba(26,58,92,.04) 0%, transparent 70%); pointer-events: none; }
+
+/* 한화생명 타겟 배너 */
+.target-banner {
+  background: linear-gradient(135deg, var(--accent) 0%, #0f2540 100%);
+  color: #fff;
+  padding: 18px 6%;
+  text-align: center;
+  font-size: .88rem;
+  font-weight: 500;
+  letter-spacing: .3px;
+}
+.target-banner strong { color: #ffd180; font-weight: 700; }
+
+section { padding: 100px 6%; max-width: 1100px; margin: 0 auto; }
+.section-label { font-size: .72rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px; }
+.section-title { font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 900; color: var(--text); line-height: 1.2; margin-bottom: 12px; }
+.section-sub { color: var(--muted); font-size: .95rem; max-width: 540px; }
+.section-header { margin-bottom: 56px; }
+.divider { width: 40px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; margin: 16px 0 20px; }
+
+.fade-in { opacity: 0; transform: translateY(24px); transition: opacity .55s, transform .55s; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── FIT SECTION ── */
+.fit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 14px; }
+.fit-card {
+  background: var(--bg); border: 1.5px solid var(--border); border-radius: 16px;
+  padding: 24px 22px; display: flex; gap: 16px; align-items: flex-start;
+  transition: all .25s;
+}
+.fit-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(26,58,92,.09); }
+.fit-card.highlight { border-color: var(--accent2); background: var(--orange-light); }
+.fit-card.highlight:hover { box-shadow: 0 8px 28px rgba(245,124,0,.12); }
+.fit-icon { width: 44px; height: 44px; min-width: 44px; border-radius: 12px; background: var(--accent-light); border: 1px solid var(--accent-mid); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+.fit-card.highlight .fit-icon { background: var(--orange-light); border-color: var(--orange-mid); }
+.fit-match { font-size: .68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent2); margin-bottom: 4px; }
+.fit-title { font-weight: 800; color: var(--text); font-size: .9rem; margin-bottom: 6px; }
+.fit-desc { font-size: .83rem; color: var(--muted); line-height: 1.65; }
+.fit-desc strong { color: var(--accent); font-weight: 700; }
+.fit-card.highlight .fit-desc strong { color: var(--accent2); }
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: start; }
+.about-text p { color: var(--sub); margin-bottom: 18px; line-height: 1.9; font-size: .96rem; }
+.about-text strong { color: var(--accent); font-weight: 700; }
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.stat-card { background: var(--surface); border: 1px solid var(--border-gray); border-radius: 13px; padding: 22px 18px; text-align: center; transition: all .25s; }
+.stat-card:hover { border-color: var(--accent); background: var(--accent-light); }
+.stat-card .num { font-size: 1.35rem; font-weight: 900; color: var(--accent); line-height: 1; }
+.stat-card .num.orange { color: var(--accent2); }
+.stat-card .desc { font-size: .73rem; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+
+/* ── SKILLS ── */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.skill-group { background: var(--surface); border: 1px solid var(--border-gray); border-radius: 14px; padding: 22px 20px; transition: all .25s; }
+.skill-group:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,58,92,.08); }
+.skill-group.core { border-color: var(--accent); background: var(--accent-light); }
+.skill-group-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.skill-group-icon { width: 36px; height: 36px; border-radius: 9px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.05rem; }
+.skill-group.core .skill-group-icon { background: var(--accent); border-color: var(--accent); }
+.skill-group-title { font-weight: 700; color: var(--text); font-size: .88rem; }
+.badge-row { display: flex; flex-wrap: wrap; gap: 7px; }
+.badge { background: #fff; border: 1px solid var(--border-gray); color: var(--sub); padding: 4px 11px; border-radius: 6px; font-size: .75rem; font-weight: 500; transition: all .2s; }
+.badge:hover { border-color: var(--accent); color: var(--accent); }
+.badge.primary { background: var(--accent-light); border-color: var(--accent-mid); color: var(--accent); font-weight: 600; }
+.badge.orange { background: var(--orange-light); border-color: var(--orange-mid); color: #b45300; font-weight: 600; }
+
+/* ── EXPERIENCE ── */
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--accent), var(--border-gray)); }
+.timeline-item { position: relative; margin-bottom: 44px; }
+.timeline-dot { position: absolute; left: -35px; top: 8px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); }
+.exp-card { background: var(--surface); border: 1.5px solid var(--border-gray); border-radius: 16px; padding: 30px 28px; transition: all .25s; }
+.exp-card:hover { border-color: var(--accent); box-shadow: 0 6px 24px rgba(26,58,92,.08); }
+.exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+.exp-company { font-size: 1.1rem; font-weight: 900; color: var(--text); }
+.exp-period { font-size: .78rem; color: var(--accent); font-weight: 600; background: var(--accent-light); padding: 3px 12px; border-radius: 20px; white-space: nowrap; }
+.exp-role { color: var(--accent); font-size: .86rem; font-weight: 700; margin-bottom: 4px; }
+.exp-tagline { color: var(--muted); font-size: .82rem; margin-bottom: 16px; }
+.exp-list { list-style: none; }
+.exp-list li { color: var(--sub); font-size: .87rem; padding: 6px 0 6px 20px; position: relative; line-height: 1.65; border-bottom: 1px solid var(--border-gray); }
+.exp-list li:last-child { border-bottom: none; }
+.exp-list li::before { content: ''; position: absolute; left: 6px; top: 15px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.exp-list li strong { color: var(--accent); font-weight: 700; }
+.exp-metrics { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.exp-metric { display: flex; align-items: center; gap: 6px; background: var(--accent-light); border: 1px solid var(--accent-mid); border-radius: 8px; padding: 6px 12px; font-size: .78rem; font-weight: 600; color: var(--accent); }
+
+/* ── PROJECTS ── */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 20px; }
+.project-card { background: var(--card); border: 1.5px solid var(--border-gray); border-radius: 18px; overflow: hidden; transition: all .25s; cursor: pointer; }
+.project-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 14px 40px rgba(26,58,92,.1); }
+.project-top { padding: 22px 22px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+.project-emoji { width: 50px; height: 50px; border-radius: 13px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; border: 1px solid var(--accent-mid); }
+.project-badge { font-size: .7rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; background: var(--surface); color: var(--muted); border: 1px solid var(--border-gray); }
+.project-badge.solo { background: var(--orange-light); color: #b45300; border-color: var(--orange-mid); }
+.project-badge.team { background: var(--accent-light); color: var(--accent); border-color: var(--accent-mid); }
+.project-body { padding: 16px 22px 20px; }
+.project-title { font-size: 1rem; font-weight: 900; color: var(--text); margin-bottom: 4px; line-height: 1.35; }
+.project-period { font-size: .74rem; color: var(--muted2); margin-bottom: 10px; }
+.project-desc { font-size: .85rem; color: var(--sub); line-height: 1.68; margin-bottom: 14px; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+.tag { background: var(--surface); border: 1px solid var(--border-gray); color: var(--muted); padding: 3px 9px; border-radius: 5px; font-size: .72rem; }
+.project-results { background: var(--accent-light); border: 1px solid var(--accent-mid); border-radius: 9px; padding: 10px 14px; }
+.project-results p { font-size: .81rem; color: var(--accent); margin: 0; font-weight: 600; line-height: 1.6; }
+
+/* ── MODAL ── */
+.modal-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.5); backdrop-filter: blur(6px); align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--bg); border: 1px solid var(--border-gray); border-radius: 22px; max-width: 680px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 38px 36px; position: relative; box-shadow: 0 28px 70px rgba(26,58,92,.14); }
+.modal-close { position: absolute; top: 16px; right: 18px; background: var(--surface); border: 1px solid var(--border-gray); color: var(--muted); font-size: 1rem; cursor: pointer; transition: all .2s; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.modal-close:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.modal-emoji { font-size: 2.2rem; margin-bottom: 10px; }
+.modal h2 { font-size: 1.22rem; color: var(--text); margin-bottom: 6px; font-weight: 900; line-height: 1.3; }
+.modal-period { font-size: .78rem; color: var(--accent); margin-bottom: 22px; font-weight: 600; background: var(--accent-light); display: inline-block; padding: 3px 12px; border-radius: 20px; }
+.modal-section { margin-bottom: 24px; }
+.modal-section h3 { font-size: .72rem; color: var(--accent2); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border-gray); }
+.modal-section ul { list-style: none; }
+.modal-section ul li { font-size: .88rem; color: var(--sub); padding: 5px 0 5px 18px; position: relative; line-height: 1.7; }
+.modal-section ul li::before { content: ''; position: absolute; left: 5px; top: 13px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.modal-section ul li strong { color: var(--accent); font-weight: 700; }
+.modal-section p { font-size: .88rem; color: var(--sub); line-height: 1.75; }
+
+/* ── MSA 다이어그램 ── */
+.arch-diagram { background: var(--surface); border: 1.5px solid var(--border); border-radius: 16px; padding: 32px; margin-top: 56px; }
+.arch-title { font-size: .8rem; font-weight: 700; color: var(--accent2); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.arch-subtitle { font-size: 1.1rem; font-weight: 800; color: var(--text); margin-bottom: 24px; }
+.arch-row { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+.arch-box { background: #fff; border: 1.5px solid var(--accent-mid); border-radius: 9px; padding: 8px 14px; font-size: .78rem; font-weight: 600; color: var(--accent); text-align: center; flex: 1; min-width: 110px; }
+.arch-box.orange { border-color: var(--orange-mid); color: #b45300; background: var(--orange-light); }
+.arch-box.green { border-color: #a7d7c5; color: #1a6b4a; background: #f0faf6; }
+.arch-arrow { color: var(--muted2); font-size: .85rem; font-weight: 700; }
+.arch-label { font-size: .7rem; color: var(--muted); text-align: center; margin-top: 8px; }
+
+/* ── EDU ── */
+.edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.edu-card { background: var(--surface); border: 1px solid var(--border-gray); border-radius: 13px; padding: 22px; transition: all .25s; display: flex; gap: 14px; align-items: flex-start; }
+.edu-card:hover { border-color: var(--accent); background: var(--accent-light); }
+.edu-icon { width: 40px; height: 40px; min-width: 40px; border-radius: 10px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; border: 1px solid var(--accent-mid); }
+.edu-title { font-weight: 700; color: var(--text); font-size: .9rem; margin-bottom: 4px; }
+.edu-sub { color: var(--muted); font-size: .78rem; line-height: 1.55; }
+
+/* ── CONTACT ── */
+.contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.contact-links { display: flex; flex-direction: column; gap: 12px; }
+.contact-link { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--border-gray); border-radius: 12px; padding: 15px 18px; text-decoration: none; color: var(--text); transition: all .2s; }
+.contact-link:hover { border-color: var(--accent); background: var(--accent-light); transform: translateX(4px); }
+.contact-link-icon { width: 38px; height: 38px; border-radius: 9px; background: var(--accent-light); border: 1px solid var(--accent-mid); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+.contact-link-label { font-size: .72rem; color: var(--muted2); margin-bottom: 1px; }
+.contact-link-val { font-size: .88rem; font-weight: 700; color: var(--text); }
+.cta-box { background: linear-gradient(135deg, var(--accent) 0%, #0f2540 100%); border-radius: 18px; padding: 40px 34px; text-align: center; color: #fff; }
+.cta-box h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 10px; }
+.cta-box p { font-size: .9rem; opacity: .85; margin-bottom: 26px; line-height: 1.75; }
+.btn-white { background: #fff; color: var(--accent); border: none; padding: 12px 26px; border-radius: 9px; font-size: .88rem; font-weight: 700; text-decoration: none; display: inline-block; transition: all .2s; }
+.btn-white:hover { background: var(--accent-light); transform: translateY(-2px); }
+
+footer { text-align: center; padding: 30px 5%; border-top: 1px solid var(--border-gray); color: var(--muted2); font-size: .8rem; background: var(--surface); }
+footer span { color: var(--accent); font-weight: 600; }
+
+@media (max-width: 768px) {
+  .about-grid, .contact-wrap { grid-template-columns: 1fr; gap: 36px; }
+  .hero-metrics { flex-direction: column; gap: 0; border: none; background: none; box-shadow: none; }
+  .metric { border: 1px solid var(--border-gray); border-radius: 10px; margin-bottom: 8px; background: var(--surface); }
+  .nav-links { display: none; }
+  section { padding: 70px 5%; }
+  .modal { padding: 26px 22px; }
+  .arch-row { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">박준철<span class="nav-logo-orange">.dev</span></div>
+  <ul class="nav-links">
+    <li><a href="#fit">접점</a></li>
+    <li><a href="#skills">기술</a></li>
+    <li><a href="#experience">경력</a></li>
+    <li><a href="#projects">프로젝트</a></li>
+    <li><a href="#contact" class="nav-cta">연락하기</a></li>
+  </ul>
+</nav>
+
+<div class="target-banner">
+  <strong>한화생명 IT개발팀 Backend Developer</strong> 지원을 위해 제작된 포트폴리오입니다
+</div>
+
+<div style="position:relative; overflow:hidden;">
+  <div class="hero-deco"></div>
+  <div class="hero-deco2"></div>
+  <section class="hero" style="max-width:none; padding-left:6%; padding-right:6%;">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        즉시 출근 가능 · 백엔드 개발자
+      </div>
+      <h1>박 준 철</h1>
+      <div class="hero-role">백엔드 개발자 · Java / Spring Boot · MSA</div>
+      <p class="hero-sub">
+        실서비스 환경에서 <strong>LG헬로비전(가입자 343만 명), 드라이브(매출 3,500억) 등 대규모 외부 시스템 연동 API</strong>를 직접 설계·운영했습니다.<br>
+        <strong>AES-256 암호화, Quartz 배치 자동화, CQRS·DDD 기반 MSA 설계</strong>를 실무에 적용한 경험으로<br>
+        한화생명 보험코어 시스템의 신뢰성 높은 개발에 기여하겠습니다.
+      </p>
+      <div class="hero-metrics">
+        <div class="metric">
+          <div class="metric-val">343만</div>
+          <div class="metric-label">연동 파트너사 가입자 수</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val orange">1년 10개월</div>
+          <div class="metric-label">실서비스 백엔드 경력</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">AES-256</div>
+          <div class="metric-label">금융급 암호화 실무 적용</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">MSA</div>
+          <div class="metric-label">CQRS · DDD · 컨텍스트 분리</div>
+        </div>
+      </div>
+      <div class="hero-btns">
+        <a href="#fit" class="btn btn-primary">공고와의 접점 보기 →</a>
+        <a href="#projects" class="btn btn-orange">핵심 프로젝트 보기</a>
+        <a href="#contact" class="btn btn-outline">연락하기</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>스크롤</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+</div>
+
+<!-- FIT SECTION -->
+<section id="fit" style="background:var(--surface); max-width:none; padding-left:6%; padding-right:6%;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <div class="section-label">Why Hanwha Life</div>
+      <h2 class="section-title">공고 요건과 저의 경험</h2>
+      <div class="divider"></div>
+      <p class="section-sub">한화생명 담당업무·우대사항과 실제 경험을 1:1로 연결했습니다.</p>
+    </div>
+    <div class="fit-grid">
+
+      <div class="fit-card highlight fade-in">
+        <div class="fit-icon">🏗️</div>
+        <div>
+          <div class="fit-match">MSA 아키텍처</div>
+          <div class="fit-title">클라우드/컨테이너 기반 MSA — 직접 설계</div>
+          <div class="fit-desc">CQRS 패턴으로 <strong>UserService(쓰기) / UserQueryService(읽기) 성질 분리</strong>, DDD 기반 User·Subscription 컨텍스트 경계 설정을 실무 프로젝트에 직접 적용했습니다. <strong>AWS EC2, Docker, GitHub Actions CI/CD</strong>로 운영합니다.</div>
+        </div>
+      </div>
+
+      <div class="fit-card highlight fade-in">
+        <div class="fit-icon">🔗</div>
+        <div>
+          <div class="fit-match">다중 채널 시스템 연동</div>
+          <div class="fit-title">대규모 외부 시스템 연동 API 설계·운영</div>
+          <div class="fit-desc">LG헬로비전(가입자 343만), 드라이브(매출 3,500억), HCN 등 SO별로 <strong>인증 구조가 다른 다중 파트너사 연동 API</strong>를 단일 확장 가능 구조로 설계했습니다. 보험코어의 채널별 시스템 연동 구조와 직접 연결됩니다.</div>
+        </div>
+      </div>
+
+      <div class="fit-card fade-in">
+        <div class="fit-icon">🔒</div>
+        <div>
+          <div class="fit-match">보안 · 암호화</div>
+          <div class="fit-title">AES-256/AES-128 암호화 실무 적용</div>
+          <div class="fit-desc">외부 SO 서버와 주고받는 모든 요청/응답에 <strong>AES-256-ECB / AES-128-CBC 암호화</strong>를 적용하고, SO별 암호화 키·방식을 SiteInfo 설정으로 분리 관리했습니다. 금융 수준의 보안 통신을 실무에서 직접 구현했습니다.</div>
+        </div>
+      </div>
+
+      <div class="fit-card fade-in">
+        <div class="fit-icon">⏱️</div>
+        <div>
+          <div class="fit-match">배치 · 스케줄링</div>
+          <div class="fit-title">Quartz 배치 파이프라인 — 5분 주기 6개 Job 운영</div>
+          <div class="fit-desc">콘텐츠 배포·인코딩·업로드·검증 전 과정을 <strong>Quartz Job 6개</strong>로 구성해 완전 자동화했습니다. AWS S3 업로드 및 Ateme 인코딩 시스템 연동을 포함하며, 수동 운영 비용을 0으로 줄였습니다. 보험 배치 처리와 동일한 구조입니다.</div>
+        </div>
+      </div>
+
+      <div class="fit-card fade-in">
+        <div class="fit-icon">✅</div>
+        <div>
+          <div class="fit-match">무결성 · 품질</div>
+          <div class="fit-title">트랜잭션 무결성 · 멱등성 키 구현</div>
+          <div class="fit-desc"><strong>Idempotency-Key를 Redis에 TTL 저장</strong>해 중복 요청을 409로 차단하고, 인터페이스 추상화로 이·운영 환경 구현체 교체를 가능하게 설계했습니다. 금융 시스템에서 요구하는 결제/계약 무결성 수준을 이해하고 구현합니다.</div>
+        </div>
+      </div>
+
+      <div class="fit-card fade-in">
+        <div class="fit-icon">🧪</div>
+        <div>
+          <div class="fit-match">품질 · 테스트</div>
+          <div class="fit-title">60건 테스트 — 단위·통합 커버리지</div>
+          <div class="fit-desc">MockMvc, Mockito, JUnit 5로 <strong>단위·통합 테스트 60건</strong>을 작성하고 GitHub Actions CI에서 자동 실행합니다. "프로그램 품질 무결성 확보를 위한 테스트 수행" 업무를 이미 실무 수준으로 수행합니다.</div>
+        </div>
+      </div>
+
+      <div class="fit-card fade-in">
+        <div class="fit-icon">⚡</div>
+        <div>
+          <div class="fit-match">성능 최적화</div>
+          <div class="fit-title">Redis 캐싱·인덱스 설계로 DB 부하 제거</div>
+          <div class="fit-desc"><strong>@Cacheable/@CacheEvict + TTL 60초</strong>로 반복 쿼리를 캐싱하고, 복합 인덱스 2개(user_id,id / user_id,completed,id)를 직접 설계해 성능을 최적화했습니다. 대용량 보험 시스템의 서비스 안정화 업무에 바로 기여할 수 있습니다.</div>
+        </div>
+      </div>
+
+      <div class="fit-card fade-in">
+        <div class="fit-icon">🛡️</div>
+        <div>
+          <div class="fit-match">보안 설계</div>
+          <div class="fit-title">Refresh Token Rotation · 404 마스킹 보안 설계</div>
+          <div class="fit-desc">HMAC-SHA256 해시 후 DB 저장(prevTokenHash)으로 <strong>탈취된 토큰 재사용을 즉시 차단</strong>하고, 타 사용자 리소스 접근 시 403 대신 404를 반환해 존재 여부 노출을 차단했습니다. 고객 정보 보호가 핵심인 보험 시스템에 필수적인 보안 감각입니다.</div>
+        </div>
+      </div>
+
+      <div class="fit-card fade-in">
+        <div class="fit-icon">☁️</div>
+        <div>
+          <div class="fit-match">인프라 대응</div>
+          <div class="fit-title">운영 장애 직접 해결 — Elastic IP 재구성</div>
+          <div class="fit-desc">로드밸런싱 환경에서 Proxy 서버 IP 변경으로 방화벽 차단이 반복 발생 → <strong>EC2 기반 Proxy 서버에 Elastic IP 할당으로 고정 IP 구조 재설계</strong>하고 전체 SSL 인증서 적용으로 HTTPS 전환까지 단독 수행했습니다.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MSA 아키텍처 다이어그램 -->
+    <div class="arch-diagram fade-in">
+      <div class="arch-title">Architecture</div>
+      <div class="arch-subtitle">MSA·CQRS 기반 서비스 설계 경험</div>
+      <div class="arch-row">
+        <div class="arch-box orange">외부 SO 서버<br><small>LG헬로비전/드라이브</small></div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box">API Gateway<br><small>v1/v2/v3 버전 분리</small></div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box">AES 암복호화 Layer</div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box">Service Layer<br><small>CQRS 분리</small></div>
+      </div>
+      <div class="arch-row">
+        <div class="arch-box green">Quartz Scheduler<br><small>6 Jobs · 5min</small></div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box green">AWS S3<br><small>파일 업로드</small></div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box green">Ateme 인코딩<br><small>외부 시스템 연동</small></div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box">Redis Cache<br><small>멱등성 키 · TTL</small></div>
+      </div>
+      <div class="arch-label">실서비스에 적용된 구조 — 한화생명 보험코어 MSA 아키텍처와 동일한 방향성</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header fade-in">
+    <div class="section-label">About</div>
+    <h2 class="section-title">안녕하세요, 박준철입니다</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p>
+        컴퓨터공학과와 <strong>모빌리티AI·SW융합전공</strong>을 복수전공하고,
+        (주)홈초이스에서 1년 10개월간 실서비스 백엔드 API 설계와 운영을 담당했습니다.
+      </p>
+      <p>
+        LG헬로비전(가입자 343만 명), 드라이브(매출 3,500억 원) 등 <strong>구조가 전혀 다른 대규모 외부 시스템들을
+        단일 확장 가능한 구조로 연동</strong>하는 API를 직접 설계하고 운영했습니다.
+        AES-256 암호화 통신, Quartz 배치 자동화, Elastic IP 기반 인프라 재구성까지
+        혼자서 완결지은 경험이 있습니다.
+      </p>
+      <p>
+        퇴직 후에는 <strong>Study Tracker API(JWT 직접 구현, Redis 캐싱, 멱등성, CQRS)</strong>와
+        <strong>다마(Kotlin, DDD, Refresh Token Rotation)</strong> 프로젝트를 통해
+        금융 시스템 수준의 신뢰성과 보안을 직접 설계·구현하며 역량을 키웠습니다.
+      </p>
+      <p>
+        한화생명 보험코어 시스템이 추구하는 <strong>MSA, 클라우드/컨테이너, 고신뢰성</strong>은
+        제가 실무에서 지향해온 방향과 정확히 일치합니다.
+        빠른 속도로 변화하는 금융 디지털 환경에 민첩하게 대응하는 팀에 기여하고 싶습니다.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="num orange">343만</div>
+        <div class="desc">연동 파트너사<br>최대 가입자 수</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">1년 10개월</div>
+        <div class="desc">실서비스 백엔드<br>설계·운영 경력</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">AES-256</div>
+        <div class="desc">금융급 암호화<br>실무 적용</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">MSA</div>
+        <div class="desc">CQRS · DDD<br>컨텍스트 분리 설계</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background:var(--surface); max-width:none; padding-left:6%; padding-right:6%;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <div class="section-label">Skills</div>
+      <h2 class="section-title">기술 스택</h2>
+      <div class="divider"></div>
+      <p class="section-sub">한화생명 보험코어 시스템 개발 요건 기준으로 정렬했습니다.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group core fade-in">
+        <div class="skill-group-header">
+          <div class="skill-group-icon">☕</div>
+          <div class="skill-group-title">주력 백엔드 (핵심)</div>
+        </div>
+        <div class="badge-row">
+          <span class="badge primary">Java 17/21</span>
+          <span class="badge primary">Kotlin</span>
+          <span class="badge primary">Spring Boot</span>
+          <span class="badge primary">Spring Security</span>
+          <span class="badge primary">JWT</span>
+          <span class="badge primary">Spring Data JPA</span>
+          <span class="badge primary">QueryDSL</span>
+          <span class="badge primary">MyBatis</span>
+          <span class="badge primary">Quartz</span>
+          <span class="badge primary">WebSocket (STOMP)</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-header">
+          <div class="skill-group-icon">🏗️</div>
+          <div class="skill-group-title">아키텍처 · 설계</div>
+        </div>
+        <div class="badge-row">
+          <span class="badge primary">MSA</span>
+          <span class="badge primary">CQRS</span>
+          <span class="badge primary">DDD</span>
+          <span class="badge primary">REST API</span>
+          <span class="badge">API 버전 관리</span>
+          <span class="badge">컨텍스트 분리</span>
+          <span class="badge">멱등성 설계</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-header">
+          <div class="skill-group-icon">🗄️</div>
+          <div class="skill-group-title">데이터베이스 · 캐시</div>
+        </div>
+        <div class="badge-row">
+          <span class="badge primary">MySQL</span>
+          <span class="badge primary">PostgreSQL</span>
+          <span class="badge primary">Redis</span>
+          <span class="badge">DynamoDB</span>
+          <span class="badge">복합 인덱스 설계</span>
+          <span class="badge">TTL 캐싱 전략</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-header">
+          <div class="skill-group-icon">🔒</div>
+          <div class="skill-group-title">보안 · 암호화</div>
+        </div>
+        <div class="badge-row">
+          <span class="badge orange">AES-256-ECB</span>
+          <span class="badge orange">AES-128-CBC</span>
+          <span class="badge orange">HMAC-SHA256</span>
+          <span class="badge">Refresh Token Rotation</span>
+          <span class="badge">SSL/HTTPS</span>
+          <span class="badge">보안 설계 패턴</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-header">
+          <div class="skill-group-icon">☁️</div>
+          <div class="skill-group-title">클라우드 · 인프라</div>
+        </div>
+        <div class="badge-row">
+          <span class="badge primary">AWS EC2</span>
+          <span class="badge primary">AWS S3</span>
+          <span class="badge primary">Elastic Beanstalk</span>
+          <span class="badge primary">Docker</span>
+          <span class="badge">GitHub Actions</span>
+          <span class="badge">CI/CD</span>
+          <span class="badge">Elastic IP</span>
+        </div>
+      </div>
+      <div class="skill-group fade-in">
+        <div class="skill-group-header">
+          <div class="skill-group-icon">🧪</div>
+          <div class="skill-group-title">테스트 · 품질</div>
+        </div>
+        <div class="badge-row">
+          <span class="badge primary">JUnit 5</span>
+          <span class="badge primary">MockMvc</span>
+          <span class="badge primary">Mockito</span>
+          <span class="badge">단위 테스트</span>
+          <span class="badge">통합 테스트</span>
+          <span class="badge">60건 테스트 커버리지</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header fade-in">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title">경력</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-company">(주)홈초이스</div>
+          <div class="exp-period">2024.02 – 2025.11 · 1년 10개월</div>
+        </div>
+        <div class="exp-role">백엔드 개발자</div>
+        <div class="exp-tagline">전국 디지털케이블TV 가입자 OTT 서비스 "홈초이스" · 매출 340억</div>
+        <ul class="exp-list">
+          <li>
+            <strong>다중 외부 시스템 연동 인증 API 설계·이관</strong> —
+            LG헬로비전(가입자 343만), 드라이브(매출 3,500억), HCN 등 SO별 인증 구조가 다른 환경에서
+            SiteInfo 설정 기반 AES 암호화 방식·키·URL 분리 관리 구조 설계.
+            API v1/v2/v3 버전별 인증 흐름 분리로 신규 파트너사 추가 시 기존 코드 변경 없이 확장 가능한 구조 구현
+          </li>
+          <li>
+            <strong>AES 암호화 기반 보안 통신 구현</strong> —
+            요청 복호화 → 서비스 처리 → 응답 암호화 흐름을 모든 API 엔드포인트에 일관 적용. 평문 전송 전면 차단
+          </li>
+          <li>
+            <strong>Quartz 스케줄러 배치 파이프라인 자동화</strong> —
+            콘텐츠 배포·인코딩·업로드·배포상태 확인·벌크파일 처리 등 5분 주기 Job 6개 구성.
+            AWS S3 파일 업로드 및 Ateme 외부 인코딩 시스템 연동 포함. 수동 운영 비용 0 달성
+          </li>
+          <li>
+            <strong>인프라 장애 대응</strong> —
+            로드밸런싱 환경 Proxy 서버 IP 변경으로 방화벽 차단 반복 발생 시
+            EC2 기반 Elastic IP 재할당으로 고정 IP 구조 재설계.
+            Proxy 서버 SSL 미적용으로 통신 실패 발생 시 인증서 적용으로 전체 구간 HTTPS 전환 (단독 수행)
+          </li>
+        </ul>
+        <div class="exp-metrics">
+          <div class="exp-metric">🏢 파트너사 가입자 343만</div>
+          <div class="exp-metric">💰 파트너사 매출 3,500억</div>
+          <div class="exp-metric">⚙️ Quartz Job 6개 운영</div>
+          <div class="exp-metric">🔒 AES-256/128 암호화</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:var(--surface); max-width:none; padding-left:6%; padding-right:6%;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <div class="section-label">Projects</div>
+      <h2 class="section-title">주요 프로젝트</h2>
+      <div class="divider"></div>
+      <p class="section-sub">퇴직 후 금융 수준의 신뢰성을 직접 설계하며 역량을 키운 프로젝트들입니다.</p>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card fade-in" onclick="openModal('p1')">
+        <div class="project-top">
+          <div class="project-emoji">📚</div>
+          <span class="project-badge solo">개인 프로젝트</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Study Tracker API</div>
+          <div class="project-period">2025 · Java 21 · Spring Boot · PostgreSQL · Redis · Docker</div>
+          <div class="project-desc">백엔드 실무 전체 흐름(인증·캐싱·무결성·테스트·배포)을 집약한 학습 Todo 관리 API. 금융 시스템에서 요구하는 CQRS, 멱등성, 타이밍 공격 방어를 직접 구현했습니다.</div>
+          <div class="project-tags">
+            <span class="tag">JWT 직접 구현</span><span class="tag">Redis 캐싱</span>
+            <span class="tag">멱등성 키</span><span class="tag">CQRS</span><span class="tag">CI/CD</span>
+          </div>
+          <div class="project-results">
+            <p>HMAC-SHA256 서명 직접 구현 · 타이밍 공격 방어<br>Redis TTL 캐싱 · 복합 인덱스 2개 설계 · 테스트 60건</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in" onclick="openModal('p2')">
+        <div class="project-top">
+          <div class="project-emoji">💳</div>
+          <span class="project-badge team">팀 프로젝트 (2인)</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">다마(Dama) — 구독 관리 서비스</div>
+          <div class="project-period">2026.01 – 2026.02 · Kotlin · Spring Boot · QueryDSL · DDD</div>
+          <div class="project-desc">DDD 기반 도메인 경계 설계와 확장 가능한 구조를 목표로 개발한 구독 통합 관리 서비스. 보험의 계약/정산 관리와 유사한 도메인 구조입니다.</div>
+          <div class="project-tags">
+            <span class="tag">Kotlin</span><span class="tag">DDD</span>
+            <span class="tag">컨텍스트 분리</span><span class="tag">Refresh Token Rotation</span>
+          </div>
+          <div class="project-results">
+            <p>User/Subscription 컨텍스트 분리 · 404 마스킹 보안<br>Soft Delete · 탈취 토큰 즉시 차단 · 결제일 D-3 알림</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in" onclick="openModal('p3')">
+        <div class="project-top">
+          <div class="project-emoji">🎮</div>
+          <span class="project-badge solo">개인 프로젝트</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">실시간 숫자 동기화 게임</div>
+          <div class="project-period">2026.01~ · Spring Boot · STOMP WebSocket</div>
+          <div class="project-desc">3일 내 기획·백엔드·배포 전 과정을 단독으로 구현한 실시간 숫자 증가 게임. 동시성 문제를 서버 단일 상태 관리 지점으로 해결했습니다.</div>
+          <div class="project-tags">
+            <span class="tag">STOMP WebSocket</span><span class="tag">동시성 제어</span>
+            <span class="tag">REST+STOMP 역할 분리</span>
+          </div>
+          <div class="project-results">
+            <p>단일 상태 관리 지점으로 동시성 해결<br>SimpMessagingTemplate 전체 구독자 실시간 동기화</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in" onclick="openModal('p4')">
+        <div class="project-top">
+          <div class="project-emoji">🔄</div>
+          <span class="project-badge solo">개인 프로젝트</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">하이브라인 콘텐츠 수집 파이프라인</div>
+          <div class="project-period">2024.10 – 2025.10 · Python · Selenium · Docker · Render Cron</div>
+          <div class="project-desc">콘텐츠 메타데이터 1,000건 이상을 평균 10분 내 수집하는 자동화 파이프라인. Quartz 배치와 동일한 철학으로 설계된 외부 자동화 시스템입니다.</div>
+          <div class="project-tags">
+            <span class="tag">Python</span><span class="tag">Selenium</span>
+            <span class="tag">Docker</span><span class="tag">Render Cron Job</span>
+          </div>
+          <div class="project-results">
+            <p>하루 1회 완전 자동 실행 · 운영 가용성 100%<br>Docker 컨테이너화로 환경 독립성 확보</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="edu">
+  <div class="section-header fade-in">
+    <div class="section-label">Education & More</div>
+    <h2 class="section-title">학력 · 활동 · AI 경험</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="edu-grid fade-in">
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-title">컴퓨터공학과 / 모빌리티AI·SW융합전공 (복수전공)</div>
+        <div class="edu-sub">재학 중 · AI·ML, 알고리즘, 시스템 소프트웨어 심화 과정</div>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">📖</div>
+      <div>
+        <div class="edu-title">공동 저서 출판</div>
+        <div class="edu-sub">「개발자가 되기 위해 꼭 알아야 하는 IT 용어」<br>Yes24 · 기술 용어 해설서</div>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🤖</div>
+      <div>
+        <div class="edu-title">정보통신산업진흥원 AI 기본과정 수료</div>
+        <div class="edu-sub">인공지능 기초·심화 교육 이수</div>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">📊</div>
+      <div>
+        <div class="edu-title">네이버 부스트코스 DATA SCIENCE 코칭스터디 2023 수료</div>
+        <div class="edu-sub">데이터 분석·머신러닝 실습 중심 교육</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI/ML 경험 -->
+  <div style="margin-top:44px;">
+    <div class="section-header" style="margin-bottom:28px;">
+      <div class="section-label" style="margin-bottom:6px;">AI / ML</div>
+      <h3 style="font-size:1.2rem; font-weight:800; color:var(--text);">AI·ML 프로젝트 경험</h3>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:14px;">
+      <div class="fit-card fade-in">
+        <div class="fit-icon">🏃</div>
+        <div>
+          <div class="fit-title">Hero Pose Challenge</div>
+          <div class="fit-desc">Android(Java), TFLite MoveNet MultiPose, CameraX로 <strong>실시간 최대 4인 Pose Detection</strong> 구현. 온디바이스 약 10FPS 추론 검증.</div>
+        </div>
+      </div>
+      <div class="fit-card fade-in">
+        <div class="fit-icon">📹</div>
+        <div>
+          <div class="fit-title">CCTV 낙상 감지 시스템</div>
+          <div class="fit-desc">Python, YOLOv5, OpenCV로 복합 조건 감지 구현. <strong>오탐률 30% → 10% 이하 개선</strong>, 25FPS 이상 실시간 처리.</div>
+        </div>
+      </div>
+      <div class="fit-card fade-in">
+        <div class="fit-icon">🌸</div>
+        <div>
+          <div class="fit-title">벚꽃 개화 시기 예측</div>
+          <div class="fit-desc">공공데이터 <strong>120만 건 분석</strong>, 랜덤 포레스트 모델로 MAE 15% 개선.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--surface); max-width:none; padding-left:6%; padding-right:6%;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">연락하기</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="contact-wrap fade-in">
+      <div class="contact-links">
+        <a href="mailto:justinnn980@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉️</div>
+          <div>
+            <div class="contact-link-label">이메일</div>
+            <div class="contact-link-val">justinnn980@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://github.com/juncheolbe" target="_blank" class="contact-link">
+          <div class="contact-link-icon">💻</div>
+          <div>
+            <div class="contact-link-label">GitHub</div>
+            <div class="contact-link-val">github.com/juncheolbe</div>
+          </div>
+        </a>
+        <a href="https://park-juncheol-portfolio-site.onrender.com/" target="_blank" class="contact-link">
+          <div class="contact-link-icon">🌐</div>
+          <div>
+            <div class="contact-link-label">포트폴리오 사이트</div>
+            <div class="contact-link-val">park-juncheol-portfolio-site.onrender.com</div>
+          </div>
+        </a>
+      </div>
+      <div class="cta-box">
+        <h3>한화생명과 함께 성장하고 싶습니다</h3>
+        <p>
+          실서비스에서 검증한 MSA 설계, AES 암호화, Quartz 배치 경험을<br>
+          한화생명 보험코어 시스템에 바로 적용할 준비가 되어 있습니다.<br>
+          금융 수준의 신뢰성과 안정성을 함께 만들어 가겠습니다.
+        </p>
+        <a href="mailto:justinnn980@gmail.com" class="btn-white">이메일 보내기 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 박준철 — 한화생명 Backend Developer 지원 포트폴리오 · <span>justinnn980@gmail.com</span></p>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-p1" onclick="closeModalOutside(event, 'p1')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('p1')">✕</button>
+    <div class="modal-emoji">📚</div>
+    <h2>Study Tracker API</h2>
+    <div class="modal-period">2025 · 개인 프로젝트 · Java 21 · Spring Boot · PostgreSQL · Redis · Docker</div>
+    <div class="modal-section">
+      <h3>프로젝트 목적</h3>
+      <p>백엔드 실무 전체 흐름(인증·캐싱·무결성·테스트·배포)을 하나의 프로젝트에 집약해 금융 시스템 수준의 신뢰성을 직접 구현하고 검증했습니다.</p>
+    </div>
+    <div class="modal-section">
+      <h3>핵심 구현 내역</h3>
+      <ul>
+        <li><strong>JWT 직접 구현</strong> : jjwt 없이 HMAC-SHA256 서명 구현, <code>MessageDigest.isEqual()</code>로 타이밍 공격 방어</li>
+        <li><strong>Redis 캐싱 최적화</strong> : @Cacheable/@CacheEvict + TTL 60초, 복합 인덱스 2개 설계(user_id,id / user_id,completed,id)로 반복 쿼리 부하 제거</li>
+        <li><strong>멱등성 키 기반 중복 요청 방지</strong> : Idempotency-Key를 Redis에 5분 TTL로 저장, 중복 요청 409 차단. IdempotencyStore 인터페이스로 운영/테스트 구현체 교체 가능하게 추상화</li>
+        <li><strong>CQRS 설계</strong> : UserService(쓰기) / UserQueryService(읽기) 성질 분리로 서비스 레이어 명확화</li>
+        <li><strong>CI/CD</strong> : GitHub Actions → Docker 멀티스테이지 빌드 → Render 자동 배포</li>
+        <li><strong>테스트 60건</strong> : MockMvc, Mockito, JUnit 5 단위·통합 테스트</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-p2" onclick="closeModalOutside(event, 'p2')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('p2')">✕</button>
+    <div class="modal-emoji">💳</div>
+    <h2>다마(Dama) — 구독 관리 서비스</h2>
+    <div class="modal-period">2026.01 – 2026.02 · 팀 프로젝트 (2인) · Kotlin · Spring Boot · QueryDSL · DDD</div>
+    <div class="modal-section">
+      <h3>프로젝트 목적</h3>
+      <p>DDD 기반 도메인 경계 설계와 확장 가능한 구조를 목표로 개발한 구독 통합 관리 서비스. 보험의 계약/정산/갱신 관리와 유사한 도메인 구조를 실습했습니다.</p>
+    </div>
+    <div class="modal-section">
+      <h3>핵심 구현 내역</h3>
+      <ul>
+        <li><strong>Refresh Token Rotation</strong> : HMAC-SHA256 해시 후 DB 저장(prevTokenHash), 탈취된 토큰 재사용 즉시 탐지 및 차단</li>
+        <li><strong>구독 비용 분석 API</strong> : 지난달 말일 기준 활성 구독 스냅샷 비교로 월별 증가 분석, 결제일 D-3 이내 자동 알림 생성</li>
+        <li><strong>보안 설계</strong> : 타 사용자 리소스 접근 시 403 대신 404 반환(존재 여부 노출 차단), Soft Delete·BaseEntity 공통 구조 적용</li>
+        <li><strong>DDD 컨텍스트 분리</strong> : User / Subscription 컨텍스트 분리, DDD 기반 도메인 경계 설정</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-p3" onclick="closeModalOutside(event, 'p3')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('p3')">✕</button>
+    <div class="modal-emoji">🎮</div>
+    <h2>실시간 숫자 동기화 게임</h2>
+    <div class="modal-period">2026.01~ · 개인 프로젝트 · Spring Boot · STOMP WebSocket</div>
+    <div class="modal-section">
+      <h3>프로젝트 목적</h3>
+      <p>3일 내 기획·백엔드·배포 전 과정을 단독으로 구현하며 실시간 동시성 문제 해결 방식을 직접 검증했습니다.</p>
+    </div>
+    <div class="modal-section">
+      <h3>핵심 구현 내역</h3>
+      <ul>
+        <li><strong>동시성 문제 해결</strong> : 서버를 단일 상태 관리 지점으로 설정, REST(변경 명령) + STOMP(브로드캐스트) 역할 분리</li>
+        <li><strong>실시간 동기화</strong> : SimpMessagingTemplate.convertAndSend로 전체 구독자에게 실시간 상태 동기화</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-p4" onclick="closeModalOutside(event, 'p4')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('p4')">✕</button>
+    <div class="modal-emoji">🔄</div>
+    <h2>하이브라인 콘텐츠 수집 파이프라인</h2>
+    <div class="modal-period">2024.10 – 2025.10 · 개인 프로젝트 · Python · Selenium · Docker · Render Cron Job</div>
+    <div class="modal-section">
+      <h3>프로젝트 목적</h3>
+      <p>콘텐츠 메타데이터를 자동으로 수집하는 배치 파이프라인. Quartz 기반 배치와 동일한 설계 철학으로 구현했습니다.</p>
+    </div>
+    <div class="modal-section">
+      <h3>핵심 구현 내역</h3>
+      <ul>
+        <li><strong>대량 수집 자동화</strong> : 콘텐츠 메타데이터 1,000건 이상을 평균 10분 내 수집하는 Selenium 기반 크롤러</li>
+        <li><strong>완전 자동화</strong> : Render Cron Job으로 하루 1회 자동 실행, Docker 컨테이너화로 환경 독립성 확보</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+  document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
+    const sec = document.querySelector(a.getAttribute('href'));
+    if (!sec) return;
+    const top = sec.getBoundingClientRect().top;
+    a.classList.toggle('active', top <= 80 && top > -sec.offsetHeight + 80);
+  });
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+function openModal(id) {
+  document.getElementById('modal-' + id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById('modal-' + id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOutside(e, id) {
+  if (e.target === document.getElementById('modal-' + id)) closeModal(id);
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => {
+    m.classList.remove('open'); document.body.style.overflow = '';
+  });
+});
+</script>
+</body>
+</html>
