@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 포트폴리오 — Blue Garage FANS · 프론트엔드 개발자 (React Native)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pk:   #E040FB;
+      --pk-l: #F3E5F5;
+      --pk-d: #4A0072;
+      --bg:   #06040A;
+      --card: #0E0A14;
+      --card2:#130F1A;
+      --bdr:  #1E1628;
+      --text: #F9FAFB;
+      --sub:  #D1D5DB;
+      --muted:#9CA3AF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans KR', 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: var(--pk); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(6,4,10,0.93); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bdr);
+      padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 52px;
+    }
+    .nav-name { font-weight: 800; font-size: 15px; }
+    .nav-tag { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: rgba(224,64,251,0.15); color: var(--pk); margin-left: 8px; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+    .nav-target {
+      font-size: 12px; font-weight: 700; color: var(--pk);
+      border: 1px solid rgba(224,64,251,0.35); border-radius: 6px;
+      padding: 3px 10px; margin-left: 8px;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px; margin: 0 auto; padding: 64px 40px 48px;
+      display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: start;
+    }
+    .hero-badge {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      background: rgba(224,64,251,0.12); border: 1px solid rgba(224,64,251,0.28);
+      color: var(--pk); font-size: 12px; font-weight: 700; margin-bottom: 16px;
+    }
+    .hero-name { font-size: 44px; font-weight: 900; line-height: 1.1; margin-bottom: 8px; letter-spacing: -1px; }
+    .hero-role { font-size: 18px; font-weight: 700; color: var(--pk); margin-bottom: 16px; }
+    .hero-lead { font-size: 14.5px; color: var(--sub); line-height: 1.85; margin-bottom: 28px; max-width: 480px; }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      margin-bottom: 28px; background: var(--bdr); border-radius: 10px; overflow: hidden;
+    }
+    .stat { background: var(--card); padding: 16px 12px; text-align: center; }
+    .stat-num   { font-size: 18px; font-weight: 900; color: var(--pk); }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+    .hero-contacts { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-contact  { font-size: 13px; color: var(--muted); }
+
+    /* CODE PANEL */
+    .code-panel { background: #050309; border: 1px solid var(--bdr); border-radius: 12px; overflow: hidden; }
+    .code-header { background: var(--card); padding: 10px 16px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--bdr); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; } .dot-y { background: #FFBD2E; } .dot-g { background: #28C840; }
+    .code-filename { font-size: 12px; color: var(--muted); margin-left: 6px; font-family: 'JetBrains Mono', monospace; }
+    .code-body { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.85; overflow-x: auto; }
+    .c-cmt { color: #5B4F6B; }
+    .c-kw  { color: #CF9FFF; }
+    .c-str { color: #F3B8FF; }
+    .c-num { color: #FBBF24; }
+    .c-fn  { color: #D8A0FF; }
+    .c-var { color: #F9FAFB; }
+    .c-prop{ color: #EFD6FF; }
+    .c-dec { color: #B97FFF; }
+    .c-type{ color: #C084FC; }
+    .c-jsx { color: #E040FB; }
+
+    /* SECTION */
+    .section { max-width: 1100px; margin: 0 auto; padding: 56px 40px; border-top: 1px solid var(--bdr); }
+    .sec-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pk); margin-bottom: 6px; }
+    .sec-title { font-size: 26px; font-weight: 900; margin-bottom: 32px; }
+
+    /* FANS DOMAIN CARDS */
+    .domain-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px; }
+    .domain-card {
+      background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px 16px;
+      text-align: center; transition: border-color .2s;
+    }
+    .domain-card:hover { border-color: rgba(224,64,251,0.4); }
+    .domain-icon { font-size: 28px; margin-bottom: 8px; }
+    .domain-name { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .domain-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: rgba(224,64,251,0.12); color: var(--pk); display: inline-block; margin-bottom: 8px; }
+    .domain-desc { font-size: 11.5px; color: var(--muted); line-height: 1.55; }
+
+    /* SKILL SECTION */
+    .sk-group { margin-bottom: 28px; }
+    .sk-group-title { font-size: 12px; font-weight: 800; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+    .sk-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .sk-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 10px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 14px; transition: border-color .2s; }
+    .sk-card:hover { border-color: rgba(224,64,251,0.35); }
+    .sk-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .sk-name { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+    .sk-level { font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 10px; display: inline-block; margin-bottom: 5px; }
+    .sk-level.prod { background: rgba(224,64,251,0.15); color: var(--pk); }
+    .sk-level.exp  { background: rgba(251,191,36,0.15); color: #FBBF24; }
+    .sk-level.know { background: rgba(156,163,175,0.15); color: var(--muted); }
+    .sk-desc { font-size: 12px; color: var(--sub); line-height: 1.55; }
+    .sk-cards-2 { grid-template-columns: repeat(2, 1fr); }
+    .sk-cards-4 { grid-template-columns: repeat(4, 1fr); }
+
+    /* BRIDGE BOX */
+    .bridge-box {
+      background: var(--card); border: 1px solid rgba(224,64,251,0.25); border-radius: 12px;
+      padding: 20px 24px; margin-bottom: 28px;
+    }
+    .bridge-title { font-size: 13px; font-weight: 800; color: var(--pk); margin-bottom: 12px; }
+    .bridge-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .bridge-item { padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+    .bi-from { background: rgba(156,163,175,0.1); color: var(--sub); border: 1px solid var(--bdr); }
+    .bi-arrow { color: var(--pk); font-size: 16px; }
+    .bi-to   { background: rgba(224,64,251,0.12); color: var(--pk); border: 1px solid rgba(224,64,251,0.3); }
+    .bridge-row + .bridge-row { margin-top: 8px; }
+
+    /* PROBLEM CARDS */
+    .prob-list { display: grid; gap: 18px; }
+    .prob-card {
+      background: var(--card); border: 1px solid var(--bdr);
+      border-left: 3px solid var(--pk); border-radius: 0 12px 12px 0; padding: 22px 26px;
+    }
+    .prob-num   { font-size: 11px; font-weight: 800; color: var(--pk); letter-spacing: 1px; margin-bottom: 8px; }
+    .prob-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+    .prob-flow  { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .pf-tag    { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; background: var(--card2); color: var(--sub); }
+    .pf-arrow  { color: var(--pk); font-size: 14px; }
+    .pf-result { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; background: rgba(224,64,251,0.15); color: #F3B8FF; }
+    .prob-desc { font-size: 13px; color: var(--sub); line-height: 1.75; }
+    .prob-desc strong { color: var(--text); font-weight: 700; }
+
+    /* SIDE-BY-SIDE */
+    .side-by-side { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    .sbs-box { background: var(--card2); border: 1px solid var(--bdr); border-radius: 8px; padding: 12px 14px; }
+    .sbs-label { font-size: 11px; font-weight: 800; color: var(--pk); margin-bottom: 5px; }
+    .sbs-body  { font-size: 12px; color: var(--sub); line-height: 1.6; }
+
+    /* CAREER / PROJ */
+    .career-block { margin-bottom: 32px; }
+    .career-head  { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+    .career-co    { font-size: 17px; font-weight: 900; }
+    .career-period{ font-size: 12px; color: var(--muted); font-weight: 600; }
+    .career-role  { font-size: 13px; font-weight: 700; color: var(--pk); margin-bottom: 6px; }
+    .career-desc  { font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
+    .ul { list-style: none; display: grid; gap: 6px; }
+    .ul li { font-size: 13px; color: var(--sub); padding-left: 16px; position: relative; line-height: 1.65; }
+    .ul li::before { content: '▸'; position: absolute; left: 0; color: var(--pk); font-size: 9px; top: 4px; }
+    .ul li strong { color: var(--text); font-weight: 700; }
+
+    .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+    .proj-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px; transition: border-color .2s; }
+    .proj-card:hover { border-color: rgba(224,64,251,0.35); }
+    .proj-head   { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+    .proj-title  { font-size: 14px; font-weight: 800; }
+    .proj-period { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .proj-sub    { font-size: 12px; color: var(--pk); font-weight: 700; margin-bottom: 8px; }
+    .tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+    .tag { padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: 700; background: var(--bdr); color: var(--sub); }
+    .tag.hl { background: rgba(224,64,251,0.12); color: #D8A0FF; }
+    .proj-ul { list-style: none; display: grid; gap: 4px; }
+    .proj-ul li { font-size: 12px; color: var(--sub); padding-left: 13px; position: relative; line-height: 1.6; }
+    .proj-ul li::before { content: '▸'; position: absolute; left: 0; color: var(--pk); font-size: 9px; top: 2px; }
+    .proj-ul li strong { color: var(--text); }
+
+    /* WHY FANS */
+    .fans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .fans-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px 18px; transition: border-color .2s; }
+    .fans-card:hover { border-color: rgba(224,64,251,0.35); }
+    .fans-num { font-size: 11px; font-weight: 800; color: var(--pk); letter-spacing: 1px; margin-bottom: 6px; }
+    .fans-title { font-size: 14px; font-weight: 800; margin-bottom: 8px; }
+    .fans-body { font-size: 12.5px; color: var(--sub); line-height: 1.7; }
+    .fans-body strong { color: var(--text); }
+
+    /* DIVIDER */
+    .divider { border: none; border-top: 1px solid var(--bdr); margin: 28px 0; }
+
+    footer { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--bdr); }
+
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .domain-grid { grid-template-columns: repeat(2, 1fr); }
+      .sk-cards, .sk-cards-4 { grid-template-columns: 1fr 1fr; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .fans-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">박준철<span class="nav-tag">React Native</span><span class="nav-target">Blue Garage · FANS</span></div>
+  <div class="nav-links">
+    <a href="#fit">지원 역량</a>
+    <a href="#skills">기술 스택</a>
+    <a href="#problem">문제 해결</a>
+    <a href="#experience">경력</a>
+    <a href="#projects">프로젝트</a>
+    <a href="#why">지원 동기</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-badge">React Native · Cross-Platform Mobile · TypeScript</div>
+    <div class="hero-name">박준철</div>
+    <div class="hero-role">프론트엔드 개발자 · React Native / 크로스플랫폼</div>
+    <div class="hero-lead">
+      Flutter 기반 크로스 플랫폼 앱과 React/TypeScript 웹 역량을 함께 갖춘 프론트엔드 개발자입니다.<br/><br/>
+      홈초이스에서 <strong style="color:var(--text);">LG헬로비전(케이블TV 가입자 343만 명) OTT 앱 전환</strong>을 담당하여 FCP 39%, LCP 10.8% 성능 개선을 달성했고, VOD 재생 / DRM 연동 / WebView 하이브리드 구조 등 미디어 서비스 전반을 직접 구현했습니다.<br/><br/>
+      수백만 글로벌 팬과 아티스트를 연결하는 <strong style="color:var(--pk);">FANS 플랫폼</strong>에서 라이브, 커뮤니티, 커머스 도메인의 사용자 경험을 함께 만들어가고 싶습니다.
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">1년 10개월</div>
+        <div class="stat-label">크로스플랫폼 앱<br/>실서비스 개발·운영</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">FCP −39%</div>
+        <div class="stat-label">성능 개선 수치<br/>실측 달성</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">파트너사 2건</div>
+        <div class="stat-label">대형 OTT 앱<br/>마이그레이션 주도</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">343만 명</div>
+        <div class="stat-label">실서비스 유저<br/>규모 운영 경험</div>
+      </div>
+    </div>
+    <div class="hero-contacts">
+      <span class="hero-contact">✉ justinnn980@gmail.com</span>
+      <span class="hero-contact">🐙 <a href="https://github.com/justinnn980">github.com/justinnn980</a></span>
+      <span class="hero-contact">📝 <a href="https://justinnn980.tistory.com">기술 블로그</a></span>
+      <span class="hero-contact">🎓 컴퓨터공학과 / 복수전공: 모빌리티AI·SW융합</span>
+    </div>
+  </div>
+
+  <!-- CODE PANEL -->
+  <div class="code-panel">
+    <div class="code-header">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="code-filename">FansCommunityFeed.tsx</span>
+    </div>
+    <div class="code-body">
+<span class="c-cmt">// 커뮤니티 피드 — 실시간 + 낙관적 업데이트</span>
+<span class="c-kw">import</span> { <span class="c-type">FlashList</span> } <span class="c-kw">from</span> <span class="c-str">'@shopify/flash-list'</span>;
+<span class="c-kw">import</span> { <span class="c-fn">useInfiniteQuery</span> } <span class="c-kw">from</span> <span class="c-str">'@tanstack/react-query'</span>;
+
+<span class="c-kw">const</span> <span class="c-fn">FansCommunityFeed</span> = () =&gt; {
+  <span class="c-kw">const</span> { <span class="c-var">data</span>, <span class="c-fn">fetchNextPage</span> } = <span class="c-fn">useInfiniteQuery</span>({
+    <span class="c-prop">queryKey</span>: [<span class="c-str">'community-feed'</span>],
+    <span class="c-prop">queryFn</span>: ({ <span class="c-var">pageParam</span> }) =&gt;
+      <span class="c-fn">fetchFeed</span>({ <span class="c-prop">cursor</span>: <span class="c-var">pageParam</span> }),
+    <span class="c-prop">getNextPageParam</span>: (<span class="c-var">last</span>) =&gt; <span class="c-var">last</span>.<span class="c-prop">nextCursor</span>,
+  });
+
+  <span class="c-kw">return</span> (
+    <span class="c-jsx">&lt;FlashList</span>
+      <span class="c-prop">data</span>={<span class="c-fn">flattenPages</span>(<span class="c-var">data</span>)}
+      <span class="c-prop">renderItem</span>={({ <span class="c-var">item</span> }) =&gt; (
+        <span class="c-jsx">&lt;PostCard</span>
+          <span class="c-prop">post</span>={<span class="c-var">item</span>}
+          <span class="c-prop">onLike</span>={<span class="c-fn">handleOptimisticLike</span>}
+        <span class="c-jsx">/&gt;</span>
+      )}
+      <span class="c-prop">estimatedItemSize</span>={<span class="c-num">160</span>}
+      <span class="c-prop">onEndReached</span>={<span class="c-fn">fetchNextPage</span>}
+      <span class="c-prop">onEndReachedThreshold</span>={<span class="c-num">0.5</span>}
+    <span class="c-jsx">/&gt;</span>
+  );
+};
+<span class="c-cmt">// → FlashList: FlatList 대비 렌더 성능 개선</span>
+<span class="c-cmt">// → TanStack Query: 무한스크롤 + 낙관적 업데이트</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 00: FANS 도메인 적합도 -->
+<div class="section" id="fit">
+  <div class="sec-label">Section 00</div>
+  <div class="sec-title">FANS 도메인 — 기여 역량 매핑</div>
+
+  <div class="domain-grid">
+    <div class="domain-card">
+      <div class="domain-icon">💬</div>
+      <div class="domain-name">커뮤니티</div>
+      <div class="domain-badge">직접 경험</div>
+      <div class="domain-desc">WebSocket 실시간 상태 동기화, 낙관적 업데이트/롤백, 무한스크롤 피드 구현 경험. 팬-아티스트 소통 흐름 설계 역량.</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">🛒</div>
+      <div class="domain-name">커머스</div>
+      <div class="domain-badge">직접 경험</div>
+      <div class="domain-desc">TanStack Query 낙관적 업데이트, RBAC 권한 설계, OTT Admin 콘텐츠 관리 시스템 구축. 복잡한 상태 흐름 처리 역량.</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">📡</div>
+      <div class="domain-name">라이브</div>
+      <div class="domain-badge">핵심 경험</div>
+      <div class="domain-desc">VOD 재생, DRM 통합(NCG/Multi), 미디어 플레이어 생명주기 직접 관리. 라이브 스트리밍 구조에 대한 실무 이해 보유.</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">🎤</div>
+      <div class="domain-name">오프라인</div>
+      <div class="domain-badge">구조적 유사성</div>
+      <div class="domain-desc">셋톱박스 페어링 — 물리 디바이스와 앱 연동, 실시간 상태 반영. 오프라인 활동 연계 앱 구조 설계 경험과 동일한 패턴.</div>
+    </div>
+  </div>
+
+  <!-- Flutter → React Native 전환 역량 -->
+  <div class="bridge-box">
+    <div class="bridge-title">Flutter 개발자가 React Native에서 즉시 기여할 수 있는 이유</div>
+    <div class="bridge-row">
+      <span class="bridge-item bi-from">Dart / Flutter Widget Tree</span>
+      <span class="bi-arrow">→</span>
+      <span class="bridge-item bi-to">TypeScript / React Native 컴포넌트</span>
+      <span style="font-size:12px; color:var(--muted); margin-left:4px;">— 동일한 선언형 UI 패러다임, JSX와 Flutter Widget 구조적으로 동치</span>
+    </div>
+    <div class="bridge-row">
+      <span class="bridge-item bi-from">Riverpod StateNotifier</span>
+      <span class="bi-arrow">→</span>
+      <span class="bridge-item bi-to">Zustand / Redux / Context API</span>
+      <span style="font-size:12px; color:var(--muted); margin-left:4px;">— 반응형 상태 관리 개념 동일, API 차이만 학습</span>
+    </div>
+    <div class="bridge-row">
+      <span class="bridge-item bi-from">Flutter MethodChannel / PlatformView</span>
+      <span class="bi-arrow">→</span>
+      <span class="bridge-item bi-to">RN Native Modules / Turbo Modules</span>
+      <span style="font-size:12px; color:var(--muted); margin-left:4px;">— 네이티브 브릿지 구조 이해 완비</span>
+    </div>
+    <div class="bridge-row">
+      <span class="bridge-item bi-from">Flutter pub.dev 패키지</span>
+      <span class="bi-arrow">→</span>
+      <span class="bridge-item bi-to">npm / yarn / Expo SDK</span>
+      <span style="font-size:12px; color:var(--muted); margin-left:4px;">— 이미 React 19 + TypeScript 실서비스 개발 역량 보유</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01: 기술 스택 -->
+<div class="section" id="skills">
+  <div class="sec-label">Section 01</div>
+  <div class="sec-title">기술 스택</div>
+
+  <div class="sk-group">
+    <div class="sk-group-title">크로스플랫폼 모바일 — Cross-Platform Mobile</div>
+    <div class="sk-cards">
+      <div class="sk-card">
+        <div class="sk-icon">📱</div>
+        <div>
+          <div class="sk-name">Flutter / Dart</div>
+          <span class="sk-level prod">실서비스 1년 10개월</span>
+          <div class="sk-desc">iOS·Android 동시 배포 및 운영. Flutter 2→3 메이저 버전업, 전체 라이브러리 의존성 재검토 직접 수행. React Native와 동일한 크로스플랫폼 설계 패턴 보유.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">⚛️</div>
+        <div>
+          <div class="sk-name">React Native / TypeScript</div>
+          <span class="sk-level exp">자기주도 학습 · 즉시 기여 가능</span>
+          <div class="sk-desc">React 19 + TypeScript 실서비스 개발 역량 보유. 컴포넌트 설계, TanStack Query, 상태관리 패턴 RN에 즉시 적용 가능. Expo 생태계 학습 진행 중.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">🔗</div>
+        <div>
+          <div class="sk-name">WebView + JS Bridge</div>
+          <span class="sk-level prod">실서비스 양방향 구현</span>
+          <div class="sk-desc">Flutter ↔ React TypeScript 양방향 JavaScript Bridge 설계. 앱 배포 없이 콘텐츠·이벤트 즉시 반영 가능한 하이브리드 운영 구조 구현.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sk-group">
+    <div class="sk-group-title">상태관리 — State Management</div>
+    <div class="sk-cards">
+      <div class="sk-card">
+        <div class="sk-icon">🔄</div>
+        <div>
+          <div class="sk-name">Riverpod</div>
+          <span class="sk-level prod">실서비스 1년 10개월</span>
+          <div class="sk-desc">셋톱박스 3대 페어링을 연결/기기/콘텐츠 단위로 분리 관리. 복잡한 다중 상태 동기화를 StateNotifierProvider로 구조화. Zustand/Redux 패턴과 동치.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">🗃️</div>
+        <div>
+          <div class="sk-name">TanStack Query</div>
+          <span class="sk-level prod">실서비스 적용</span>
+          <div class="sk-desc">낙관적 업데이트·롤백, 서버 상태 캐시 관리, 무한스크롤 구현. OTT Admin에서 삭제 즉시 반영 후 서버 실패 시 자동 롤백 구조 설계.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">🌐</div>
+        <div>
+          <div class="sk-name">WebSocket 실시간 통신</div>
+          <span class="sk-level prod">서버·클라이언트 모두 구현</span>
+          <div class="sk-desc">숫자 대결 게임에서 Spring Boot WebSocket 서버와 Flutter 클라이언트 동시 구현. 동시 입력 충돌 방지, 전체 클라이언트 실시간 동기화 구조 설계.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sk-group">
+    <div class="sk-group-title">미디어 / 라이브 — VOD · DRM · Streaming</div>
+    <div class="sk-cards sk-cards-2">
+      <div class="sk-card">
+        <div class="sk-icon">🎬</div>
+        <div>
+          <div class="sk-name">VOD 재생 · DRM 통합</div>
+          <span class="sk-level prod">실서비스 핵심 구현</span>
+          <div class="sk-desc">NCG DRM → Multi DRM(Widevine/FairPlay) 전환. 단일 플레이어 인터페이스로 DRM 방식 추상화. 쇼츠형 화면 오디오 중복 이슈를 라이브러리 소스 레벨에서 직접 분석·해결.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">📺</div>
+        <div>
+          <div class="sk-name">미디어 플레이어 생명주기</div>
+          <span class="sk-level prod">실서비스 직접 관리</span>
+          <div class="sk-desc">영상 전환 시 생성/재생/종료 단계를 명시적으로 분리 관리. betterPlayer 라이브러리를 직접 수정하여 Android 생명주기 레벨 버그 해결. 라이브 스트리밍 구조 이해 보유.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sk-group">
+    <div class="sk-group-title">프론트엔드 웹 — React · TypeScript</div>
+    <div class="sk-cards sk-cards-4">
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">React 19 / TypeScript</div>
+          <span class="sk-level prod">실서비스 적용</span>
+          <div class="sk-desc">Next.js 16, Tailwind CSS, Zod. OTT Admin 기획~배포 단독 구현. React Native에 동일 역량 즉시 적용 가능.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">성능 최적화</div>
+          <span class="sk-level prod">FCP −39% 달성</span>
+          <div class="sk-desc">Lazy Loading, Skeleton UI, CDN 전환, 이미지 리사이징. FCP/LCP 지표 기반 병목 분석 및 수치화된 개선.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">테스트 자동화</div>
+          <span class="sk-level prod">CI 파이프라인 구성</span>
+          <div class="sk-desc">Vitest 단위 96개, Playwright E2E 4개, Storybook 컴포넌트 24개. GitHub Actions CI 파이프라인 구축.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">RBAC / 보안</div>
+          <span class="sk-level prod">Route Handler 레벨 구현</span>
+          <div class="sk-desc">조회/관리자 역할 분리, 직접 API 요청 재검증. Rate Limit, 감사 로그, Sentry 오류 추적, Web Vitals 구현.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sk-group" style="margin-bottom:0;">
+    <div class="sk-group-title">배포 / 인프라</div>
+    <div class="sk-cards sk-cards-4">
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">iOS / Android 배포</div>
+          <span class="sk-level prod">App Store · Play Store 운영</span>
+          <div class="sk-desc">인증서·프로비저닝 관리, TestFlight, ProGuard·Keystore 서명, 스토어 심사·버전 관리 전 과정.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">AWS / Docker</div>
+          <span class="sk-level prod">실서비스 운영</span>
+          <div class="sk-desc">EC2 Elastic IP + HTTPS 전구간 보안 통신 구성. Docker 컨테이너화, Render 배포, Cron Job 자동화.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">PostgreSQL / Prisma</div>
+          <span class="sk-level exp">프로젝트 적용</span>
+          <div class="sk-desc">OTT Admin에서 Prisma ORM 스키마 설계, 마이그레이션 관리, 쿼리 최적화.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">Sentry / Web Vitals</div>
+          <span class="sk-level exp">프로젝트 적용</span>
+          <div class="sk-desc">오류 추적, 성능 지표 모니터링. FCP/LCP 기반 병목 분석 후 수치 개선 경험.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 02: 문제 해결 -->
+<div class="section" id="problem">
+  <div class="sec-label">Section 02</div>
+  <div class="sec-title">실서비스에서 해결한 문제들</div>
+  <div class="prob-list">
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 01 · 라이브 도메인 적합성</div>
+      <div class="prob-title">쇼츠형 화면 오디오 이중 출력 — 플레이어 생명주기 분리로 완전 해결</div>
+      <div class="prob-flow">
+        <span class="pf-tag">스크롤 시 이전 영상 오디오 잔존</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">라이브러리 소스 직접 분석</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">생성 / 재생 / 종료 생명주기 명시 분리</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">오디오 겹침 완전 해결</span>
+      </div>
+      <div class="prob-desc">
+        딜라이브 OTT 앱에서 쇼츠형 피드 스크롤 시 이전 영상 오디오가 겹쳐 출력되는 문제. API 문서만으로 해결 불가 — <strong>betterPlayer 라이브러리 소스를 직접 분석</strong>해 내부 생명주기 처리 방식을 파악. 영상 전환 시 플레이어 생성/재생/종료 단계를 명시적으로 분리 호출해 완전 해결. FANS 라이브 스트리밍·아티스트 콘텐츠 재생에서도 동일하게 적용 가능한 역량입니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 02 · 커뮤니티 도메인 적합성</div>
+      <div class="prob-title">셋톱박스 3대 실시간 상태 동기화 — 다중 상태를 단위별로 분리 관리</div>
+      <div class="prob-flow">
+        <span class="pf-tag">최대 3대 기기 상태 혼재·렌더링 오류</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">연결·기기·콘텐츠 단위 분리 설계</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">StateNotifierProvider 구조화</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">상태 변화 즉시 반영 · 유지보수성 개선</span>
+      </div>
+      <div class="prob-desc">
+        셋톱박스 최대 3대 페어링 상태를 단일 Provider로 관리하면 상태 혼재 및 렌더링 오류 발생. <strong>연결 상태 / 기기 노출 / 콘텐츠 접근 권한을 별도 StateNotifierProvider로 분리</strong>해 각 단위의 상태 변화가 독립적으로 즉시 반영되도록 설계. FANS 커뮤니티의 팔로우 상태, 좋아요, 실시간 알림 등 다중 상태 흐름 관리에 동일하게 적용 가능한 구조 경험입니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 03 · 성능 최적화 역량</div>
+      <div class="prob-title">WebView 전환 후 성능 저하 — FCP 39%, LCP 10.8% 수치 개선</div>
+      <div class="prob-flow">
+        <span class="pf-tag">앱 배포 의존 + 초기 로딩 지연</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">FCP/LCP 기준 병목 분석</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Lazy Loading · Skeleton UI · CDN 적용</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">FCP −39% · LCP −10.8%</span>
+      </div>
+      <div class="prob-desc">
+        LG헬로비전 헬로tv 앱(케이블TV 가입자 343만 명) 전환 프로젝트에서 콘텐츠 탐색 화면을 WebView로 분리 후 초기 로딩 체감 속도 저하 발생. <strong>FCP/LCP 지표를 기반으로 병목 구간을 식별</strong>하고 CDN 전환, 번들 최적화, Lazy Loading, Skeleton UI를 순차 적용. FCP 39%, LCP 10.8% 개선 달성. 수백만 글로벌 유저가 사용하는 FANS 앱의 성능 병목 파악·해결에 즉시 기여 가능합니다.
+      </div>
+      <div class="side-by-side">
+        <div class="sbs-box">
+          <div class="sbs-label">변경 전</div>
+          <div class="sbs-body">앱 코드 수정 → 빌드 → 스토어 심사(1~3일) → 배포 → 콘텐츠 반영</div>
+        </div>
+        <div class="sbs-box">
+          <div class="sbs-label">변경 후</div>
+          <div class="sbs-body">React 웹 배포만으로 즉시 반영 (앱 배포 없음) · FCP −39% 달성</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 04 · 커머스 도메인 적합성</div>
+      <div class="prob-title">낙관적 업데이트 + 서버 실패 시 자동 롤백 — 사용자 혼란 없는 커머스 UX</div>
+      <div class="prob-flow">
+        <span class="pf-tag">삭제 요청 후 서버 응답 대기 중 UX 공백</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">TanStack Query 낙관적 업데이트</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">서버 실패 시 이전 상태 자동 복원</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">반응성 개선 + 데이터 안정성 확보</span>
+      </div>
+      <div class="prob-desc">
+        OTT Admin(콘텐츠 관리 어드민)에서 영화/시리즈 삭제 시 서버 응답을 기다리는 동안 UI가 멈춰 보이는 UX 문제. <strong>TanStack Query의 onMutate 훅으로 삭제 즉시 UI 반영 후, 서버 실패 시 onError에서 이전 캐시 상태로 자동 롤백</strong> 구현. 커머스에서 카트 추가·수량 변경·쿠폰 적용 등 사용자 입력이 즉시 반영되어야 하는 상황에 동일하게 적용 가능합니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 05 · DRM / 미디어 통합</div>
+      <div class="prob-title">NCG DRM → Multi DRM 전환 — 단일 플레이어 인터페이스로 통합</div>
+      <div class="prob-flow">
+        <span class="pf-tag">서비스마다 다른 DRM 방식</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">DRM 타입 추상화 레이어 설계</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">플레이어 커스터마이징</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">서비스 무관 동일 시청 흐름</span>
+      </div>
+      <div class="prob-desc">
+        딜라이브 앱(NCG DRM)과 헬로tv 앱(Multi DRM: Widevine/FairPlay)의 DRM 방식 차이로 통합이 어려운 문제. <strong>DRM 방식을 추상화한 단일 플레이어 인터페이스를 설계</strong>하여 내부에서 DRM 타입을 분기 처리. 별도 솔루션 도입 없이 추가 비용·운영 리스크 없이 해결. 글로벌 콘텐츠를 제공하는 FANS 플랫폼의 미디어 시스템 이해에 직접 활용 가능한 경험입니다.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 03: 경력 -->
+<div class="section" id="experience">
+  <div class="sec-label">Section 03</div>
+  <div class="sec-title">경력</div>
+
+  <div class="career-block">
+    <div class="career-head">
+      <span class="career-co">(주)홈초이스</span>
+      <span class="career-period">2024.02 ~ 2025.11 · 1년 10개월</span>
+    </div>
+    <div class="career-role">Flutter 개발자 · iOS / Android 앱 개발 및 유지보수</div>
+    <div class="career-desc">OTT 서비스 "오초이스" · 매출 340억 · 전국 디지털케이블TV / LG헬로비전(케이블TV 가입자 343만, 매출 1조) · 딜라이브(매출 3,500억) 파트너사 마이그레이션 2건 주도</div>
+    <ul class="ul">
+      <li>Flutter 기반 OTT 모바일 앱 단독 개발·운영 — iOS/Android 동시 배포, 스토어 심사·버전 관리 전 과정 직접 수행</li>
+      <li><strong>LG헬로비전 헬로tv 앱(가입자 343만 명)</strong> → 오초이스 전환 마이그레이션 개발 주도 (팀 4인)</li>
+      <li><strong>딜라이브 모바일TV</strong> → 오초이스 전환, Flutter 2→3 메이저 버전업 및 전체 라이브러리 의존성 재검토</li>
+      <li>Riverpod 기반 셋톱박스 3대 페어링 상태 — 연결/기기/콘텐츠 단위 분리 관리, 실시간 상태 변화 즉시 반영</li>
+      <li>React + WebView JS Bridge 양방향 구조 → 앱 배포 없이 콘텐츠 즉시 반영 · <strong>FCP 39% 단축, LCP 10.8% 개선</strong></li>
+      <li>NCG DRM → Multi DRM(Widevine/FairPlay) 전환 — 단일 플레이어 커스터마이징으로 라이선스 검증 흐름 통합</li>
+      <li>쇼츠형 화면 오디오 중복 이슈 — betterPlayer 라이브러리 소스 직접 분석, Android 생명주기 레벨에서 해결</li>
+      <li>AWS EC2 Elastic IP + HTTPS 전환으로 이통사 Proxy 방화벽 차단 문제 해결 — 전구간 보안 통신 구성</li>
+      <li>Firebase Analytics, AdMob 연동 · FCP/LCP 기반 성능 지표 모니터링 및 개선</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 04: 프로젝트 -->
+<div class="section" id="projects">
+  <div class="sec-label">Section 04</div>
+  <div class="sec-title">프로젝트</div>
+
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">헬로tv → 오초이스 앱 전환 및 웹 구조 개선</span>
+        <span class="proj-period">2025.02–2025.10</span>
+      </div>
+      <div class="proj-sub">LG헬로비전 (케이블TV 가입자 343만, 매출 1조) · 팀 4인</div>
+      <div class="tags">
+        <span class="tag hl">Riverpod</span>
+        <span class="tag hl">WebView JS Bridge</span>
+        <span class="tag hl">FCP −39%</span>
+        <span class="tag">Flutter</span>
+        <span class="tag">React/TS</span>
+        <span class="tag">CDN</span>
+      </div>
+      <ul class="proj-ul">
+        <li>WebView 하이브리드 구조 도입 — 앱 재배포 없이 배너·콘텐츠·이벤트 즉시 반영 가능한 운영 구조 구현</li>
+        <li>Lazy Loading · Skeleton UI · CDN 적용 → <strong>FCP 39%, LCP 10.8% 개선</strong></li>
+        <li>Riverpod으로 셋톱박스 3대 페어링 상태(연결/기기/콘텐츠) 분리 관리, 상태 변화 즉시 반영</li>
+        <li>AWS EC2 Elastic IP + HTTPS로 이통사 방화벽 차단 해결 · 전구간 보안 통신 구성</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">딜라이브 모바일TV → 오초이스 앱 전환</span>
+        <span class="proj-period">2024.02–2024.11</span>
+      </div>
+      <div class="proj-sub">딜라이브 (매출 3,500억) · 팀 4인</div>
+      <div class="tags">
+        <span class="tag hl">DRM 통합</span>
+        <span class="tag hl">Flutter 2→3</span>
+        <span class="tag hl">미디어 생명주기</span>
+        <span class="tag">VOD</span>
+        <span class="tag">NCG/Multi DRM</span>
+      </div>
+      <ul class="proj-ul">
+        <li>NCG DRM → Multi DRM(Widevine/FairPlay) 단일 플레이어로 통합, 서비스별 동일 시청 흐름</li>
+        <li>플레이어 생명주기(생성/재생/종료) 명시 분리 → 쇼츠형 화면 오디오 겹침 완전 해결 (소스 직접 분석)</li>
+        <li><strong>Flutter 2 → 3 메이저 버전업</strong> · 전체 라이브러리 의존성 재검토 · 안정적 업그레이드 완료</li>
+        <li>Elastic IP 고정 + HTTP→HTTPS 전환(SSL)으로 방화벽 차단 문제 구조적 해결</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">OTT Admin — 영화/시리즈 콘텐츠 관리 시스템</span>
+        <span class="proj-period">2026 · 개인</span>
+      </div>
+      <div class="proj-sub">React 19 역량 검증 · 기획~배포 단독 구현 · FANS 커머스 도메인 직접 적합성</div>
+      <div class="tags">
+        <span class="tag hl">낙관적 업데이트</span>
+        <span class="tag hl">RBAC</span>
+        <span class="tag hl">E2E 테스트</span>
+        <span class="tag">React 19</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Next.js 16</span>
+        <span class="tag">TanStack Query</span>
+        <span class="tag">Playwright</span>
+      </div>
+      <ul class="proj-ul">
+        <li>TanStack Query 낙관적 업데이트·롤백 — 삭제 즉시 UI 반영, 서버 실패 시 자동 복원</li>
+        <li>서버사이드 RBAC — 조회/관리자 역할 분리, Route Handler 레벨 권한 재검증</li>
+        <li>보안: Rate Limit(5회 초과 잠금) · 감사 로그 · Sentry · Web Vitals 수집</li>
+        <li>자동화 품질 체계 — Vitest 단위 96개 · E2E 4개 · CI 파이프라인 구성</li>
+        <li>모바일 UI — 하단 탭 네비게이션·가로 스크롤, SVG 기반 디자인 시스템 구축</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">숫자 대결 — 실시간 WebSocket 게임</span>
+        <span class="proj-period">2026.01~ · 솔로 3일</span>
+      </div>
+      <div class="proj-sub">기획~배포 End-to-End · FANS 라이브/커뮤니티 실시간 구조 직접 경험</div>
+      <div class="tags">
+        <span class="tag hl">WebSocket</span>
+        <span class="tag hl">실시간 동기화</span>
+        <span class="tag">Flutter</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">Render</span>
+      </div>
+      <ul class="proj-ul">
+        <li>서버 중심 상태 관리 → 동시 입력 충돌 방지, WebSocket broadcast로 전체 클라이언트 실시간 동기화</li>
+        <li><strong>기획 / Flutter / Spring Boot / Render 배포</strong> 전 과정을 3일 내 단독 구현</li>
+        <li>실시간 반응성을 유지하면서 데이터 일관성을 확보하는 구조 직접 설계</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">담아(Dama) — 구독 통합 관리 서비스</span>
+        <span class="proj-period">2026.01–2026.02</span>
+      </div>
+      <div class="proj-sub">팀 3인 (개발 2, 디자이너 1) · Flutter / Spring Boot / JWT / MySQL / Docker</div>
+      <div class="tags">
+        <span class="tag hl">Flutter</span>
+        <span class="tag hl">JWT 인증</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Docker</span>
+      </div>
+      <ul class="proj-ul">
+        <li>User / Subscription / Community 도메인 분리 설계, JWT Access/Refresh Token Flutter 직접 구현</li>
+        <li>Soft Delete 정책으로 구독 이력 보존, Docker 통합 실행 환경 구성</li>
+        <li>PM·디자이너와 협업하여 요구사항 구조화 및 기능 설계 과정 경험</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">SECT — 커뮤니티 SNS 웹앱</span>
+        <span class="proj-period">2026.05~ · 진행 중</span>
+      </div>
+      <div class="proj-sub">개인 · FANS 커뮤니티 도메인 역량 직접 구축</div>
+      <div class="tags">
+        <span class="tag hl">커뮤니티</span>
+        <span class="tag hl">팔로우/팔로잉</span>
+        <span class="tag hl">실시간 채팅</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Render</span>
+      </div>
+      <ul class="proj-ul">
+        <li>팔로우/팔로잉, 게시글, 좋아요, 채팅 등 FANS 커뮤니티와 동일한 핵심 기능 구조 설계</li>
+        <li>AI 에이전트 활용으로 ERD·기능 구현 방향 빠르게 정리, Docker+Render 배포 자동화</li>
+        <li>FANS 커뮤니티 도메인에서 필요한 기능 구조를 직접 체득하기 위해 기획·구현 중</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 05: 수료 및 저서 -->
+<div class="section" id="cert" style="padding-bottom:40px;">
+  <div class="sec-label">Section 05</div>
+  <div class="sec-title">수료 및 저서</div>
+  <ul class="ul">
+    <li><strong>정보통신산업진흥원</strong> · 인공지능 기본과정 수료</li>
+    <li><strong>네이버 부스트코스</strong> · DATA SCIENCE 코칭스터디 2023 수료</li>
+    <li><strong>저서</strong> · <a href="https://www.yes24.com/Product/Goods/109711067" target="_blank">『개발자가 되기 위해 꼭 알아야하는 IT 용어』</a> 공동 저자 (YES24)</li>
+    <li><strong>컴퓨터공학과</strong> 졸업 / 복수전공: 모빌리티AI·SW융합</li>
+  </ul>
+</div>
+
+<!-- SECTION 06: 지원 동기 -->
+<div class="section" id="why">
+  <div class="sec-label">Section 06</div>
+  <div class="sec-title">왜 Blue Garage · FANS인가</div>
+
+  <div class="fans-grid">
+    <div class="fans-card">
+      <div class="fans-num">REASON 01</div>
+      <div class="fans-title">라이브 / 미디어 경험이 직접 연결됩니다</div>
+      <div class="fans-body">
+        홈초이스에서 VOD 재생, DRM 통합, 플레이어 생명주기 관리를 실서비스에서 직접 다뤘습니다. <strong>아티스트가 직접 송출하는 라이브와 채팅 기능 개발</strong>은 제가 쌓아온 미디어 스트리밍 구조 이해를 가장 직접적으로 활용할 수 있는 도메인입니다.
+      </div>
+    </div>
+    <div class="fans-card">
+      <div class="fans-num">REASON 02</div>
+      <div class="fans-title">글로벌 서비스의 복잡성을 해결하고 싶습니다</div>
+      <div class="fans-body">
+        LG헬로비전(343만 가입자) 규모의 OTT 앱 성능 개선 경험을 갖고 있습니다. <strong>수백만 글로벌 팬이 사용하는 FANS 플랫폼</strong>에서 렌더링 병목 파악, 응답성 개선, 다국어 i18n 구조 설계를 함께 해결해나가고 싶습니다.
+      </div>
+    </div>
+    <div class="fans-card">
+      <div class="fans-num">REASON 03</div>
+      <div class="fans-title">크로스플랫폼 개발자로서 즉시 기여합니다</div>
+      <div class="fans-body">
+        Flutter와 React Native는 <strong>동일한 선언형 UI·상태관리·네이티브 브릿지 패러다임</strong>을 공유합니다. React 19 + TypeScript 실서비스 경험까지 갖추어, 학습 비용 없이 React Native 코드베이스에 즉시 기여할 수 있습니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer id="contact">
+  박준철 · justinnn980@gmail.com · <a href="https://github.com/justinnn980">github.com/justinnn980</a><br/>
+  <span style="font-size:12px; margin-top:6px; display:block;">Blue Garage · FANS 프론트엔드 개발자 (React Native) 지원용 포트폴리오</span>
+</footer>
+
+</body>
+</html>
