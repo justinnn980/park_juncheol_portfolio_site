@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>박준철 포트폴리오 — 로보티즈AI · 데이터 Curation 엔지니어</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --pk:   #FF7A1A;
+    --pk-l: #FFE9D6;
+    --pk-d: #7A3300;
+    --bg:   #0A0908;
+    --card: #14110D;
+    --card2:#191510;
+    --bdr:  #2A2218;
+    --text: #F9FAFB;
+    --sub:  #D1D5DB;
+    --muted:#9CA3AF;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Noto Sans KR', 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  a { color: var(--pk); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,9,8,0.93); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--bdr);
+    padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 52px;
+  }
+  .nav-name { font-weight: 800; font-size: 15px; }
+  .nav-tag { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: rgba(255,122,26,0.15); color: var(--pk); margin-left: 8px; }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { font-size: 13px; color: var(--muted); font-weight: 500; }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+  .nav-target {
+    font-size: 12px; font-weight: 700; color: var(--pk);
+    border: 1px solid rgba(255,122,26,0.35); border-radius: 6px;
+    padding: 3px 10px; margin-left: 8px;
+  }
+
+  /* HERO */
+  .hero {
+    max-width: 1100px; margin: 0 auto; padding: 64px 40px 48px;
+    display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: start;
+  }
+  .hero-badge {
+    display: inline-block; padding: 4px 12px; border-radius: 20px;
+    background: rgba(255,122,26,0.12); border: 1px solid rgba(255,122,26,0.28);
+    color: var(--pk); font-size: 12px; font-weight: 700; margin-bottom: 16px;
+  }
+  .hero-name { font-size: 44px; font-weight: 900; line-height: 1.1; margin-bottom: 8px; letter-spacing: -1px; }
+  .hero-role { font-size: 18px; font-weight: 700; color: var(--pk); margin-bottom: 16px; }
+  .hero-lead { font-size: 14.5px; color: var(--sub); line-height: 1.85; margin-bottom: 28px; max-width: 480px; }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    margin-bottom: 28px; background: var(--bdr); border-radius: 10px; overflow: hidden;
+  }
+  .stat { background: var(--card); padding: 16px 12px; text-align: center; }
+  .stat-num   { font-size: 17px; font-weight: 900; color: var(--pk); }
+  .stat-label { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+  .hero-contacts { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-contact  { font-size: 13px; color: var(--muted); }
+
+  /* CODE PANEL */
+  .code-panel { background: #07060500; background-color:#070605; border: 1px solid var(--bdr); border-radius: 12px; overflow: hidden; }
+  .code-header { background: var(--card); padding: 10px 16px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--bdr); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #FF5F57; } .dot-y { background: #FFBD2E; } .dot-g { background: #28C840; }
+  .code-filename { font-size: 12px; color: var(--muted); margin-left: 6px; font-family: 'JetBrains Mono', monospace; }
+  .code-body { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.85; overflow-x: auto; }
+  .c-cmt { color: #6B5A45; }
+  .c-kw  { color: #FFB37A; }
+  .c-str { color: #FFD8A8; }
+  .c-num { color: #FBBF24; }
+  .c-fn  { color: #FF9D4D; }
+  .c-var { color: #F9FAFB; }
+  .c-prop{ color: #FFE0BD; }
+
+  /* SECTION */
+  .section { max-width: 1100px; margin: 0 auto; padding: 56px 40px; border-top: 1px solid var(--bdr); }
+  .sec-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pk); margin-bottom: 6px; }
+  .sec-title { font-size: 26px; font-weight: 900; margin-bottom: 32px; }
+
+  /* DOMAIN CARDS */
+  .domain-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px; }
+  .domain-card {
+    background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px 16px;
+    text-align: center; transition: border-color .2s;
+  }
+  .domain-card:hover { border-color: rgba(255,122,26,0.4); }
+  .domain-icon { font-size: 28px; margin-bottom: 8px; }
+  .domain-name { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+  .domain-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: rgba(255,122,26,0.12); color: var(--pk); display: inline-block; margin-bottom: 8px; }
+  .domain-desc { font-size: 11.5px; color: var(--muted); line-height: 1.55; }
+
+  /* SKILL SECTION */
+  .sk-group { margin-bottom: 28px; }
+  .sk-group-title { font-size: 12px; font-weight: 800; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  .sk-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .sk-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 10px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 14px; transition: border-color .2s; }
+  .sk-card:hover { border-color: rgba(255,122,26,0.35); }
+  .sk-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .sk-name { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+  .sk-level { font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 10px; display: inline-block; margin-bottom: 5px; }
+  .sk-level.prod { background: rgba(255,122,26,0.15); color: var(--pk); }
+  .sk-level.exp  { background: rgba(251,191,36,0.15); color: #FBBF24; }
+  .sk-level.know { background: rgba(156,163,175,0.15); color: var(--muted); }
+  .sk-desc { font-size: 12px; color: var(--sub); line-height: 1.55; }
+  .sk-cards-2 { grid-template-columns: repeat(2, 1fr); }
+  .sk-cards-4 { grid-template-columns: repeat(4, 1fr); }
+
+  /* BRIDGE BOX */
+  .bridge-box {
+    background: var(--card); border: 1px solid rgba(255,122,26,0.25); border-radius: 12px;
+    padding: 20px 24px; margin-bottom: 28px;
+  }
+  .bridge-title { font-size: 13px; font-weight: 800; color: var(--pk); margin-bottom: 12px; }
+  .bridge-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .bridge-item { padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+  .bi-from { background: rgba(156,163,175,0.1); color: var(--sub); border: 1px solid var(--bdr); }
+  .bi-arrow { color: var(--pk); font-size: 16px; }
+  .bi-to   { background: rgba(255,122,26,0.12); color: var(--pk); border: 1px solid rgba(255,122,26,0.3); }
+  .bridge-row + .bridge-row { margin-top: 8px; }
+
+  /* PROBLEM CARDS */
+  .prob-list { display: grid; gap: 18px; }
+  .prob-card {
+    background: var(--card); border: 1px solid var(--bdr);
+    border-left: 3px solid var(--pk); border-radius: 0 12px 12px 0; padding: 22px 26px;
+  }
+  .prob-num   { font-size: 11px; font-weight: 800; color: var(--pk); letter-spacing: 1px; margin-bottom: 8px; }
+  .prob-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+  .prob-flow  { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .pf-tag    { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; background: var(--card2); color: var(--sub); }
+  .pf-arrow  { color: var(--pk); font-size: 14px; }
+  .pf-result { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; background: rgba(255,122,26,0.15); color: #FFD8A8; }
+  .prob-desc { font-size: 13px; color: var(--sub); line-height: 1.75; }
+  .prob-desc strong { color: var(--text); font-weight: 700; }
+
+  .side-by-side { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  .sbs-box { background: var(--card2); border: 1px solid var(--bdr); border-radius: 8px; padding: 12px 14px; }
+  .sbs-label { font-size: 11px; font-weight: 800; color: var(--pk); margin-bottom: 5px; }
+  .sbs-body  { font-size: 12px; color: var(--sub); line-height: 1.6; }
+
+  /* CAREER / PROJ */
+  .career-block { margin-bottom: 32px; }
+  .career-head  { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+  .career-co    { font-size: 17px; font-weight: 900; }
+  .career-period{ font-size: 12px; color: var(--muted); font-weight: 600; }
+  .career-role  { font-size: 13px; font-weight: 700; color: var(--pk); margin-bottom: 6px; }
+  .career-desc  { font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
+  .ul { list-style: none; display: grid; gap: 6px; }
+  .ul li { font-size: 13px; color: var(--sub); padding-left: 16px; position: relative; line-height: 1.65; }
+  .ul li::before { content: '▸'; position: absolute; left: 0; color: var(--pk); font-size: 9px; top: 4px; }
+  .ul li strong { color: var(--text); font-weight: 700; }
+
+  .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+  .proj-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px; transition: border-color .2s; }
+  .proj-card:hover { border-color: rgba(255,122,26,0.35); }
+  .proj-head   { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+  .proj-title  { font-size: 14px; font-weight: 800; }
+  .proj-period { font-size: 11px; color: var(--muted); font-weight: 600; }
+  .proj-sub    { font-size: 12px; color: var(--pk); font-weight: 700; margin-bottom: 8px; }
+  .tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+  .tag { padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: 700; background: var(--bdr); color: var(--sub); }
+  .tag.hl { background: rgba(255,122,26,0.12); color: #FFB37A; }
+  .proj-ul { list-style: none; display: grid; gap: 4px; }
+  .proj-ul li { font-size: 12px; color: var(--sub); padding-left: 13px; position: relative; line-height: 1.6; }
+  .proj-ul li::before { content: '▸'; position: absolute; left: 0; color: var(--pk); font-size: 9px; top: 2px; }
+  .proj-ul li strong { color: var(--text); }
+
+  /* WHY */
+  .fans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .fans-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px 18px; transition: border-color .2s; }
+  .fans-card:hover { border-color: rgba(255,122,26,0.35); }
+  .fans-num { font-size: 11px; font-weight: 800; color: var(--pk); letter-spacing: 1px; margin-bottom: 6px; }
+  .fans-title { font-size: 14px; font-weight: 800; margin-bottom: 8px; }
+  .fans-body { font-size: 12.5px; color: var(--sub); line-height: 1.7; }
+  .fans-body strong { color: var(--text); }
+
+  /* GAP / LEARN BOX */
+  .learn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .learn-card { background: var(--card2); border: 1px dashed var(--bdr); border-radius: 10px; padding: 16px 18px; }
+  .learn-name { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+  .learn-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  .divider { border: none; border-top: 1px solid var(--bdr); margin: 28px 0; }
+  footer { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--bdr); }
+
+  @media (max-width: 800px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .domain-grid { grid-template-columns: repeat(2, 1fr); }
+    .sk-cards, .sk-cards-4 { grid-template-columns: 1fr 1fr; }
+    .proj-grid { grid-template-columns: 1fr; }
+    .fans-grid, .learn-grid { grid-template-columns: 1fr; }
+    .side-by-side { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">박준철<span class="nav-tag">Data Curation</span><span class="nav-target">로보티즈AI</span></div>
+  <div class="nav-links">
+    <a href="#fit">지원 역량</a>
+    <a href="#skills">기술 스택</a>
+    <a href="#problem">데이터 품질 사례</a>
+    <a href="#experience">경력</a>
+    <a href="#projects">프로젝트</a>
+    <a href="#why">지원 동기</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-badge">자율주행로봇 · 학습 데이터 품질 · Auto-Labeling</div>
+    <div class="hero-name">박준철</div>
+    <div class="hero-role">데이터 Curation 엔지니어 지원 · 로보티즈AI</div>
+    <div class="hero-lead">
+      YOLOv5 기반 객체 탐지 모델의 <strong style="color:var(--text);">학습 데이터 구성부터 추론 결과의 오탐/미탐 패턴 분석, 판단 로직 개선</strong>까지 전 과정을 직접 수행한 경험이 있습니다.<br/><br/>
+      바운딩 박스 품질·Confidence Score를 정량 기준으로 검증하고 Threshold를 튜닝해 <strong style="color:var(--pk);">오탐률을 30%에서 10% 이하로 낮춘 경험</strong>은 라벨 정확도 검증·Auto-labeling 품질 평가 업무와 본질적으로 동일한 작업입니다.<br/><br/>
+      Selenium 기반 대규모 데이터 수집 파이프라인을 Docker·Cron Job으로 무인 자동화한 경험을 바탕으로, 로보티즈AI의 학습 데이터 파이프라인 구축에 바로 기여하고 싶습니다.
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">오탐률 30%→10%↓</div>
+        <div class="stat-label">바운딩박스·Confidence<br/>정량 검증·튜닝</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1,000건+/10분</div>
+        <div class="stat-label">데이터 수집<br/>파이프라인 자동화</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">120만 건</div>
+        <div class="stat-label">공공데이터 품질<br/>점검·이상치 처리</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">25FPS+</div>
+        <div class="stat-label">실시간 추론<br/>파이프라인 구현</div>
+      </div>
+    </div>
+    <div class="hero-contacts">
+      <span class="hero-contact">✉ justinnn980@gmail.com</span>
+      <span class="hero-contact">🐙 <a href="https://github.com/justinnn980">github.com/justinnn980</a></span>
+      <span class="hero-contact">📝 <a href="https://justinnn980.tistory.com">기술 블로그</a></span>
+      <span class="hero-contact">🎓 컴퓨터공학과 / 복수전공: 모빌리티AI·SW융합</span>
+    </div>
+  </div>
+
+  <!-- CODE PANEL -->
+  <div class="code-panel">
+    <div class="code-header">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="code-filename">label_quality_check.py</span>
+    </div>
+    <div class="code-body">
+<span class="c-cmt"># 오탐/미탐 패턴 분석 → 판단 로직 품질 개선</span>
+<span class="c-kw">def</span> <span class="c-fn">filter_low_quality_box</span>(<span class="c-var">box</span>, <span class="c-var">conf</span>, <span class="c-var">prev_center</span>):
+    <span class="c-var">aspect_ratio</span> = <span class="c-var">box</span>.<span class="c-prop">w</span> / <span class="c-var">box</span>.<span class="c-prop">h</span>
+    <span class="c-var">center_shift</span> = <span class="c-fn">dist</span>(<span class="c-var">box</span>.<span class="c-prop">center</span>, <span class="c-var">prev_center</span>)
+
+    <span class="c-kw">if</span> <span class="c-var">conf</span> &lt; <span class="c-num">0.45</span> <span class="c-kw">or</span> <span class="c-var">aspect_ratio</span> &gt; <span class="c-num">2.2</span>:
+        <span class="c-kw">return</span> <span class="c-str">"reject"</span>   <span class="c-cmt"># 저품질 박스 제외</span>
+
+    <span class="c-kw">if</span> <span class="c-var">center_shift</span> &lt; <span class="c-num">3</span>:
+        <span class="c-kw">return</span> <span class="c-str">"stable"</span>   <span class="c-cmt"># 자세 유지 시간 누적</span>
+
+    <span class="c-kw">return</span> <span class="c-str">"accept"</span>
+
+<span class="c-cmt"># → 오탐률 30% → 10% 이하, 25FPS+ 실시간 처리</span>
+<span class="c-cmt"># → 동일 로직을 pseudo-label 신뢰도 필터링에 적용 가능</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 00: 직무 적합도 -->
+<div class="section" id="fit">
+  <div class="sec-label">Section 00</div>
+  <div class="sec-title">데이터 Curation 직무 — 기여 역량 매핑</div>
+
+  <div class="domain-grid">
+    <div class="domain-card">
+      <div class="domain-icon">🎯</div>
+      <div class="domain-name">라벨 품질 관리</div>
+      <div class="domain-badge">직접 경험</div>
+      <div class="domain-desc">YOLOv5 출력 바운딩박스·Confidence Score의 오탐/미탐 패턴 분석, 정량 기준(종횡비·중심좌표 이동) 기반 품질 검증.</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">🤖</div>
+      <div class="domain-name">Pre/Auto-Labeling</div>
+      <div class="domain-badge">구조적 유사성</div>
+      <div class="domain-desc">Confidence 기반 Threshold 튜닝으로 모델 출력을 자동 분류한 경험 — pseudo label 생성·품질 평가와 동일한 로직 패턴.</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">⚙️</div>
+      <div class="domain-name">데이터 파이프라인</div>
+      <div class="domain-badge">직접 경험</div>
+      <div class="domain-desc">Selenium 대규모 수집, Pandas 정제, Docker+Cron Job 무인 자동화. 라벨링 파이프라인 운영에 필요한 인프라 역량 보유.</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">🐧</div>
+      <div class="domain-name">Python / Linux</div>
+      <div class="domain-badge">직접 경험</div>
+      <div class="domain-desc">AWS EC2 Linux 환경에서 운영 서비스 배포·관리. Python 기반 데이터 처리 및 AI 도구 활용 역량 보유.</div>
+    </div>
+  </div>
+
+  <!-- 전이 역량 -->
+  <div class="bridge-box">
+    <div class="bridge-title">객체 탐지 모델 출력 분석 경험이 라벨 Curation 업무로 이어지는 지점</div>
+    <div class="bridge-row">
+      <span class="bridge-item bi-from">바운딩박스 종횡비·중심좌표 이동 분석</span>
+      <span class="bi-arrow">→</span>
+      <span class="bridge-item bi-to">라벨 정확도·일관성 검증</span>
+      <span style="font-size:12px; color:var(--muted); margin-left:4px;">— 정량 기준으로 "잘못된 라벨"을 걸러내는 동일한 사고 과정</span>
+    </div>
+    <div class="bridge-row">
+      <span class="bridge-item bi-from">Confidence Score Threshold 튜닝</span>
+      <span class="bi-arrow">→</span>
+      <span class="bridge-item bi-to">Pseudo-label 신뢰도 필터링</span>
+      <span style="font-size:12px; color:var(--muted); margin-left:4px;">— Auto-labeling 결과를 자동/수동 검수로 나누는 기준 설계 경험</span>
+    </div>
+    <div class="bridge-row">
+      <span class="bridge-item bi-from">Selenium 대규모 수집 + Docker + Cron 자동화</span>
+      <span class="bi-arrow">→</span>
+      <span class="bridge-item bi-to">라벨링 파이프라인 무인 운영</span>
+      <span style="font-size:12px; color:var(--muted); margin-left:4px;">— 반복 수작업을 코드로 자동화해 운영 체계로 정착시킨 경험</span>
+    </div>
+    <div class="bridge-row">
+      <span class="bridge-item bi-from">YOLOv5 추론 파이프라인 직접 구현</span>
+      <span class="bi-arrow">→</span>
+      <span class="bridge-item bi-to">Deep Learning 추론 파이프라인 연동</span>
+      <span style="font-size:12px; color:var(--muted); margin-left:4px;">— 모델 입출력 형식, 추론 속도/정확도 트레이드오프에 대한 실무 이해</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01: 기술 스택 -->
+<div class="section" id="skills">
+  <div class="sec-label">Section 01</div>
+  <div class="sec-title">기술 스택</div>
+
+  <div class="sk-group">
+    <div class="sk-group-title">AI / 데이터 — Object Detection & Quality</div>
+    <div class="sk-cards">
+      <div class="sk-card">
+        <div class="sk-icon">📦</div>
+        <div>
+          <div class="sk-name">YOLOv5 / OpenCV</div>
+          <span class="sk-level prod">실서비스 프로젝트 적용</span>
+          <div class="sk-desc">학습 데이터셋 구성부터 추론 파이프라인 구현, 출력 품질 분석까지 전 과정 직접 수행. 경량 모델(YOLOv5s) 적용 경험.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">📊</div>
+        <div>
+          <div class="sk-name">Pandas / Scikit-learn</div>
+          <span class="sk-level prod">실서비스 프로젝트 적용</span>
+          <div class="sk-desc">대규모 데이터 정제·이상치 처리, 피처 엔지니어링, 정량 지표(MAE 등) 기반 모델 성능 검증 경험.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">🐍</div>
+        <div>
+          <div class="sk-name">Python 3</div>
+          <span class="sk-level prod">전 프로젝트 핵심 언어</span>
+          <div class="sk-desc">데이터 처리·자동화·모델 추론 스크립트 전반에 사용. Claude Code/Codex 등 AI 도구로 빠른 학습·구현 역량 보유.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sk-group">
+    <div class="sk-group-title">데이터 파이프라인 — Collection & Automation</div>
+    <div class="sk-cards">
+      <div class="sk-card">
+        <div class="sk-icon">🕸️</div>
+        <div>
+          <div class="sk-name">Selenium</div>
+          <span class="sk-level prod">실서비스 운영</span>
+          <div class="sk-desc">콘텐츠 메타데이터 1,000건 이상을 평균 10분 내 수집하는 대규모 자동 수집 파이프라인 설계·운영.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">🐳</div>
+        <div>
+          <div class="sk-name">Docker / Cron Job</div>
+          <span class="sk-level prod">무인 자동화 체계 구축</span>
+          <div class="sk-desc">컨테이너화 및 Render Cron Job으로 일 1회 무인 자동 수집 체계 구축. 반복 수작업 100% 자동화.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">✅</div>
+        <div>
+          <div class="sk-name">데이터 일관성 검증</div>
+          <span class="sk-level prod">실서비스 운영</span>
+          <div class="sk-desc">수집된 데이터의 정제/가공 로직 구현 및 일관성 검증 — 사내 라벨링 데이터 품질 모니터링 체계 수립에 적용 가능.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sk-group">
+    <div class="sk-group-title">백엔드 / 인프라</div>
+    <div class="sk-cards sk-cards-4">
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">Linux / AWS EC2</div>
+          <span class="sk-level prod">실서비스 운영</span>
+          <div class="sk-desc">EC2 기반 운영 인프라 구축·관리. 사내 개발 환경 Linux 기반 작업에 즉시 적응 가능.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">MySQL / AWS S3</div>
+          <span class="sk-level prod">실서비스 운영</span>
+          <div class="sk-desc">운영 데이터 처리 및 인프라 운영 경험. 대용량 데이터셋 저장·관리 구조 이해.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">Java / Spring</div>
+          <span class="sk-level exp">실서비스 백엔드 연동</span>
+          <div class="sk-desc">백엔드 API 연동 경험 — 라벨링 툴 백엔드 개선/개발 업무에 필요한 서버 사이드 이해 보유.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">Claude Code / Codex</div>
+          <span class="sk-level prod">실무 활용</span>
+          <div class="sk-desc">AI 코딩 도구를 활용한 빠른 학습·프로토타이핑. 신규 라벨링 툴 기능 개발 속도 향상에 기여 가능.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sk-group" style="margin-bottom:0;">
+    <div class="sk-group-title">학습 진행 중 — 즉시 학습 가능 영역</div>
+    <div class="learn-grid">
+      <div class="learn-card">
+        <div class="learn-name">CVAT / Label Studio</div>
+        <div class="learn-desc">오픈소스 라벨링 툴은 사용해보지 않았지만, YOLOv5 학습 데이터 포맷 구성·라벨 검증 로직을 직접 짜본 경험으로 커스터마이징 구조를 빠르게 학습 가능합니다.</div>
+      </div>
+      <div class="learn-card">
+        <div class="learn-name">SAM / Grounding DINO / CLIP</div>
+        <div class="learn-desc">Foundation Model 기반 auto-labeling은 직접 다뤄보지 않았지만, YOLOv5 confidence 기반 필터링 경험을 바탕으로 pseudo-label 품질 평가 로직 설계에 빠르게 적응할 수 있습니다.</div>
+      </div>
+      <div class="learn-card">
+        <div class="learn-name">COCO / KITTI / nuScenes</div>
+        <div class="learn-desc">YOLO 포맷 학습 데이터 구성 경험을 바탕으로 자율주행 표준 어노테이션 포맷 학습에 빠르게 적응 가능합니다.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 02: 데이터 품질 사례 -->
+<div class="section" id="problem">
+  <div class="sec-label">Section 02</div>
+  <div class="sec-title">데이터/모델 품질을 직접 개선한 사례</div>
+  <div class="prob-list">
+
+    <div class="prob-card">
+      <div class="prob-num">CASE 01 · 라벨 정확도 검증 — 핵심 직무 직결</div>
+      <div class="prob-title">바운딩박스·Confidence Score 정량 분석으로 오탐률 30% → 10% 이하</div>
+      <div class="prob-flow">
+        <span class="pf-tag">YOLOv5 추론 결과 오탐/미탐 다수 발생</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">종횡비·중심좌표 이동·자세 유지시간 정량 기준 설계</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Threshold 튜닝 및 복합 조건 적용</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">오탐률 30%→10%↓ · 25FPS+</span>
+      </div>
+      <div class="prob-desc">
+        CCTV 실시간 낙상 감지 시스템에서 YOLOv5 모델의 출력 결과(바운딩 박스, Confidence Score)를 분석해 <strong>오탐/미탐 패턴을 정량적으로 분류</strong>했습니다. 바운딩 박스 종횡비, 중심 좌표 이동, 자세 유지 시간을 복합 조건으로 묶고 Threshold를 튜닝해 판단 로직과 데이터 품질을 구조적으로 개선했습니다. 이는 로보티즈AI가 요구하는 <strong>라벨 정확도·일관성 검증, 데이터셋 품질 분석</strong> 업무와 본질적으로 같은 작업입니다.
+      </div>
+      <div class="side-by-side">
+        <div class="sbs-box">
+          <div class="sbs-label">개선 전</div>
+          <div class="sbs-body">단순 Confidence 임계값만 사용 → 오탐률 30%</div>
+        </div>
+        <div class="sbs-box">
+          <div class="sbs-label">개선 후</div>
+          <div class="sbs-body">바운딩박스 형태·이동량 복합 조건 추가 → 오탐률 10% 이하, 실시간 25FPS+ 유지</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">CASE 02 · Pre/Auto-Labeling 구조적 유사 경험</div>
+      <div class="prob-title">경량 모델 + 프레임 샘플링으로 실시간 추론 파이프라인 성능 확보</div>
+      <div class="prob-flow">
+        <span class="pf-tag">전체 프레임 추론 시 속도 저하</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">YOLOv5s 경량 모델 전환</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">프레임 샘플링 전략 적용</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">실시간 추론 25FPS+ 확보</span>
+      </div>
+      <div class="prob-desc">
+        모델 추론 결과를 <strong>품질 손실 없이 처리량을 확보</strong>해야 하는 문제를 경량 모델 적용과 샘플링 전략으로 해결한 경험입니다. Pre-labeling·Auto-labeling 파이프라인 구축 시 대량 데이터를 빠르게 처리하면서도 pseudo label 품질을 유지해야 하는 요구사항과 동일한 트레이드오프 설계 경험입니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">CASE 03 · 데이터 파이프라인 운영 경험</div>
+      <div class="prob-title">대규모 수집 파이프라인의 무인 자동화 + 데이터 일관성 검증</div>
+      <div class="prob-flow">
+        <span class="pf-tag">반복 수작업 데이터 수집</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Selenium 자동 수집 설계</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Pandas 정제 + Docker/Cron 무인화</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">반복 수작업 100% 자동화</span>
+      </div>
+      <div class="prob-desc">
+        키노라이츠 콘텐츠 메타데이터 1,000건 이상을 평균 10분 내 수집하는 파이프라인을 설계하고, <strong>수집 데이터의 정제·가공 로직과 일관성 검증</strong>을 직접 구현했습니다. Docker 컨테이너화와 Cron Job으로 일 1회 무인 자동 수집 체계를 구축한 경험은 사내 라벨링 파이프라인의 안정적 운영, 품질 모니터링 체계 수립에 바로 적용할 수 있습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">CASE 04 · 데이터 품질 점검 / 이상치 처리</div>
+      <div class="prob-title">대용량 공공데이터 결합 및 이상치 처리로 예측 모델 정밀도 개선</div>
+      <div class="prob-flow">
+        <span class="pf-tag">공공데이터 120만 건 + 기상데이터 결합</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">데이터 품질 점검·이상치 처리</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">시간대/요일/날씨별 피처 엔지니어링</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">MAE 기준 오차 15%↑ 개선</span>
+      </div>
+      <div class="prob-desc">
+        서울시 따릉이 약 120만 건 데이터와 기상 데이터를 결합하는 과정에서 <strong>결측치·이상치를 점검·처리</strong>하고 피처 엔지니어링을 수행했습니다. 대용량 데이터셋의 품질을 구조적으로 관리하고 정량 지표(MAE)로 개선을 검증한 경험은 데이터셋 품질 분석 업무에 직접 적용 가능합니다.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 03: 경력 -->
+<div class="section" id="experience">
+  <div class="sec-label">Section 03</div>
+  <div class="sec-title">경력</div>
+
+  <div class="career-block">
+    <div class="career-head">
+      <span class="career-co">(주)홈초이스</span>
+      <span class="career-period">2024.02 ~ 2025.11 · 1년 10개월</span>
+    </div>
+    <div class="career-role">소프트웨어 개발자 · OTT 앱 개발/운영</div>
+    <div class="career-desc">Flutter 기반 OTT 앱 개발/운영, Java/Spring Boot 백엔드 API 연동, AWS 인프라 운영</div>
+    <ul class="ul">
+      <li>Flutter 기반 OTT 앱 개발·운영, Java/Spring Boot 백엔드 API 연동</li>
+      <li>운영 데이터(MySQL/DynamoDB) 처리 및 AWS 인프라(EC2/S3/Elastic Beanstalk) 운영 — Linux 환경 실무 경험</li>
+      <li>실서비스 데이터 일관성·정합성 검증, 운영 환경에서의 품질 모니터링 체계 경험</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 04: 프로젝트 -->
+<div class="section" id="projects">
+  <div class="sec-label">Section 04</div>
+  <div class="sec-title">주요 프로젝트</div>
+
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">CCTV 실시간 낙상 감지 시스템</span>
+        <span class="proj-period">2023.05–2023.07 · 5인</span>
+      </div>
+      <div class="proj-sub">라벨/모델 출력 품질 분석 핵심 프로젝트</div>
+      <div class="tags">
+        <span class="tag hl">오탐률 30%→10%↓</span>
+        <span class="tag hl">Threshold 튜닝</span>
+        <span class="tag">Python</span>
+        <span class="tag">YOLOv5</span>
+        <span class="tag">OpenCV</span>
+        <span class="tag">PyQt5</span>
+      </div>
+      <ul class="proj-ul">
+        <li>YOLOv5 기반 객체 탐지 모델의 학습 데이터셋 구성 및 추론 파이프라인 직접 구현</li>
+        <li>모델 출력(바운딩박스, Confidence Score)의 오탐/미탐 패턴 분석 → 판단 로직 품질 개선</li>
+        <li>종횡비·중심좌표 이동·자세 유지시간 복합 조건 + Threshold 튜닝으로 품질 정량 검증</li>
+        <li>경량 YOLOv5s 적용 + 프레임 샘플링 → 실시간 추론 <strong>25FPS+</strong> 확보</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">키노라이츠 콘텐츠 메타데이터 크롤링 자동화</span>
+        <span class="proj-period">2024.10–2025.11 · 개인</span>
+      </div>
+      <div class="proj-sub">데이터 파이프라인 구축·무인 운영 경험</div>
+      <div class="tags">
+        <span class="tag hl">파이프라인 자동화</span>
+        <span class="tag hl">일관성 검증</span>
+        <span class="tag">Python</span>
+        <span class="tag">Selenium</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">Docker</span>
+      </div>
+      <ul class="proj-ul">
+        <li>Selenium 기반 대규모 수집 파이프라인 설계, 1,000건 이상을 평균 10분 내 수집</li>
+        <li>Pandas 기반 수집 데이터 정제/가공 로직 구현, 데이터 일관성 검증</li>
+        <li>Docker 컨테이너화 및 Render Cron Job으로 일 1회 무인 자동 수집 체계 구축</li>
+        <li><strong>반복 수작업 100% 자동화</strong> — 라벨링 파이프라인 무인 운영에 적용 가능한 구조</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">서울시 따릉이 이용 데이터 통계와 예측</span>
+        <span class="proj-period">2023.09–2023.11 · 2인</span>
+      </div>
+      <div class="proj-sub">대용량 데이터 품질 관리·정량 검증 경험</div>
+      <div class="tags">
+        <span class="tag hl">데이터 품질 점검</span>
+        <span class="tag hl">이상치 처리</span>
+        <span class="tag">Python</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Matplotlib</span>
+      </div>
+      <ul class="proj-ul">
+        <li>공공데이터 약 120만 건과 기상 데이터를 결합, 데이터 품질 점검 및 이상치 처리</li>
+        <li>시간대/요일/날씨별 피처 엔지니어링 수행 후 랜덤 포레스트 모델 적용</li>
+        <li>선형 회귀 대비 <strong>MAE 기준 오차 15% 이상 개선</strong>, 정량 지표 기반 모델 성능 검증</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 05: 수료 및 저서 -->
+<div class="section" id="cert" style="padding-bottom:40px;">
+  <div class="sec-label">Section 05</div>
+  <div class="sec-title">학력 / 수료 및 저서</div>
+  <ul class="ul">
+    <li><strong>컴퓨터공학과</strong> 졸업 / 복수전공: 모빌리티AI·SW융합</li>
+    <li><strong>정보통신산업진흥원</strong> · 인공지능 기본과정 수료</li>
+    <li><strong>네이버 부스트코스</strong> · DATA SCIENCE 코칭스터디 2023 수료</li>
+    <li><strong>저서</strong> · <a href="https://www.yes24.com/Product/Goods/109711067" target="_blank">『개발자가 되기 위해 꼭 알아야하는 IT 용어』</a> 공동 저자 (YES24)</li>
+  </ul>
+</div>
+
+<!-- SECTION 06: 지원 동기 -->
+<div class="section" id="why">
+  <div class="sec-label">Section 06</div>
+  <div class="sec-title">왜 로보티즈AI · 데이터 Curation인가</div>
+
+  <div class="fans-grid">
+    <div class="fans-card">
+      <div class="fans-num">REASON 01</div>
+      <div class="fans-title">모델 출력을 정량적으로 검증해 본 경험이 있습니다</div>
+      <div class="fans-body">
+        CCTV 낙상 감지 프로젝트에서 바운딩박스·Confidence Score를 정량 기준으로 분석해 오탐률을 30%에서 10% 이하로 낮췄습니다. <strong>라벨 정확도·일관성 검증, 데이터셋 품질 분석</strong>은 제가 이미 깊게 다뤄본 문제의 연장선입니다.
+      </div>
+    </div>
+    <div class="fans-card">
+      <div class="fans-num">REASON 02</div>
+      <div class="fans-title">반복 작업을 자동화 파이프라인으로 바꾼 경험이 있습니다</div>
+      <div class="fans-body">
+        Selenium·Docker·Cron Job으로 데이터 수집을 100% 자동화한 경험을 바탕으로, <strong>Pre/Auto-labeling 파이프라인 구축</strong>과 라벨러 운영 체계의 효율을 코드로 끌어올리는 데 기여하고 싶습니다.
+      </div>
+    </div>
+    <div class="fans-card">
+      <div class="fans-num">REASON 03</div>
+      <div class="fans-title">자율주행로봇의 데이터 신뢰성에 직접 기여하고 싶습니다</div>
+      <div class="fans-body">
+        CVAT/Label Studio, SAM·Grounding DINO 같은 도구는 아직 직접 다뤄보지 않았지만, <strong>YOLOv5 학습 데이터 구성과 모델 출력 품질 검증을 처음부터 직접 설계해 본 경험</strong>으로 빠르게 학습해 로보티즈AI의 학습 데이터 품질을 끌어올리는 데 기여할 수 있습니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer id="contact">
+  박준철 · justinnn980@gmail.com · <a href="https://github.com/justinnn980">github.com/justinnn980</a><br/>
+  <span style="font-size:12px; margin-top:6px; display:block;">로보티즈AI · 자율주행로봇 데이터 Curation 엔지니어 지원용 포트폴리오</span>
+</footer>
+
+</body>
+</html>
