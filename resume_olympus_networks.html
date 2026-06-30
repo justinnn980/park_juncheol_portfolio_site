@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>박준철 포트폴리오 — 올림포스네트웍스 · 웹/앱 개발자</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --pk:   #2F7DFF;
+    --pk-l: #DCE9FF;
+    --pk-d: #0B3E91;
+    --bg:   #070A12;
+    --card: #0E1320;
+    --card2:#121828;
+    --bdr:  #1C2438;
+    --text: #F9FAFB;
+    --sub:  #D1D5DB;
+    --muted:#9CA3AF;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Noto Sans KR', 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  a { color: var(--pk); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(7,10,18,0.93); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--bdr);
+    padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 52px;
+  }
+  .nav-name { font-weight: 800; font-size: 15px; }
+  .nav-tag { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: rgba(47,125,255,0.15); color: var(--pk); margin-left: 8px; }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { font-size: 13px; color: var(--muted); font-weight: 500; }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+  .nav-target {
+    font-size: 12px; font-weight: 700; color: var(--pk);
+    border: 1px solid rgba(47,125,255,0.35); border-radius: 6px;
+    padding: 3px 10px; margin-left: 8px;
+  }
+
+  /* HERO */
+  .hero {
+    max-width: 1100px; margin: 0 auto; padding: 64px 40px 48px;
+    display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: start;
+  }
+  .hero-badge {
+    display: inline-block; padding: 4px 12px; border-radius: 20px;
+    background: rgba(47,125,255,0.12); border: 1px solid rgba(47,125,255,0.28);
+    color: var(--pk); font-size: 12px; font-weight: 700; margin-bottom: 16px;
+  }
+  .hero-name { font-size: 44px; font-weight: 900; line-height: 1.1; margin-bottom: 8px; letter-spacing: -1px; }
+  .hero-role { font-size: 18px; font-weight: 700; color: var(--pk); margin-bottom: 16px; }
+  .hero-lead { font-size: 14.5px; color: var(--sub); line-height: 1.85; margin-bottom: 28px; max-width: 480px; }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    margin-bottom: 28px; background: var(--bdr); border-radius: 10px; overflow: hidden;
+  }
+  .stat { background: var(--card); padding: 16px 12px; text-align: center; }
+  .stat-num   { font-size: 17px; font-weight: 900; color: var(--pk); }
+  .stat-label { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+  .hero-contacts { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-contact  { font-size: 13px; color: var(--muted); }
+
+  /* CODE PANEL */
+  .code-panel { background-color:#070A12; border: 1px solid var(--bdr); border-radius: 12px; overflow: hidden; }
+  .code-header { background: var(--card); padding: 10px 16px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--bdr); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #FF5F57; } .dot-y { background: #FFBD2E; } .dot-g { background: #28C840; }
+  .code-filename { font-size: 12px; color: var(--muted); margin-left: 6px; font-family: 'JetBrains Mono', monospace; }
+  .code-body { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.85; overflow-x: auto; }
+  .c-cmt { color: #51607E; }
+  .c-kw  { color: #7AA8FF; }
+  .c-str { color: #A9C9FF; }
+  .c-num { color: #FBBF24; }
+  .c-fn  { color: #5C9DFF; }
+  .c-var { color: #F9FAFB; }
+  .c-prop{ color: #CFE0FF; }
+  .c-dec { color: #7AA8FF; }
+  .c-type{ color: #5C9DFF; }
+  .c-jsx { color: #2F7DFF; }
+
+  /* SECTION */
+  .section { max-width: 1100px; margin: 0 auto; padding: 56px 40px; border-top: 1px solid var(--bdr); }
+  .sec-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pk); margin-bottom: 6px; }
+  .sec-title { font-size: 26px; font-weight: 900; margin-bottom: 32px; }
+
+  /* DOMAIN CARDS */
+  .domain-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px; }
+  .domain-card {
+    background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px 16px;
+    text-align: center; transition: border-color .2s;
+  }
+  .domain-card:hover { border-color: rgba(47,125,255,0.4); }
+  .domain-icon { font-size: 28px; margin-bottom: 8px; }
+  .domain-name { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+  .domain-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: rgba(47,125,255,0.12); color: var(--pk); display: inline-block; margin-bottom: 8px; }
+  .domain-desc { font-size: 11.5px; color: var(--muted); line-height: 1.55; }
+
+  /* SKILL SECTION */
+  .sk-group { margin-bottom: 28px; }
+  .sk-group-title { font-size: 12px; font-weight: 800; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  .sk-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .sk-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 10px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 14px; transition: border-color .2s; }
+  .sk-card:hover { border-color: rgba(47,125,255,0.35); }
+  .sk-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .sk-name { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+  .sk-level { font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 10px; display: inline-block; margin-bottom: 5px; }
+  .sk-level.prod { background: rgba(47,125,255,0.15); color: var(--pk); }
+  .sk-level.exp  { background: rgba(251,191,36,0.15); color: #FBBF24; }
+  .sk-level.know { background: rgba(156,163,175,0.15); color: var(--muted); }
+  .sk-desc { font-size: 12px; color: var(--sub); line-height: 1.55; }
+  .sk-cards-2 { grid-template-columns: repeat(2, 1fr); }
+  .sk-cards-4 { grid-template-columns: repeat(4, 1fr); }
+
+  /* BRIDGE BOX */
+  .bridge-box {
+    background: var(--card); border: 1px solid rgba(47,125,255,0.25); border-radius: 12px;
+    padding: 20px 24px; margin-bottom: 28px;
+  }
+  .bridge-title { font-size: 13px; font-weight: 800; color: var(--pk); margin-bottom: 12px; }
+  .bridge-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .bridge-item { padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+  .bi-from { background: rgba(156,163,175,0.1); color: var(--sub); border: 1px solid var(--bdr); }
+  .bi-arrow { color: var(--pk); font-size: 16px; }
+  .bi-to   { background: rgba(47,125,255,0.12); color: var(--pk); border: 1px solid rgba(47,125,255,0.3); }
+  .bridge-row + .bridge-row { margin-top: 8px; }
+
+  /* PROBLEM CARDS */
+  .prob-list { display: grid; gap: 18px; }
+  .prob-card {
+    background: var(--card); border: 1px solid var(--bdr);
+    border-left: 3px solid var(--pk); border-radius: 0 12px 12px 0; padding: 22px 26px;
+  }
+  .prob-num   { font-size: 11px; font-weight: 800; color: var(--pk); letter-spacing: 1px; margin-bottom: 8px; }
+  .prob-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+  .prob-flow  { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .pf-tag    { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; background: var(--card2); color: var(--sub); }
+  .pf-arrow  { color: var(--pk); font-size: 14px; }
+  .pf-result { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; background: rgba(47,125,255,0.15); color: #A9C9FF; }
+  .prob-desc { font-size: 13px; color: var(--sub); line-height: 1.75; }
+  .prob-desc strong { color: var(--text); font-weight: 700; }
+
+  .side-by-side { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  .sbs-box { background: var(--card2); border: 1px solid var(--bdr); border-radius: 8px; padding: 12px 14px; }
+  .sbs-label { font-size: 11px; font-weight: 800; color: var(--pk); margin-bottom: 5px; }
+  .sbs-body  { font-size: 12px; color: var(--sub); line-height: 1.6; }
+
+  /* CAREER / PROJ */
+  .career-block { margin-bottom: 32px; }
+  .career-head  { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+  .career-co    { font-size: 17px; font-weight: 900; }
+  .career-period{ font-size: 12px; color: var(--muted); font-weight: 600; }
+  .career-role  { font-size: 13px; font-weight: 700; color: var(--pk); margin-bottom: 6px; }
+  .career-desc  { font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
+  .ul { list-style: none; display: grid; gap: 6px; }
+  .ul li { font-size: 13px; color: var(--sub); padding-left: 16px; position: relative; line-height: 1.65; }
+  .ul li::before { content: '▸'; position: absolute; left: 0; color: var(--pk); font-size: 9px; top: 4px; }
+  .ul li strong { color: var(--text); font-weight: 700; }
+
+  .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+  .proj-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px; transition: border-color .2s; }
+  .proj-card:hover { border-color: rgba(47,125,255,0.35); }
+  .proj-head   { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+  .proj-title  { font-size: 14px; font-weight: 800; }
+  .proj-period { font-size: 11px; color: var(--muted); font-weight: 600; }
+  .proj-sub    { font-size: 12px; color: var(--pk); font-weight: 700; margin-bottom: 8px; }
+  .tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+  .tag { padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: 700; background: var(--bdr); color: var(--sub); }
+  .tag.hl { background: rgba(47,125,255,0.12); color: #A9C9FF; }
+  .proj-ul { list-style: none; display: grid; gap: 4px; }
+  .proj-ul li { font-size: 12px; color: var(--sub); padding-left: 13px; position: relative; line-height: 1.6; }
+  .proj-ul li::before { content: '▸'; position: absolute; left: 0; color: var(--pk); font-size: 9px; top: 2px; }
+  .proj-ul li strong { color: var(--text); }
+
+  /* WHY */
+  .fans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .fans-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px 18px; transition: border-color .2s; }
+  .fans-card:hover { border-color: rgba(47,125,255,0.35); }
+  .fans-num { font-size: 11px; font-weight: 800; color: var(--pk); letter-spacing: 1px; margin-bottom: 6px; }
+  .fans-title { font-size: 14px; font-weight: 800; margin-bottom: 8px; }
+  .fans-body { font-size: 12.5px; color: var(--sub); line-height: 1.7; }
+  .fans-body strong { color: var(--text); }
+
+  .divider { border: none; border-top: 1px solid var(--bdr); margin: 28px 0; }
+  footer { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--bdr); }
+
+  @media (max-width: 800px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .domain-grid { grid-template-columns: repeat(2, 1fr); }
+    .sk-cards, .sk-cards-4 { grid-template-columns: 1fr 1fr; }
+    .proj-grid { grid-template-columns: 1fr; }
+    .fans-grid { grid-template-columns: 1fr; }
+    .side-by-side { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">박준철<span class="nav-tag">Web/App</span><span class="nav-target">올림포스네트웍스</span></div>
+  <div class="nav-links">
+    <a href="#fit">지원 역량</a>
+    <a href="#skills">기술 스택</a>
+    <a href="#problem">문제 해결</a>
+    <a href="#experience">경력</a>
+    <a href="#projects">프로젝트</a>
+    <a href="#why">지원 동기</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-badge">모빌리티 플랫폼 · 웹/앱 동시 개발 · 백오피스</div>
+    <div class="hero-name">박준철</div>
+    <div class="hero-role">웹/앱 개발자 지원 · 올림포스네트웍스</div>
+    <div class="hero-lead">
+      Flutter 기반 모바일 앱과 React/TypeScript 웹을 함께 다루는 개발자입니다. 홈초이스에서 <strong style="color:var(--text);">OTT 앱 개발·운영, 2개 파트너사 서비스 마이그레이션</strong>을 주도하며 WebView-Native 연동, 성능 최적화, 앱스토어 배포 전 과정을 직접 수행했습니다.<br/><br/>
+      React 19 기반 <strong style="color:var(--pk);">백오피스(콘텐츠 관리 어드민)</strong>를 기획부터 배포까지 단독 구현한 경험도 있어, "사용자용 웹/앱"과 "사내 백오피스 UI/UX"를 동시에 요구하는 이 직무에 바로 투입 가능합니다.<br/><br/>
+      컴퓨터공학과 복수전공으로 <strong style="color:var(--text);">모빌리티AI/SW융합</strong>을 이수해, 렌터카·사고대차 플랫폼이라는 도메인에도 자연스럽게 관심을 갖고 있습니다.
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">1년 10개월</div>
+        <div class="stat-label">앱+웹 실서비스<br/>개발·운영</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">파트너사 2건</div>
+        <div class="stat-label">대형 OTT 앱<br/>마이그레이션 주도</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">FCP −39%</div>
+        <div class="stat-label">실측 성능 개선<br/>(LCP −10.8%)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">모빌리티</div>
+        <div class="stat-label">AI/SW융합<br/>복수전공</div>
+      </div>
+    </div>
+    <div class="hero-contacts">
+      <span class="hero-contact">✉ justinnn980@gmail.com</span>
+      <span class="hero-contact">🐙 <a href="https://github.com/justinnn980">github.com/justinnn980</a></span>
+      <span class="hero-contact">📝 <a href="https://justinnn980.tistory.com">기술 블로그</a></span>
+      <span class="hero-contact">🎓 컴퓨터공학과 / 복수전공: 모빌리티AI·SW융합</span>
+    </div>
+  </div>
+
+  <!-- CODE PANEL -->
+  <div class="code-panel">
+    <div class="code-header">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="code-filename">BackofficeContentTable.tsx</span>
+    </div>
+    <div class="code-body">
+<span class="c-cmt">// 백오피스 — 삭제 즉시 반영 + 서버 실패 시 롤백</span>
+<span class="c-kw">const</span> { <span class="c-var">mutate</span> } = <span class="c-fn">useMutation</span>({
+  <span class="c-prop">mutationFn</span>: <span class="c-fn">deleteContent</span>,
+  <span class="c-prop">onMutate</span>: (<span class="c-var">id</span>) =&gt; {
+    <span class="c-kw">const</span> <span class="c-var">prev</span> = <span class="c-fn">getQueryData</span>([<span class="c-str">'contents'</span>]);
+    <span class="c-fn">setQueryData</span>([<span class="c-str">'contents'</span>],
+      (<span class="c-var">rows</span>) =&gt; <span class="c-var">rows</span>.<span class="c-fn">filter</span>((<span class="c-var">r</span>) =&gt; <span class="c-var">r</span>.<span class="c-prop">id</span> !== <span class="c-var">id</span>));
+    <span class="c-kw">return</span> { <span class="c-var">prev</span> };
+  },
+  <span class="c-prop">onError</span>: (_<span class="c-var">e</span>, _<span class="c-var">id</span>, <span class="c-var">ctx</span>) =&gt;
+    <span class="c-fn">setQueryData</span>([<span class="c-str">'contents'</span>], <span class="c-var">ctx</span>.<span class="c-prop">prev</span>),
+});
+<span class="c-cmt">// → 관리자 화면 반응성 + 데이터 정합성 동시 확보</span>
+<span class="c-cmt">// → RBAC: 조회/관리자 권한 Route Handler 레벨 재검증</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 00: 직무 적합도 -->
+<div class="section" id="fit">
+  <div class="sec-label">Section 00</div>
+  <div class="sec-title">웹/앱 개발자 직무 — 기여 역량 매핑</div>
+
+  <div class="domain-grid">
+    <div class="domain-card">
+      <div class="domain-icon">📱</div>
+      <div class="domain-name">사용자용 앱</div>
+      <div class="domain-badge">직접 경험</div>
+      <div class="domain-desc">Flutter로 iOS/Android 동시 개발·배포. 모빌리티 서비스 사용자용 앱 프론트엔드 개발에 즉시 적용 가능한 실서비스 경험.</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">🖥️</div>
+      <div class="domain-name">사용자용 웹</div>
+      <div class="domain-badge">직접 경험</div>
+      <div class="domain-desc">React/TypeScript 기반 웹 개발. WebView-Native 연동 구조 설계 및 성능 최적화(FCP −39%) 실측 경험.</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">🗂️</div>
+      <div class="domain-name">백오피스 UI/UX</div>
+      <div class="domain-badge">직접 경험</div>
+      <div class="domain-desc">React 19 기반 콘텐츠 관리 어드민을 기획~배포 단독 구현. 관리자용 화면의 권한 분리·낙관적 업데이트 설계 경험.</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-icon">🚀</div>
+      <div class="domain-name">앱스토어 배포 관리</div>
+      <div class="domain-badge">직접 경험</div>
+      <div class="domain-desc">인증서·프로비저닝 관리, TestFlight, Keystore 서명, 스토어 심사·버전 관리 전 과정을 실서비스에서 직접 수행.</div>
+    </div>
+  </div>
+
+  <div class="bridge-box">
+    <div class="bridge-title">웹+앱 동시 개발 경험이 모빌리티 플랫폼에 바로 연결되는 지점</div>
+    <div class="bridge-row">
+      <span class="bridge-item bi-from">WebView ↔ Native JS Bridge 설계</span>
+      <span class="bi-arrow">→</span>
+      <span class="bridge-item bi-to">앱 배포 없이 콘텐츠/정책 즉시 반영</span>
+      <span style="font-size:12px; color:var(--muted); margin-left:4px;">— 배차·요금 정책처럼 자주 바뀌는 화면을 앱 심사 없이 운영 가능한 구조</span>
+    </div>
+    <div class="bridge-row">
+      <span class="bridge-item bi-from">2개 파트너사 OTT 앱 → 단일 서비스 마이그레이션 주도</span>
+      <span class="bi-arrow">→</span>
+      <span class="bridge-item bi-to">렌터카/사고대차 등 신규 서비스 통합·런칭 대응</span>
+      <span style="font-size:12px; color:var(--muted); margin-left:4px;">— 이종 서비스를 하나의 앱/구조로 통합한 경험</span>
+    </div>
+    <div class="bridge-row">
+      <span class="bridge-item bi-from">React 19 백오피스 RBAC·낙관적 업데이트</span>
+      <span class="bi-arrow">→</span>
+      <span class="bridge-item bi-to">무인 배차·운영 관리자용 백오피스 고도화</span>
+      <span style="font-size:12px; color:var(--muted); margin-left:4px;">— 운영자가 실시간으로 차량·배차 상태를 다루는 화면 설계 경험과 동일한 패턴</span>
+    </div>
+    <div class="bridge-row">
+      <span class="bridge-item bi-from">모빌리티AI/SW융합 복수전공</span>
+      <span class="bi-arrow">→</span>
+      <span class="bridge-item bi-to">모빌리티 도메인 이해</span>
+      <span style="font-size:12px; color:var(--muted); margin-left:4px;">— 렌터카·사고대차 플랫폼이라는 산업 맥락에 대한 기본 이해 보유</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01: 기술 스택 -->
+<div class="section" id="skills">
+  <div class="sec-label">Section 01</div>
+  <div class="sec-title">기술 스택</div>
+
+  <div class="sk-group">
+    <div class="sk-group-title">App — Flutter / iOS / Android</div>
+    <div class="sk-cards">
+      <div class="sk-card">
+        <div class="sk-icon">📱</div>
+        <div>
+          <div class="sk-name">Flutter 2.0 ~ 3.38</div>
+          <span class="sk-level prod">실서비스 1년 10개월</span>
+          <div class="sk-desc">iOS·Android 동시 배포 및 운영. 메이저 버전업(2→3) 및 전체 라이브러리 의존성 재검토 직접 수행.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">🔗</div>
+        <div>
+          <div class="sk-name">WebView 연동</div>
+          <span class="sk-level prod">실서비스 양방향 구현</span>
+          <div class="sk-desc">JavaScript Bridge로 WebView ↔ Native 양방향 데이터 동기화. 앱 배포 없이 콘텐츠 즉시 반영 구조 설계.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">🔄</div>
+        <div>
+          <div class="sk-name">Riverpod</div>
+          <span class="sk-level prod">실서비스 적용</span>
+          <div class="sk-desc">최대 3대 기기 페어링 상태를 연결/기기/콘텐츠 단위로 분리 관리. 복잡한 다중 상태 동기화 구조화 경험.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sk-group">
+    <div class="sk-group-title">Frontend / Web — React · TypeScript</div>
+    <div class="sk-cards">
+      <div class="sk-card">
+        <div class="sk-icon">⚛️</div>
+        <div>
+          <div class="sk-name">React 18/19, TypeScript</div>
+          <span class="sk-level prod">실서비스 + 개인 프로젝트</span>
+          <div class="sk-desc">WebView 화면 개발 및 백오피스(Admin) 기획~배포 단독 구현. Next.js, Vite, Tailwind CSS 경험.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">⚡</div>
+        <div>
+          <div class="sk-name">성능 최적화</div>
+          <span class="sk-level prod">FCP −39% 달성</span>
+          <div class="sk-desc">FCP/LCP 지표 기반 병목 분석. Skeleton UI, Lazy Loading, 이미지 리사이징, CDN 적용으로 체감 성능 개선.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">🗃️</div>
+        <div>
+          <div class="sk-name">TanStack Query</div>
+          <span class="sk-level prod">실서비스 적용</span>
+          <div class="sk-desc">낙관적 업데이트·롤백, 서버 상태 캐시 관리. 백오피스에서 삭제 즉시 반영 후 실패 시 자동 복원 구조 설계.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sk-group">
+    <div class="sk-group-title">Backend / Infra</div>
+    <div class="sk-cards sk-cards-4">
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">Java 17 / Spring Boot</div>
+          <span class="sk-level prod">백엔드 API 연동·구현</span>
+          <div class="sk-desc">REST API 연동, JWT 기반 Stateless 인증, WebSocket 서버 구현 경험.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">AWS / Docker</div>
+          <span class="sk-level prod">실서비스 운영</span>
+          <div class="sk-desc">EC2 Elastic IP + HTTPS 보안 통신 구성. Docker 컨테이너화, Render 배포, Cron Job 자동화.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">MySQL / DynamoDB</div>
+          <span class="sk-level prod">실서비스 운영</span>
+          <div class="sk-desc">운영 데이터 처리, JWT 인증 데이터·구독 이력 등 도메인 분리 스키마 설계.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">앱스토어 배포</div>
+          <span class="sk-level prod">App Store · Play Store 운영</span>
+          <div class="sk-desc">인증서·프로비저닝 관리, TestFlight, ProGuard·Keystore 서명, 스토어 심사·버전 관리 전 과정.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sk-group" style="margin-bottom:0;">
+    <div class="sk-group-title">AI 개발 도구 / 데이터 자동화</div>
+    <div class="sk-cards sk-cards-2">
+      <div class="sk-card">
+        <div class="sk-icon">🤖</div>
+        <div>
+          <div class="sk-name">Claude Code / Codex</div>
+          <span class="sk-level prod">실무 활용</span>
+          <div class="sk-desc">기획~배포 전 과정에서 AI 도구 활용. 신규 서비스 프로토타이핑 속도 향상에 직접 기여.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">🕸️</div>
+        <div>
+          <div class="sk-name">Selenium / Pandas / Docker</div>
+          <span class="sk-level exp">데이터 자동화 경험</span>
+          <div class="sk-desc">대규모 데이터 수집 파이프라인 설계·무인 자동화 경험. 데이터 기반 운영 자동화가 필요한 조직에 추가 기여 가능.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 02: 문제 해결 -->
+<div class="section" id="problem">
+  <div class="sec-label">Section 02</div>
+  <div class="sec-title">실서비스에서 해결한 문제들</div>
+  <div class="prob-list">
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 01 · 웹/앱 동시 운영 구조</div>
+      <div class="prob-title">앱 배포 없이 콘텐츠 즉시 반영 — WebView-Native 하이브리드 구조</div>
+      <div class="prob-flow">
+        <span class="pf-tag">콘텐츠 변경 시 앱 재배포 필요</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">콘텐츠 탐색 화면 WebView 분리</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">JS Bridge로 WebView-Native 데이터 동기화</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">스토어 심사 없이 즉시 반영</span>
+      </div>
+      <div class="prob-desc">
+        OTT 앱에서 콘텐츠·이벤트·배너가 자주 바뀌는데도 매번 앱 스토어 심사를 거쳐야 했던 문제를 <strong>React 웹 화면을 WebView로 분리하고 JavaScript Bridge로 양방향 데이터를 동기화</strong>하는 구조로 해결했습니다. 렌터카 요금 정책, 프로모션 배너처럼 자주 변경되는 화면을 가진 모빌리티 서비스에도 동일하게 적용 가능한 구조입니다.
+      </div>
+      <div class="side-by-side">
+        <div class="sbs-box">
+          <div class="sbs-label">변경 전</div>
+          <div class="sbs-body">앱 코드 수정 → 빌드 → 스토어 심사(1~3일) → 배포 → 콘텐츠 반영</div>
+        </div>
+        <div class="sbs-box">
+          <div class="sbs-label">변경 후</div>
+          <div class="sbs-body">React 웹 배포만으로 즉시 반영(앱 배포 불필요) · FCP −39% 달성</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 02 · 백오피스 UI/UX 고도화</div>
+      <div class="prob-title">관리자 화면 UX 공백 — 낙관적 업데이트로 즉시 반응하는 백오피스</div>
+      <div class="prob-flow">
+        <span class="pf-tag">삭제 요청 후 서버 응답 대기 중 UI 멈춤</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">TanStack Query 낙관적 업데이트</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">서버 실패 시 이전 상태 자동 복원</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">반응성 개선 + 데이터 안정성 확보</span>
+      </div>
+      <div class="prob-desc">
+        콘텐츠 관리 어드민에서 삭제 처리 시 서버 응답을 기다리는 동안 화면이 멈춰 보이는 문제를 <strong>onMutate에서 즉시 UI 반영, onError에서 이전 캐시로 자동 롤백</strong>하는 구조로 해결했습니다. 무인 배차·차량 컨디션 관리처럼 운영자가 실시간으로 상태를 다루는 백오피스 화면에도 동일하게 적용할 수 있습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 03 · 서비스 통합 마이그레이션</div>
+      <div class="prob-title">이종 OTT 서비스 2건을 단일 앱으로 통합 — 안정적 마이그레이션 주도</div>
+      <div class="prob-flow">
+        <span class="pf-tag">서로 다른 파트너사 앱 2개 운영 부담</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">단일 Flutter 앱으로 마이그레이션 설계</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">DRM·플레이어 구조 추상화로 통합</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">2개 파트너사 서비스 단일 앱 통합 완료</span>
+      </div>
+      <div class="prob-desc">
+        LG헬로비전(헬로tv), 딜라이브(모바일TV) 두 파트너사의 서로 다른 OTT 앱을 <strong>단일 서비스 앱으로 마이그레이션</strong>했습니다. DRM 방식(NCG/Multi DRM) 차이를 추상화한 플레이어 인터페이스로 통합 비용을 최소화했습니다. 신규 모빌리티 서비스를 기존 플랫폼에 통합·런칭하는 업무와 동일한 구조의 의사결정 경험입니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 04 · 앱스토어 배포 운영</div>
+      <div class="prob-title">스토어 배포·심사 전 과정 단독 수행</div>
+      <div class="prob-flow">
+        <span class="pf-tag">버전 관리·인증서·서명 비정형 업무</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">iOS 인증서/프로비저닝 + Android Keystore 체계화</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">TestFlight 배포 → 스토어 심사 대응</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">서비스 런칭·버전 관리 전 과정 단독 수행</span>
+      </div>
+      <div class="prob-desc">
+        OTT 앱 운영 기간 동안 <strong>iOS 인증서/프로비저닝, Android ProGuard·Keystore 서명, 스토어 심사 대응, 버전 관리</strong>를 단독으로 수행했습니다. 공고에서 요구하는 "서비스 런칭 및 앱스토어 배포 관리" 업무를 처음부터 끝까지 경험한 사례입니다.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 03: 경력 -->
+<div class="section" id="experience">
+  <div class="sec-label">Section 03</div>
+  <div class="sec-title">경력</div>
+
+  <div class="career-block">
+    <div class="career-head">
+      <span class="career-co">(주)홈초이스</span>
+      <span class="career-period">2024.02.19 ~ 2025.11.03 · 1년 10개월</span>
+    </div>
+    <div class="career-role">모바일/웹 개발자 · OTT 앱 "오초이스" 신규 개발 및 유지보수</div>
+    <div class="career-desc">Flutter 기반 모바일 앱 + React/TypeScript 웹 화면을 함께 개발·운영, 2개 파트너사 서비스 마이그레이션 주도</div>
+    <ul class="ul">
+      <li>Flutter 기반 iOS/Android 앱 신규 개발 및 유지보수 전반, 실서비스 배포·운영</li>
+      <li><strong>LG헬로비전(헬로tv), 딜라이브(모바일TV)</strong> 두 파트너사 앱을 단일 서비스로 통합하는 마이그레이션 및 재배칭 주도</li>
+      <li>콘텐츠 탐색 화면을 WebView로 분리, JavaScript Bridge로 WebView ↔ Native 데이터 동기화 구조 설계</li>
+      <li>FCP/LCP 지표 기반 병목 분석, Skeleton UI/Lazy Loading/이미지 리사이징 복합 적용으로 체감 성능 개선</li>
+      <li>Riverpod 기반 상태관리로 최대 3개 셋톱박스 페어링 상태의 콘텐츠 변경 흐름 안정화</li>
+    </ul>
+    <div style="margin-top:8px;">
+      <span class="tag hl" style="display:inline-block;">FCP 39% / LCP 10.8% 개선</span>
+      <span class="tag hl" style="display:inline-block;">2개 서비스 단일 앱 통합 마이그레이션</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 04: 프로젝트 -->
+<div class="section" id="projects">
+  <div class="sec-label">Section 04</div>
+  <div class="sec-title">주요 프로젝트</div>
+
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">OTT Admin — 콘텐츠 관리 백오피스</span>
+        <span class="proj-period">2026 · 개인</span>
+      </div>
+      <div class="proj-sub">백오피스 UI/UX 직접 적합성 · 기획~배포 단독 구현</div>
+      <div class="tags">
+        <span class="tag hl">백오피스</span>
+        <span class="tag hl">낙관적 업데이트</span>
+        <span class="tag hl">RBAC</span>
+        <span class="tag">React 19</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Next.js</span>
+      </div>
+      <ul class="proj-ul">
+        <li>TanStack Query 낙관적 업데이트·롤백 — 관리자 삭제 요청 즉시 UI 반영, 실패 시 자동 복원</li>
+        <li>서버사이드 RBAC — 조회/관리자 역할 분리, Route Handler 레벨 권한 재검증</li>
+        <li>Rate Limit, 감사 로그, Sentry, Web Vitals 등 운영 안정성 기능 구현</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">담아(Dama) — 구독 통합 관리 서비스</span>
+        <span class="proj-period">2026.01–2026.02</span>
+      </div>
+      <div class="proj-sub">팀 3인(개발 2, 디자이너 1) · 앱+백엔드 동시 설계</div>
+      <div class="tags">
+        <span class="tag hl">Flutter</span>
+        <span class="tag hl">JWT 인증</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Docker</span>
+      </div>
+      <ul class="proj-ul">
+        <li>모바일 앱(Flutter) + 백엔드(Spring Boot)를 함께 설계한 풀스택 프로젝트</li>
+        <li>JWT 기반 Access/Refresh Token 구조로 Stateless 인증 시스템 구축</li>
+        <li>User/Subscription/Community 도메인 분리 설계, Docker 통합 실행 환경 구성</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">SECT — AI 에이전트 기반 커뮤니티 SNS 웹앱</span>
+        <span class="proj-period">2026.05~ · 진행 중 · 개인</span>
+      </div>
+      <div class="proj-sub">기획~배포 단독 진행 · 빠른 서비스 런칭 역량</div>
+      <div class="tags">
+        <span class="tag hl">기획~배포 단독</span>
+        <span class="tag">Codex</span>
+        <span class="tag">Claude Code</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Render</span>
+      </div>
+      <ul class="proj-ul">
+        <li>기획부터 개발, 배포까지 단독 진행, 팔로우/게시글/좋아요/채팅 등 커뮤니티 핵심 기능 구현</li>
+        <li>AI 도구를 기획/설계/구현/배포 전 과정에 활용해 빠른 서비스 런칭 경험 축적</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">숫자 대결 — 실시간 WebSocket 게임</span>
+        <span class="proj-period">2026.01~ · 솔로 3일</span>
+      </div>
+      <div class="proj-sub">앱+백엔드+배포 End-to-End 단독 구현</div>
+      <div class="tags">
+        <span class="tag hl">WebSocket</span>
+        <span class="tag hl">실시간 동기화</span>
+        <span class="tag">Flutter</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">Render</span>
+      </div>
+      <ul class="proj-ul">
+        <li>3일 내 기획부터 프론트엔드, 백엔드, 배포까지 단독 구현</li>
+        <li>WebSocket 기반 양방향 통신으로 다중 사용자 동시 접속 시 데이터 일관성 확보</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 05: 자격 / 저서 -->
+<div class="section" id="cert" style="padding-bottom:40px;">
+  <div class="sec-label">Section 05</div>
+  <div class="sec-title">학력 / 자격 / 저서</div>
+  <ul class="ul">
+    <li><strong>컴퓨터공학과</strong> 졸업 / 복수전공: 모빌리티AI·SW융합</li>
+    <li><strong>정보통신산업진흥원</strong> · 인공지능 기본과정 수료</li>
+    <li><strong>네이버 부스트코스</strong> · DATA SCIENCE 코칭스터디 2023 수료</li>
+    <li><strong>저서</strong> · <a href="https://www.yes24.com/Product/Goods/109711067" target="_blank">『개발자가 되기 위해 꼭 알아야하는 IT 용어』</a> 공동 저자 (YES24)</li>
+  </ul>
+</div>
+
+<!-- SECTION 06: 지원 동기 -->
+<div class="section" id="why">
+  <div class="sec-label">Section 06</div>
+  <div class="sec-title">왜 올림포스네트웍스인가</div>
+
+  <div class="fans-grid">
+    <div class="fans-card">
+      <div class="fans-num">REASON 01</div>
+      <div class="fans-title">모빌리티 도메인에 대한 기초 이해를 갖추고 있습니다</div>
+      <div class="fans-body">
+        컴퓨터공학과 복수전공으로 <strong>모빌리티AI/SW융합</strong>을 이수했습니다. 렌터카·사고대차 시장의 데이터 기반 자동화라는 올림포스네트웍스의 방향성에 자연스럽게 관심을 갖고 있습니다.
+      </div>
+    </div>
+    <div class="fans-card">
+      <div class="fans-num">REASON 02</div>
+      <div class="fans-title">웹과 앱을 함께 다루는 개발자가 필요한 조직입니다</div>
+      <div class="fans-body">
+        사용자용 앱(Flutter), 사용자용 웹(React), 백오피스 UI/UX까지 모두 직접 경험했습니다. <strong>한 사람이 웹/앱/백오피스를 넘나들며 빠르게 기능을 붙일 수 있는 역량</strong>이 신규 서비스를 빠르게 만들어가는 조직에 바로 기여할 수 있다고 생각합니다.
+      </div>
+    </div>
+    <div class="fans-card">
+      <div class="fans-num">REASON 03</div>
+      <div class="fans-title">서비스 런칭과 운영을 끝까지 책임진 경험이 있습니다</div>
+      <div class="fans-body">
+        2개 파트너사 OTT 앱을 단일 서비스로 통합하는 마이그레이션을 <strong>기획-개발-배포-운영까지 끝까지 책임진 경험</strong>이 있습니다. 무인 배차 시스템처럼 새로운 서비스를 빠르게 런칭하고 안정화해야 하는 환경에서 같은 역할을 할 수 있습니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer id="contact">
+  박준철 · justinnn980@gmail.com · <a href="https://github.com/justinnn980">github.com/justinnn980</a><br/>
+  <span style="font-size:12px; margin-top:6px; display:block;">올림포스네트웍스 · 웹/앱 개발자 지원용 포트폴리오</span>
+</footer>
+
+</body>
+</html>
