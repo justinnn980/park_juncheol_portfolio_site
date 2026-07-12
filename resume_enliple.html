@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 포트폴리오 — 인라이플 모비소프트 앱 운영 담당자</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --em: #14B8A6;
+      --em-l: #99F6E4;
+      --em-d: #0F766E;
+      --bg: #08110F;
+      --card: #0F1D1A;
+      --card2: #142722;
+      --bdr: #1E332E;
+      --text: #F9FAFB;
+      --sub: #D1D5DB;
+      --muted: #8FA39C;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans KR', 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: var(--em); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(8,17,15,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bdr);
+      padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 52px;
+    }
+    .nav-name { font-weight: 800; font-size: 15px; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px; margin: 0 auto; padding: 64px 40px 48px;
+      display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: start;
+    }
+    .hero-badge {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      background: rgba(20,184,166,0.15); border: 1px solid rgba(20,184,166,0.3);
+      color: var(--em); font-size: 12px; font-weight: 700; margin-bottom: 16px;
+    }
+    .hero-name { font-size: 44px; font-weight: 900; line-height: 1.1; margin-bottom: 8px; letter-spacing: -1px; }
+    .hero-role { font-size: 18px; font-weight: 700; color: var(--em); margin-bottom: 16px; }
+    .hero-lead { font-size: 14.5px; color: var(--sub); line-height: 1.85; margin-bottom: 28px; max-width: 480px; }
+    .hero-stats { display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 28px; padding: 16px 20px; background: var(--card); border-radius: 10px; border: 1px solid var(--bdr); }
+    .stat { text-align: center; }
+    .stat-num { font-size: 20px; font-weight: 900; color: var(--em); }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+    .hero-contacts { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-contact { font-size: 13px; color: var(--muted); }
+
+    /* CODE PANEL */
+    .code-panel { background: #050B09; border: 1px solid var(--bdr); border-radius: 12px; overflow: hidden; }
+    .code-header { background: var(--card); padding: 10px 16px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--bdr); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FFBD2E; }
+    .dot-g { background: #28C840; }
+    .code-filename { font-size: 12px; color: var(--muted); margin-left: 6px; font-family: 'JetBrains Mono', monospace; }
+    .code-body { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.85; }
+    .c-cmt { color: #5B7369; }
+    .c-kw  { color: #5EEAD4; }
+    .c-str { color: #99F6E4; }
+    .c-num { color: #FBBF24; }
+    .c-fn  { color: #2DD4BF; }
+    .c-var { color: #F9FAFB; }
+    .c-prop{ color: #7DD3C8; }
+
+    /* SECTION */
+    .section { max-width: 1100px; margin: 0 auto; padding: 56px 40px; border-top: 1px solid var(--bdr); }
+    .sec-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--em); margin-bottom: 6px; }
+    .sec-title { font-size: 26px; font-weight: 900; margin-bottom: 32px; }
+
+    /* MATCH GRID */
+    .match-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .match-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px; transition: border-color .2s; }
+    .match-card:hover { border-color: var(--em); }
+    .match-req   { font-size: 11px; font-weight: 700; color: var(--em); margin-bottom: 6px; }
+    .match-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .match-desc  { font-size: 12.5px; color: var(--sub); line-height: 1.7; }
+
+    /* PROBLEM CARDS */
+    .prob-list { display: grid; gap: 18px; }
+    .prob-card {
+      background: var(--card); border: 1px solid var(--bdr);
+      border-left: 3px solid var(--em); border-radius: 0 12px 12px 0; padding: 22px 26px;
+    }
+    .prob-num   { font-size: 11px; font-weight: 800; color: var(--em); letter-spacing: 1px; margin-bottom: 8px; }
+    .prob-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+    .prob-flow  { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .pf-tag    { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; background: var(--card2); color: var(--sub); }
+    .pf-arrow  { color: var(--em); font-size: 14px; }
+    .pf-result { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; background: rgba(20,184,166,0.2); color: #99F6E4; }
+    .prob-desc { font-size: 13px; color: var(--sub); line-height: 1.75; }
+    .prob-desc strong { color: var(--text); font-weight: 700; }
+
+    /* PROJ GRID */
+    .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .proj-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 22px; transition: border-color .2s; }
+    .proj-card:hover { border-color: rgba(20,184,166,0.4); }
+    .proj-head   { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+    .proj-title  { font-size: 15px; font-weight: 800; }
+    .proj-period { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .proj-sub    { font-size: 12px; color: var(--em); font-weight: 700; margin-bottom: 10px; }
+    .tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
+    .tag { padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: 700; background: var(--bdr); color: var(--sub); }
+    .tag.hl { background: rgba(20,184,166,0.15); color: #99F6E4; }
+    .ul { list-style: none; display: grid; gap: 5px; }
+    .ul li { font-size: 12.5px; color: var(--sub); padding-left: 14px; position: relative; line-height: 1.6; }
+    .ul li::before { content: '▸'; position: absolute; left: 0; color: var(--em); font-size: 9px; top: 3px; }
+    .ul li strong { color: var(--text); font-weight: 700; }
+
+    footer { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--bdr); }
+
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; }
+      .match-grid { grid-template-columns: 1fr 1fr; }
+      .proj-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">박준철 / 인라이플 모비소프트</div>
+  <div class="nav-links">
+    <a href="#match">요건 매칭</a>
+    <a href="#problem">문제 해결</a>
+    <a href="#projects">프로젝트</a>
+    <a href="#contact">연락처</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-badge">인라이플 / 모비소프트(이지랩) 앱 운영 담당자 지원</div>
+    <div class="hero-name">박준철</div>
+    <div class="hero-role">서비스 운영 / 데이터 기반 이슈 분석</div>
+    <div class="hero-lead">
+      운영 이슈를 임시로 덮지 않고 끝까지 추적해<br/>재발방지 구조로 정리해온 서비스 운영 담당자.<br/><br/>
+      매출 1조+ 파트너사 앱 마이그레이션 2건을 직접 대응했고,<br/>
+      지표 기반 개선, 경쟁 서비스 벤치마킹 자동화 경험을 보유합니다.<br/><br/>
+      이지랩 유틸리티 서비스의 <strong style="color:var(--text);">VOC 분석 → 개선안 도출 → 운영 문서화</strong>를<br/>
+      바로 이어받아 기여하고 싶습니다.
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">2건</div>
+        <div class="stat-label">대형 서비스 전환<br/>마이그레이션 대응</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">FCP −39%</div>
+        <div class="stat-label">데이터 기반<br/>운영 지표 개선</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1,000+</div>
+        <div class="stat-label">경쟁 서비스<br/>자동 수집 데이터</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">반복 리서치<br/>업무 자동화</div>
+      </div>
+    </div>
+    <div class="hero-contacts">
+      <span class="hero-contact">📞 010-2538-1519</span>
+      <span class="hero-contact">✉ justinnn980@gmail.com</span>
+      <span class="hero-contact">📝 <a href="https://justinnn980.tistory.com">기술 블로그</a></span>
+    </div>
+  </div>
+
+  <!-- CODE PANEL -->
+  <div class="code-panel">
+    <div class="code-header">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="code-filename">voc_log.js</span>
+    </div>
+    <div class="code-body">
+<span class="c-cmt">// VOC 이슈 트래킹 &amp; 재발방지 로그</span>
+<span class="c-cmt">// 오초이스 앱 운영 이슈 대응 이력</span>
+
+<span class="c-kw">const</span> <span class="c-var">vocLog</span> = [
+  {
+    category: <span class="c-str">'재생 오류'</span>,
+    issue: <span class="c-str">'쇼츠 화면 사운드 중복'</span>,
+    rootCause: <span class="c-str">'플레이어 중복 초기화'</span>,
+    action: <span class="c-str">'생명주기 레벨 수정'</span>,
+    status: <span class="c-str">'resolved'</span>,  <span class="c-cmt">// 재발 0건</span>
+  },
+  {
+    category: <span class="c-str">'네트워크 장애'</span>,
+    issue: <span class="c-str">'앱-서버 통신 두절'</span>,
+    rootCause: <span class="c-str">'Proxy IP 변경 + 방화벽'</span>,
+    action: <span class="c-str">'Elastic IP 고정 + SSL 전환'</span>,
+  },
+  {
+    category: <span class="c-str">'성능 저하'</span>,
+    issue: <span class="c-str">'웹 전환 후 초기 로딩 지연'</span>,
+    rootCause: <span class="c-str">'FCP/LCP 병목 구간'</span>,
+    action: <span class="c-str">'Lazy Loading + CDN'</span>,
+    result: <span class="c-str">'FCP -39%, LCP -10.8%'</span>,
+  },
+];
+
+<span class="c-cmt">// 임시 우회 대신 원인 추적 → 재발방지 구조로 정리</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01: 요건 매칭 -->
+<div class="section" id="match">
+  <div class="sec-label">Section 01</div>
+  <div class="sec-title">채용 공고 요건 — 매칭 포인트</div>
+  <div class="match-grid">
+
+    <div class="match-card">
+      <div class="match-req">필수 / 온라인 서비스 운영 경험</div>
+      <div class="match-title">실서비스 앱 운영 1년 10개월</div>
+      <div class="match-desc">매출 340억 OTT 서비스 "오초이스" 앱을 실서비스로 개발/운영. 이슈 접수부터 원인분석, 재발방지 구조 수립까지 운영 전 과정을 직접 담당.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">필수 / 데이터 분석 및 인사이트 도출</div>
+      <div class="match-title">FCP/LCP 지표 기반 병목 분석</div>
+      <div class="match-desc">성능 지표를 기준으로 병목 구간을 정량화하고 Lazy Loading / 스켈레톤 UI / CDN 적용으로 FCP 39%, LCP 10.8% 개선. 개선 효과를 항상 수치로 검증.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">필수 / 문제 분석 및 해결책 도출</div>
+      <div class="match-title">근본 원인 추적 습관화</div>
+      <div class="match-desc">DRM 호환, Proxy IP 변경, SSL 미적용 등 운영 장애를 임시 우회가 아닌 근본 원인 추적 방식으로 해결. 재발 방지까지 구조화.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">필수 / 개발팀 / 기획실 커뮤니케이션</div>
+      <div class="match-title">4인 팀 마이그레이션 협업</div>
+      <div class="match-desc">시니어 개발자, 디자이너와 함께 대형 마이그레이션 2건을 진행하며 기획 요구사항을 기술적으로 구조화해 전달, 일정/품질 관리.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">우대 / AI / 업무 자동화 역량</div>
+      <div class="match-title">Claude Code, Codex 상시 활용</div>
+      <div class="match-desc">개인 프로젝트의 기획/문서화/구현 전 과정에 AI 에이전트를 활용. ChatGPT 기반 리서치 요약, 문서 초안 작성 등 업무 자동화가 익숙함.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">우대 / 경쟁 제품 벤치마킹 경험</div>
+      <div class="match-title">경쟁 서비스 데이터 자동 수집</div>
+      <div class="match-desc">Selenium 기반으로 경쟁 OTT 서비스의 콘텐츠 메타데이터 1,000건 이상을 자동 수집/정리. Cron Job으로 매일 자동 실행하는 리서치 파이프라인 구축.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 02: 문제 해결 -->
+<div class="section" id="problem">
+  <div class="sec-label">Section 02</div>
+  <div class="sec-title">이슈를 어떻게 접수하고 해결했나</div>
+  <div class="prob-list">
+
+    <div class="prob-card">
+      <div class="prob-num">ISSUE 01</div>
+      <div class="prob-title">쇼츠 화면 사운드 중복 재생 — 접수 후 근본 원인까지 추적</div>
+      <div class="prob-flow">
+        <span class="pf-tag">이슈 접수</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">플레이어 중복 초기화 원인 확인</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">라이브러리 생명주기 수정</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">재발 0건</span>
+      </div>
+      <div class="prob-desc">
+        쇼츠형 화면에서 영상을 빠르게 넘기면 이전 영상 소리가 겹쳐 들리는 문제가 접수됐습니다. 단순 재부팅 안내로 덮지 않고 플레이어 라이브러리의 생성/재생/종료 시점을 직접 분리하는 구조로 수정해 <strong>근본적으로 해결</strong>했습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">ISSUE 02</div>
+      <div class="prob-title">서버 통신 두절 장애 — 임시 우회 대신 근본 원인 추적</div>
+      <div class="prob-flow">
+        <span class="pf-tag">통신 장애 접수</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Proxy IP 변경 / 방화벽 차단 확인</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Elastic IP 고정 + HTTPS 전환</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">재발 방지 구조 확보</span>
+      </div>
+      <div class="prob-desc">
+        중계 서버 IP 변경으로 방화벽에 막혀 앱-서버 통신이 끊기는 장애가 발생했습니다. 임시 우회가 아닌 근본 원인을 추적해 <strong>고정 IP 할당과 전 구간 HTTPS 전환</strong>으로 동일 장애가 재발하지 않도록 구조를 개선했습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">ISSUE 03</div>
+      <div class="prob-title">웹 전환 후 초기 로딩 지연 — 지표로 병목을 증명하고 개선</div>
+      <div class="prob-flow">
+        <span class="pf-tag">체감 속도 저하 접수</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">FCP/LCP 지표 분석</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Lazy Loading / 스켈레톤 UI / CDN</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">FCP −39%, LCP −10.8%</span>
+      </div>
+      <div class="prob-desc">
+        콘텐츠 화면을 웹으로 전환한 직후 첫 화면 표시 속도가 느려졌다는 피드백을 받았습니다. 감으로 판단하지 않고 FCP/LCP 지표로 병목 구간을 특정한 뒤 개선 조치를 적용해 <strong>수치로 검증된 개선</strong>을 만들었습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">ISSUE 04</div>
+      <div class="prob-title">경쟁 서비스 벤치마킹 — 반복 리서치 업무를 자동화</div>
+      <div class="prob-flow">
+        <span class="pf-tag">수작업 리서치 반복 확인</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Selenium 크롤링 로직 설계</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Cron Job 자동 실행</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">리서치 업무 100% 자동화</span>
+      </div>
+      <div class="prob-desc">
+        경쟁 OTT 서비스의 콘텐츠 순위/장르/히트수를 수작업으로 확인하던 방식에서 벗어나, 자동 수집 파이프라인을 직접 구축했습니다. <strong>매일 1회 자동 실행</strong>되어 별도 조작 없이 최신 벤치마킹 데이터가 쌓이도록 만들었습니다.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 03: 프로젝트 -->
+<div class="section" id="projects">
+  <div class="sec-label">Section 03</div>
+  <div class="sec-title">주요 프로젝트</div>
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">헬로tv / 딜라이브 → 오초이스 앱 마이그레이션</span>
+        <span class="proj-period">2024.02–2025.10</span>
+      </div>
+      <div class="proj-sub">LG헬로비전(매출 1조) / 딜라이브(매출 3,500억) / 팀 4인</div>
+      <div class="tags">
+        <span class="tag hl">운영 이슈 대응</span>
+        <span class="tag hl">지표 기반 개선</span>
+        <span class="tag">Flutter</span>
+        <span class="tag">WebView</span>
+        <span class="tag">DRM</span>
+      </div>
+      <ul class="ul">
+        <li>서비스 전환 과정에서 발생한 DRM 호환, 플레이어 중복 실행, 네트워크 장애를 접수 → 원인분석 → 재발방지로 대응</li>
+        <li>탐색 화면 WebView 분리로 앱 재배포 없이 콘텐츠 / 배너 / 공지 즉시 반영 가능한 운영 구조 구축</li>
+        <li><strong>FCP 39% 단축, LCP 10.8% 개선</strong> — 병목 분석 기반 데이터 검증형 운영 개선</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">경쟁 OTT 서비스 벤치마킹 자동화</span>
+        <span class="proj-period">2024.10 ~ 퇴사 전까지 운영</span>
+      </div>
+      <div class="proj-sub">개인 / Selenium / Pandas / Docker / Render</div>
+      <div class="tags">
+        <span class="tag hl">벤치마킹 자동화</span>
+        <span class="tag hl">리서치 파이프라인</span>
+        <span class="tag">Python</span>
+        <span class="tag">Cron Job</span>
+      </div>
+      <ul class="ul">
+        <li>경쟁 서비스의 콘텐츠 순위 / 장르 / 히트수 등 메타데이터 1,000건 이상을 평균 10분 내 자동 수집</li>
+        <li>동적 페이지 로딩 지연으로 인한 수집 실패를 대기 로직 개선으로 해결, Render Cron Job으로 매일 1회 자동 실행</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">이용 데이터 통계 및 수요 예측</span>
+        <span class="proj-period">2023.09–2023.11</span>
+      </div>
+      <div class="proj-sub">2인 / Python / Pandas / Scikit-learn</div>
+      <div class="tags">
+        <span class="tag hl">데이터 인사이트 도출</span>
+        <span class="tag">통계 분석</span>
+        <span class="tag">예측 모델</span>
+      </div>
+      <ul class="ul">
+        <li>공공데이터 약 120만 건 + 기상데이터를 결합해 시간대 / 요일 / 날씨별 이용 패턴 분석</li>
+        <li>랜덤 포레스트 모델 적용으로 <strong>예측 오차(MAE) 15% 이상 개선</strong>, 수요 급증 구간 도출</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">SECT — 개인 커뮤니티 웹앱</span>
+        <span class="proj-period">2026.05 ~ 진행 중</span>
+      </div>
+      <div class="proj-sub">개인 / Claude Code / Codex 활용</div>
+      <div class="tags">
+        <span class="tag hl">AI 업무 자동화</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Render</span>
+      </div>
+      <ul class="ul">
+        <li>AI 에이전트를 README / ERD 설계 / 기능 구현 방향 정리 / 코드 수정 전 과정에 활용해 문서화/구현 속도 향상</li>
+        <li>팔로우 / 게시글 / 좋아요 / 채팅 등 핵심 기능을 혼자서 기획부터 배포까지 진행</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+  <div class="sec-label">Contact</div>
+  <div class="sec-title">연락처</div>
+  <div style="display:flex; gap:32px; flex-wrap:wrap; background:var(--card); border:1px solid var(--bdr); border-radius:12px; padding:24px;">
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">전화</div>
+      <div style="font-weight:700;">010-2538-1519</div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">이메일</div>
+      <div style="font-weight:700;">justinnn980@gmail.com</div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">블로그</div>
+      <div style="font-weight:700;"><a href="https://justinnn980.tistory.com">justinnn980.tistory.com</a></div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">도서</div>
+      <div style="font-weight:700;"><a href="https://www.yes24.com/Product/Goods/109711067">개발자가 꼭 알아야 하는 IT 용어</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>박준철 포트폴리오 / 인라이플 모비소프트 앱 운영 담당자 지원</footer>
+
+</body>
+</html>
