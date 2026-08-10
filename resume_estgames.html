@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 포트폴리오 — ESTgames 웹 개발자 (TypeScript, Next.js, Java, Spring)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --em: #8B5CF6;
+      --em-l: #DDD6FE;
+      --em-d: #6D28D9;
+      --bg: #0A0A12;
+      --card: #15131F;
+      --card2: #1C1930;
+      --bdr: #2A2540;
+      --text: #F9FAFB;
+      --sub: #D1D5DB;
+      --muted: #9691B0;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans KR', 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: var(--em); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,18,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bdr);
+      padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 52px;
+    }
+    .nav-name { font-weight: 800; font-size: 15px; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px; margin: 0 auto; padding: 64px 40px 48px;
+      display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: start;
+    }
+    .hero-badge {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3);
+      color: var(--em-l); font-size: 12px; font-weight: 700; margin-bottom: 16px;
+    }
+    .hero-name { font-size: 44px; font-weight: 900; line-height: 1.1; margin-bottom: 8px; letter-spacing: -1px; }
+    .hero-role { font-size: 18px; font-weight: 700; color: var(--em-l); margin-bottom: 16px; }
+    .hero-lead { font-size: 14.5px; color: var(--sub); line-height: 1.85; margin-bottom: 28px; max-width: 480px; }
+    .hero-stats { display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 28px; padding: 16px 20px; background: var(--card); border-radius: 10px; border: 1px solid var(--bdr); }
+    .stat { text-align: center; }
+    .stat-num { font-size: 20px; font-weight: 900; color: var(--em-l); }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+    .hero-contacts { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-contact { font-size: 13px; color: var(--muted); }
+
+    /* CODE PANEL */
+    .code-panel { background: #08070F; border: 1px solid var(--bdr); border-radius: 12px; overflow: hidden; }
+    .code-header { background: var(--card); padding: 10px 16px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--bdr); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FFBD2E; }
+    .dot-g { background: #28C840; }
+    .code-filename { font-size: 12px; color: var(--muted); margin-left: 6px; font-family: 'JetBrains Mono', monospace; }
+    .code-body { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.85; }
+    .c-cmt { color: #635B7A; }
+    .c-kw  { color: #C4B5FD; }
+    .c-str { color: #A78BFA; }
+    .c-num { color: #FBBF24; }
+    .c-fn  { color: #B794F4; }
+    .c-var { color: #F9FAFB; }
+    .c-prop{ color: #BFA9FA; }
+
+    /* SECTION */
+    .section { max-width: 1100px; margin: 0 auto; padding: 56px 40px; border-top: 1px solid var(--bdr); }
+    .sec-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--em-l); margin-bottom: 6px; }
+    .sec-title { font-size: 26px; font-weight: 900; margin-bottom: 32px; }
+
+    /* MATCH GRID */
+    .match-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .match-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px; transition: border-color .2s; }
+    .match-card:hover { border-color: var(--em); }
+    .match-req   { font-size: 11px; font-weight: 700; color: var(--em-l); margin-bottom: 6px; }
+    .match-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .match-desc  { font-size: 12.5px; color: var(--sub); line-height: 1.7; }
+
+    /* PROBLEM CARDS */
+    .prob-list { display: grid; gap: 18px; }
+    .prob-card {
+      background: var(--card); border: 1px solid var(--bdr);
+      border-left: 3px solid var(--em); border-radius: 0 12px 12px 0; padding: 22px 26px;
+    }
+    .prob-num   { font-size: 11px; font-weight: 800; color: var(--em-l); letter-spacing: 1px; margin-bottom: 8px; }
+    .prob-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+    .prob-flow  { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .pf-tag    { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; background: var(--card2); color: var(--sub); }
+    .pf-arrow  { color: var(--em-l); font-size: 14px; }
+    .pf-result { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; background: rgba(139,92,246,0.2); color: #DDD6FE; }
+    .prob-desc { font-size: 13px; color: var(--sub); line-height: 1.75; }
+    .prob-desc strong { color: var(--text); font-weight: 700; }
+
+    /* PROJ GRID */
+    .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .proj-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 22px; transition: border-color .2s; }
+    .proj-card.wide { grid-column: 1 / span 2; }
+    .proj-card:hover { border-color: rgba(139,92,246,0.4); }
+    .proj-head   { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; flex-wrap: wrap; gap: 6px; }
+    .proj-title  { font-size: 15px; font-weight: 800; }
+    .proj-title a { color: var(--text); }
+    .proj-period { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .proj-sub    { font-size: 12px; color: var(--em-l); font-weight: 700; margin-bottom: 10px; }
+    .tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
+    .tag { padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: 700; background: var(--bdr); color: var(--sub); }
+    .tag.hl { background: rgba(139,92,246,0.15); color: #DDD6FE; }
+    .ul { list-style: none; display: grid; gap: 5px; }
+    .ul li { font-size: 12.5px; color: var(--sub); padding-left: 14px; position: relative; line-height: 1.6; }
+    .ul li::before { content: '▸'; position: absolute; left: 0; color: var(--em-l); font-size: 9px; top: 3px; }
+    .ul li strong { color: var(--text); font-weight: 700; }
+
+    footer { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--bdr); }
+
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; }
+      .match-grid { grid-template-columns: 1fr 1fr; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .proj-card.wide { grid-column: 1 / span 1; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">박준철 / ESTgames 웹 개발자 지원</div>
+  <div class="nav-links">
+    <a href="#match">요건 매칭</a>
+    <a href="#problem">문제 해결</a>
+    <a href="#projects">프로젝트</a>
+    <a href="#contact">연락처</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-badge">ESTgames 웹 개발팀 지원 (TypeScript, Next.js, Java, Spring)</div>
+    <div class="hero-name">박준철</div>
+    <div class="hero-role">풀스택 웹 개발자 / React, Next.js + Java, Spring Boot</div>
+    <div class="hero-lead">
+      게임 유저가 매일 만나는 화면은 결국 프론트엔드와 백엔드가<br/>함께 맞물려 돌아가야 매끄럽다고 생각합니다.<br/><br/>
+      실서비스에서 콘텐츠 화면을 React/TypeScript 웹으로 분리해<br/>
+      Native 앱과 WebView로 연동하는 하이브리드 구조를 직접 설계했고,<br/>
+      Java/Kotlin Spring Boot로 인증/캐싱/실시간 서비스를 갖춘<br/>
+      백엔드까지 기획부터 배포까지 혼자 구현해봤습니다.<br/><br/>
+      3일 만에 만든 <strong style="color:var(--text);">Spring Boot + WebSocket 실시간 대결 게임</strong>처럼,<br/>
+      웹으로 재미있는 인터랙션을 만드는 일 자체를 즐깁니다.
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">1년 10개월</div>
+        <div class="stat-label">실서비스 프론트/백엔드<br/>하이브리드 앱 운영</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">FCP 39%↓</div>
+        <div class="stat-label">LCP 10.8%↓<br/>웹 성능 최적화</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3일</div>
+        <div class="stat-label">기획~배포 단독 구현<br/>실시간 WebSocket 게임</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">96+24+4</div>
+        <div class="stat-label">단위/화면/E2E<br/>자동화 테스트</div>
+      </div>
+    </div>
+    <div class="hero-contacts">
+      <span class="hero-contact">📞 010-2538-1519</span>
+      <span class="hero-contact">✉ justinnn980@gmail.com</span>
+      <span class="hero-contact">💻 <a href="https://github.com/justinnn980">GitHub</a></span>
+      <span class="hero-contact">📝 <a href="https://justinnn980.tistory.com">기술 블로그</a></span>
+    </div>
+  </div>
+
+  <!-- CODE PANEL -->
+  <div class="code-panel">
+    <div class="code-header">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="code-filename">useDeleteContent.ts</span>
+    </div>
+    <div class="code-body">
+<span class="c-cmt">// 낙관적 업데이트 + 실패 시 자동 롤백</span>
+<span class="c-cmt">// OTT Admin - 콘텐츠 삭제 훅</span>
+
+<span class="c-kw">const</span> <span class="c-fn">deleteContent</span> = <span class="c-kw">async</span> (<span class="c-var">id</span>: <span class="c-prop">string</span>) => {
+  <span class="c-kw">const</span> <span class="c-var">prev</span> = <span class="c-var">queryClient</span>.<span class="c-fn">getQueryData</span>([<span class="c-str">'contents'</span>]);
+
+  <span class="c-var">queryClient</span>.<span class="c-fn">setQueryData</span>([<span class="c-str">'contents'</span>],
+    (<span class="c-var">old</span>) => <span class="c-var">old</span>.<span class="c-fn">filter</span>((<span class="c-var">c</span>) => <span class="c-var">c</span>.<span class="c-prop">id</span> !== <span class="c-var">id</span>));
+
+  <span class="c-kw">try</span> {
+    <span class="c-kw">await</span> <span class="c-var">api</span>.<span class="c-fn">delete</span>(<span class="c-str">`/contents/${id}`</span>);
+  } <span class="c-kw">catch</span> (<span class="c-var">err</span>) {
+    <span class="c-var">queryClient</span>.<span class="c-fn">setQueryData</span>([<span class="c-str">'contents'</span>], <span class="c-var">prev</span>);
+    <span class="c-var">toast</span>.<span class="c-fn">error</span>(<span class="c-str">'삭제 실패, 목록을 복구했습니다'</span>);
+  }
+};
+
+<span class="c-cmt">// 실패해도 화면과 실제 데이터가 어긋나지 않도록 보장</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01: 요건 매칭 -->
+<div class="section" id="match">
+  <div class="sec-label">Section 01</div>
+  <div class="sec-title">채용 공고 요건 — 매칭 포인트</div>
+  <div class="match-grid">
+
+    <div class="match-card">
+      <div class="match-req">자격요건 / 웹 프론트+백엔드 기본지식, CS 기초</div>
+      <div class="match-title">컴퓨터공학과 + 풀스택 실무/개인 프로젝트</div>
+      <div class="match-desc">컴퓨터공학과 전공을 바탕으로 React/TypeScript/Next.js 프론트엔드와 Java/Kotlin Spring Boot 백엔드를 실무와 개인 프로젝트에서 함께 구현해왔습니다.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">담당업무 / 게임 관련 웹 서비스(포털, 이벤트 페이지)</div>
+      <div class="match-title">콘텐츠 화면 React/TS 분리 구현 실무</div>
+      <div class="match-desc">자주 바뀌는 콘텐츠 탐색 화면을 React/TypeScript 웹으로 분리 구현해, 이벤트성 화면 구성이나 배너를 앱 배포 없이 바로 반영할 수 있는 운영 구조를 만들었습니다.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">담당업무 / 모바일 게임 플랫폼(WebView 하이브리드 앱)</div>
+      <div class="match-title">Native 앱 ↔ 웹 하이브리드 아키텍처 설계</div>
+      <div class="match-desc">Flutter 앱과 React/TypeScript 웹 화면을 WebView로 연동하는 하이브리드 구조를 직접 설계해, 앱 재배포 없이 화면을 실시간으로 갱신하는 운영 체계를 구축했습니다.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">담당업무 / 게임 내 결제 시스템 및 과금 서비스</div>
+      <div class="match-title">구독/비용 로직 및 보안 설계 경험</div>
+      <div class="match-desc">구독 관리 서비스 "담아"에서 결제 예정 알림과 비용 증감 로직을 직접 설계하고, 로그인 유지 토큰 탈취 대응 등 결제와 맞닿은 보안 시나리오를 구현했습니다.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">담당업무 / 게임 데이터 시각화 및 대시보드</div>
+      <div class="match-title">통계 API + Redis 캐싱 설계</div>
+      <div class="match-desc">반복 조회되는 통계 API에 Redis 캐싱과 DB 인덱스를 직접 설계해 응답 속도를 개선하고, 변경 발생 시 캐시를 즉시 무효화해 최신 데이터를 보장했습니다.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">우대사항 / Next.js, 상태관리, 웹 성능 최적화</div>
+      <div class="match-title">Next.js 16 App Router + Zustand + Web Vitals 개선</div>
+      <div class="match-desc">Next.js 16 App Router와 TanStack Query/Zustand로 서버 상태와 클라이언트 상태를 분리 설계했고, 실무에서 FCP 39%, LCP 10.8% 개선을 직접 이끌어냈습니다.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 02: 문제 해결 -->
+<div class="section" id="problem">
+  <div class="sec-label">Section 02</div>
+  <div class="sec-title">프론트/백엔드 경계에서 부딪힌 문제들</div>
+  <div class="prob-list">
+
+    <div class="prob-card">
+      <div class="prob-num">ISSUE 01</div>
+      <div class="prob-title">동시 접속자마다 다른 숫자가 보이는 문제 — 실시간 대결 게임</div>
+      <div class="prob-flow">
+        <span class="pf-tag">동시 변경 시 값 불일치 발생</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">서버를 단일 상태 저장소로 재설계</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">WebSocket으로 결과 동시 브로드캐스트</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">전원 동일 상태 즉시 동기화</span>
+      </div>
+      <div class="prob-desc">
+        여러 사용자가 동시에 숫자를 증감시키면 기기마다 다른 값이 보였습니다. 각 기기에서 계산하면 충돌이 날 수밖에 없다고 판단해 <strong>서버만 값을 계산하고, 사용자 입력은 변경 요청으로만 전달</strong>하도록 구조를 바꿔 모든 접속자가 동일한 결과를 실시간으로 보게 만들었습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">ISSUE 02</div>
+      <div class="prob-title">화면 하나 바꾸는데 앱 심사/재배포가 필요한 문제</div>
+      <div class="prob-flow">
+        <span class="pf-tag">콘텐츠 화면 변경마다 앱 심사 대기</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">React/TS 웹으로 화면 분리</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Flutter 앱에서 WebView 연동</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">배포 없이 실시간 반영</span>
+      </div>
+      <div class="prob-desc">
+        포스터가 나열되는 탐색 화면처럼 자주 바뀌는 화면을 앱 내부 화면으로 관리하면 수정할 때마다 앱 심사를 거쳐야 했습니다. 해당 화면을 <strong>React/TypeScript 웹으로 직접 분리 구현</strong>하고 WebView로 연동하는 하이브리드 구조로 전환해, 이후 콘텐츠나 배너를 앱 배포 없이 바로 반영할 수 있게 됐습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">ISSUE 03</div>
+      <div class="prob-title">웹 전환 후 첫 화면이 느려진 문제 — 지표로 증명한 개선</div>
+      <div class="prob-flow">
+        <span class="pf-tag">체감 로딩 저하 접수</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">구간별 소요 시간 측정</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">스켈레톤 UI + Lazy Loading + CDN 적용</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">FCP 39%, LCP 10.8% 개선</span>
+      </div>
+      <div class="prob-desc">
+        앱 내부 화면을 웹으로 전환한 뒤 첫 화면 표시가 느려졌습니다. 감으로 판단하지 않고 <strong>로딩 구간별 소요 시간을 측정해 병목을 특정</strong>한 뒤, 화면에 보이는 콘텐츠부터 우선 로딩하고 이미지가 늦게 뜨는 구간에는 스켈레톤 화면을 먼저 보여주는 방식으로 개선했습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">ISSUE 04</div>
+      <div class="prob-title">버튼만 숨기면 안전하다고 오해하기 쉬운 권한 문제</div>
+      <div class="prob-flow">
+        <span class="pf-tag">조회 전용 계정도 URL 직접 요청 가능</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Route Handler에서 접근 직전 권한 재검증</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">서버 단 차단 구조로 재설계</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">화면 우회 접근 차단</span>
+      </div>
+      <div class="prob-desc">
+        조회 전용 계정은 화면에 등록/수정/삭제 버튼이 보이지 않지만, 주소를 직접 입력하면 요청 자체는 보낼 수 있었습니다. <strong>화면 숨김은 보안이 아니라고 판단</strong>해 데이터 접근 직전 서버에서 한 번 더 권한을 확인하도록 구현해 실제 공격 경로를 차단했습니다.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 03: 프로젝트 -->
+<div class="section" id="projects">
+  <div class="sec-label">Section 03</div>
+  <div class="sec-title">주요 프로젝트</div>
+  <div class="proj-grid">
+
+    <div class="proj-card wide">
+      <div class="proj-head">
+        <span class="proj-title">(주)홈초이스 — OTT 앱 프론트/백엔드 하이브리드 운영 (실무)</span>
+        <span class="proj-period">2024.02–2025.11 (1년 10개월)</span>
+      </div>
+      <div class="proj-sub">LG헬로비전(매출 1조)/딜라이브(매출 3,500억) 파트너사 앱 전환 / 팀 4인</div>
+      <div class="tags">
+        <span class="tag hl">React/TypeScript</span>
+        <span class="tag hl">WebView 하이브리드</span>
+        <span class="tag">Flutter</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">AWS</span>
+      </div>
+      <ul class="ul">
+        <li>콘텐츠 탐색 화면을 React/TypeScript 웹으로 분리하고 Flutter 앱과 WebView로 연동하는 하이브리드 구조 설계, 앱 재배포 없이 콘텐츠/배너 반영</li>
+        <li>초기 로딩 병목을 구간별로 측정해 스켈레톤 UI/Lazy Loading/CDN 적용, <strong>FCP 39%, LCP 10.8% 개선</strong></li>
+        <li>Proxy 서버 IP 변경으로 인한 방화벽 차단 장애를 EC2 Elastic IP 고정 구조로 근본 해결, SSL 적용으로 전 구간 HTTPS 전환</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">숫자 대결 — Spring Boot + WebSocket 실시간 게임</span>
+        <span class="proj-period">2026.01 ~ 진행중</span>
+      </div>
+      <div class="proj-sub">개인 / 기획~배포 단독 구현</div>
+      <div class="tags">
+        <span class="tag hl">실시간 동기화</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">STOMP WebSocket</span>
+        <span class="tag">Flutter</span>
+      </div>
+      <ul class="ul">
+        <li>3일 내 기획부터 백엔드/프론트/배포까지 혼자 구현한 실시간 다중 사용자 숫자 증감 게임</li>
+        <li>서버 중심 상태 관리로 동시 접속 시 값 불일치 문제 해결, 연결 종료 시 5초 후 자동 재연결</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">OTT Admin — Next.js 콘텐츠 관리 웹</span>
+        <span class="proj-period">2026</span>
+      </div>
+      <div class="proj-sub">개인 / 기획~배포 단독 구현</div>
+      <div class="tags">
+        <span class="tag hl">Next.js 16</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Playwright</span>
+      </div>
+      <ul class="ul">
+        <li>React 19/TypeScript/Next.js 16 App Router 기반 콘텐츠 CRUD 웹, 관리자/조회 전용 권한 분리</li>
+        <li>삭제 낙관적 업데이트 + 실패 시 자동 롤백, 자동 테스트 96개/E2E 4개로 품질 검증</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">Study Tracker API — <a href="https://github.com/justinnn980/study-tracker-api">GitHub ↗</a></span>
+        <span class="proj-period">2025</span>
+      </div>
+      <div class="proj-sub">개인 / <a href="https://study-tracker-api-7stm.onrender.com/swagger-ui/index.html">Swagger 문서 ↗</a></div>
+      <div class="tags">
+        <span class="tag hl">Java 21</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">JWT</span>
+        <span class="tag">Redis</span>
+      </div>
+      <ul class="ul">
+        <li>JWT 인증부터 Todo CRUD, 통계 API까지 직접 구현한 REST API 서버, Redis로 통계 캐싱 및 DB 인덱스 설계</li>
+        <li>단위/통합 테스트 60건, GitHub Actions로 테스트~빌드~Docker 배포 자동화</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">담아(Dama) — Kotlin/Spring Boot 구독 관리 서비스</span>
+        <span class="proj-period">2026.01–2026.02</span>
+      </div>
+      <div class="proj-sub">개발자 2명, 디자이너 1명</div>
+      <div class="tags">
+        <span class="tag hl">Kotlin</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">QueryDSL</span>
+        <span class="tag">DDD</span>
+      </div>
+      <ul class="ul">
+        <li>도메인 기반 설계로 구독 비용 증감/결제 예정 알림 로직 구현, 타인 데이터 접근 시 존재 자체를 노출하지 않는 보안 설계</li>
+        <li>로그인 유지 토큰 탈취 시 해당 계정 전체 세션 즉시 종료 처리</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+  <div class="sec-label">Contact</div>
+  <div class="sec-title">연락처</div>
+  <div style="display:flex; gap:32px; flex-wrap:wrap; background:var(--card); border:1px solid var(--bdr); border-radius:12px; padding:24px;">
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">전화</div>
+      <div style="font-weight:700;">010-2538-1519</div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">이메일</div>
+      <div style="font-weight:700;">justinnn980@gmail.com</div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">GitHub</div>
+      <div style="font-weight:700;"><a href="https://github.com/justinnn980">github.com/justinnn980</a></div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">블로그</div>
+      <div style="font-weight:700;"><a href="https://justinnn980.tistory.com">justinnn980.tistory.com</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>박준철 포트폴리오 / ESTgames 웹 개발자(TypeScript, Next.js, Java, Spring) 지원</footer>
+
+</body>
+</html>
