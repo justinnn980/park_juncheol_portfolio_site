@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 포트폴리오 — YG엔터테인먼트 IT개발팀 프론트엔드 개발자(경력)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --em: #E8B923;
+      --em-l: #F6DE8C;
+      --em-d: #B4890B;
+      --bg: #0B0B0C;
+      --card: #17161A;
+      --card2: #1F1D22;
+      --bdr: #2E2B27;
+      --text: #F9FAFB;
+      --sub: #D1D5DB;
+      --muted: #9C9690;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans KR', 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: var(--em); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(11,11,12,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bdr);
+      padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 52px;
+    }
+    .nav-name { font-weight: 800; font-size: 15px; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px; margin: 0 auto; padding: 64px 40px 48px;
+      display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: start;
+    }
+    .hero-badge {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      background: rgba(232,185,35,0.14); border: 1px solid rgba(232,185,35,0.32);
+      color: var(--em-l); font-size: 12px; font-weight: 700; margin-bottom: 16px;
+    }
+    .hero-name { font-size: 44px; font-weight: 900; line-height: 1.1; margin-bottom: 8px; letter-spacing: -1px; }
+    .hero-role { font-size: 18px; font-weight: 700; color: var(--em-l); margin-bottom: 16px; }
+    .hero-lead { font-size: 14.5px; color: var(--sub); line-height: 1.85; margin-bottom: 28px; max-width: 480px; }
+    .hero-stats { display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 28px; padding: 16px 20px; background: var(--card); border-radius: 10px; border: 1px solid var(--bdr); }
+    .stat { text-align: center; }
+    .stat-num { font-size: 20px; font-weight: 900; color: var(--em-l); }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+    .hero-contacts { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-contact { font-size: 13px; color: var(--muted); }
+
+    /* CODE PANEL */
+    .code-panel { background: #08070F; border: 1px solid var(--bdr); border-radius: 12px; overflow: hidden; }
+    .code-header { background: var(--card); padding: 10px 16px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--bdr); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FFBD2E; }
+    .dot-g { background: #28C840; }
+    .code-filename { font-size: 12px; color: var(--muted); margin-left: 6px; font-family: 'JetBrains Mono', monospace; }
+    .code-body { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.85; }
+    .c-cmt { color: #6B6560; }
+    .c-kw  { color: #F0D27A; }
+    .c-str { color: #E8B923; }
+    .c-num { color: #FBBF24; }
+    .c-fn  { color: #F6DE8C; }
+    .c-var { color: #F9FAFB; }
+    .c-prop{ color: #E4C876; }
+
+    /* SECTION */
+    .section { max-width: 1100px; margin: 0 auto; padding: 56px 40px; border-top: 1px solid var(--bdr); }
+    .sec-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--em-l); margin-bottom: 6px; }
+    .sec-title { font-size: 26px; font-weight: 900; margin-bottom: 32px; }
+
+    /* MATCH GRID */
+    .match-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .match-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px; transition: border-color .2s; }
+    .match-card:hover { border-color: var(--em); }
+    .match-req   { font-size: 11px; font-weight: 700; color: var(--em-l); margin-bottom: 6px; }
+    .match-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .match-desc  { font-size: 12.5px; color: var(--sub); line-height: 1.7; }
+
+    /* PROBLEM CARDS */
+    .prob-list { display: grid; gap: 18px; }
+    .prob-card {
+      background: var(--card); border: 1px solid var(--bdr);
+      border-left: 3px solid var(--em); border-radius: 0 12px 12px 0; padding: 22px 26px;
+    }
+    .prob-num   { font-size: 11px; font-weight: 800; color: var(--em-l); letter-spacing: 1px; margin-bottom: 8px; }
+    .prob-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+    .prob-flow  { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .pf-tag    { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; background: var(--card2); color: var(--sub); }
+    .pf-arrow  { color: var(--em-l); font-size: 14px; }
+    .pf-result { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; background: rgba(232,185,35,0.2); color: #F6DE8C; }
+    .prob-desc { font-size: 13px; color: var(--sub); line-height: 1.75; }
+    .prob-desc strong { color: var(--text); font-weight: 700; }
+
+    /* PROJ GRID */
+    .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .proj-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 22px; transition: border-color .2s; }
+    .proj-card.wide { grid-column: 1 / span 2; }
+    .proj-card:hover { border-color: rgba(232,185,35,0.4); }
+    .proj-head   { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; flex-wrap: wrap; gap: 6px; }
+    .proj-title  { font-size: 15px; font-weight: 800; }
+    .proj-title a { color: var(--text); }
+    .proj-period { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .proj-sub    { font-size: 12px; color: var(--em-l); font-weight: 700; margin-bottom: 10px; }
+    .tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
+    .tag { padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: 700; background: var(--bdr); color: var(--sub); }
+    .tag.hl { background: rgba(232,185,35,0.15); color: #F6DE8C; }
+    .ul { list-style: none; display: grid; gap: 5px; }
+    .ul li { font-size: 12.5px; color: var(--sub); padding-left: 14px; position: relative; line-height: 1.6; }
+    .ul li::before { content: '▸'; position: absolute; left: 0; color: var(--em-l); font-size: 9px; top: 3px; }
+    .ul li strong { color: var(--text); font-weight: 700; }
+
+    footer { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--bdr); }
+
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; }
+      .match-grid { grid-template-columns: 1fr 1fr; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .proj-card.wide { grid-column: 1 / span 1; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">박준철 / YG엔터테인먼트 IT개발팀 지원</div>
+  <div class="nav-links">
+    <a href="#match">요건 매칭</a>
+    <a href="#problem">문제 해결</a>
+    <a href="#projects">프로젝트</a>
+    <a href="#contact">연락처</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-badge">YG엔터테인먼트 IT개발팀 프론트엔드 개발자(경력) 지원</div>
+    <div class="hero-name">박준철</div>
+    <div class="hero-role">프론트엔드 개발자 / React, TypeScript, Next.js</div>
+    <div class="hero-lead">
+      콘텐츠가 자주 바뀌는 화면일수록, 배포 없이 바로 반영되는<br/>
+      구조가 곧 서비스 품질이라고 생각합니다.<br/><br/>
+      실서비스에서 콘텐츠 탐색 화면을 React/TypeScript 웹으로<br/>
+      분리해 앱 심사 없이 즉시 반영되는 운영 구조를 직접 설계했고,<br/>
+      그 결과를 감이 아닌 FCP/LCP 수치로 증명해왔습니다.<br/><br/>
+      매출 3,500억/1조 규모 파트너사 앱 전환을 두 차례 완주한<br/>
+      경험을, YG의 <strong style="color:var(--text);">빅오피스 시스템/팬 데이터 시각화</strong> 업무에 바로 적용하겠습니다.
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">1년 10개월</div>
+        <div class="stat-label">OTT 앱 실서비스<br/>개발/운영</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">FCP 39%↓</div>
+        <div class="stat-label">LCP 10.8%↓<br/>수치로 증명한 성능 개선</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2건</div>
+        <div class="stat-label">매출 3,500억+1조 규모<br/>파트너사 앱 전환 완주</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Next.js 16</div>
+        <div class="stat-label">App Router 기반<br/>콘텐츠 관리 웹 직접 구현</div>
+      </div>
+    </div>
+    <div class="hero-contacts">
+      <span class="hero-contact">📞 010-2538-1519</span>
+      <span class="hero-contact">✉ justinnn980@gmail.com</span>
+      <span class="hero-contact">💻 <a href="https://github.com/justinnn980">GitHub</a></span>
+      <span class="hero-contact">📝 <a href="https://justinnn980.tistory.com">기술 블로그</a></span>
+    </div>
+  </div>
+
+  <!-- CODE PANEL -->
+  <div class="code-panel">
+    <div class="code-header">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="code-filename">ContentDashboardPage.tsx</span>
+    </div>
+    <div class="code-body">
+<span class="c-cmt">// OTT Admin - Next.js Server Component</span>
+<span class="c-cmt">// 콘텐츠 반응 집계를 서버에서 미리 조회해 초기 렌더 최적화</span>
+
+<span class="c-kw">export default async function</span> <span class="c-fn">ContentDashboardPage</span>() {
+  <span class="c-kw">const</span> <span class="c-var">stats</span> = <span class="c-kw">await</span> <span class="c-var">db</span>.<span class="c-var">content</span>.<span class="c-fn">groupBy</span>({
+    <span class="c-prop">by</span>: [<span class="c-str">'category'</span>],
+    <span class="c-prop">_count</span>: { <span class="c-prop">_all</span>: <span class="c-kw">true</span> },
+  });
+
+  <span class="c-kw">return</span> &lt;<span class="c-fn">StatsChart</span> <span class="c-prop">data</span>={<span class="c-var">stats</span>} /&gt;;
+}
+
+<span class="c-cmt">// 서버에서 집계까지 끝내고 클라이언트로는 결과만 전달</span>
+<span class="c-cmt">// → 팬 반응/콘텐츠 데이터 시각화 업무에 동일하게 적용 가능</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01: 요건 매칭 -->
+<div class="section" id="match">
+  <div class="sec-label">Section 01</div>
+  <div class="sec-title">채용 공고 요건 — 매칭 포인트</div>
+  <div class="match-grid">
+
+    <div class="match-card">
+      <div class="match-req">담당업무 / 사내 빅오피스시스템 구현</div>
+      <div class="match-title">배포 없이 즉시 반영되는 운영 시스템 설계 실무</div>
+      <div class="match-desc">변경이 잦은 콘텐츠 탐색 화면을 웹으로 분리해 앱 심사/재배포 없이 운영진이 바로 반영할 수 있는 구조를 실제로 구축한 경험이 있습니다.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">담당업무 / React 기반 SPA Framework 웹 서비스 개발</div>
+      <div class="match-title">React/TypeScript/Next.js 웹 서비스 직접 구현</div>
+      <div class="match-desc">실서비스 콘텐츠 화면과 개인 프로젝트 OTT Admin을 React/TypeScript/Next.js 16 App Router 기반 SPA로 기획부터 배포까지 직접 구현했습니다.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">담당업무 / BI Tool 개발</div>
+      <div class="match-title">서버 집계 → 시각화 데이터 파이프라인 구현</div>
+      <div class="match-desc">OTT Admin에서 서버 단에서 데이터를 집계해 클라이언트에 결과만 전달하는 구조를 직접 설계했습니다. 팬 반응 데이터를 집계/시각화하는 BI Tool 업무에 동일한 방식으로 적용하겠습니다.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">자격요건 / 반응형 WebApp 설계 및 구현</div>
+      <div class="match-title">모바일 앱 ↔ 웹 하이브리드 반응형 구조 설계</div>
+      <div class="match-desc">Flutter 앱과 WebView로 연동되는 웹 화면을 반응형으로 설계해, 하나의 화면이 앱 내부와 모바일 브라우저 양쪽에서 동일하게 동작하도록 구현했습니다.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">자격요건 / mobile 웹서비스 기초지식</div>
+      <div class="match-title">모바일 앱 실무 경험 기반의 웹 개발</div>
+      <div class="match-desc">Flutter 기반 모바일 앱을 1년 10개월간 실서비스로 운영하며 모바일 환경의 제약과 사용자 흐름을 체득한 뒤, 이를 웹 화면 설계에 그대로 반영하고 있습니다.</div>
+    </div>
+
+    <div class="match-card">
+      <div class="match-req">우대사항 / Next.js SSR, 상태관리, Node 서버 로직</div>
+      <div class="match-title">Next.js 16 App Router + TanStack Query/Zustand</div>
+      <div class="match-desc">Next.js 16 App Router로 서버 컴포넌트 기반 SSR을 구현하고, TanStack Query와 Zustand로 서버 상태/클라이언트 상태를 분리 설계했습니다. Prisma 기반 서버 로직도 함께 구현했습니다.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 02: 문제 해결 -->
+<div class="section" id="problem">
+  <div class="sec-label">Section 02</div>
+  <div class="sec-title">콘텐츠 서비스 운영에서 부딪힌 문제들</div>
+  <div class="prob-list">
+
+    <div class="prob-card">
+      <div class="prob-num">ISSUE 01</div>
+      <div class="prob-title">화면 하나 바꾸는데 앱 심사/재배포가 필요한 문제</div>
+      <div class="prob-flow">
+        <span class="pf-tag">콘텐츠 화면 변경마다 앱 심사 대기</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">웹으로 화면 분리</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">앱에서 WebView로 연동</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">배포 없이 즉시 반영</span>
+      </div>
+      <div class="prob-desc">
+        영화 포스터가 나열되는 탐색 화면처럼 자주 바뀌는 화면을 앱 내부 화면으로 관리하면 수정할 때마다 앱 심사를 거쳐야 했습니다. 해당 화면을 <strong>웹으로 직접 분리 구현</strong>하고 WebView로 연동하는 구조로 전환해, 이후 콘텐츠나 배너를 앱 배포 없이 바로 반영할 수 있게 됐습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">ISSUE 02</div>
+      <div class="prob-title">웹 전환 후 첫 화면이 느려진 문제 — 지표로 증명한 개선</div>
+      <div class="prob-flow">
+        <span class="pf-tag">체감 로딩 저하 발생</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">구간별 소요 시간 측정</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">스켈레톤 UI + Lazy Loading + CDN 적용</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">FCP 39%, LCP 10.8% 개선</span>
+      </div>
+      <div class="prob-desc">
+        앱 내부 화면을 웹으로 전환한 뒤 첫 화면 표시가 느려졌습니다. 감으로 판단하지 않고 <strong>로딩 구간별 소요 시간을 측정해 병목을 특정</strong>한 뒤, 화면에 보이는 콘텐츠부터 우선 로딩하고 이미지가 늦게 뜨는 구간에는 스켈레톤 화면을 먼저 보여주는 방식으로 개선했습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">ISSUE 03</div>
+      <div class="prob-title">서로 다른 두 서비스의 영상 보호 방식을 하나로 통합</div>
+      <div class="prob-flow">
+        <span class="pf-tag">NCG / Multi DRM 이원화</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">플레이어 구조 직접 분석</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">보호 방식 무관 단일 재생 구조로 재설계</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">유지보수 복잡도 절감</span>
+      </div>
+      <div class="prob-desc">
+        두 파트너사가 서로 다른 영상 보호 방식(NCG, Multi DRM)을 사용해 재생 구조를 통일하기 어려웠습니다. 방식마다 별도 구조를 만들면 유지보수 비용이 커진다고 판단해, <strong>기존 플레이어를 직접 수정</strong>해 보호 방식과 무관하게 동일한 화면과 시청 흐름을 유지하도록 통합했습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">ISSUE 04</div>
+      <div class="prob-title">서버 IP 변경으로 인한 앱-서버 통신 두절</div>
+      <div class="prob-flow">
+        <span class="pf-tag">방화벽 정책으로 통신 차단</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">임시 우회 대신 원인 추적</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">고정 IP + SSL 구조로 재구성</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">통신 장애 재발 차단</span>
+      </div>
+      <div class="prob-desc">
+        중계 서버의 IP가 변경되면서 방화벽 정책에 의해 요청이 차단돼 통신이 두절됐습니다. 임시로 덮지 않고 <strong>중계 서버에 고정 IP를 할당</strong>해 근본적으로 해결했고, 암호화되지 않았던 구간에는 SSL을 적용해 앱-서버 전 구간을 HTTPS로 전환했습니다.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 03: 프로젝트 -->
+<div class="section" id="projects">
+  <div class="sec-label">Section 03</div>
+  <div class="sec-title">주요 프로젝트</div>
+  <div class="proj-grid">
+
+    <div class="proj-card wide">
+      <div class="proj-head">
+        <span class="proj-title">(주)홈초이스 — OTT 앱 콘텐츠 서비스 개발/운영 (실무)</span>
+        <span class="proj-period">2024.02–2025.11 (1년 10개월)</span>
+      </div>
+      <div class="proj-sub">LG헬로비전(매출 1조)/딜라이브(매출 3,500억) 파트너사 앱 전환 / 팀 4인</div>
+      <div class="tags">
+        <span class="tag hl">Flutter</span>
+        <span class="tag hl">WebView 하이브리드</span>
+        <span class="tag">DRM 통합</span>
+        <span class="tag">CDN/성능 최적화</span>
+        <span class="tag">AWS</span>
+      </div>
+      <ul class="ul">
+        <li>콘텐츠 탐색 화면을 웹으로 분리하고 앱과 WebView로 연동하는 하이브리드 구조 설계, 앱 재배포 없이 콘텐츠/배너 반영</li>
+        <li>초기 로딩 병목을 구간별로 측정해 스켈레톤 UI/Lazy Loading/CDN 적용, <strong>FCP 39%, LCP 10.8% 개선</strong></li>
+        <li>서로 다른 DRM 방식(NCG/Multi)을 단일 재생 구조로 통합, 중계 서버 IP 변경 장애를 고정 IP/HTTPS 전환으로 근본 해결</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">OTT Admin — Next.js 콘텐츠 관리/대시보드 웹</span>
+        <span class="proj-period">2026</span>
+      </div>
+      <div class="proj-sub">개인 / 기획~배포 단독 구현</div>
+      <div class="tags">
+        <span class="tag hl">Next.js 16</span>
+        <span class="tag">React 19</span>
+        <span class="tag">TanStack Query</span>
+        <span class="tag">Zustand</span>
+      </div>
+      <ul class="ul">
+        <li>React 19/TypeScript/Next.js 16 App Router 기반 콘텐츠 CRUD/집계 대시보드 웹을 서버 컴포넌트 SSR로 구현</li>
+        <li>TanStack Query(서버 상태)와 Zustand(클라이언트 상태)를 분리 설계, 삭제 낙관적 업데이트 + 실패 시 자동 롤백 구현</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">Study Tracker API — <a href="https://github.com/justinnn980/study-tracker-api">GitHub ↗</a></span>
+        <span class="proj-period">2025</span>
+      </div>
+      <div class="proj-sub">개인 / <a href="https://study-tracker-api-7stm.onrender.com/swagger-ui/index.html">Swagger 문서 ↗</a></div>
+      <div class="tags">
+        <span class="tag hl">Java 21</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">JWT</span>
+        <span class="tag">Redis</span>
+      </div>
+      <ul class="ul">
+        <li>JWT 인증부터 Todo CRUD, 통계 API까지 직접 구현한 REST API 서버, Redis로 통계 캐싱 및 DB 인덱스 설계</li>
+        <li>단위/통합 테스트 60건, GitHub Actions로 테스트~빌드~Docker 배포 자동화</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">담아(Dama) — Kotlin/Spring Boot 구독 관리 서비스</span>
+        <span class="proj-period">2026.01–2026.02</span>
+      </div>
+      <div class="proj-sub">개발자 2명, 디자이너 1명</div>
+      <div class="tags">
+        <span class="tag hl">Kotlin</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">QueryDSL</span>
+        <span class="tag">DDD</span>
+      </div>
+      <ul class="ul">
+        <li>도메인 기반 설계로 구독 비용 증감/결제 예정 알림 로직 구현, 타인 데이터 접근 시 존재 자체를 노출하지 않는 보안 설계</li>
+        <li>로그인 유지 토큰 탈취 시 해당 계정 전체 세션 즉시 종료 처리</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+  <div class="sec-label">Contact</div>
+  <div class="sec-title">연락처</div>
+  <div style="display:flex; gap:32px; flex-wrap:wrap; background:var(--card); border:1px solid var(--bdr); border-radius:12px; padding:24px;">
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">전화</div>
+      <div style="font-weight:700;">010-2538-1519</div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">이메일</div>
+      <div style="font-weight:700;">justinnn980@gmail.com</div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">GitHub</div>
+      <div style="font-weight:700;"><a href="https://github.com/justinnn980">github.com/justinnn980</a></div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">블로그</div>
+      <div style="font-weight:700;"><a href="https://justinnn980.tistory.com">justinnn980.tistory.com</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>박준철 포트폴리오 / YG엔터테인먼트 IT개발팀 프론트엔드 개발자(경력) 지원</footer>
+
+</body>
+</html>
