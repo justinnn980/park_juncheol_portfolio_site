@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 지원서 — 토스뱅크 Server Developer Intern</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --em:   #0F766E;
+      --em-l: #CCFBF1;
+      --text: #111827;
+      --sub:  #374151;
+      --muted:#6B7280;
+      --bdr:  #E5E7EB;
+      --bg-h: #F0FDFA;
+    }
+    html { font-size: 12.5px; }
+    body {
+      font-family: 'Noto Sans KR', -apple-system, 'Segoe UI', sans-serif;
+      color: var(--text); background: #fff; line-height: 1.6;
+    }
+    a { color: var(--em); text-decoration: none; }
+
+    .page {
+      width: 210mm;
+      margin: 0 auto;
+      padding: 15mm 17mm;
+      background: #fff;
+    }
+
+    /* HEADER */
+    .hd { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 2px solid var(--text); }
+    .hd-name { font-size: 25px; font-weight: 900; letter-spacing: -1px; line-height: 1.15; margin-bottom: 4px; }
+    .hd-role { font-size: 12.5px; font-weight: 700; color: var(--em); margin-bottom: 8px; }
+    .hd-contacts { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hd-contact { font-size: 11px; color: var(--muted); }
+
+    /* SUMMARY BAR */
+    .sum-bar {
+      display: flex; flex-wrap: wrap; gap: 0;
+      border: 1px solid var(--bdr); border-radius: 6px; overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .sum-item {
+      flex: 1 1 0; min-width: 110px; padding: 8px 12px;
+      border-right: 1px solid var(--bdr); background: var(--bg-h);
+    }
+    .sum-item:last-child { border-right: none; }
+    .sum-n { font-size: 12.5px; font-weight: 900; color: var(--em); }
+    .sum-l { font-size: 9.5px; color: var(--muted); font-weight: 600; margin-top: 1px; }
+
+    /* SECTION */
+    .sec { margin-bottom: 14px; }
+    .sec-title {
+      font-size: 11px; font-weight: 900; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--em);
+      border-bottom: 1px solid var(--bdr);
+      padding-bottom: 5px; margin-bottom: 9px;
+    }
+
+    .quote-box {
+      margin-bottom: 10px; padding: 10px 14px;
+      border-left: 3px solid var(--em); background: var(--bg-h);
+      border-radius: 0 6px 6px 0;
+      font-size: 12px; font-weight: 700; color: var(--text); line-height: 1.6;
+    }
+    .body-p { font-size: 11.5px; color: var(--sub); line-height: 1.75; margin-bottom: 8px; }
+    .body-p:last-child { margin-bottom: 0; }
+    .body-p strong { color: var(--text); font-weight: 700; }
+
+    .meta-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+    .meta-co   { font-size: 13.5px; font-weight: 900; }
+    .meta-period { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .meta-sub { font-size: 10.5px; color: var(--muted); margin-bottom: 8px; }
+
+    .blk-lbl { font-size: 10.5px; font-weight: 800; color: var(--sub); margin: 8px 0 4px; }
+    ul.blt { list-style: none; }
+    ul.blt li {
+      position: relative; padding-left: 12px; font-size: 11.5px; color: var(--sub);
+      line-height: 1.65; margin-bottom: 4px;
+    }
+    ul.blt li::before {
+      content: '-'; position: absolute; left: 0; color: var(--em); font-weight: 900;
+    }
+    ul.blt li:last-child { margin-bottom: 0; }
+    ul.blt.result li::before { content: '▸'; font-size: 9px; top: 1px; }
+    ul.blt strong { color: var(--text); font-weight: 700; }
+
+    .stack-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+    .stack-tag { padding: 3px 8px; border-radius: 4px; background: var(--bg-h); border: 1px solid var(--em-l); color: var(--em); font-size: 10px; font-weight: 700; }
+
+    /* SKILL GROUPS */
+    .skill-groups { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; }
+    .skill-group { border: 1px solid var(--bdr); border-radius: 6px; padding: 8px 10px; }
+    .skill-group-t { font-size: 10px; font-weight: 800; color: var(--em); margin-bottom: 4px; }
+    .skill-group-v { font-size: 10.5px; color: var(--sub); line-height: 1.6; }
+
+    /* EDU */
+    .edu-row { display: flex; justify-content: space-between; padding: 3.5px 0; border-bottom: 1px solid var(--bdr); font-size: 11.5px; }
+    .edu-row:last-child { border-bottom: none; }
+    .edu-title { font-weight: 700; }
+    .edu-date  { color: var(--muted); font-size: 10.5px; flex-shrink: 0; margin-left: 8px; }
+
+    /* PRINT */
+    @media print {
+      html { font-size: 11.5px; }
+      body { background: #fff; }
+      .page { margin: 0; padding: 12mm 14mm; width: 100%; }
+      .no-print { display: none !important; }
+      .sec { break-inside: avoid; }
+    }
+
+    /* SCREEN */
+    @media screen {
+      body { background: #e5e7eb; padding: 32px 0; }
+      .page { box-shadow: 0 2px 20px rgba(0,0,0,0.12); }
+      .print-btn {
+        position: fixed; top: 20px; right: 20px; z-index: 100;
+        padding: 10px 20px; background: var(--em); color: #fff;
+        border: none; border-radius: 8px; font-size: 14px; font-weight: 700;
+        cursor: pointer; box-shadow: 0 4px 12px rgba(15,118,110,0.3);
+        font-family: inherit;
+      }
+      .print-btn:hover { background: #0d5f58; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨 PDF 저장 / 인쇄</button>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="hd">
+    <div class="hd-name">박준철 지원서</div>
+    <div class="hd-role">토스뱅크 Server Developer Intern 지원</div>
+    <div class="hd-contacts">
+      <span class="hd-contact">📞 010-2538-1519</span>
+      <span class="hd-contact">✉ justinnn980@gmail.com</span>
+      <span class="hd-contact">🌐 <a href="https://park-juncheol-portfolio-site.onrender.com/resume_tossbank.html">포트폴리오 상세보기 →</a></span>
+      <span class="hd-contact">🔗 <a href="https://github.com/justinnn980">github.com/justinnn980</a></span>
+    </div>
+  </div>
+
+  <!-- 경력요약 -->
+  <div class="sum-bar">
+    <div class="sum-item"><div class="sum-n">1년 10개월</div><div class="sum-l">실서비스 백엔드/인프라 운영</div></div>
+    <div class="sum-item"><div class="sum-n">Kotlin/Java</div><div class="sum-l">Spring Boot 백엔드 직접 설계</div></div>
+    <div class="sum-item"><div class="sum-n">JWT 직접구현</div><div class="sum-l">Redis 캐싱/멱등성 처리</div></div>
+    <div class="sum-item"><div class="sum-n">테스트 60+</div><div class="sum-l">CI/CD 파이프라인 구축</div></div>
+  </div>
+
+  <!-- 지원동기: 문제를 정의하는 개발자 -->
+  <div class="sec">
+    <div class="sec-title">문제를 정의하는 개발자 / 지원동기</div>
+    <div class="quote-box">"요청받은 기능을 만드는 개발자"가 아니라 "사용자의 진짜 문제를 찾아 기술로 가장 적절한 해결책을 제시하는 개발자"</div>
+    <div class="body-p">
+      기능을 구현하는 방법 자체는 이제 AI도 빠르게 알려줄 수 있습니다. 예를 들어 "매번 작성하는 엑셀 업무를 자동화해달라"는
+      요청을 받았을 때, 실제 문제의 본질은 여러 사람이 각자 파일을 관리하면서 데이터가 중복/누락되고 최신 데이터를
+      확인하기 어렵다는 것일 수 있습니다. 이 경우 처음 요청받은 엑셀 자동화보다, 데이터를 하나의 데이터베이스에서
+      관리하고 필요할 때만 Excel로 내보내는 시스템이 더 적절한 해결책입니다.
+    </div>
+    <div class="body-p">
+      <strong>사용자가 왜 그 기능을 원하는지, 어떤 불편을 겪고 있는지, 여러 해결 방법 중 무엇이 가장 적합한지를 판단하는 능력</strong>이
+      AI 시대에 개발자가 가져야 할 핵심 역량이라고 생각합니다. 토스뱅크처럼 복잡한 금융 로직과 규정이 얽힌 서비스일수록
+      요구사항 하나를 그대로 구현하기보다, 그 뒤의 운영/리스크/사용자 맥락까지 고려한 설계가 필요하다고 생각합니다.
+    </div>
+  </div>
+
+  <!-- 프로젝트 경험 -->
+  <div class="sec">
+    <div class="sec-title">프로젝트 경험 / 문제 정의와 해결 과정</div>
+
+    <div class="meta-row">
+      <span class="meta-co">(주)홈초이스 — 파트너사 앱 전환 및 인프라 안정화</span>
+      <span class="meta-period">2024.02 ~ 2025.11</span>
+    </div>
+    <div class="meta-sub">역할: 서버/네트워크 인프라 운영, 대형 파트너사 두 곳의 앱 전환 대응</div>
+    <div class="body-p">
+      처음 받은 요청은 LG헬로비전(가입자 343만) / 딜라이브(매출 3,500억) 두 대형 파트너사 앱을 자사 서비스로
+      단순 전환해달라는 것이었습니다. 화면만 바꿔 붙였다면 중계 서버의 IP가 바뀔 때마다 방화벽 정책에 막혀
+      통신이 끊기는 문제가 반복될 상황이었고, 두 파트너사가 서로 다른 DRM(NCG/Multi)을 쓰는 문제도 함께
+      있었습니다. <strong>증상(통신 두절)을 매번 임시 대응하는 대신 중계 서버에 고정 IP(EIP)를 할당해 원인
+      자체를 제거</strong>하고, SSL 인증서를 적용해 전 구간을 HTTPS로 재구성했습니다. 서로 다른 두 DRM 체계는
+      단일 재생 구조로 통합했고, 콘텐츠 화면은 앱 배포 없이 반영되도록 웹 분리 구조까지 함께 구축했습니다.
+    </div>
+    <div class="stack-row">
+      <span class="stack-tag">AWS EC2/EIP</span>
+      <span class="stack-tag">SSL/HTTPS</span>
+      <span class="stack-tag">DRM 통합</span>
+      <span class="stack-tag">방화벽 정책 대응</span>
+    </div>
+
+    <div class="meta-row" style="margin-top:12px;">
+      <span class="meta-co">Study Tracker API — 개인 프로젝트</span>
+      <span class="meta-period">2026.06 ~</span>
+    </div>
+    <div class="meta-sub">역할: 기획부터 배포까지 백엔드 전체 단독 구현 / Java 21, Spring Boot, PostgreSQL, Redis</div>
+    <div class="body-p">
+      학습 Todo를 관리하는 REST API를 혼자 설계하고 구현했습니다. CRUD 기능 완성에서 멈추지 않고,
+      <strong>실서비스라면 반드시 마주칠 문제를 스스로 찾아 정의</strong>했습니다. Todo 번호만 알면 다른
+      사용자 데이터에 접근 가능한 인가 취약점을 발견해 로그인 사용자 기준 접근 제어를 적용했고, 통계 조회마다
+      반복되는 DB count 쿼리를 Redis에 60초 캐싱하고 데이터 변경 시 즉시 무효화하도록 설계했습니다.
+      중복 클릭/재전송으로 인한 데이터 중복 생성을 막기 위해 Idempotency-Key 기반 방어 로직도 직접 구현했습니다.
+      jjwt 없이 HMAC-SHA256으로 JWT 서명을 직접 구현해 인증 흐름을 처음부터 끝까지 이해하는 방식으로 학습했습니다.
+    </div>
+    <ul class="blt result">
+      <li>단위/통합 테스트 60건 작성, GitHub Actions → Docker → Render CI/CD 파이프라인 구축</li>
+      <li>Actuator 상태 확인 API와 운영 Runbook, 장애 대응 템플릿까지 함께 작성</li>
+    </ul>
+    <div class="stack-row">
+      <span class="stack-tag">JWT 직접 구현</span>
+      <span class="stack-tag">Redis 캐싱</span>
+      <span class="stack-tag">Idempotency-Key</span>
+      <span class="stack-tag">JUnit/Mockito</span>
+      <span class="stack-tag">GitHub Actions</span>
+    </div>
+  </div>
+
+  <!-- 성장 -->
+  <div class="sec">
+    <div class="sec-title">개발자로서의 성장 / 지금의 노력</div>
+    <div class="body-p">
+      "공부만 하지 않는다. 각 단계마다 코드, 실행 결과, 설명을 남긴다"는 원칙으로 백엔드 학습 로드맵을 스스로
+      세워 실행하고 있습니다. 합격 기준을 "알고 있다"가 아니라 <strong>"만들었고, 왜 그렇게 만들었는지 말할
+      수 있다"</strong>로 두고, Java 객체지향 설계부터 Spring Boot 구조, 인증/캐싱/동시성 문제까지 단계별로
+      직접 구현하며 검증해왔습니다.
+    </div>
+    <div class="body-p">
+      Study Tracker API에서 인증/캐싱/멱등성 처리를 직접 설계했고, 담아(Dama) 프로젝트에서는 Kotlin 기반으로
+      도메인을 분리하고 Refresh Token Rotation 구조를 직접 구현했습니다. 두 프로젝트 모두 테스트 코드와
+      운영 문서를 함께 남기며, 기능 구현에서 끝나지 않고 유지보수 가능한 구조로 완성하는 방식을 실제로
+      만들어가고 있습니다.
+    </div>
+  </div>
+
+  <!-- 보유 기술 -->
+  <div class="sec">
+    <div class="sec-title">보유 기술</div>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <div class="skill-group-t">Backend</div>
+        <div class="skill-group-v">Java 17/21, Kotlin, Spring Boot, Spring MVC, Spring Security, Spring Data JPA/Hibernate</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-t">Database/Cache</div>
+        <div class="skill-group-v">MySQL, PostgreSQL, Redis, DynamoDB</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-t">Infra/DevOps</div>
+        <div class="skill-group-v">AWS EC2/S3, Docker, GitHub Actions, Render</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-t">Architecture/Security</div>
+        <div class="skill-group-v">JWT 직접 구현, WebSocket(STOMP), Idempotency Key, SSL/HTTPS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 경력사항 -->
+  <div class="sec">
+    <div class="sec-title">경력사항</div>
+    <div class="meta-row">
+      <span class="meta-co">(주)홈초이스</span>
+      <span class="meta-period">2024.02 ~ 2025.11 (1년 10개월)</span>
+    </div>
+    <div class="meta-sub">전국 디지털케이블TV 가입가구에 VOD를 공급하는 국내 유일 사업자 / 서버/네트워크 인프라 운영 및 서비스 개발</div>
+    <ul class="blt">
+      <li>AWS EC2/S3/Elastic Beanstalk 기반 서버/네트워크 인프라 구축 및 운영</li>
+      <li>방화벽 정책 관련 장애 대응 및 통신 구간 정보보안(SSL/HTTPS) 개선</li>
+      <li>LG헬로비전/딜라이브 등 복수 파트너사 서비스 통합 마이그레이션 및 이슈 조율</li>
+      <li>콘텐츠 메타데이터 수집 자동화(Python/Selenium/Docker/Cron Job) 및 MySQL/DynamoDB 데이터 처리</li>
+    </ul>
+  </div>
+
+  <!-- 학력 -->
+  <div class="sec">
+    <div class="sec-title">학력 / 교육</div>
+    <div class="edu-row">
+      <div><div class="edu-title">대전대학교 컴퓨터공학과 졸업 / 복수전공: 모빌리티AI/SW융합전공</div></div>
+      <div class="edu-date">2017.03 ~ 2024.02</div>
+    </div>
+    <div class="edu-row">
+      <div><div class="edu-title">정보통신산업진흥원 인공지능 기본과정 수료 / 네이버 부스트코스 &lt;DATA SCIENCE&gt; 코칭스터디 2023 수료</div></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
