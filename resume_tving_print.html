@@ -148,9 +148,9 @@
 
   <!-- 경력요약 -->
   <div class="sum-bar">
-    <div class="sum-item"><div class="sum-n">자산관리 사이트</div><div class="sum-l">조직도 연동 물품지급 자동화</div></div>
+    <div class="sum-item"><div class="sum-n">자산관리 시스템 자체 개발</div><div class="sum-l">Spring Boot/React, 실데이터 2,394건</div></div>
     <div class="sum-item"><div class="sum-n">채팅방/FAQ 사이트</div><div class="sum-l">헬프데스크 대응체계 구축</div></div>
-    <div class="sum-item"><div class="sum-n">MS 시스템 자동화</div><div class="sum-l">입/퇴사 계정 처리</div></div>
+    <div class="sum-item"><div class="sum-n">Render API 배포자동화</div><div class="sum-l">DB 프로비저닝~배포 코드화</div></div>
     <div class="sum-item"><div class="sum-n">AWS S3 이관</div><div class="sum-l">스토리지 비용 절감</div></div>
     <div class="sum-item"><div class="sum-n">방화벽/SSL</div><div class="sum-l">장애 근본해결 및 보안전환</div></div>
   </div>
@@ -167,26 +167,30 @@
 
     <div class="blk-lbl">담당업무</div>
     <ul class="blt">
-      <li>자산관리대장/조직도 기반 물품지급 사내사이트 구축</li>
+      <li>조직도/HW 자산/SW 라이선스가 엑셀 등으로 흩어져 관리되던 문제를 발견해 '조직도/IT 자산관리 시스템'을 기획부터 백엔드(Java/Spring Boot), 프론트엔드(React/TypeScript) 개발, 배포까지 단독 진행</li>
+      <li>실사용 데이터(직원 306명, HW 자산 1,471건, SW 라이선스 617건) 연동, 만료 임박 라이선스 자동 경고 대시보드 구현</li>
+      <li>실제 온보딩 절차를 반영한 4단계 마법사 UI로 입사 프로세스 표준화(사번 자동 채번)</li>
+      <li>Docker 멀티스테이지 빌드 + Render.com REST API 기반 배포 자동화(DB 프로비저닝~배포 코드화), Spring Security로 외부 접근 차단</li>
       <li>헬프데스크 Form 접수 → Teams 알림 연동, 채팅방/FAQ 사이트 개발(회사 공용 계정으로 운영해 담당자 변경/서버 장애에도 대비)</li>
-      <li>인수인계 프로세스 개선 및 헬프데스크 이력 상세화</li>
-      <li>SW 라이선스 관리 사내사이트 구축, 입/퇴사 시 MS 관리 시스템 자동화</li>
-      <li>IT 자산 비용 절감을 위한 IDC 환경 변경 및 클라우드 전환 실사화</li>
+      <li>인수인계 프로세스 개선 및 헬프데스크 이력 상세화, IT 자산 비용 절감을 위한 IDC 환경 변경 및 클라우드 전환 실사화</li>
     </ul>
 
     <div class="blk-lbl">주요성과</div>
     <ul class="blt result">
-      <li>자산관리대장과 조직도를 연동해 <strong>물품지급이 누락 없이 이뤄지는 온보딩 프로세스</strong> 구축</li>
+      <li>엑셀로 흩어져 있던 자산관리를 <strong>PostgreSQL 기반 웹 시스템으로 전환</strong>, 실데이터 2,394건 무손실 연동</li>
+      <li>상태변경 API에서만 간헐적으로 발생한 CORS 오류를 Vite 프록시의 Origin 헤더 전달 방식까지 추적해 근본 해결, 대량 데이터 이관 시 <strong>페이지네이션 상한 누락을 발견해 전량 재이관, 100% 검증</strong></li>
       <li>채팅방/FAQ 사이트를 만들 때 담당자가 바뀌거나 서버에 문제가 생기는 상황까지 미리 대비해, <strong>문의가 끊기지 않도록 MS Form을 가장 먼저 보이게 구성</strong>해 서비스 공백 예방</li>
       <li>헬프데스크 이력을 상세화해 <strong>동일 장애 재발 시 신속 대응이 가능한 인수인계 체계</strong> 구축</li>
-      <li>입/퇴사 시 필요한 MS 관리 시스템 계정 처리를 <strong>자동화</strong>해 반복 수작업 제거</li>
     </ul>
 
     <div class="stack-row">
+      <span class="stack-tag">Java/Spring Boot</span>
+      <span class="stack-tag">React/TypeScript</span>
+      <span class="stack-tag">PostgreSQL</span>
+      <span class="stack-tag">Docker/Render API</span>
+      <span class="stack-tag">Spring Security</span>
       <span class="stack-tag">MS 365 / Teams</span>
-      <span class="stack-tag">자산관리 사내사이트</span>
       <span class="stack-tag">채팅방/FAQ 사이트</span>
-      <span class="stack-tag">SW 라이선스 관리</span>
       <span class="stack-tag">IDC/클라우드</span>
     </div>
   </div>
@@ -240,7 +244,7 @@
       </div>
       <div class="skill-group">
         <div class="skill-group-t">자산/계정 관리</div>
-        <div class="skill-group-v">자산관리대장/조직도 연동 사내사이트, SW 라이선스 관리, MS 관리 시스템 계정 자동화</div>
+        <div class="skill-group-v">자산관리 시스템 자체 개발(Java/Spring Boot, React/TypeScript, PostgreSQL), SW 라이선스 관리, 온보딩 프로세스 표준화</div>
       </div>
       <div class="skill-group">
         <div class="skill-group-t">헬프데스크/자동화</div>
@@ -259,24 +263,28 @@
         <td class="exp">AWS S3 이관을 통한 스토리지 비용 절감, IDC 환경 변경 및 클라우드 전환 실사화 진행</td>
       </tr>
       <tr>
+        <td class="req">최신 기술 도입 / 기술 부채 최소화</td>
+        <td class="exp">엑셀로 흩어져 있던 자산관리를 Java/Spring Boot, React/TypeScript, PostgreSQL 기반 웹 시스템으로 직접 전환, Docker/Render API로 배포 자동화</td>
+      </tr>
+      <tr>
         <td class="req">사내 임직원 IT 온보딩</td>
-        <td class="exp">자산관리대장/조직도 기반 물품지급 사내사이트 구축으로 온보딩 프로세스 표준화</td>
+        <td class="exp">자체 개발한 자산관리 시스템에 4단계 마법사 UI로 온보딩 절차 표준화(사번 자동 채번), 실사용 데이터 306명/1,471건 반영</td>
       </tr>
       <tr>
         <td class="req">엔지니어링 기반 헬프데스크</td>
-        <td class="exp">Teams 알림 연동 접수체계, 채팅방/FAQ 사이트 안정 운영(담당자 변경 대비), 인수인계 이력 상세화, 방화벽 장애 근본 해결(EIP 고정)</td>
+        <td class="exp">Teams 알림 연동 접수체계, 채팅방/FAQ 사이트 안정 운영(담당자 변경 대비), 인수인계 이력 상세화, 방화벽 장애 근본 해결(EIP 고정), CORS/데이터이관 등 근본원인 추적 다수</td>
       </tr>
       <tr>
         <td class="req">운영 자동화 (AI 기반 API 연동)</td>
-        <td class="exp">입/퇴사 MS 관리 시스템 자동화, 콘텐츠 메타데이터 수집 자동화(Selenium/Docker/Cron), Claude Code 상시 활용</td>
+        <td class="exp">Render.com REST API로 DB 프로비저닝~배포 전 과정 자동화, 콘텐츠 메타데이터 수집 자동화(Selenium/Docker/Cron), Claude Code 상시 활용</td>
       </tr>
       <tr>
         <td class="req">SaaS 기반 업무 도구 관리 (Slack/Google Workspace/Jira 등)</td>
-        <td class="exp">SW 라이선스 관리 사내사이트 구축, AWS 콘솔/배포 환경 계정 및 권한 관리, Slack/Jira 실무 활용</td>
+        <td class="exp">SW 라이선스(617건) 관리 시스템 자체 개발, AWS 콘솔/배포 환경 계정 및 권한 관리, Slack/Jira 실무 활용</td>
       </tr>
       <tr>
         <td class="req">계정/권한 관리(입사/퇴사/조직 변경) 경험</td>
-        <td class="exp">입/퇴사 시 필요한 MS 관리 시스템 자동화, AWS 계정/권한 관리</td>
+        <td class="exp">자체 개발한 자산관리 시스템으로 온보딩 시 계정/자산 처리 프로세스 표준화, AWS 계정/권한 관리</td>
       </tr>
       <tr>
         <td class="req">우대: AI 서비스 활용 경험</td>
