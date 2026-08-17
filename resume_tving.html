@@ -333,7 +333,7 @@
           <div class="cl"><span class="ln">3</span><span class="kw">- 자산</span><span class="pl">: 자산관리대장 + 조직도 연동 물품지급</span></div>
           <div class="cl"><span class="ln">4</span><span class="kw">- 계정</span><span class="pl">: MS 관리 시스템 입/퇴사 자동 처리</span></div>
           <hr class="cdiv"/>
-          <div class="cl"><span class="ln">6</span><span class="cmt"># 헬프데스크 이중화 설계</span></div>
+          <div class="cl"><span class="ln">6</span><span class="cmt"># 담당자 부재/서버 장애 대비</span></div>
           <div class="cl"><span class="ln">7</span><span class="fn">if</span><span class="pl"> (admin_offline </span><span class="kw">or</span><span class="pl"> bot_down):</span></div>
           <div class="cl"><span class="ln">8</span><span class="pl">  fallback = </span><span class="str">"MS Form 우선 노출"</span></div>
           <div class="cl"><span class="ln">9</span><span class="pl">  <span class="cmt"># 채팅방/FAQ 사이트 장애 시에도 접수 공백 방지</span></span></div>
@@ -373,7 +373,7 @@
       <div class="sk">
         <div class="sk-icon">🎧</div>
         <div class="sk-name">엔지니어링 기반 헬프데스크</div>
-        <div class="sk-desc">Form 접수를 Teams 알림으로 즉시 엔지니어에게 전달하는 구조를 만들고, 채팅방과 FAQ 사이트는 관리자 퇴사/서버 장애 상황까지 고려해 MS 관리자 계정 기반으로 이중화 설계. 인수인계 프로세스를 개선해 헬프데스크 이력을 상세화했습니다.</div>
+        <div class="sk-desc">Form으로 접수하면 Teams로 담당 엔지니어에게 바로 알림이 가도록 만들었고, 채팅방과 FAQ 사이트는 담당자가 바뀌거나 서버에 문제가 생겨도 계속 운영될 수 있도록 회사 공용 계정으로 관리했습니다. 인수인계 자료에 처리 이력을 자세히 남기도록 개선했습니다.</div>
         <div class="sk-tags">
           <span class="sk-tag">Teams 알림 자동화</span>
           <span class="sk-tag blue">채팅방/FAQ 사이트</span>
@@ -429,7 +429,7 @@
           <div class="exp-role">IT 인프라 / 자산관리 담당</div>
           <div class="exp-detail">
             자동차 소프트웨어 보안 분야 코스닥 상장기업의 사내 IT 인프라와 자산을 담당하며, 자산관리대장과 조직도를 연동해 물품 지급이 누락 없이 이뤄지는 사내사이트를 구축했습니다.
-            헬프데스크 Form 접수를 Teams 알림으로 엔지니어에게 즉시 전달하는 체계를 만들고, 채팅방과 FAQ 사이트는 관리자 퇴사/서버 장애 상황까지 고려해 MS 관리자 계정 기반으로 구성하되 채팅방/FAQ 사이트보다 MS Form을 우선 노출해 사용자 불편을 예방했습니다.
+            헬프데스크 Form 접수를 Teams 알림으로 엔지니어에게 즉시 전달하는 체계를 만들고, 채팅방과 FAQ 사이트는 개인 계정이 아닌 회사 공용 관리자 계정으로 운영해 담당자가 바뀌거나 서버에 문제가 생겨도 계속 쓸 수 있게 했습니다. 혹시 모를 상황에도 문의가 끊기지 않도록 채팅방/FAQ 사이트보다 MS Form을 먼저 보이게 구성했습니다.
             이후 인수인계 프로세스를 개선해 동일 장애 재발 시 빠르게 대처할 수 있도록 헬프데스크 이력을 상세화했고, SW 라이선스 관리 사내사이트와 입/퇴사 시 필요한 MS 관리 시스템 자동화를 구축했습니다. IT 자산 비용 절감을 위한 IDC 환경 변경 및 클라우드 전환 실사화도 함께 진행했습니다.
           </div>
           <div class="exp-tags">
@@ -499,7 +499,7 @@
       <div class="sap-card">
         <div class="sap-card-top"><span class="sap-emoji">🎧</span><span class="sap-num">엔지니어링 기반 헬프데스크</span></div>
         <div class="sap-title">원인분석형 장애대응 + 채팅방/FAQ 사이트 운영 체계화</div>
-        <div class="sap-desc">헬프데스크 접수를 Teams 알림으로 즉시 엔지니어에게 전달하는 구조를 구축했고, 채팅방과 FAQ 사이트는 관리자 퇴사/서버 장애 상황까지 고려해 MS 관리자 계정 기반으로 설계하되 채팅방/FAQ 사이트보다 MS Form을 우선 노출해 사용자 불편을 예방했습니다. 인수인계 프로세스를 개선해 헬프데스크 이력을 상세화했고, 홈초이스에서는 방화벽 정책 변경 장애를 EC2 Elastic IP 고정 구조로 근본 해결한 경험도 있습니다.</div>
+        <div class="sap-desc">헬프데스크 접수를 Teams 알림으로 즉시 엔지니어에게 전달하는 구조를 구축했고, 채팅방과 FAQ 사이트는 회사 공용 관리자 계정으로 운영해 담당자가 바뀌거나 서버에 문제가 생겨도 계속 쓸 수 있게 했습니다. 문의가 끊기지 않도록 채팅방/FAQ 사이트보다 MS Form을 먼저 보이게 구성했고, 인수인계 프로세스를 개선해 헬프데스크 이력을 상세화했습니다. 홈초이스에서는 방화벽 정책 변경 장애를 EC2 Elastic IP 고정 구조로 근본 해결한 경험도 있습니다.</div>
         <div class="sap-result">장애 원인분석/이력관리 체계화 + 근본원인 해결 경험</div>
       </div>
       <div class="sap-card">
@@ -520,8 +520,8 @@
     <div class="sap-grid">
       <div class="sap-card">
         <div class="sap-card-top"><span class="sap-emoji">🔍</span><span class="sap-num">다양한 IT 이슈 분석/원인파악 후 신속 해결 경험</span></div>
-        <div class="sap-title">방화벽 장애 근본 해결 + 채팅방/FAQ 사이트 이중화 설계</div>
-        <div class="sap-desc">방화벽 정책 변경으로 인한 통신 장애를 EC2 Elastic IP 고정 구조로 근본 해결했고, 채팅방/FAQ 사이트 개발 시 관리자 퇴사/서버 장애까지 고려해 서비스 공백이 발생하지 않도록 이중화 설계를 적용했습니다.</div>
+        <div class="sap-title">방화벽 장애 근본 해결 + 채팅방/FAQ 사이트 끊김 없는 운영</div>
+        <div class="sap-desc">방화벽 정책 변경으로 인한 통신 장애를 EC2 Elastic IP 고정 구조로 근본 해결했고, 채팅방/FAQ 사이트는 담당자가 바뀌거나 서버에 문제가 생겨도 안내가 끊기지 않도록 미리 대비해 만들었습니다.</div>
         <div class="sap-result">근본원인 해결형 장애 대응 경험 다수</div>
       </div>
       <div class="sap-card">
@@ -559,6 +559,12 @@
         <div class="sap-title">AWS VPC/방화벽 정책 기반 네트워크 구성 경험</div>
         <div class="sap-desc">AWS VPC/방화벽 정책 기반으로 네트워크를 구성하고, 통신 구간에 SSL을 적용해 HTTPS로 전환한 경험이 있어 사내 네트워크 구성 최적화 업무로 확장 가능합니다.</div>
         <div class="sap-result">네트워크 구성/보안 전환 실무 경험 보유</div>
+      </div>
+      <div class="sap-card">
+        <div class="sap-card-top"><span class="sap-emoji">📺</span><span class="sap-num">우대 : IT 기기 관리 경험</span></div>
+        <div class="sap-title">셋톱박스 등 스트리밍 기기 연결 상태 관리 경험</div>
+        <div class="sap-desc">홈초이스에서 모바일 기기 1대당 최대 3대까지 연결되는 셋톱박스의 연결 상태를 실시간으로 반영하는 상태관리 구조를 설계했습니다. SmartTV/셋톱박스 같은 영상 스트리밍 기기의 특성을 다뤄본 경험이 있어, 화상회의 기기나 AirPlay/Chromecast/AppleTV/Google Cast 같은 IT 기기 운영 업무에도 빠르게 적응할 수 있습니다.</div>
+        <div class="sap-result">스트리밍 기기(셋톱박스) 연결 상태 관리 실무 경험 보유</div>
       </div>
     </div>
   </section>
