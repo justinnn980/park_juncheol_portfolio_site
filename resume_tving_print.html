@@ -167,20 +167,17 @@
 
     <div class="blk-lbl">담당업무</div>
     <ul class="blt">
-      <li>조직도/HW 자산/SW 라이선스가 엑셀 등으로 흩어져 관리되던 문제를 발견해 '조직도/IT 자산관리 시스템'을 기획부터 백엔드(Java/Spring Boot), 프론트엔드(React/TypeScript) 개발, 배포까지 단독 진행</li>
-      <li>실사용 데이터(직원 306명, HW 자산 1,471건, SW 라이선스 617건) 연동, 만료 임박 라이선스 자동 경고 대시보드 구현</li>
-      <li>실제 온보딩 절차를 반영한 4단계 마법사 UI로 입사 프로세스 표준화(사번 자동 채번)</li>
-      <li>Docker 멀티스테이지 빌드 + Render.com REST API 기반 배포 자동화(DB 프로비저닝~배포 코드화), Spring Security로 외부 접근 차단</li>
-      <li>헬프데스크 Form 접수 → Teams 알림 연동, 채팅방/FAQ 사이트 개발(회사 공용 계정으로 운영해 담당자 변경/서버 장애에도 대비)</li>
-      <li>인수인계 프로세스 개선 및 헬프데스크 이력 상세화, IT 자산 비용 절감을 위한 IDC 환경 변경 및 클라우드 전환 실사화</li>
+      <li>엑셀로 흩어진 조직도/HW 자산/SW 라이선스 관리를 자동화하는 '조직도/IT 자산관리 시스템' 기획부터 개발(Java/Spring Boot, React/TypeScript), 배포까지 단독 진행</li>
+      <li>4단계 마법사 UI로 온보딩 프로세스 표준화(사번 자동 채번), Docker/Render API로 배포 자동화</li>
+      <li>헬프데스크 Form 접수 → Teams 알림 연동, 채팅방/FAQ 사이트 개발(관리자 퇴사/서버 장애 대비 예방 설계)</li>
+      <li>IT 자산 비용 절감을 위한 IDC 환경 변경 및 클라우드 전환 실사화</li>
     </ul>
 
-    <div class="blk-lbl">주요성과</div>
+    <div class="blk-lbl">애로사항 및 해결</div>
     <ul class="blt result">
-      <li>엑셀로 흩어져 있던 자산관리를 <strong>PostgreSQL 기반 웹 시스템으로 전환</strong>, 실데이터 2,394건 무손실 연동</li>
-      <li>상태변경 API에서만 간헐적으로 발생한 CORS 오류를 Vite 프록시의 Origin 헤더 전달 방식까지 추적해 근본 해결, 대량 데이터 이관 시 <strong>페이지네이션 상한 누락을 발견해 전량 재이관, 100% 검증</strong></li>
-      <li>채팅방/FAQ 사이트를 만들 때 담당자가 바뀌거나 서버에 문제가 생기는 상황까지 미리 대비해, <strong>문의가 끊기지 않도록 MS Form을 가장 먼저 보이게 구성</strong>해 서비스 공백 예방</li>
-      <li>헬프데스크 이력을 상세화해 <strong>동일 장애 재발 시 신속 대응이 가능한 인수인계 체계</strong> 구축</li>
+      <li>상태변경 API의 간헐적 CORS 오류 → Vite 프록시의 Origin 헤더 전달 방식까지 추적해 근본 해결</li>
+      <li>실데이터 이관 중 <strong>페이지네이션 상한 누락 발견</strong> → 전량 재이관, 100% 검증</li>
+      <li>채팅방/FAQ 사이트 운영자 공백 리스크 → <strong>오류가 적은 MS Form을 먼저 노출</strong>하도록 예방 설계</li>
     </ul>
 
     <div class="stack-row">
@@ -204,20 +201,16 @@
 
     <div class="blk-lbl">담당업무</div>
     <ul class="blt">
-      <li>AWS EC2/S3/Elastic Beanstalk 기반 서버/네트워크 인프라 구축 및 운영</li>
-      <li>방화벽 정책 관련 장애 대응 및 통신 구간 정보보안(SSL/HTTPS) 개선</li>
       <li>OTT 앱 '오초이스' 개발/운영, LG헬로비전/딜라이브 등 복수 사업자 앱 전환 프로젝트 주도</li>
+      <li>AWS EC2/S3/Elastic Beanstalk 기반 서버/네트워크 인프라 구축 및 운영</li>
       <li>콘텐츠 메타데이터 수집 자동화(Python/Selenium/Docker/Cron Job)</li>
-      <li>장애 대응 절차 및 인프라 변경 내역 문서화, 팀 내 공유</li>
     </ul>
 
-    <div class="blk-lbl">주요성과</div>
+    <div class="blk-lbl">애로사항 및 해결</div>
     <ul class="blt result">
-      <li>로드밸런싱 환경에서 Proxy 서버 IP 변경으로 인한 통신 장애를 <strong>EC2 Elastic IP 고정 할당 구조로 근본 해결</strong></li>
-      <li>미암호화 통신 구간에 SSL 인증서를 적용해 <strong>전 구간 HTTPS 전환</strong> 완료</li>
-      <li>가입자 343만 명 규모 LG헬로비전, 매출 3,500억 원 규모 딜라이브 등 <strong>복수 사업자 앱을 오초이스로 전환</strong>하는 프로젝트 2건 완주</li>
-      <li>화면 로딩 구간별 소요 시간을 분석/개선해 <strong>첫 화면 표시 속도(FCP) 39%, 주요 콘텐츠 표시 속도(LCP) 10.8% 개선</strong></li>
-      <li>반복 업무였던 콘텐츠 메타데이터 수집을 자동화해 운영 공수 절감</li>
+      <li>Proxy 서버 IP 변경으로 방화벽에 막혀 통신 장애 발생 → <strong>EC2 Elastic IP 고정으로 근본 해결</strong></li>
+      <li>미암호화 통신 구간 → <strong>SSL 적용, 전 구간 HTTPS 전환</strong></li>
+      <li>복수 사업자 앱 전환 2건 완주(가입자 343만 명 LG헬로비전, 매출 3,500억 딜라이브), <strong>FCP 39%/LCP 10.8% 개선</strong></li>
     </ul>
 
     <div class="stack-row">
@@ -272,7 +265,7 @@
       </tr>
       <tr>
         <td class="req">엔지니어링 기반 헬프데스크</td>
-        <td class="exp">Teams 알림 연동 접수체계, 채팅방/FAQ 사이트 안정 운영(담당자 변경 대비), 인수인계 이력 상세화, 방화벽 장애 근본 해결(EIP 고정), CORS/데이터이관 등 근본원인 추적 다수</td>
+        <td class="exp">Teams 알림 접수체계, 채팅방/FAQ 사이트 예방 설계(MS Form 우선 노출), CORS/데이터이관/방화벽 등 근본원인 추적 다수</td>
       </tr>
       <tr>
         <td class="req">운영 자동화 (AI 기반 API 연동)</td>
@@ -296,7 +289,7 @@
       </tr>
       <tr>
         <td class="req">우대: IT 기기 관리 경험</td>
-        <td class="exp">모바일 기기 1대당 최대 3대까지 연결되는 셋톱박스의 연결 상태를 실시간으로 반영하는 상태관리 구조 설계 (SmartTV/셋톱박스 등 스트리밍 기기 취급 경험)</td>
+        <td class="exp">셋톱박스 연결 상태 실시간 관리 구조 설계(스트리밍 기기 취급 경험)</td>
       </tr>
     </table>
   </div>
