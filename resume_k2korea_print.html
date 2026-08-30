@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 경력기술서 — 케이투코리아 서버 인프라 운영</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --em:   #15803D;
+      --em-l: #DCFCE7;
+      --text: #111827;
+      --sub:  #374151;
+      --muted:#6B7280;
+      --bdr:  #E5E7EB;
+      --bg-h: #F0FDF4;
+    }
+    html { font-size: 12.5px; }
+    body {
+      font-family: 'Noto Sans KR', -apple-system, 'Segoe UI', sans-serif;
+      color: var(--text); background: #fff; line-height: 1.6;
+    }
+    a { color: var(--em); text-decoration: none; }
+
+    .page {
+      width: 210mm;
+      margin: 0 auto;
+      padding: 15mm 17mm;
+      background: #fff;
+    }
+
+    /* HEADER */
+    .hd { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 2px solid var(--text); }
+    .hd-name { font-size: 25px; font-weight: 900; letter-spacing: -1px; line-height: 1.15; margin-bottom: 4px; }
+    .hd-role { font-size: 12.5px; font-weight: 700; color: var(--em); margin-bottom: 8px; }
+    .hd-contacts { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hd-contact { font-size: 11px; color: var(--muted); }
+
+    /* SUMMARY BAR */
+    .sum-bar {
+      display: flex; flex-wrap: wrap; gap: 0;
+      border: 1px solid var(--bdr); border-radius: 6px; overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .sum-item {
+      flex: 1 1 0; min-width: 110px; padding: 8px 12px;
+      border-right: 1px solid var(--bdr); background: var(--bg-h);
+    }
+    .sum-item:last-child { border-right: none; }
+    .sum-n { font-size: 12.5px; font-weight: 900; color: var(--em); }
+    .sum-l { font-size: 9.5px; color: var(--muted); font-weight: 600; margin-top: 1px; }
+
+    /* SECTION */
+    .sec { margin-bottom: 14px; }
+    .sec-title {
+      font-size: 11px; font-weight: 900; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--em);
+      border-bottom: 1px solid var(--bdr);
+      padding-bottom: 5px; margin-bottom: 9px;
+    }
+
+    .meta-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+    .meta-co   { font-size: 13.5px; font-weight: 900; }
+    .meta-period { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .meta-sub { font-size: 10.5px; color: var(--muted); margin-bottom: 8px; }
+
+    .blk-lbl { font-size: 10.5px; font-weight: 800; color: var(--sub); margin: 8px 0 4px; }
+    ul.blt { list-style: none; }
+    ul.blt li {
+      position: relative; padding-left: 12px; font-size: 11.5px; color: var(--sub);
+      line-height: 1.65; margin-bottom: 4px;
+    }
+    ul.blt li::before {
+      content: '-'; position: absolute; left: 0; color: var(--em); font-weight: 900;
+    }
+    ul.blt li:last-child { margin-bottom: 0; }
+    ul.blt.result li::before { content: '▸'; font-size: 9px; top: 1px; }
+    ul.blt strong { color: var(--text); font-weight: 700; }
+
+    .stack-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+    .stack-tag { padding: 3px 8px; border-radius: 4px; background: var(--bg-h); border: 1px solid var(--em-l); color: var(--em); font-size: 10px; font-weight: 700; }
+
+    /* SKILL GROUPS */
+    .skill-groups { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .skill-group { border: 1px solid var(--bdr); border-radius: 6px; padding: 8px 10px; }
+    .skill-group-t { font-size: 10px; font-weight: 800; color: var(--em); margin-bottom: 4px; }
+    .skill-group-v { font-size: 10.5px; color: var(--sub); line-height: 1.6; }
+
+    /* MATCH TABLE */
+    .match-table { width: 100%; border-collapse: collapse; }
+    .match-table th, .match-table td {
+      border: 1px solid var(--bdr); padding: 6px 9px; font-size: 10.5px; text-align: left; vertical-align: top;
+    }
+    .match-table th {
+      background: var(--bg-h); color: var(--em); font-weight: 800; font-size: 10px;
+      letter-spacing: 0.3px;
+    }
+    .match-table td.req { font-weight: 700; color: var(--text); width: 34%; }
+    .match-table td.exp { color: var(--sub); line-height: 1.55; }
+
+    /* EDU */
+    .edu-row { display: flex; justify-content: space-between; padding: 3.5px 0; border-bottom: 1px solid var(--bdr); font-size: 11.5px; }
+    .edu-row:last-child { border-bottom: none; }
+    .edu-title { font-weight: 700; }
+    .edu-date  { color: var(--muted); font-size: 10.5px; flex-shrink: 0; margin-left: 8px; }
+
+    /* MOTIVATION */
+    .mot-p { font-size: 11px; color: var(--sub); line-height: 1.75; margin-bottom: 8px; }
+    .mot-p:last-child { margin-bottom: 0; }
+    .mot-p strong { color: var(--text); font-weight: 700; }
+
+    /* PRINT */
+    @media print {
+      html { font-size: 11.5px; }
+      body { background: #fff; }
+      .page { margin: 0; padding: 12mm 14mm; width: 100%; }
+      .no-print { display: none !important; }
+    }
+
+    /* SCREEN */
+    @media screen {
+      body { background: #e5e7eb; padding: 32px 0; }
+      .page { box-shadow: 0 2px 20px rgba(0,0,0,0.12); }
+      .print-btn {
+        position: fixed; top: 20px; right: 20px; z-index: 100;
+        padding: 10px 20px; background: var(--em); color: #fff;
+        border: none; border-radius: 8px; font-size: 14px; font-weight: 700;
+        cursor: pointer; box-shadow: 0 4px 12px rgba(21,128,61,0.3);
+        font-family: inherit;
+      }
+      .print-btn:hover { background: #14532D; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨 PDF 저장 / 인쇄</button>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="hd">
+    <div class="hd-name">박준철 경력기술서</div>
+    <div class="hd-role">케이투코리아(주) 서버 인프라 운영 지원 (계약직)</div>
+    <div class="hd-contacts">
+      <span class="hd-contact">📞 010-2538-1519</span>
+      <span class="hd-contact">✉ justinnn980@gmail.com</span>
+      <span class="hd-contact">🌐 <a href="https://park-juncheol-portfolio-site.onrender.com/resume_k2korea.html">포트폴리오 상세보기 →</a></span>
+    </div>
+  </div>
+
+  <!-- 경력요약 -->
+  <div class="sum-bar">
+    <div class="sum-item"><div class="sum-n">AWS EC2/S3</div><div class="sum-l">Elastic Beanstalk 실서비스 운영</div></div>
+    <div class="sum-item"><div class="sum-n">방화벽/SSL</div><div class="sum-l">통신 장애 근본 해결/보안 전환</div></div>
+    <div class="sum-item"><div class="sum-n">IDC → 클라우드</div><div class="sum-l">전환 가능성 직접 실사</div></div>
+    <div class="sum-item"><div class="sum-n">2,394건</div><div class="sum-l">자산관리 시스템 자체 개발/이관</div></div>
+    <div class="sum-item"><div class="sum-n">Python/Docker</div><div class="sum-l">운영 자동화</div></div>
+  </div>
+
+  <!-- 경력사항 -->
+  <div class="sec">
+    <div class="sec-title">경력사항</div>
+
+    <div class="meta-row">
+      <span class="meta-co">아우토크립트 (그린맨파워 파견)</span>
+      <span class="meta-period">IT 인프라 / 자산관리 담당</span>
+    </div>
+    <div class="meta-sub">사내 IT 인프라 운영 및 자산관리 시스템 자체 개발</div>
+    <ul class="blt result">
+      <li><strong>IT 자산 비용 절감을 위한 IDC 환경 변경 및 클라우드 전환 가능성 실사</strong> 직접 수행</li>
+      <li>엑셀로 흩어진 조직도/IT 자산 현황을 <strong>Java/Spring Boot/React 시스템</strong>으로 직접 개발, 실사용 데이터 2,394건 이관</li>
+      <li>헬프데스크 Form 접수를 <strong>Power Automate/Teams Webhook</strong> 연동으로 담당자 자동 전달</li>
+      <li>입/퇴사 시 계정 생성/회수 자동화로 정보보안 리스크 축소, SW 라이선스 관리 사내사이트 구축</li>
+      <li>Docker/Render API로 배포 자동화, CORS 오류/데이터 이관 누락 직접 원인 추적 및 해결</li>
+    </ul>
+
+    <div class="meta-row" style="margin-top:10px;">
+      <span class="meta-co">(주)홈초이스</span>
+      <span class="meta-period">2024.02 ~ 2025.11 (1년 10개월)</span>
+    </div>
+    <div class="meta-sub">TECH사업실 / OTT 서비스 "오초이스" 앱/서버 인프라 운영</div>
+    <ul class="blt result">
+      <li>로드밸런싱 환경에서 방화벽 정책 변경으로 발생한 통신 장애를 <strong>EC2 Elastic IP 고정 구조로 재설계해 근본 해결</strong></li>
+      <li>미암호화 통신 구간에 SSL 인증서 적용, <strong>전 구간 HTTPS 전환</strong> 완료</li>
+      <li>AWS EC2/S3/Elastic Beanstalk 기반 인프라 운영, Spring Boot REST API 서버 개발</li>
+      <li>Quartz 배치로 5분 주기 잡 6개 구성해 콘텐츠 발행~배포 자동화, MySQL/DynamoDB 데이터 처리</li>
+      <li>LG헬로비전/딜라이브 등 DRM 방식이 다른 복수 파트너사 시스템을 하나의 앱으로 통합 마이그레이션 2건</li>
+    </ul>
+
+    <div class="stack-row">
+      <span class="stack-tag">AWS EC2</span>
+      <span class="stack-tag">AWS S3</span>
+      <span class="stack-tag">Elastic Beanstalk</span>
+      <span class="stack-tag">IDC/클라우드 전환</span>
+      <span class="stack-tag">방화벽/네트워크</span>
+      <span class="stack-tag">SSL/HTTPS</span>
+      <span class="stack-tag">Docker</span>
+      <span class="stack-tag">Power Automate</span>
+      <span class="stack-tag">Python</span>
+      <span class="stack-tag">Selenium</span>
+      <span class="stack-tag">MySQL</span>
+      <span class="stack-tag">DynamoDB</span>
+    </div>
+  </div>
+
+  <!-- 보유 기술 -->
+  <div class="sec">
+    <div class="sec-title">보유 기술 / 역량</div>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <div class="skill-group-t">클라우드/인프라</div>
+        <div class="skill-group-v">AWS EC2/S3/Elastic Beanstalk, IDC 환경 변경/클라우드 전환 실사, 방화벽 정책 대응</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-t">정보보안/자동화</div>
+        <div class="skill-group-v">SSL/HTTPS 전환, Docker 배포 자동화, Power Automate/Teams Webhook 연동</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-t">백엔드/데이터</div>
+        <div class="skill-group-v">Java/Spring Boot REST API, Python/Selenium, MySQL, DynamoDB</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 직무 적합성 -->
+  <div class="sec">
+    <div class="sec-title">직무 적합성 (케이투코리아 서버 인프라 운영 요건 매칭)</div>
+    <table class="match-table">
+      <tr><th>공고 요건</th><th>보유 경험</th></tr>
+      <tr>
+        <td class="req">서버 및 인프라 운영</td>
+        <td class="exp">AWS EC2/S3/Elastic Beanstalk 인프라 운영, 방화벽 정책 변경 장애를 EC2 Elastic IP 고정 구조로 재설계해 근본 해결</td>
+      </tr>
+      <tr>
+        <td class="req">클라우드 인프라 운영</td>
+        <td class="exp">IT 자산 비용 절감을 위한 IDC 환경 변경 및 클라우드 전환 가능성 실사 직접 수행 — 귀사의 온프레미스/AWS/Oracle Cloud 하이브리드 구조와 동일 방향</td>
+      </tr>
+      <tr>
+        <td class="req">IT 솔루션 운영</td>
+        <td class="exp">엑셀 산재 자산관리를 Java/Spring Boot/React 시스템으로 직접 개발/운영, 헬프데스크 Form-Teams 자동 연동</td>
+      </tr>
+      <tr>
+        <td class="req">우대: IT인프라 관련 자격증 보유자, 클라우드/서버 운영 경험자</td>
+        <td class="exp">AWS 클라우드 인프라 실무 운영 경험, 정보통신산업진흥원 인공지능 기본과정 등 자기주도 학습으로 IT 이해도 확장</td>
+      </tr>
+      <tr>
+        <td class="req">원활한 커뮤니케이션 및 문제 해결 능력</td>
+        <td class="exp">헬프데스크로 사용자 문의를 직접 받아 처리, 증상이 아닌 원인 조건까지 구조 단위로 추적해 재발 방지</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 지원동기 -->
+  <div class="sec">
+    <div class="sec-title">지원동기</div>
+    <p class="mot-p">귀사가 데이터베이스는 온프레미스에 두고 Web/WAS는 AWS와 Oracle Cloud로 나눠 운영하는 <strong>하이브리드 클라우드 구조</strong>로 K.VILLAGE 같은 실서비스를 운영하고 있다는 점이, 아우토크립트에서 겪었던 IDC/클라우드 전환 판단과 방향이 같다고 느꼈습니다.</p>
+    <p class="mot-p">매장 1,000여 개와 통합 온라인몰을 함께 떠받치는 인프라는 작은 장애도 매출 손실로 바로 이어지는 만큼, 증상만 지우지 않고 원인을 구조 단위로 추적해 재발을 막아온 방식을 그대로 적용해 안정적인 서버/클라우드 인프라 운영에 기여하고 싶습니다.</p>
+  </div>
+
+  <!-- 학력 / 교육 / 저서 -->
+  <div class="sec">
+    <div class="sec-title">학력 / 교육 / 저서</div>
+    <div class="edu-row">
+      <div><div class="edu-title">대전대학교 컴퓨터공학과 졸업 / 복수전공: 모빌리티AI/SW융합전공</div></div>
+    </div>
+    <div class="edu-row">
+      <div><div class="edu-title">정보통신산업진흥원 인공지능 기본과정 수료 / 네이버 부스트코스 &lt;DATA SCIENCE&gt; 코칭스터디 2023 수료</div></div>
+    </div>
+    <div class="edu-row">
+      <div><div class="edu-title">『개발자가 되기 위해 꼭 알아야 하는 IT 용어』 공동 저자 &nbsp;<a href="https://www.yes24.com/Product/Goods/109711067" style="font-size:10px;">(yes24)</a></div></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
