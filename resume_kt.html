@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 포트폴리오 — KT NW 인프라운용 지원</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --em:   #E4032E;
+      --em-l: #FBCFD8;
+      --em-d: #A80020;
+      --bg:   #120708;
+      --card: #1C1012;
+      --card2:#241518;
+      --bdr:  #3A2126;
+      --text: #F9FAFB;
+      --sub:  #DBCED0;
+      --muted:#A6898D;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans KR', 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: var(--em); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(18,7,8,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bdr);
+      padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 52px;
+    }
+    .nav-name { font-weight: 800; font-size: 15px; }
+    .nav-tag { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: rgba(228,3,46,0.15); color: var(--em); margin-left: 8px; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px; margin: 0 auto; padding: 64px 40px 48px;
+      display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: start;
+    }
+    .hero-badge {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      background: rgba(228,3,46,0.12); border: 1px solid rgba(228,3,46,0.28);
+      color: var(--em); font-size: 12px; font-weight: 700; margin-bottom: 16px;
+    }
+    .hero-name { font-size: 44px; font-weight: 900; line-height: 1.1; margin-bottom: 8px; letter-spacing: -1px; }
+    .hero-role { font-size: 18px; font-weight: 700; color: var(--em); margin-bottom: 16px; }
+    .hero-lead { font-size: 14.5px; color: var(--sub); line-height: 1.85; margin-bottom: 28px; max-width: 480px; }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      margin-bottom: 28px; background: var(--bdr); border-radius: 10px; overflow: hidden;
+    }
+    .stat { background: var(--card); padding: 16px 12px; text-align: center; }
+    .stat-num   { font-size: 14px; font-weight: 900; color: var(--em); }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+    .hero-contacts { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-contact  { font-size: 13px; color: var(--muted); }
+
+    /* CODE PANEL */
+    .code-panel { background: #0B0405; border: 1px solid var(--bdr); border-radius: 12px; overflow: hidden; }
+    .code-header { background: var(--card); padding: 10px 16px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--bdr); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; } .dot-y { background: #FFBD2E; } .dot-g { background: #28C840; }
+    .code-filename { font-size: 12px; color: var(--muted); margin-left: 6px; font-family: 'JetBrains Mono', monospace; }
+    .code-body { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.85; }
+    .c-cmt { color: #7A5A5F; }
+    .c-kw  { color: #FB7185; }
+    .c-str { color: #FBCFD8; }
+    .c-num { color: #FBBF24; }
+    .c-fn  { color: #FDA4AF; }
+    .c-var { color: #F9FAFB; }
+    .c-prop{ color: #FBCFD8; }
+    .c-type{ color: #38BDF8; }
+
+    /* SECTION */
+    .section { max-width: 1100px; margin: 0 auto; padding: 56px 40px; border-top: 1px solid var(--bdr); }
+    .sec-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--em); margin-bottom: 6px; }
+    .sec-title { font-size: 26px; font-weight: 900; margin-bottom: 12px; }
+    .sec-desc { font-size: 13px; color: var(--muted); margin-bottom: 28px; line-height: 1.7; }
+
+    /* SKILL SECTION */
+    .sk-group { margin-bottom: 28px; }
+    .sk-group-title { font-size: 12px; font-weight: 800; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+    .sk-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .sk-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 10px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 14px; transition: border-color .2s; }
+    .sk-card:hover { border-color: rgba(228,3,46,0.35); }
+    .sk-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .sk-name { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+    .sk-level { font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 10px; display: inline-block; margin-bottom: 5px; }
+    .sk-level.prod { background: rgba(228,3,46,0.15); color: var(--em); }
+    .sk-desc { font-size: 12px; color: var(--sub); line-height: 1.55; }
+    .sk-cards-2 { grid-template-columns: repeat(2, 1fr); }
+    .sk-cards-4 { grid-template-columns: repeat(4, 1fr); }
+
+    /* MATCH / PROBLEM CARDS */
+    .prob-list { display: grid; gap: 18px; }
+    .prob-card {
+      background: var(--card); border: 1px solid var(--bdr);
+      border-left: 3px solid var(--em); border-radius: 0 12px 12px 0; padding: 22px 26px;
+    }
+    .prob-num   { font-size: 11px; font-weight: 800; color: var(--em); letter-spacing: 1px; margin-bottom: 8px; }
+    .prob-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+    .prob-flow  { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .pf-tag    { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; background: var(--card2); color: var(--sub); }
+    .pf-arrow  { color: var(--em); font-size: 14px; }
+    .pf-result { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; background: rgba(228,3,46,0.15); color: #FBCFD8; }
+    .prob-desc { font-size: 13px; color: var(--sub); line-height: 1.75; }
+    .prob-desc strong { color: var(--text); font-weight: 700; }
+
+    /* MOTIVATION */
+    .mot-box { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px 24px; font-size: 13.5px; color: var(--sub); line-height: 1.8; margin-bottom: 12px; }
+    .mot-box strong { color: var(--text); }
+
+    /* CAREER */
+    .career-block { margin-bottom: 32px; }
+    .career-head  { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+    .career-co    { font-size: 17px; font-weight: 900; }
+    .career-period{ font-size: 12px; color: var(--muted); font-weight: 600; }
+    .career-role  { font-size: 13px; font-weight: 700; color: var(--em); margin-bottom: 6px; }
+    .career-desc  { font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
+    .ul { list-style: none; display: grid; gap: 6px; }
+    .ul li { font-size: 13px; color: var(--sub); padding-left: 16px; position: relative; line-height: 1.65; }
+    .ul li::before { content: '▸'; position: absolute; left: 0; color: var(--em); font-size: 9px; top: 4px; }
+    .ul li strong { color: var(--text); font-weight: 700; }
+
+    /* VALUES */
+    .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 8px; }
+    .value-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 18px 20px; }
+    .value-card.active { border-color: var(--em); background: rgba(228,3,46,0.06); }
+    .value-kr { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+    .value-desc { font-size: 12px; color: var(--sub); line-height: 1.6; }
+    .value-pick { display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 700; color: var(--em); }
+
+    footer { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--bdr); }
+
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .sk-cards, .sk-cards-4 { grid-template-columns: 1fr 1fr; }
+      .value-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">박준철<span class="nav-tag">KT NW인프라운용 지원</span></div>
+  <div class="nav-links">
+    <a href="#match">직무 매칭</a>
+    <a href="#skills">기술 스택</a>
+    <a href="#problem">문제 해결</a>
+    <a href="#experience">경력</a>
+    <a href="#values">핵심가치</a>
+    <a href="#contact">연락처</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-badge">KT / NW 인프라운용 지원</div>
+    <div class="hero-name">박준철</div>
+    <div class="hero-role">서버/네트워크 인프라 운용 + AX 자동화 도구 활용</div>
+    <div class="hero-lead">
+      방화벽 정책 변경으로 인한 통신 장애를 <strong style="color:var(--text);">구조적으로 재발 방지</strong>하고,<br/>
+      IDC/클라우드 전환 판단, 자동화 도구 기반 운용 데이터 관리까지<br/>
+      실무로 다뤄본 경험이 있습니다. AI 도구를 활용할 때도<br/>
+      결과를 그대로 쓰지 않고 직접 검증/조정해 완성까지 끌고 갑니다.
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">방화벽 장애</div>
+        <div class="stat-label">Elastic IP 고정<br/>구조로 근본 해결</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">IDC → 클라우드</div>
+        <div class="stat-label">전환 가능성<br/>직접 실사</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">자동화 2건</div>
+        <div class="stat-label">Python/Docker/Cron<br/>Power Automate</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">AI 도구 상시 활용</div>
+        <div class="stat-label">Claude Code, Codex<br/>결과 직접 검증</div>
+      </div>
+    </div>
+    <div class="hero-contacts">
+      <span class="hero-contact">📞 010-2538-1519</span>
+      <span class="hero-contact">✉ justinnn980@gmail.com</span>
+      <span class="hero-contact">📝 <a href="https://justinnn980.tistory.com">기술 블로그</a></span>
+    </div>
+  </div>
+
+  <!-- CODE PANEL -->
+  <div class="code-panel">
+    <div class="code-header">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="code-filename">nw_incident_fix.py</span>
+    </div>
+    <div class="code-body">
+<span class="c-cmt"># 방화벽 정책 변경 → 통신 두절</span>
+<span class="c-cmt"># 재연결이 아니라 재발하지 않는 구조로</span>
+
+<span class="c-kw">def</span> <span class="c-fn">fix_proxy_disconnect</span>(<span class="c-var">instance</span>):
+    <span class="c-var">eip</span> = <span class="c-fn">allocate_elastic_ip</span>()
+    <span class="c-fn">associate</span>(<span class="c-var">instance</span>, <span class="c-var">eip</span>)
+    <span class="c-fn">update_firewall_rule</span>(<span class="c-var">eip</span>)
+    <span class="c-fn">enforce_https</span>(<span class="c-var">instance</span>)  <span class="c-cmt"># SSL 적용</span>
+    <span class="c-kw">return</span> <span class="c-str">"reconfigured, no recurrence"</span>
+
+<span class="c-cmt"># 반복 운용 업무 자동화</span>
+<span class="c-fn">automate</span>(<span class="c-str">"helpdesk_form"</span>, via=<span class="c-str">"PowerAutomate"</span>)
+<span class="c-fn">automate</span>(<span class="c-str">"content_collect"</span>, via=<span class="c-str">"Selenium+Cron"</span>)
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 00: 직무 매칭 -->
+<div class="section" id="match">
+  <div class="sec-label">Job Posting Match</div>
+  <div class="sec-title">수행업무 / 우대사항 매칭</div>
+  <div class="sec-desc">KT NW 인프라운용 채용공고(수행업무 / 우대사항)에 보유 경험을 매칭했습니다.</div>
+  <div class="prob-list">
+
+    <div class="prob-card">
+      <div class="prob-num">수행업무 / E2E 품질/성능 모니터링, 네트워크 안정 운용</div>
+      <div class="prob-title">방화벽 정책 변경 장애를 구조적으로 재발 방지</div>
+      <div class="prob-flow">
+        <span class="pf-tag">통신 장애 발생</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Proxy IP 변경 이력 확인</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">Elastic IP 고정 구조로 재구성</span>
+      </div>
+      <div class="prob-desc">
+        방화벽 정책이 바뀔 때마다 통신이 끊기는 장애를 임시 재연결이 아니라 IP를 고정하는 구조로 근본 해결하고, SSL 인증서 적용으로 통신 구간 보안까지 함께 개선했습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">수행업무 / 자동화/AX 도구 기반 운용 데이터 관리 및 업무 효율화</div>
+      <div class="prob-title">반복되는 운용 업무를 자동화 도구로 직접 전환</div>
+      <div class="prob-flow">
+        <span class="pf-tag">반복 콘텐츠 수집/헬프데스크 접수</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Python/Selenium/Cron, Power Automate</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">수작업 제거, 처리 속도 향상</span>
+      </div>
+      <div class="prob-desc">
+        콘텐츠 메타데이터 수집을 Python/Selenium/Docker/Cron으로 자동화했고, 헬프데스크 Form 접수는 Power Automate/Teams Webhook으로 자동 연동해 반복 업무를 없앴습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">수행업무 / 데이터 기반 운영관리, 변경 작업 전후 서비스 영향도 분석</div>
+      <div class="prob-title">IDC 환경 변경/클라우드 전환 실사, 데이터 기반 판단</div>
+      <div class="prob-flow">
+        <span class="pf-tag">IT 자산 비용 절감 필요</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">워크로드별 온프레미스/클라우드 구분</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">전환 실사 및 자산 현황 데이터화</span>
+      </div>
+      <div class="prob-desc">
+        IT 자산 비용 절감을 위해 IDC 환경 변경과 클라우드 전환 가능성을 실사했고, 판단 근거가 될 자산 현황을 시스템으로 직접 구축해 실사용 데이터 2,394건을 데이터화했습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">우대사항 / AX 기술(AI, Cloud, Data, 보안 등)에 대한 관심과 이해</div>
+      <div class="prob-title">AI 도구를 기획~구현~운영 전 과정에 상시 활용</div>
+      <div class="prob-flow">
+        <span class="pf-tag">Claude Code로 코드/설계 초안 생성</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">직접 검증/조정</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">FAQ 챗봇/자산관리 시스템 완성</span>
+      </div>
+      <div class="prob-desc">
+        AI 도구로 FAQ 챗봇과 자산관리 시스템 초안을 빠르게 만들고, 이중화 구조나 CORS 오류처럼 실제로 돌아가야 하는 부분은 직접 판단하고 고쳐서 완성까지 끌고 갔습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">우대사항 / 서로 다른 이해관계자를 조율하며 원활하게 소통</div>
+      <div class="prob-title">복수 파트너사/사용자 대응 커뮤니케이션 경험</div>
+      <div class="prob-flow">
+        <span class="pf-tag">DRM/인증 체계가 다른 복수 파트너사</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">헬프데스크 사용자 문의 직접 대응</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">조율/커뮤니케이션 실무 경험</span>
+      </div>
+      <div class="prob-desc">
+        LG헬로비전/딜라이브 등 서로 다른 시스템을 쓰는 복수 파트너사를 동시에 대응했고, 헬프데스크로 사용자 문의를 직접 받아 처리하며 커뮤니케이션 경험을 쌓았습니다.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 01: 기술 스택 -->
+<div class="section" id="skills">
+  <div class="sec-label">Section 01</div>
+  <div class="sec-title">기술 스택</div>
+
+  <div class="sk-group">
+    <div class="sk-group-title">네트워크/인프라</div>
+    <div class="sk-cards sk-cards-2">
+      <div class="sk-card">
+        <div class="sk-icon">🌐</div>
+        <div>
+          <div class="sk-name">방화벽/통신 장애 대응</div>
+          <span class="sk-level prod">근본 원인 해결 실무</span>
+          <div class="sk-desc">방화벽 정책 변경발 통신 장애를 Elastic IP 고정 구조로 재구성, 재발 방지.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">🏗️</div>
+        <div>
+          <div class="sk-name">IDC / 클라우드 전환 판단</div>
+          <span class="sk-level prod">전환 실사 수행</span>
+          <div class="sk-desc">온프레미스/클라우드 워크로드 구분, IDC 환경 변경 및 전환 가능성 실사.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sk-group">
+    <div class="sk-group-title">자동화 / AX 도구 활용</div>
+    <div class="sk-cards sk-cards-4">
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">Power Automate</div>
+          <span class="sk-level prod">운용 업무 자동화</span>
+          <div class="sk-desc">헬프데스크 Form-Teams 자동 연동.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">Python / Selenium</div>
+          <span class="sk-level prod">데이터 수집 자동화</span>
+          <div class="sk-desc">반복 데이터 수집을 Docker/Cron으로 정기 실행.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">Claude Code / Codex</div>
+          <span class="sk-level prod">AI 도구 상시 활용</span>
+          <div class="sk-desc">코드/설계 초안 생성 후 직접 검증/조정.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">Java / Spring Boot</div>
+          <span class="sk-level prod">시스템 자체 개발</span>
+          <div class="sk-desc">자산관리 시스템, REST API 서버 직접 구현.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sk-group" style="margin-bottom:0;">
+    <div class="sk-group-title">보안 / 데이터</div>
+    <div class="sk-cards sk-cards-2">
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">SSL / HTTPS 전환</div>
+          <span class="sk-level prod">보안 정책 적용</span>
+          <div class="sk-desc">통신 구간 암호화 전환, 정보보안 리스크 축소.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">MySQL / DynamoDB</div>
+          <span class="sk-level prod">실서비스 데이터 처리</span>
+          <div class="sk-desc">서비스 데이터 및 배치 파이프라인 연동 데이터 구조 운영.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 02: 문제 해결 -->
+<div class="section" id="problem">
+  <div class="sec-label">Section 02</div>
+  <div class="sec-title">직접 해결한 인프라/운용 문제들</div>
+  <div class="prob-list">
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 01</div>
+      <div class="prob-title">방화벽 정책 변경 → 통신 두절, 임시조치가 아닌 구조 재설계</div>
+      <div class="prob-flow">
+        <span class="pf-tag">통신 장애 접수</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Proxy 서버 IP 변경 이력 확인</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">EC2 Elastic IP 고정 구조 재구성</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">재발 방지 구조 확보</span>
+      </div>
+      <div class="prob-desc">
+        로드밸런싱 환경에서 Proxy 서버 IP가 바뀌며 방화벽에 막혀 통신이 끊기는 장애를 <strong>재연결이 아닌 재발하지 않는 구조</strong>로 근본적으로 정리하고, SSL 인증서 적용으로 전 구간 HTTPS 전환을 완료했습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 02</div>
+      <div class="prob-title">FAQ 챗봇 장애 리스크 — AI 결과물을 검증해 이중화 구조로 재설계</div>
+      <div class="prob-flow">
+        <span class="pf-tag">AI로 챗봇 초안 생성</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">관리자 공백/장애 리스크 직접 판단</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">MS Form 우선 노출 이중화 구조</span>
+      </div>
+      <div class="prob-desc">
+        AI가 만든 단순 매칭형 챗봇 초안을 그대로 쓰지 않고, 관리자 퇴사/서버 장애 상황을 직접 고려해 <strong>오류가 적은 채널이 우선 노출되는 이중화 구조</strong>로 다시 설계했습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 03</div>
+      <div class="prob-title">엑셀 산재 자산관리 — 데이터화해 클라우드 전환 판단 근거 확보</div>
+      <div class="prob-flow">
+        <span class="pf-tag">현황 데이터 부재</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Java/Spring Boot/React 시스템 개발</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">실사용 데이터 2,394건 이관</span>
+      </div>
+      <div class="prob-desc">
+        IDC/클라우드 전환을 판단하려면 현황 데이터가 먼저 필요하다는 걸 파악하고, 엑셀 산재 자산관리를 <strong>데이터베이스 기반 시스템</strong>으로 직접 전환해 판단 근거를 확보했습니다.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 03: 경력 -->
+<div class="section" id="experience">
+  <div class="sec-label">Section 03</div>
+  <div class="sec-title">경력</div>
+
+  <div class="career-block">
+    <div class="career-head">
+      <span class="career-co">아우토크립트</span>
+      <span class="career-period">그린맨파워 파견</span>
+    </div>
+    <div class="career-role">IT 인프라 / 자산관리 담당</div>
+    <div class="career-desc">IDC/클라우드 전환 실사, 자산관리 시스템 자체 개발, 헬프데스크 자동화</div>
+    <ul class="ul">
+      <li><strong>IT 자산 비용 절감을 위한 IDC 환경 변경 및 클라우드 전환 가능성 실사</strong> 직접 수행</li>
+      <li>엑셀 산재 자산관리를 Java/Spring Boot/React 시스템으로 전환, 실사용 데이터 2,394건 이관</li>
+      <li>AI 도구로 FAQ 챗봇 개발, 관리자 공백/서버 장애 대비 이중화 구조 직접 설계</li>
+      <li>헬프데스크 Form 접수를 Power Automate/Teams Webhook으로 연동해 자동 전달</li>
+      <li>Docker/Render API로 배포 자동화, CORS 오류/데이터 이관 누락 직접 원인 추적 및 해결</li>
+    </ul>
+  </div>
+
+  <div class="career-block">
+    <div class="career-head">
+      <span class="career-co">(주)홈초이스</span>
+      <span class="career-period">2024.02 ~ 2025.11 / 1년 10개월</span>
+    </div>
+    <div class="career-role">TECH사업실 / 서버 인프라 운영 및 백엔드 개발</div>
+    <div class="career-desc">OTT 서비스 "오초이스" 앱/서버 인프라 운영</div>
+    <ul class="ul">
+      <li>방화벽 정책 변경으로 인한 통신 장애를 <strong>EC2 Elastic IP 고정 구조</strong>로 재구성해 근본 해결</li>
+      <li>SSL 인증서 적용으로 전 구간 HTTPS 전환, AWS EC2/S3/Elastic Beanstalk 인프라 운영</li>
+      <li>콘텐츠 메타데이터 수집을 Python/Selenium/Docker/Cron으로 자동화</li>
+      <li>Spring Boot REST API 서버 개발, Quartz 배치로 5분 주기 잡 6개 구성해 자동화</li>
+      <li>LG헬로비전/딜라이브 등 DRM 방식이 다른 복수 파트너사 시스템 통합 마이그레이션 2건 수행</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 04: 핵심가치 -->
+<div class="section" id="values">
+  <div class="sec-label">Section 04</div>
+  <div class="sec-title">KT Professionalism</div>
+  <div class="sec-desc">고객 / 존중 / 책임 — 전문성 기반 과감한 실행으로 성과를 창출하는 KT의 핵심가치입니다.</div>
+  <div class="value-grid">
+    <div class="value-card">
+      <div class="value-kr">고객</div>
+      <div class="value-desc">고객을 가장 먼저 생각하고 새로운 경험을 제시.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-kr">존중</div>
+      <div class="value-desc">동료를 존중하며 함께 성장, 공동의 목표를 달성.</div>
+    </div>
+    <div class="value-card active">
+      <div class="value-kr">책임</div>
+      <div class="value-desc">방화벽 장애를 임시조치로 덮지 않고, 이용자 입장에서 원인을 끝까지 추적해 재발하지 않는 구조로 해결한 경험과 맞닿아 있습니다.</div>
+      <span class="value-pick">✓ 본인 경험과 가장 맞닿은 가치</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 05: 지원동기 -->
+<div class="section" id="motivation">
+  <div class="sec-label">Section 05</div>
+  <div class="sec-title">지원동기</div>
+  <div class="mot-box">
+    KT가 AICT 컴퍼니로 전환하며 AI 코어 오케스트레이터, Infra-Bot 같은 자동화/AX 도구로 네트워크 운용 방식 자체를 바꾸고 있는 지금, 저는 인프라 현황을 데이터로 남기고 반복 업무를 자동화 도구로 처리하며 장애 원인을 구조 단위로 추적해온 경험을 이 직무에 바로 적용하고 싶습니다. AI 도구를 활용할 때도 결과를 그대로 쓰지 않고 직접 검증/조정해 완성까지 끌고 가는 태도로, 네트워크 품질과 안정성을 지키는 데 기여하겠습니다.
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+  <div class="sec-label">Contact</div>
+  <div class="sec-title">연락처</div>
+  <div style="display:flex; gap:32px; flex-wrap:wrap; background:var(--card); border:1px solid var(--bdr); border-radius:12px; padding:24px;">
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">전화</div>
+      <div style="font-weight:700;">010-2538-1519</div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">이메일</div>
+      <div style="font-weight:700;">justinnn980@gmail.com</div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">블로그</div>
+      <div style="font-weight:700;"><a href="https://justinnn980.tistory.com">justinnn980.tistory.com</a></div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">도서</div>
+      <div style="font-weight:700;"><a href="https://www.yes24.com/Product/Goods/109711067">개발자가 꼭 알아야 하는 IT 용어</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>박준철 포트폴리오 / KT NW 인프라운용 지원</footer>
+
+</body>
+</html>
