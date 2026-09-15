@@ -1,0 +1,479 @@
+<title>박준철 코어뱅킹 포트폴리오</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700;900&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --paper: #f6f1e2;
+    --paper-raised: #efe7d2;
+    --line: #d9cdaa;
+    --line-strong: #b9a97b;
+    --ink: #23281f;
+    --ink-soft: #5b5748;
+    --green: #16513f;
+    --green-deep: #0e3b2d;
+    --brass: #9c6d1e;
+    --stamp-red: #8c3324;
+    --shadow: rgba(35, 40, 31, 0.12);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #161a16;
+      --paper-raised: #1d221c;
+      --line: #34392d;
+      --line-strong: #4a4f3c;
+      --ink: #e9e2cc;
+      --ink-soft: #a9a48e;
+      --green: #4fb996;
+      --green-deep: #7fd4b3;
+      --brass: #d7a94a;
+      --stamp-red: #d9705a;
+      --shadow: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #161a16;
+    --paper-raised: #1d221c;
+    --line: #34392d;
+    --line-strong: #4a4f3c;
+    --ink: #e9e2cc;
+    --ink-soft: #a9a48e;
+    --green: #4fb996;
+    --green-deep: #7fd4b3;
+    --brass: #d7a94a;
+    --stamp-red: #d9705a;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--green); color: var(--paper); }
+
+  .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── Ledger cover ── */
+  .cover {
+    padding: 56px 0 40px;
+    border-bottom: 3px double var(--line-strong);
+  }
+  .cover-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+  }
+  .cover-label span:last-child { color: var(--brass); }
+  .cover h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 2.9rem);
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+  .cover-role {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    color: var(--green);
+    font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+    margin: 0 0 18px;
+  }
+  .cover-desc {
+    max-width: 60ch;
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    margin: 0 0 30px;
+  }
+  .cover-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    padding: 10px 18px;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 3px;
+    color: var(--ink);
+    text-decoration: none;
+    background: var(--paper-raised);
+    transition: border-color .15s, color .15s;
+  }
+  .btn:hover { border-color: var(--green); color: var(--green); }
+  .btn.primary { background: var(--green); color: var(--paper); border-color: var(--green); }
+  .btn.primary:hover { background: var(--green-deep); border-color: var(--green-deep); color: var(--paper); }
+
+  /* ── Ledger balance strip ── */
+  .balances {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--line);
+  }
+  .bal {
+    padding: 22px 16px;
+    text-align: center;
+    border-right: 1px solid var(--line);
+  }
+  .bal:last-child { border-right: none; }
+  .bal-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--green);
+  }
+  .bal-label {
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  /* ── Sections ── */
+  section { padding: 52px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 30px;
+  }
+  .sec-no {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--brass);
+    border: 1px solid var(--brass);
+    border-radius: 2px;
+    padding: 2px 7px;
+  }
+  .sec-title {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+  .sec-sub { color: var(--ink-soft); font-size: 0.85rem; }
+
+  /* ── Entry (career) ── */
+  .entry {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 20px;
+    padding: 20px 0;
+    border-top: 1px dashed var(--line);
+  }
+  .entry:first-child { border-top: none; }
+  .entry-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    padding-top: 3px;
+  }
+  .entry-org { font-weight: 700; color: var(--green); font-size: 1.02rem; margin-bottom: 2px; }
+  .entry-role { font-size: 0.86rem; color: var(--ink-soft); margin-bottom: 10px; }
+  .entry ul { margin: 0; padding-left: 18px; }
+  .entry li { margin-bottom: 7px; font-size: 0.94rem; }
+  .entry li::marker { color: var(--brass); }
+
+  /* ── Project cards ── */
+  .ledger-table { width: 100%; border-collapse: collapse; }
+  .proj {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 18px;
+    padding: 22px 0;
+    border-top: 1px dashed var(--line);
+  }
+  .proj:first-child { border-top: none; }
+  .proj-idx {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--brass);
+    padding-top: 2px;
+  }
+  .proj-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; }
+  .proj-meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; color: var(--ink-soft); margin-bottom: 10px; }
+  .proj-desc { font-size: 0.93rem; margin-bottom: 12px; color: var(--ink); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    color: var(--ink-soft);
+  }
+  .proj-result {
+    font-size: 0.85rem;
+    color: var(--green);
+    font-weight: 500;
+    border-left: 2px solid var(--green);
+    padding-left: 10px;
+  }
+
+  /* ── Stamp grid (skills) ── */
+  .stamps { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .stamp {
+    border: 1.5px solid var(--line-strong);
+    border-radius: 4px;
+    padding: 14px 16px;
+    background: var(--paper-raised);
+  }
+  .stamp-cat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 8px;
+  }
+  .stamp-items { font-size: 0.86rem; color: var(--ink); line-height: 1.9; }
+
+  /* ── Fit note ── */
+  .fit {
+    background: var(--paper-raised);
+    border: 1px solid var(--line-strong);
+    border-radius: 4px;
+    padding: 24px 26px;
+    font-size: 0.96rem;
+  }
+  .fit-mark {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 900;
+    color: var(--stamp-red);
+    border: 2px solid var(--stamp-red);
+    border-radius: 3px;
+    padding: 1px 8px;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    display: inline-block;
+    margin-bottom: 12px;
+    transform: rotate(-2deg);
+  }
+
+  /* ── Signature / contact ── */
+  .sign {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+  }
+  .sign-item { border-top: 2px solid var(--ink); padding-top: 8px; }
+  .sign-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; }
+  .sign-val { font-size: 0.95rem; margin-top: 4px; }
+  .sign-val a { color: var(--green); text-decoration: none; }
+  .sign-val a:hover { text-decoration: underline; }
+
+  .foot {
+    text-align: center;
+    padding: 30px 0 50px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 600px) {
+    .balances { grid-template-columns: repeat(2, 1fr); }
+    .bal:nth-child(2) { border-right: none; }
+    .entry { grid-template-columns: 1fr; gap: 6px; }
+    .proj { grid-template-columns: 30px 1fr; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .fade { animation: fadeUp .5s ease both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="cover fade">
+    <div class="cover-label">
+      <span>PASSBOOK / 개발 원장</span>
+      <span>NO. JC-2026</span>
+    </div>
+    <h1>박준철</h1>
+    <p class="cover-role">Java 백엔드 &amp; Flutter 모바일/웹 풀사이클 개발자</p>
+    <p class="cover-desc">
+      Java/Kotlin 기반 Spring Boot 백엔드와 Flutter 모바일/웹 개발을 함께 다뤄온 개발자입니다.
+      대형 SO사 두 곳의 시스템을 실서비스 중단 없이 연동/전환한 경험을 바탕으로,
+      API 연동과 안정적인 운영이 핵심인 코어뱅킹 개발 직무에 지원합니다.
+    </p>
+    <div class="cover-actions">
+      <a class="btn primary" href="mailto:justinnn980@gmail.com">이메일 보내기</a>
+      <a class="btn" href="https://github.com/justinnn980" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://justinnn980.tistory.com" target="_blank" rel="noopener">기술 블로그</a>
+    </div>
+  </header>
+
+  <div class="balances fade">
+    <div class="bal"><div class="bal-num">1년 10개월</div><div class="bal-label">Java/Flutter 실무 경험</div></div>
+    <div class="bal"><div class="bal-num">750만</div><div class="bal-label">가입가구 기반 서비스 운영</div></div>
+    <div class="bal"><div class="bal-num">2개사</div><div class="bal-label">대형 SO사 시스템 연동/전환</div></div>
+    <div class="bal"><div class="bal-num">4+</div><div class="bal-label">풀사이클 프로젝트</div></div>
+  </div>
+
+  <section class="fade">
+    <div class="sec-head">
+      <span class="sec-no">01</span>
+      <div>
+        <div class="sec-title">경력 원장</div>
+        <div class="sec-sub">Employment Ledger</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-date">2024.02<br>~2025.11</div>
+      <div>
+        <div class="entry-org">(주)홈초이스</div>
+        <div class="entry-role">Flutter 앱 개발자 / 정규직 — 전국 디지털케이블TV OTT "오초이스" 운영사 (매출 340억)</div>
+        <ul>
+          <li>딜라이브(매출 3,500억) / LG헬로비전(가입자 343만) 두 대형 SO사의 앱을 오초이스 앱으로 전환</li>
+          <li>NCG / Multi 두 가지 영상 저작권 보호 방식을 하나의 재생 구조로 통합, 통합 이후 관련 장애 없이 운영</li>
+          <li>콘텐츠 탐색 화면을 웹 기반으로 분리해 앱 배포 없이 콘텐츠가 실시간 반영되는 구조 구축</li>
+          <li>EC2 Proxy Elastic IP 고정, HTTPS SSL 전환으로 앱-서버 통신 인프라 안정화 전담</li>
+          <li>초기 로딩 속도 개선 — FCP 39% 단축, LCP 10.8% 개선</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-date">아우토크립트</div>
+      <div>
+        <div class="entry-org">아우토크립트 (그린맨파워 파견)</div>
+        <div class="entry-role">IT 인프라 / 자산관리 담당</div>
+        <ul>
+          <li>사내 FAQ 챗봇을 AI 도구로 직접 개발, 관리자 공백에 대비한 이중화 구조 설계</li>
+          <li>코드/문서 초안은 AI에게 맡기고 결과 검증은 항상 직접 확인하는 방식으로 업무 생산성 확보</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="fade">
+    <div class="sec-head">
+      <span class="sec-no">02</span>
+      <div>
+        <div class="sec-title">거래 내역 — 프로젝트</div>
+        <div class="sec-sub">Transaction History / Projects</div>
+      </div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-idx">1</div>
+      <div>
+        <div class="proj-title">오초이스 OTT 모바일 앱 개발</div>
+        <div class="proj-meta">TEAM 4명 · 2024.02~2025.10 · LG헬로비전 / 딜라이브 연동</div>
+        <p class="proj-desc">파트너사 앱을 오초이스 앱으로 전환하는 과정에서 영상 재생, 저작권 보호, 콘텐츠 화면 분리, 인프라 안정화까지 전 과정의 문제를 직접 해결.</p>
+        <div class="tags"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Riverpod</span><span class="tag">WebView</span><span class="tag">AWS EC2</span><span class="tag">Spring Boot</span></div>
+        <div class="proj-result">FCP 39% 개선 / 영상 보호 방식 단일화 / 앱 배포 없는 콘텐츠 운영 구조</div>
+      </div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-idx">2</div>
+      <div>
+        <div class="proj-title">Study Tracker API — 학습 Todo 관리 REST API</div>
+        <div class="proj-meta">개인 프로젝트 · 2025~2026.06</div>
+        <p class="proj-desc">JWT 직접 구현, Redis 캐싱, 멱등성 키, CQRS까지 실무 흐름 전체를 담은 Spring Boot REST API. 테스트 60건과 CI/CD 파이프라인까지 완성.</p>
+        <div class="tags"><span class="tag">Java 21</span><span class="tag">Spring Boot</span><span class="tag">Redis</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span></div>
+        <div class="proj-result">JWT 직접 구현 / Redis 캐싱 / 멱등성 방지 / 테스트 60건</div>
+      </div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-idx">3</div>
+      <div>
+        <div class="proj-title">담아(Dama) — 구독 정보 통합 관리 서비스</div>
+        <div class="proj-meta">TEAM 3명 · 2026.01~2026.02</div>
+        <p class="proj-desc">사용자의 구독을 통합 관리하는 서비스. Refresh Token Rotation, 구독 비용 분석 API 등 실무 수준의 보안/백엔드 패턴을 Kotlin으로 구현.</p>
+        <div class="tags"><span class="tag">Kotlin</span><span class="tag">Spring Security</span><span class="tag">JWT</span><span class="tag">QueryDSL</span><span class="tag">PostgreSQL</span></div>
+        <div class="proj-result">RTR 토큰 탈취 방어 / 구독 비용 분석 / DDD 설계</div>
+      </div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-idx">4</div>
+      <div>
+        <div class="proj-title">숫자 대결 — 실시간 증감 게임</div>
+        <div class="proj-meta">개인 프로젝트 · 2026.01~진행 중</div>
+        <p class="proj-desc">다중 사용자 동시 입력의 동시성 문제를 서버 중심 상태 관리로 해결한 실시간 게임. 기획부터 백엔드, 프론트, 배포까지 3일 내 단독 완성.</p>
+        <div class="tags"><span class="tag">Spring Boot</span><span class="tag">STOMP WebSocket</span><span class="tag">Flutter</span><span class="tag">Render</span></div>
+        <div class="proj-result">서버 단일 상태관리로 동시성 해결 / WebSocket 브로드캐스트 / 자동 재연결</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fade">
+    <div class="sec-head">
+      <span class="sec-no">03</span>
+      <div>
+        <div class="sec-title">보유 인장 — 기술 스택</div>
+        <div class="sec-sub">Stamps / Skills</div>
+      </div>
+    </div>
+    <div class="stamps">
+      <div class="stamp"><div class="stamp-cat">Backend</div><div class="stamp-items">Java · Kotlin · Spring Boot · Spring Security · JWT · Spring Data JPA · QueryDSL · MyBatis</div></div>
+      <div class="stamp"><div class="stamp-cat">Database</div><div class="stamp-items">MySQL · PostgreSQL · Redis · DynamoDB</div></div>
+      <div class="stamp"><div class="stamp-cat">Infra / DevOps</div><div class="stamp-items">Docker · GitHub Actions · AWS EC2 · AWS S3 · Elastic Beanstalk</div></div>
+      <div class="stamp"><div class="stamp-cat">Architecture</div><div class="stamp-items">REST API · WebSocket/STOMP · AES 암호화 · CQRS · DDD</div></div>
+      <div class="stamp"><div class="stamp-cat">Cross-platform</div><div class="stamp-items">Flutter · Riverpod · Dart</div></div>
+      <div class="stamp"><div class="stamp-cat">협업 / 도구</div><div class="stamp-items">Git/GitHub · JUnit 5 · MockMvc · Swagger</div></div>
+    </div>
+  </section>
+
+  <section class="fade">
+    <div class="sec-head">
+      <span class="sec-no">04</span>
+      <div>
+        <div class="sec-title">배서 — 지원 사유</div>
+        <div class="sec-sub">Endorsement</div>
+      </div>
+    </div>
+    <div class="fit">
+      <span class="fit-mark">FIT CHECK</span>
+      <p style="margin:0">
+        코어뱅킹 개발은 화면 하나를 새로 그리는 일보다 API 연동, 외부 3rd party 연동,
+        배포 이후의 안정성에 더 무게가 실리는 영역이라고 생각합니다.
+        딜라이브와 LG헬로비전, 서로 다른 시스템을 쓰는 두 대형 SO사의 앱을 실서비스 중단 없이
+        전환/연동해본 경험이 이 직무가 요구하는 문제와 맞닿아 있습니다.
+        Java/Spring Boot로 백엔드를, Flutter로 모바일/웹 화면까지 이어서 만들어봤기 때문에
+        단순 화면 개발을 넘어 API 연동부터 배포, 운영까지 전체 흐름을 스스로 그려볼 수 있습니다.
+      </p>
+    </div>
+  </section>
+
+  <footer class="fade">
+    <div class="sec-head">
+      <span class="sec-no">05</span>
+      <div>
+        <div class="sec-title">서명</div>
+        <div class="sec-sub">Signature / Contact</div>
+      </div>
+    </div>
+    <div class="sign">
+      <div class="sign-item"><div class="sign-label">Phone</div><div class="sign-val mono">010-2538-1519</div></div>
+      <div class="sign-item"><div class="sign-label">Email</div><div class="sign-val"><a href="mailto:justinnn980@gmail.com">justinnn980@gmail.com</a></div></div>
+      <div class="sign-item"><div class="sign-label">GitHub</div><div class="sign-val"><a href="https://github.com/justinnn980" target="_blank" rel="noopener">github.com/justinnn980</a></div></div>
+      <div class="sign-item"><div class="sign-label">Blog</div><div class="sign-val"><a href="https://justinnn980.tistory.com" target="_blank" rel="noopener">justinnn980.tistory.com</a></div></div>
+    </div>
+  </footer>
+
+  <p class="foot">박준철 — Java 백엔드 & Flutter 풀사이클 개발자 원장, 2026</p>
+</div>
