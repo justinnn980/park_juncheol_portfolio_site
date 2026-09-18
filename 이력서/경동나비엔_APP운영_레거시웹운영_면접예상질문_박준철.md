@@ -307,6 +307,14 @@ StatelessWidget은 한 번 만들어지면 내부 상태가 바뀌지 않는 위
 **Q. Widget 생명주기(라이프사이클)를 설명해주세요.**
 StatefulWidget은 `createState()`로 State 객체가 만들어지고, `initState()`가 한 번 호출된 다음 `build()`가 호출돼 화면을 그립니다. 데이터가 바뀌면 `didUpdateWidget()`을 거쳐 다시 `build()`가 호출되고, 화면에서 빠지면 `dispose()`가 호출됩니다. 오초이스에서 WebView 컨트롤러나 애니메이션 컨트롤러처럼 리소스를 쥐고 있는 객체는 `initState()`에서 생성하고 `dispose()`에서 반드시 해제했습니다.
 
+**Q. Flutter에서 "dirty"가 뭔가요? setState()를 호출하면 정확히 무슨 일이 일어나나요?**
+Flutter는 내부적으로 세 개의 트리를 가지고 있습니다. **Widget 트리**(그냥 설정값, 매번 새로 만들어지는 불변 객체), **Element 트리**(화면에 실제로 붙어서 상태를 유지하는 실체), **RenderObject 트리**(실제 레이아웃 계산과 그리기를 담당)입니다. setState()를 호출하면 해당 Element에 `markNeedsBuild()`가 호출되면서 그 Element가 **"dirty(더러움/갱신 필요)"** 상태로 표시되고, 프레임워크가 관리하는 "다시 그려야 할 Element 목록"에 등록됩니다.
+
+다음 프레임이 그려질 때 프레임워크는 이 목록에 있는 dirty한 Element들만 골라서 build()를 다시 호출합니다 — **전체 위젯 트리를 다 다시 그리는 게 아니라, dirty로 표시된 부분만** 다시 그립니다. 새로 나온 Widget 설정과 기존 Element를 비교(타입과 key가 같은지)해서, 같으면 Element를 재사용하며 내용만 갱신하고, 다르면 기존 Element를 버리고 새로 만듭니다. 레이아웃/그리기 자체가 바뀌어야 하면 RenderObject 쪽에도 `markNeedsLayout()`/`markNeedsPaint()`로 별도의 dirty 표시가 되어, 실제 픽셀을 다시 그리는 Raster 단계까지 이어집니다.
+
+**꼬리질문. 그럼 불필요한 리빌드(dirty 처리)를 줄이려면 어떻게 하나요?**
+세 가지를 봅니다. 첫째, **const 생성자**를 쓸 수 있는 위젯은 const로 선언합니다 — 내용이 절대 안 바뀌는 게 컴파일 타임에 보장되면 Flutter가 그 Element를 아예 dirty 목록에 넣지 않고 건너뜁니다. 둘째, setState()를 호출하는 범위를 최소화합니다 — 화면 전체를 감싸는 최상위 위젯에서 setState()를 부르면 그 아래 전부가 dirty가 되니, 실제로 바뀌는 부분만 별도 위젯으로 쪼개서 그 안에서 상태를 갖게 합니다. 셋째, Riverpod/Provider를 쓸 때도 `Consumer`로 감싸는 범위를 최소 단위로 좁히거나 `select()`로 필요한 필드만 구독해서, 상태 객체 전체가 아니라 실제로 쓰는 값이 바뀔 때만 dirty가 되게 만듭니다. DevTools의 "Track widget rebuilds"를 켜면 어떤 위젯이 얼마나 자주 dirty가 되는지 실시간으로 확인할 수 있습니다.
+
 **Q. key는 왜 쓰나요?**
 같은 타입의 위젯이 리스트에서 순서가 바뀌거나 추가/삭제될 때, Flutter가 어떤 위젯이 어떤 위젯인지 구분할 수 있게 해주는 식별자입니다. key가 없으면 Flutter가 위치 기준으로 위젯을 재사용해버려서, 리스트 아이템의 상태(예: 선택 여부)가 엉뚱한 아이템으로 넘어가는 버그가 날 수 있습니다.
 
