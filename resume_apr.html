@@ -284,15 +284,6 @@
     .prj-ul li { padding-left: 13px; position: relative; font-size: 12px; color: var(--muted); line-height: 1.6; }
     .prj-ul li::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: var(--teal); }
 
-    /* ── MOTIVATION ── */
-    .mot-box {
-      border: 1px solid var(--bdr-a); border-radius: 14px; padding: 26px 28px;
-      background: linear-gradient(135deg, rgba(0,212,180,0.07), rgba(0,212,180,0.02));
-      font-size: 14px; line-height: 1.9; color: var(--muted); margin-bottom: 16px;
-    }
-    .mot-box strong { color: var(--teal); }
-    .mot-box:last-child { margin-bottom: 0; }
-
     /* ── CERT ── */
     .cert-list { display: grid; gap: 10px; }
     .cert { display: grid; grid-template-columns: 160px 1fr; overflow: hidden; border: 1px solid var(--bdr); border-radius: var(--r); }
@@ -340,7 +331,6 @@
     <a class="nav-brand" href="#intro">박준철 <span class="nav-tag">에이피알 지원</span></a>
     <div class="nav-links">
       <a href="#problems">문제 해결</a>
-      <a href="#motivation">지원동기</a>
       <a href="#contact">연락처</a>
     </div>
   </div>
@@ -650,24 +640,9 @@
     </div>
   </section>
 
-  <!-- 지원동기 & MAKE IT -->
-  <section class="section" id="motivation">
-    <div class="eyebrow"><span class="sec-num">02</span><span class="sec-lbl">Motivation &amp; Core Value</span></div>
-    <h2 class="sec-title">지원동기 &amp; MAKE IT</h2>
-    <div class="mot-box">
-      메디큐브 에이지알 앱을 보고 에이피알을 눈여겨보게 됐습니다. 제가 1년 10개월 동안 <strong>Flutter/Dart</strong>로 실서비스 앱을 만들고 운영해왔는데, 공고에 적힌 App 기술스택이 정확히 겹쳤습니다. 단순히 아는 언어라서가 아니라, 홈초이스에서 겪었던 문제 해결 방식 — WebView와 Native 사이 역할을 나누고, 성능 문제를 숫자로 검증하고, 서로 다른 구조의 레거시 앱 두 개를 하나로 합치는 작업 — 이 에이피알이 Product Engineer에게 요구하는 <strong>"Frontend/Backend/Data/AI를 고정된 역할로 나누지 않고 문제에 맞는 기술을 선택"</strong>하는 방식과 맞닿아 있다는 확신이 들어 지원했습니다.
-    </div>
-    <div class="mot-box">
-      쇼츠형 콘텐츠를 스크롤하던 중 특정 조건에서 오디오가 두 번 겹쳐 출력되는 버그가 있었습니다. 원인은 외부 플레이어 라이브러리 내부의 중복 초기화였고, 라이브러리 교체는 최소 몇 주, 공식 패치는 기약이 없었습니다. 그 사이 사용자는 계속 이중 오디오를 들어야 했습니다. 저는 라이브러리를 fork해 소스를 직접 읽고 생명주기 이벤트 처리 과정에서 중복 초기화 지점을 특정해, 별도 배포 일정 없이 <strong>당일 패치</strong>로 문제를 완전히 없앴습니다. 목표를 "언젠가 고쳐지는 문제"로 남겨두지 않고 끝까지 파고들어 성과로 만든 이 경험이 에이피알 인재상 중 <strong>MAKE IT</strong>과 맞닿아 있다고 생각합니다.
-    </div>
-    <div class="mot-box">
-      입사 후에는 정보통신산업진흥원 AI 기본과정과 네이버 부스트코스 데이터사이언스 코칭스터디로 스스로 다져온 데이터 파이프라인/모델링 기초를 AGE-R 앱과 커머스 데이터로 직접 검증하고 싶습니다. 에이피알은 해외 매출 비중이 80%를 넘어설 만큼 미국/유럽으로 빠르게 확장하고 있습니다. 트래픽이 늘어날수록 데이터 정합성과 자동화의 중요성도 커질 텐데, 그 확장 속도를 기술로 뒷받침하는 사람이 되고 싶습니다.
-    </div>
-  </section>
-
   <!-- 수료증 -->
   <section class="section" id="certificates">
-    <div class="eyebrow"><span class="sec-num">03</span><span class="sec-lbl">Certificates &amp; Book</span></div>
+    <div class="eyebrow"><span class="sec-num">02</span><span class="sec-lbl">Certificates &amp; Book</span></div>
     <h2 class="sec-title">수료증 및 저서</h2>
     <div class="cert-list">
       <div class="cert"><div class="cert-lbl">정보통신산업진흥원</div><div class="cert-val">인공지능 기본과정 수료 (2023.08.07~2023.09.15, (재)포항테크노파크 운영)</div></div>
@@ -679,7 +654,7 @@
 
   <!-- 연락처 -->
   <section class="section" id="contact">
-    <div class="eyebrow"><span class="sec-num">04</span><span class="sec-lbl">Contact</span></div>
+    <div class="eyebrow"><span class="sec-num">03</span><span class="sec-lbl">Contact</span></div>
     <h2 class="sec-title">연락처</h2>
     <div class="contact-row">
       <a class="clink" href="mailto:justinnn980@gmail.com">✉ Email</a>
