@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 포트폴리오 — 주성엔지니어링 IT(서버관리/보안) 지원</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --em:   #16A34A;
+      --em-l: #BBF7D0;
+      --em-d: #15803D;
+      --bg:   #0A1210;
+      --card: #101A16;
+      --card2:#152219;
+      --bdr:  #24352C;
+      --text: #F9FAFB;
+      --sub:  #D3DBD5;
+      --muted:#8FA396;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans KR', 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: var(--em); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,18,16,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bdr);
+      padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 52px;
+    }
+    .nav-name { font-weight: 800; font-size: 15px; }
+    .nav-tag { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: rgba(22,163,74,0.15); color: var(--em); margin-left: 8px; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px; margin: 0 auto; padding: 64px 40px 48px;
+      display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: start;
+    }
+    .hero-badge {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      background: rgba(22,163,74,0.12); border: 1px solid rgba(22,163,74,0.28);
+      color: var(--em); font-size: 12px; font-weight: 700; margin-bottom: 16px;
+    }
+    .hero-name { font-size: 44px; font-weight: 900; line-height: 1.1; margin-bottom: 8px; letter-spacing: -1px; }
+    .hero-role { font-size: 18px; font-weight: 700; color: var(--em); margin-bottom: 16px; }
+    .hero-lead { font-size: 14.5px; color: var(--sub); line-height: 1.85; margin-bottom: 28px; max-width: 480px; }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      margin-bottom: 28px; background: var(--bdr); border-radius: 10px; overflow: hidden;
+    }
+    .stat { background: var(--card); padding: 16px 12px; text-align: center; }
+    .stat-num   { font-size: 14px; font-weight: 900; color: var(--em); }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+    .hero-contacts { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-contact  { font-size: 13px; color: var(--muted); }
+
+    /* CODE PANEL */
+    .code-panel { background: #070C0A; border: 1px solid var(--bdr); border-radius: 12px; overflow: hidden; }
+    .code-header { background: var(--card); padding: 10px 16px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--bdr); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; } .dot-y { background: #FFBD2E; } .dot-g { background: #28C840; }
+    .code-filename { font-size: 12px; color: var(--muted); margin-left: 6px; font-family: 'JetBrains Mono', monospace; }
+    .code-body { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.85; }
+    .c-cmt { color: #5A6E60; }
+    .c-kw  { color: #4ADE80; }
+    .c-str { color: #BBF7D0; }
+    .c-num { color: #FBBF24; }
+    .c-fn  { color: #86EFAC; }
+    .c-var { color: #F9FAFB; }
+    .c-prop{ color: #BBF7D0; }
+    .c-type{ color: #38BDF8; }
+
+    /* SECTION */
+    .section { max-width: 1100px; margin: 0 auto; padding: 56px 40px; border-top: 1px solid var(--bdr); }
+    .sec-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--em); margin-bottom: 6px; }
+    .sec-title { font-size: 26px; font-weight: 900; margin-bottom: 12px; }
+    .sec-desc { font-size: 13px; color: var(--muted); margin-bottom: 28px; line-height: 1.7; }
+
+    /* SKILL SECTION */
+    .sk-group { margin-bottom: 28px; }
+    .sk-group-title { font-size: 12px; font-weight: 800; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+    .sk-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .sk-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 10px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 14px; transition: border-color .2s; }
+    .sk-card:hover { border-color: rgba(22,163,74,0.35); }
+    .sk-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .sk-name { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+    .sk-level { font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 10px; display: inline-block; margin-bottom: 5px; }
+    .sk-level.prod { background: rgba(22,163,74,0.15); color: var(--em); }
+    .sk-desc { font-size: 12px; color: var(--sub); line-height: 1.55; }
+    .sk-cards-2 { grid-template-columns: repeat(2, 1fr); }
+    .sk-cards-4 { grid-template-columns: repeat(4, 1fr); }
+
+    /* MATCH / PROBLEM CARDS */
+    .prob-list { display: grid; gap: 18px; }
+    .prob-card {
+      background: var(--card); border: 1px solid var(--bdr);
+      border-left: 3px solid var(--em); border-radius: 0 12px 12px 0; padding: 22px 26px;
+    }
+    .prob-num   { font-size: 11px; font-weight: 800; color: var(--em); letter-spacing: 1px; margin-bottom: 8px; }
+    .prob-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+    .prob-flow  { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .pf-tag    { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; background: var(--card2); color: var(--sub); }
+    .pf-arrow  { color: var(--em); font-size: 14px; }
+    .pf-result { padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; background: rgba(22,163,74,0.15); color: #BBF7D0; }
+    .prob-desc { font-size: 13px; color: var(--sub); line-height: 1.75; }
+    .prob-desc strong { color: var(--text); font-weight: 700; }
+
+    /* MOTIVATION */
+    .mot-box { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px 24px; font-size: 13.5px; color: var(--sub); line-height: 1.8; margin-bottom: 12px; }
+    .mot-box strong { color: var(--text); }
+
+    /* CAREER */
+    .career-block { margin-bottom: 32px; }
+    .career-head  { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+    .career-co    { font-size: 17px; font-weight: 900; }
+    .career-period{ font-size: 12px; color: var(--muted); font-weight: 600; }
+    .career-role  { font-size: 13px; font-weight: 700; color: var(--em); margin-bottom: 6px; }
+    .career-desc  { font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
+    .ul { list-style: none; display: grid; gap: 6px; }
+    .ul li { font-size: 13px; color: var(--sub); padding-left: 16px; position: relative; line-height: 1.65; }
+    .ul li::before { content: '▸'; position: absolute; left: 0; color: var(--em); font-size: 9px; top: 4px; }
+    .ul li strong { color: var(--text); font-weight: 700; }
+
+    /* CERT */
+    .cert-list { display: grid; gap: 10px; }
+    .cert { display: flex; gap: 16px; background: var(--card); border: 1px solid var(--bdr); border-radius: 8px; padding: 12px 16px; align-items: baseline; }
+    .cert-lbl { font-size: 11px; font-weight: 800; color: var(--em); min-width: 120px; }
+    .cert-val { font-size: 13px; color: var(--sub); }
+
+    footer { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--bdr); }
+
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .sk-cards, .sk-cards-4 { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">박준철<span class="nav-tag">주성엔지니어링 지원</span></div>
+  <div class="nav-links">
+    <a href="#match">직무 매칭</a>
+    <a href="#skills">기술 스택</a>
+    <a href="#problem">문제 해결</a>
+    <a href="#experience">경력</a>
+    <a href="#certs">자격/학력</a>
+    <a href="#contact">연락처</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-badge">주성엔지니어링(주) / IT(서버관리/보안) 지원</div>
+    <div class="hero-name">박준철</div>
+    <div class="hero-role">사내 서버/네트워크/보안 운영</div>
+    <div class="hero-lead">
+      실서비스 서버 인프라를 직접 운영하며<br/>
+      <strong style="color:var(--text);">방화벽 정책 변경발 장애</strong>를 구조적으로 해결했고,<br/><br/>
+      사내 IT 자산관리 시스템/헬프데스크 체계를<br/>
+      직접 개발하고 운영해본 경험이 있습니다.
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">방화벽/EIP</div>
+        <div class="stat-label">통신 장애<br/>구조적 해결</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">SSL/HTTPS</div>
+        <div class="stat-label">전 구간<br/>보안 통신 전환</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">IT 자산관리</div>
+        <div class="stat-label">시스템 자체 개발<br/>2,394건 이관</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">헬프데스크</div>
+        <div class="stat-label">접수/알림<br/>자동화 구축</div>
+      </div>
+    </div>
+    <div class="hero-contacts">
+      <span class="hero-contact">📞 010-2538-1519</span>
+      <span class="hero-contact">✉ justinnn980@gmail.com</span>
+      <span class="hero-contact">📝 <a href="https://justinnn980.tistory.com">기술 블로그</a></span>
+    </div>
+  </div>
+
+  <!-- CODE PANEL -->
+  <div class="code-panel">
+    <div class="code-header">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="code-filename">infra_failover.py</span>
+    </div>
+    <div class="code-body">
+<span class="c-cmt"># 방화벽 정책 변경 → Proxy 통신 장애 재구성</span>
+<span class="c-cmt"># 재연결이 아니라 재발하지 않는 구조로</span>
+
+<span class="c-kw">def</span> <span class="c-fn">reassign_elastic_ip</span>(<span class="c-var">instance</span>):
+    <span class="c-var">old_ip</span> = <span class="c-var">instance</span>.<span class="c-prop">public_ip</span>
+    <span class="c-var">eip</span> = <span class="c-fn">allocate_elastic_ip</span>()
+    <span class="c-fn">associate</span>(<span class="c-var">instance</span>, <span class="c-var">eip</span>)
+
+    <span class="c-cmt"># 방화벽 정책에 EIP 고정 등록</span>
+    <span class="c-fn">update_firewall_rule</span>(<span class="c-var">old_ip</span>, <span class="c-var">eip</span>)
+    <span class="c-kw">return</span> <span class="c-str">"reconfigured"</span>
+
+<span class="c-cmt"># 헬프데스크 Form 접수 → 담당자 자동 전달</span>
+<span class="c-kw">def</span> <span class="c-fn">on_form_submitted</span>(<span class="c-var">ticket</span>):
+    <span class="c-fn">notify_teams_webhook</span>(<span class="c-var">ticket</span>.<span class="c-prop">owner</span>)
+    <span class="c-kw">return</span> <span class="c-str">"routed"</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 00: 직무 매칭 -->
+<div class="section" id="match">
+  <div class="sec-label">Job Posting Match</div>
+  <div class="sec-title">주요업무 / 자격요건 매칭</div>
+  <div class="sec-desc">주성엔지니어링 IT(서버관리/보안) 공고(사내 서버 및 네트워크 장비 운영 / SQL Server 기반 사내 시스템DB 운영 / 백업 운영 및 장애 대응 / 그룹웨어 운영 관리 / 전산배선 유지/관리)에 보유 경험을 매칭했습니다.</div>
+  <div class="prob-list">
+
+    <div class="prob-card">
+      <div class="prob-num">주요업무 / 사내 서버(Windows/Linux) 및 네트워크 장비 운영</div>
+      <div class="prob-title">방화벽 정책 변경 → 통신 장애를 구조적으로 재설계</div>
+      <div class="prob-flow">
+        <span class="pf-tag">방화벽 정책 변경</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Proxy 통신 장애 발생</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">EC2 Elastic IP 고정 구조 재구성</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">재발 없는 구조로 해결</span>
+      </div>
+      <div class="prob-desc">
+        홈초이스에서 로드밸런싱 환경의 서버 인프라를 직접 운영하며 방화벽 정책 변경으로 발생한 통신 장애를 임시 재연결이 아니라 IP 고정 구조로 근본적으로 해결했습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">주요업무 / 백업 운영 및 장애 대응, 전산배선 유지/관리</div>
+      <div class="prob-title">CORS 오류/데이터 이관 누락 — 로그 추적으로 원인 특정</div>
+      <div class="prob-flow">
+        <span class="pf-tag">간헐적 API 오류 발생</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">요청/응답 헤더 비교 추적</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">원인 특정 후 재발 없이 해결</span>
+      </div>
+      <div class="prob-desc">
+        아우토크립트에서 자산관리 시스템 운영 중 발생한 CORS 오류와 데이터 이관 누락을 증상 대응이 아니라 원인이 되는 조건까지 추적해 해결한 경험이 있습니다. 장애가 나면 증상만 지우지 않고 구조를 고치는 방식으로 일합니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">주요업무 / 개발 및 그룹웨어 운영 관리</div>
+      <div class="prob-title">자산관리/헬프데스크 사내 시스템 자체 개발 및 운영</div>
+      <div class="prob-flow">
+        <span class="pf-tag">엑셀 산재 자산관리 발견</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Java/Spring Boot/React 시스템 개발</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">실사용 데이터 2,394건 이관 운영</span>
+      </div>
+      <div class="prob-desc">
+        요청받지 않은 문제를 먼저 찾아 사내 IT 솔루션을 직접 기획/개발/운영한 경험이 있습니다. 헬프데스크 Form 접수를 Power Automate/Teams Webhook으로 자동 연동해 운영 효율도 함께 높였습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">자격요건 / Windows Server, TCP/IP 네트워크, SQL 지식 보유자</div>
+      <div class="prob-title">서버/네트워크/DB를 함께 다뤄본 실무 경험</div>
+      <div class="prob-flow">
+        <span class="pf-tag">AWS EC2/S3/Elastic Beanstalk 실무</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">MySQL/DynamoDB 데이터 처리</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">SSL/HTTPS 보안 전환까지 수행</span>
+      </div>
+      <div class="prob-desc">
+        서버 인프라 운영, 데이터베이스 기반 시스템 개발, 네트워크 통신 장애 대응을 실무로 함께 다뤄왔습니다. Docker로 배포 환경을 통일해 서버 운영 안정성도 높였습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">자격요건 / IT 인프라 관리 경험, 프로젝트 수행 경험</div>
+      <div class="prob-title">입/퇴사 계정 자동화로 정보보안 리스크 축소</div>
+      <div class="prob-flow">
+        <span class="pf-tag">계정 방치 리스크 인지</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">입/퇴사 시 계정 생성/회수 자동화</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">SW 라이선스 관리 사내사이트 구축</span>
+      </div>
+      <div class="prob-desc">
+        IT 자산 비용 절감을 위한 IDC 환경 변경/클라우드 전환 가능성 실사까지 수행하며 정보보안과 인프라 운영을 함께 챙긴 프로젝트 경험이 있습니다.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 01: 기술 스택 -->
+<div class="section" id="skills">
+  <div class="sec-label">Section 01</div>
+  <div class="sec-title">기술 스택</div>
+
+  <div class="sk-group">
+    <div class="sk-group-title">서버 / 네트워크 / 보안</div>
+    <div class="sk-cards sk-cards-2">
+      <div class="sk-card">
+        <div class="sk-icon">🖥️</div>
+        <div>
+          <div class="sk-name">AWS 서버 인프라 (EC2 / S3 / Elastic Beanstalk)</div>
+          <span class="sk-level prod">실서비스 운영</span>
+          <div class="sk-desc">Elastic IP 고정 구조로 방화벽 정책 변경발 통신 장애를 근본적으로 해결. 로드밸런싱 환경 인프라 운영 실무.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div class="sk-icon">🔒</div>
+        <div>
+          <div class="sk-name">SSL/HTTPS 전환, 계정 접근권한 관리</div>
+          <span class="sk-level prod">보안 정책 적용</span>
+          <div class="sk-desc">전 구간 HTTPS 전환, 입/퇴사 시 계정 생성/회수 자동화로 계정 방치 리스크 축소.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sk-group">
+    <div class="sk-group-title">DB / IT 자산/헬프데스크 운영 / 자동화</div>
+    <div class="sk-cards sk-cards-4">
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">MySQL / DynamoDB</div>
+          <span class="sk-level prod">데이터 운영</span>
+          <div class="sk-desc">실서비스 데이터 및 자산관리 시스템 데이터베이스 운영.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">IT 자산관리/헬프데스크</div>
+          <span class="sk-level prod">시스템 자체 개발</span>
+          <div class="sk-desc">Java/Spring Boot/React 기반 사내 시스템 개발, 2,394건 이관 운영.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">Power Automate / Teams Webhook</div>
+          <span class="sk-level prod">알림/운영 자동화</span>
+          <div class="sk-desc">헬프데스크 접수-알림 자동 연동, 처리 이력 상세화.</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <div>
+          <div class="sk-name">Docker / Python / Selenium</div>
+          <span class="sk-level prod">배포/운영 자동화</span>
+          <div class="sk-desc">배포 환경 표준화, 반복 운영 작업 스크립트화.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 02: 문제 해결 -->
+<div class="section" id="problem">
+  <div class="sec-label">Section 02</div>
+  <div class="sec-title">직접 해결한 인프라/보안 문제들</div>
+  <div class="prob-list">
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 01</div>
+      <div class="prob-title">방화벽 정책 변경 → 통신 두절, 재연결이 아닌 구조 재설계</div>
+      <div class="prob-flow">
+        <span class="pf-tag">통신 장애 접수</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Proxy 서버 IP 변경 이력 확인</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">EC2 Elastic IP 고정 구조 재구성</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">재발 방지 구조 확보</span>
+      </div>
+      <div class="prob-desc">
+        로드밸런싱 환경에서 Proxy 서버 IP가 바뀌며 방화벽에 막혀 통신이 끊기는 장애가 발생했습니다. 임시 재연결이 아니라 <strong>IP가 다시 바뀌어도 재발하지 않는 구조</strong>로 근본적으로 정리하고, SSL 인증서 적용으로 전 구간 HTTPS 전환을 함께 완료했습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 02</div>
+      <div class="prob-title">간헐적 CORS 오류/데이터 이관 누락 — 로그 단위 원인 추적</div>
+      <div class="prob-flow">
+        <span class="pf-tag">특정 조건에서만 재현</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">요청/응답 헤더, 이관 로그 비교</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">특정 API 경로/조건 원인 특정 후 해결</span>
+      </div>
+      <div class="prob-desc">
+        새로고침하면 다시 되는 오류라 그냥 넘길 수도 있었지만, 원인을 두면 사용자가 늘었을 때 더 자주 터질 거라 판단해 <strong>화면별로 헤더와 로그를 하나씩 비교</strong>해 원인을 좁혀 해결했습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 03</div>
+      <div class="prob-title">엑셀 산재 자산관리 — 시스템 자체 개발로 운영 리스크 제거</div>
+      <div class="prob-flow">
+        <span class="pf-tag">담당자 개인 엑셀 의존</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Java/Spring Boot/React 시스템 개발</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">실사용 데이터 2,394건 이관</span>
+      </div>
+      <div class="prob-desc">
+        담당자가 바뀔 때마다 자산 현황이 끊기는 문제를 발견하고, <strong>데이터베이스 기반 자산관리 시스템</strong>을 직접 개발해 온보딩/라이선스 만료 관리까지 자동화했습니다.
+      </div>
+    </div>
+
+    <div class="prob-card">
+      <div class="prob-num">PROBLEM 04</div>
+      <div class="prob-title">헬프데스크 처리 지연 — 자동화하되 담당자 부재까지 대비</div>
+      <div class="prob-flow">
+        <span class="pf-tag">Form 접수 후 수동 확인/전달</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-tag">Power Automate + Teams Webhook + FAQ 챗봇 이중화</span>
+        <span class="pf-arrow">→</span>
+        <span class="pf-result">담당자 공백에도 안내 유지</span>
+      </div>
+      <div class="prob-desc">
+        헬프데스크 문의를 사람이 옮겨 적던 과정을 자동화했고, 담당자 한 명에게 문제가 생겨도 안내가 끊기지 않도록 <strong>관리자 계정 이중화</strong> 구조까지 함께 설계했습니다.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 03: 경력 -->
+<div class="section" id="experience">
+  <div class="sec-label">Section 03</div>
+  <div class="sec-title">경력</div>
+
+  <div class="career-block">
+    <div class="career-head">
+      <span class="career-co">(주)홈초이스</span>
+      <span class="career-period">2024.02 ~ 2025.11 / 1년 10개월</span>
+    </div>
+    <div class="career-role">TECH사업실 / 서버 인프라 운영 및 백엔드 개발</div>
+    <div class="career-desc">OTT 서비스 "오초이스" 앱/서버 인프라 운영</div>
+    <ul class="ul">
+      <li><strong>AWS EC2/S3/Elastic Beanstalk</strong> 기반 서비스 인프라 직접 운영</li>
+      <li>방화벽 정책 변경으로 인한 통신 장애를 <strong>EC2 Elastic IP 고정 구조</strong>로 재구성해 근본 해결</li>
+      <li>SSL 인증서 적용으로 전 구간 HTTPS 전환, 정보보안 정책 실무 적용</li>
+      <li>Spring Boot REST API 서버 개발, Quartz 배치로 5분 주기 잡 6개 구성해 자동화</li>
+      <li>MySQL/DynamoDB 기반 데이터 처리, LG헬로비전/딜라이브 파트너사 마이그레이션 2건 수행</li>
+    </ul>
+  </div>
+
+  <div class="career-block">
+    <div class="career-head">
+      <span class="career-co">아우토크립트</span>
+      <span class="career-period">그린맨파워 파견</span>
+    </div>
+    <div class="career-role">IT 인프라 / 자산관리 담당</div>
+    <ul class="ul">
+      <li>엑셀 산재 자산관리를 <strong>Java/Spring Boot/React 시스템</strong>으로 전환, 실사용 데이터 2,394건 이관</li>
+      <li>헬프데스크 Form 접수를 Power Automate/Teams Webhook으로 연동, <strong>FAQ 챗봇 관리자 계정 이중화</strong> 설계</li>
+      <li>입/퇴사 시 계정 생성/회수 자동화로 정보보안 리스크 축소, SW 라이선스 관리 사내사이트 구축</li>
+      <li><strong>IT 자산 비용 절감을 위한 IDC 환경 변경 및 클라우드 전환 가능성 실사</strong> 직접 수행</li>
+      <li>Docker/Render API로 배포 자동화, CORS 오류/데이터 이관 누락 직접 원인 추적 및 해결</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 04: 지원동기 -->
+<div class="section" id="motivation">
+  <div class="sec-label">Section 04</div>
+  <div class="sec-title">지원동기</div>
+  <div class="mot-box">
+    주성엔지니어링은 <strong>광주 본사와 용인 R&D센터</strong>로 거점이 나뉘어 있고, 전체 인력의 60%를 넘는 비중이 R&D 인력으로 알고 있습니다. 반도체/디스플레이 증착 장비처럼 정밀한 연구와 생산이 계속 돌아가는 조직일수록, 그걸 뒤에서 떠받치는 사내 서버와 네트워크, DB가 멈추면 손해가 훨씬 크게 번질 거라고 생각합니다.
+  </div>
+  <div class="mot-box">
+    홈초이스에서 실서비스 인프라를 운영하며 방화벽 정책 변경으로 반복되던 통신 장애를 구조적으로 고쳤고, 아우토크립트에서는 IT 자산관리 시스템을 직접 개발하며 서버/네트워크 안정 운영과 계정/자산 보안을 함께 다뤄봤습니다. 본사와 R&D센터, 두 거점을 함께 운용해야 하는 이 자리에 이 경험을 바로 적용하고 싶습니다.
+  </div>
+</div>
+
+<!-- SECTION 05: 자격/학력 -->
+<div class="section" id="certs">
+  <div class="sec-label">Section 05</div>
+  <div class="sec-title">자격 / 학력 / 저서</div>
+  <div class="cert-list">
+    <div class="cert"><div class="cert-lbl">학력</div><div class="cert-val">대전대학교 컴퓨터공학과 졸업 / 복수전공: 모빌리티AI/SW융합전공</div></div>
+    <div class="cert"><div class="cert-lbl">AI 기본과정 수료</div><div class="cert-val">정보통신산업진흥원 — 인공지능 기본과정 이수</div></div>
+    <div class="cert"><div class="cert-lbl">데이터사이언스 수료</div><div class="cert-val">네이버 부스트코스 &lt;DATA SCIENCE&gt; 코칭스터디 2023 수료</div></div>
+    <div class="cert"><div class="cert-lbl">저서</div><div class="cert-val"><a href="https://www.yes24.com/Product/Goods/109711067" target="_blank">개발자가 되기 위해 꼭 알아야 하는 IT 용어 (공동 저자)</a></div></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+  <div class="sec-label">Contact</div>
+  <div class="sec-title">연락처</div>
+  <div style="display:flex; gap:32px; flex-wrap:wrap; background:var(--card); border:1px solid var(--bdr); border-radius:12px; padding:24px;">
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">전화</div>
+      <div style="font-weight:700;">010-2538-1519</div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">이메일</div>
+      <div style="font-weight:700;">justinnn980@gmail.com</div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">블로그</div>
+      <div style="font-weight:700;"><a href="https://justinnn980.tistory.com">justinnn980.tistory.com</a></div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">도서</div>
+      <div style="font-weight:700;"><a href="https://www.yes24.com/Product/Goods/109711067">개발자가 꼭 알아야 하는 IT 용어</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>박준철 포트폴리오 / 주성엔지니어링(주) IT(서버관리/보안) 지원</footer>
+
+</body>
+</html>
