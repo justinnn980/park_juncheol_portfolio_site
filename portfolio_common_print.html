@@ -106,7 +106,7 @@
   </div>
 
   <div class="lead">
-    실서비스에서 1년 10개월간 Flutter 앱(LG헬로비전 가입자 343만 명 / 딜라이브 매출 3,500억)을 단독으로 개발/운영하며 마이그레이션, DRM 통합, 성능 개선을 직접 수행했습니다. App Store/Play Store 정식 배포부터 Kotlin/Spring Boot 백엔드 연동까지 앱 하나를 처음부터 끝까지 책임져온 개발자입니다.
+    실서비스에서 1년 10개월간 Flutter 앱(LG헬로비전 가입자 343만 명 / 딜라이브 매출 3,500억)을 단독으로 개발/운영하며 마이그레이션, DRM 통합, 성능 개선을 직접 수행했습니다. App Store/Play Store 정식 배포부터 개인 프로젝트의 연동 서버 구현까지, 앱 하나를 처음부터 끝까지 책임져온 개발자입니다.
   </div>
 
   <!-- 실무 프로젝트 -->
@@ -115,9 +115,9 @@
 
     <div class="proj">
       <div class="proj-t">헬로tv → 오초이스 앱 마이그레이션</div>
-      <div class="proj-tech">Flutter, Riverpod, React/TypeScript, WebView JS Bridge, AWS, Firebase &nbsp;|&nbsp; (주)홈초이스 / LG헬로비전(매출 1조) / 2025.02–2025.10 / 팀 4인(개발3/디자인1)</div>
-      <div class="proj-d">헬로tv 앱을 오초이스로 통합 마이그레이션. <strong>Riverpod</strong>으로 셋톱박스 3대 페어링 상태를 연결/기기/콘텐츠 단위로 분리 관리해 상태 혼재를 해결하고, React + WebView JS Bridge 양방향 구조로 앱 재배포 없이 콘텐츠를 즉시 반영하는 운영 구조를 구현. Lazy Loading/스켈레톤 UI/CDN 최적화로 <strong>FCP 39% 단축, LCP 10.8% 개선</strong>. AWS EC2 Elastic IP + HTTPS로 이통사 방화벽 차단 문제도 근본 해결.</div>
-      <div class="proj-pt"><b>어필 포인트</b> 상태관리 설계부터 성능 최적화, 인프라 이슈 대응까지 앱 전체를 관통하는 문제 해결 능력을 보여줍니다.</div>
+      <div class="proj-tech">Flutter, Riverpod, WebView JS Bridge, Firebase &nbsp;|&nbsp; (주)홈초이스 / LG헬로비전(매출 1조) / 2025.02–2025.10 / 팀 4인(개발3/디자인1)</div>
+      <div class="proj-d">헬로tv 앱을 오초이스로 통합 마이그레이션. <strong>Riverpod</strong>으로 셋톱박스 3대 페어링 상태를 연결/기기/콘텐츠 단위로 분리 관리해 상태 혼재를 해결하고, Flutter ↔ WebView JS Bridge 양방향 구조로 앱 재배포 없이 콘텐츠를 즉시 반영하는 운영 구조를 구현. 화면 병목을 분석/개선해 <strong>로딩 속도 39% 단축</strong>을 달성.</div>
+      <div class="proj-pt"><b>어필 포인트</b> 상태관리 설계부터 화면 성능 최적화까지, 앱 UX 전체를 관통하는 문제 해결 능력을 보여줍니다.</div>
     </div>
 
     <div class="proj">
@@ -133,24 +133,17 @@
     <div class="sec-title">개인 프로젝트</div>
 
     <div class="proj">
-      <div class="proj-t">담아(Dama) — 구독 통합 관리 서비스</div>
-      <div class="proj-tech">Flutter, Kotlin/Spring Boot, JWT, MySQL, Docker &nbsp;|&nbsp; 팀 3인 / 2026.01–2026.02</div>
-      <div class="proj-d">User/Subscription/Community 도메인을 분리 설계하고, JWT Access/Refresh Token 인증 흐름을 Flutter에서 직접 구현. Kotlin/Spring Boot 백엔드를 직접 구현했고, Soft Delete 정책으로 구독 이력 데이터를 보존, Docker로 통합 실행 환경을 구성.</div>
-      <div class="proj-pt"><b>어필 포인트</b> Flutter 클라이언트와 Kotlin/Spring Boot 서버를 함께 설계하는 프론트/백엔드 양방향 역량을 보여줍니다.</div>
+      <div class="proj-t">담아(Dama) — 구독 통합 관리 앱</div>
+      <div class="proj-tech">Flutter, JWT, REST API 연동 &nbsp;|&nbsp; 팀 3인 / Flutter 앱 개발 담당 / 2026.01–2026.02</div>
+      <div class="proj-d">회원/구독/커뮤니티 화면을 도메인별로 분리 설계하고, JWT Access/Refresh Token 인증 흐름을 Flutter에서 직접 구현. 연동 서버까지 함께 구현해 구독 취소 후에도 이력이 남도록 데이터 보존 처리를 적용.</div>
+      <div class="proj-pt"><b>어필 포인트</b> 앱 화면 설계뿐 아니라 연동 서버까지 이해하고 있어, 데이터 흐름을 고려한 화면 설계가 가능함을 보여줍니다.</div>
     </div>
 
     <div class="proj">
-      <div class="proj-t">숫자 대결 — 실시간 WebSocket 게임</div>
-      <div class="proj-tech">Flutter, Kotlin/Spring Boot, WebSocket, Render &nbsp;|&nbsp; 솔로 3일 / 2026.01~</div>
-      <div class="proj-d">기획부터 Flutter 클라이언트, Kotlin Spring Boot WebSocket 서버 구현, Render 배포까지 전 과정을 3일 내 단독으로 구현. 서버 중심 상태 관리로 동시 입력 충돌을 방지.</div>
+      <div class="proj-t">숫자 대결 — 실시간 대결 앱</div>
+      <div class="proj-tech">Flutter, WebSocket 연동 &nbsp;|&nbsp; 솔로 3일 / 기획~배포 End-to-End / 2026.01~</div>
+      <div class="proj-d">실시간 통신으로 여러 사용자의 입력을 동시에 반영하는 대결 화면을 Flutter로 구현. 기획, 앱 개발, 연동 서버 구축, 배포까지 전 과정을 3일 내 단독으로 완성.</div>
       <div class="proj-pt"><b>어필 포인트</b> 기획-구현-배포 전 과정을 짧은 기간에 혼자 완결하는 실행력을 보여줍니다.</div>
-    </div>
-
-    <div class="proj">
-      <div class="proj-t">개인 커뮤니티 웹앱</div>
-      <div class="proj-tech">Docker, Render, AI 에이전트 활용 &nbsp;|&nbsp; 개인 / 2026.05~ 진행 중</div>
-      <div class="proj-d">게시글/좋아요/팔로우/채팅 기능을 ERD 설계부터 배포까지 단독 구현. Claude Code 등 AI 에이전트를 기획/설계/구현/배포 전 과정에서 활용해 개발 속도를 최적화.</div>
-      <div class="proj-pt"><b>어필 포인트</b> AI 도구를 실제 개발 워크플로우에 능동적으로 통합해 활용하는 역량을 보여줍니다.</div>
     </div>
   </div>
 
@@ -163,14 +156,13 @@
   <div class="sec">
     <div class="sec-title">기술 스택</div>
     <ul class="blt">
-      <li><strong>App</strong> — Flutter 2.0~3.38, Riverpod, GetX, Provider, betterPlayer, iOS, Android</li>
+      <li><strong>언어/프레임워크</strong> — Dart, Flutter 2.0~3.38, iOS, Android</li>
+      <li><strong>상태관리</strong> — Riverpod(주력), GetX, Provider</li>
+      <li><strong>아키텍처</strong> — WebView JS Bridge, DRM 통합(NCG/Multi DRM)</li>
       <li><strong>배포/운영</strong> — App Store(인증서/프로비저닝/TestFlight), Play Store(Keystore/ProGuard)</li>
-      <li><strong>Frontend</strong> — React 18, TypeScript, WebView JS Bridge</li>
-      <li><strong>Backend</strong> — Kotlin, Java, Spring Boot, REST API, WebSocket, JWT</li>
-      <li><strong>DB</strong> — MySQL, DynamoDB</li>
-      <li><strong>인프라</strong> — AWS(EC2, S3, Elastic Beanstalk), Docker, SSL</li>
-      <li><strong>분석/광고</strong> — Firebase Analytics, Crashlytics, AdMob</li>
-      <li><strong>AI Tool</strong> — Claude Code — 기획/설계/구현/배포 전 사이클 활용</li>
+      <li><strong>분석/연동</strong> — Firebase Analytics/Crashlytics, AdMob, REST API/JWT 인증, WebSocket 연동</li>
+      <li><strong>AI Tool</strong> — AI 도구를 기획/설계/구현/배포 전 사이클에서 활용</li>
+      <li><strong>부가 역량</strong> — 앱과 연동되는 서버(백엔드) 개발도 필요 시 직접 수행 가능</li>
     </ul>
   </div>
 
@@ -180,7 +172,7 @@
     <ul class="blt">
       <li><strong>소스 레벨 진단력</strong> — API 문서로 해결되지 않는 문제를 라이브러리 소스 코드까지 분석해 해결</li>
       <li><strong>앱 전 과정 책임</strong> — 기획-개발-배포-운영을 단독으로 수행한 실서비스/개인 프로젝트 다수</li>
-      <li><strong>프론트/백엔드 양방향 설계</strong> — Flutter 클라이언트와 Kotlin/Spring Boot 서버를 함께 구현</li>
+      <li><strong>성능 최적화</strong> — 화면 병목을 데이터로 분석해 로딩 속도 39% 개선 등 수치로 증명되는 결과를 만듦</li>
     </ul>
   </div>
 
