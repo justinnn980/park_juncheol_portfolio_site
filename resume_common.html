@@ -87,23 +87,6 @@
     .summary-box { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 24px 28px; font-size: 14px; color: var(--sub); line-height: 1.9; }
     .summary-box strong { color: var(--text); }
 
-    /* SKILL SECTION */
-    .sk-group { margin-bottom: 28px; }
-    .sk-group-title { font-size: 12px; font-weight: 800; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
-    .sk-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .sk-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 10px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 14px; transition: border-color .2s; }
-    .sk-card:hover { border-color: rgba(6,182,212,0.35); }
-    .sk-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
-    .sk-name { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
-    .sk-level { font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 10px; display: inline-block; margin-bottom: 5px; }
-    .sk-level.prod { background: rgba(6,182,212,0.15); color: var(--cy); }
-    .sk-level.exp  { background: rgba(251,191,36,0.15); color: #FBBF24; }
-    .sk-desc { font-size: 12px; color: var(--sub); line-height: 1.55; }
-    .sk-cards-2 { grid-template-columns: repeat(2, 1fr); }
-    .sk-cards-4 { grid-template-columns: repeat(4, 1fr); }
-    .sk-note { margin-top: 16px; font-size: 12.5px; color: var(--muted); padding: 12px 16px; background: var(--card2); border: 1px solid var(--bdr); border-radius: 8px; }
-    .sk-note strong { color: var(--sub); }
-
     /* PROBLEM CARDS */
     .prob-list { display: grid; gap: 18px; }
     .prob-card {
@@ -162,7 +145,6 @@
     @media (max-width: 800px) {
       .hero { grid-template-columns: 1fr; }
       .hero-stats { grid-template-columns: repeat(2, 1fr); }
-      .sk-cards, .sk-cards-4 { grid-template-columns: 1fr 1fr; }
       .proj-grid { grid-template-columns: 1fr; }
       .side-by-side { grid-template-columns: 1fr; }
     }
@@ -173,7 +155,7 @@
 <nav>
   <div class="nav-name">박준철<span class="nav-tag">이력서 / 포트폴리오</span></div>
   <div class="nav-links">
-    <a href="#skills">기술 스택</a>
+    <a href="#summary">요약</a>
     <a href="#problem">문제 해결</a>
     <a href="#experience">경력</a>
     <a href="#projects">프로젝트</a>
@@ -258,144 +240,9 @@
   </div>
 </div>
 
-<!-- SECTION 01: 기술 스택 -->
-<div class="section" id="skills">
-  <div class="sec-label">Section 01</div>
-  <div class="sec-title">기술 스택</div>
-
-  <div class="sk-group">
-    <div class="sk-group-title">언어 / 프레임워크</div>
-    <div class="sk-cards sk-cards-2">
-      <div class="sk-card">
-        <div class="sk-icon">🎯</div>
-        <div>
-          <div class="sk-name">Dart / Flutter</div>
-          <span class="sk-level prod">실서비스 1년 10개월</span>
-          <div class="sk-desc">Flutter 2.0부터 3.38까지 버전업을 직접 수행하며 실서비스 앱을 단독 개발/운영.</div>
-        </div>
-      </div>
-      <div class="sk-card">
-        <div class="sk-icon">🧩</div>
-        <div>
-          <div class="sk-name">크로스플랫폼 (iOS / Android)</div>
-          <span class="sk-level prod">단일 코드베이스 운영</span>
-          <div class="sk-desc">하나의 코드베이스로 아이폰/안드로이드 양쪽에 정식 출시 및 지속 운영.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sk-group">
-    <div class="sk-group-title">상태 관리</div>
-    <div class="sk-cards">
-      <div class="sk-card">
-        <div class="sk-icon">🥇</div>
-        <div>
-          <div class="sk-name">Riverpod</div>
-          <span class="sk-level prod">실서비스 주력 / 1년 10개월</span>
-          <div class="sk-desc">셋톱박스 3대 페어링 상태를 연결 / 기기 / 콘텐츠 노출 단위로 분리 관리.</div>
-        </div>
-      </div>
-      <div class="sk-card">
-        <div class="sk-icon">🥈</div>
-        <div>
-          <div class="sk-name">GetX</div>
-          <span class="sk-level exp">프로젝트 적용 경험</span>
-          <div class="sk-desc">GetxController + .obs 반응형 상태 관리, 간결한 의존성 주입 패턴 활용.</div>
-        </div>
-      </div>
-      <div class="sk-card">
-        <div class="sk-icon">🥉</div>
-        <div>
-          <div class="sk-name">Provider</div>
-          <span class="sk-level exp">프로젝트 적용 경험</span>
-          <div class="sk-desc">ChangeNotifier + Consumer 구조, 멀티 프로바이더 트리 설계.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sk-group">
-    <div class="sk-group-title">아키텍처 / 네이티브 연동</div>
-    <div class="sk-cards sk-cards-2">
-      <div class="sk-card">
-        <div>
-          <div class="sk-name">WebView + JS Bridge</div>
-          <span class="sk-level prod">실서비스 적용</span>
-          <div class="sk-desc">웹 화면과 Flutter 간 양방향 브리지를 설계해 앱 재배포 없이 콘텐츠 즉시 반영.</div>
-        </div>
-      </div>
-      <div class="sk-card">
-        <div>
-          <div class="sk-name">DRM 통합</div>
-          <span class="sk-level prod">실서비스 적용</span>
-          <div class="sk-desc">NCG DRM → Multi DRM(Widevine/FairPlay) 전환, 단일 플레이어 인터페이스로 통합.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sk-group">
-    <div class="sk-group-title">배포 / 출시 운영</div>
-    <div class="sk-cards sk-cards-2">
-      <div class="sk-card">
-        <div class="sk-icon">🍎</div>
-        <div>
-          <div class="sk-name">iOS 배포</div>
-          <span class="sk-level prod">App Store 출시 운영</span>
-          <div class="sk-desc">인증서 / 프로비저닝 프로파일 관리, TestFlight 배포, 네이티브 권한 / 빌드 이슈 직접 대응.</div>
-        </div>
-      </div>
-      <div class="sk-card">
-        <div class="sk-icon">🤖</div>
-        <div>
-          <div class="sk-name">Android 배포</div>
-          <span class="sk-level prod">Play Store 출시 운영</span>
-          <div class="sk-desc">Keystore 서명 / ProGuard 설정, 플레이스토어 심사 / 버전 관리.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sk-group" style="margin-bottom:0;">
-    <div class="sk-group-title">분석 / 연동</div>
-    <div class="sk-cards sk-cards-4">
-      <div class="sk-card">
-        <div>
-          <div class="sk-name">Firebase</div>
-          <span class="sk-level prod">실서비스 연동</span>
-          <div class="sk-desc">Analytics 이벤트 설계, Crashlytics 오류 모니터링.</div>
-        </div>
-      </div>
-      <div class="sk-card">
-        <div>
-          <div class="sk-name">AdMob</div>
-          <span class="sk-level prod">실서비스 연동</span>
-          <div class="sk-desc">광고 노출 운영, 수익화 지표 확인.</div>
-        </div>
-      </div>
-      <div class="sk-card">
-        <div>
-          <div class="sk-name">REST API 연동</div>
-          <span class="sk-level prod">실서비스 연동</span>
-          <div class="sk-desc">JWT Access/Refresh Token 인증 흐름 앱단에서 직접 구현.</div>
-        </div>
-      </div>
-      <div class="sk-card">
-        <div>
-          <div class="sk-name">WebSocket 연동</div>
-          <span class="sk-level exp">프로젝트 적용</span>
-          <div class="sk-desc">실시간 데이터 반영이 필요한 화면에 실시간 통신 연동.</div>
-        </div>
-      </div>
-    </div>
-    <div class="sk-note"><strong>부가 역량</strong> — 앱과 연동되는 서버(백엔드) 개발도 필요 시 직접 수행 가능 (개인 프로젝트에서 Kotlin/Spring Boot로 REST API/WebSocket 서버 직접 구현).</div>
-  </div>
-</div>
-
-<!-- SECTION 02: 문제 해결 -->
+<!-- SECTION 01: 문제 해결 -->
 <div class="section" id="problem">
-  <div class="sec-label">Section 02</div>
+  <div class="sec-label">Section 01</div>
   <div class="sec-title">실서비스에서 해결한 문제들</div>
   <div class="prob-list">
 
@@ -487,9 +334,9 @@
   </div>
 </div>
 
-<!-- SECTION 03: 경력 -->
+<!-- SECTION 02: 경력 -->
 <div class="section" id="experience">
-  <div class="sec-label">Section 03</div>
+  <div class="sec-label">Section 02</div>
   <div class="sec-title">경력</div>
 
   <div class="career-block">
@@ -511,9 +358,9 @@
   </div>
 </div>
 
-<!-- SECTION 04: 프로젝트 -->
+<!-- SECTION 03: 프로젝트 -->
 <div class="section" id="projects">
-  <div class="sec-label">Section 04</div>
+  <div class="sec-label">Section 03</div>
   <div class="sec-title">프로젝트</div>
 
   <div class="proj-grid">
@@ -592,9 +439,9 @@
   </div>
 </div>
 
-<!-- SECTION 05: 자격/학력 -->
+<!-- SECTION 04: 자격/학력 -->
 <div class="section" id="certs">
-  <div class="sec-label">Section 05</div>
+  <div class="sec-label">Section 04</div>
   <div class="sec-title">자격 / 학력 / 저서</div>
   <div class="cert-list">
     <div class="cert"><div class="cert-lbl">학력</div><div class="cert-val">대전대학교 컴퓨터공학과 졸업 / 복수전공: 모빌리티AI/SW융합전공</div></div>
