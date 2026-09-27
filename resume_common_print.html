@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>박준철 이력서 / 경력기술서</title>
+  <title>박준철 이력서 / 경력기술서 — Flutter 앱 개발자</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --em:   #1D4ED8;
-      --em-l: #DBEAFE;
+      --em:   #0E7490;
+      --em-l: #CFFAFE;
       --text: #111827;
       --sub:  #374151;
       --muted:#6B7280;
       --bdr:  #E5E7EB;
-      --bg-h: #EFF6FF;
+      --bg-h: #ECFEFF;
     }
     html { font-size: 12.5px; }
     body {
@@ -40,11 +40,11 @@
       margin-bottom: 16px;
     }
     .sum-item {
-      flex: 1 1 0; min-width: 110px; padding: 8px 12px;
+      flex: 1 1 0; min-width: 100px; padding: 8px 10px;
       border-right: 1px solid var(--bdr); background: var(--bg-h);
     }
     .sum-item:last-child { border-right: none; }
-    .sum-n { font-size: 12.5px; font-weight: 900; color: var(--em); }
+    .sum-n { font-size: 12px; font-weight: 900; color: var(--em); }
     .sum-l { font-size: 9.5px; color: var(--muted); font-weight: 600; margin-top: 1px; }
 
     /* SECTION */
@@ -111,10 +111,10 @@
         position: fixed; top: 20px; right: 20px; z-index: 100;
         padding: 10px 20px; background: var(--em); color: #fff;
         border: none; border-radius: 8px; font-size: 14px; font-weight: 700;
-        cursor: pointer; box-shadow: 0 4px 12px rgba(29,78,216,0.3);
+        cursor: pointer; box-shadow: 0 4px 12px rgba(14,116,144,0.3);
         font-family: inherit;
       }
-      .print-btn:hover { background: #1E3A8A; }
+      .print-btn:hover { background: #0b5a70; }
     }
   </style>
 </head>
@@ -127,7 +127,7 @@
   <!-- HEADER -->
   <div class="hd">
     <div class="hd-name">박준철 이력서 / 경력기술서</div>
-    <div class="hd-role">백엔드 / 서버인프라 개발자</div>
+    <div class="hd-role">Flutter 앱 개발자 / iOS / Android</div>
     <div class="hd-contacts">
       <span class="hd-contact">📞 010-2538-1519</span>
       <span class="hd-contact">✉ justinnn980@gmail.com</span>
@@ -138,10 +138,11 @@
 
   <!-- 경력요약 -->
   <div class="sum-bar">
-    <div class="sum-item"><div class="sum-n">1년 10개월</div><div class="sum-l">실서비스 인프라/백엔드 운영</div></div>
-    <div class="sum-item"><div class="sum-n">Flutter/React</div><div class="sum-l">앱/웹 통합 마이그레이션</div></div>
-    <div class="sum-item"><div class="sum-n">AWS EC2/S3</div><div class="sum-l">클라우드 인프라 운영</div></div>
-    <div class="sum-item"><div class="sum-n">2,394건</div><div class="sum-l">사내 시스템 자체 개발/운영</div></div>
+    <div class="sum-item"><div class="sum-n">1년 10개월</div><div class="sum-l">Flutter 실서비스 개발/운영</div></div>
+    <div class="sum-item"><div class="sum-n">AOS + iOS</div><div class="sum-l">정식 배포 및 버전 관리</div></div>
+    <div class="sum-item"><div class="sum-n">Kotlin + Flutter</div><div class="sum-l">프론트/백엔드 양쪽 구현</div></div>
+    <div class="sum-item"><div class="sum-n">AdMob/Firebase</div><div class="sum-l">광고/분석 실서비스 연동</div></div>
+    <div class="sum-item"><div class="sum-n">마이그레이션 2건</div><div class="sum-l">대형 파트너사 앱 전환 주도</div></div>
   </div>
 
   <!-- 경력사항 -->
@@ -151,52 +152,36 @@
       <span class="meta-co">(주)홈초이스</span>
       <span class="meta-period">2024.02 ~ 2025.11 (1년 10개월)</span>
     </div>
-    <div class="meta-sub">전국 디지털케이블TV 가입가구에 VOD를 공급하는 국내 유일 사업자 / TECH사업실 앱/웹/서버 인프라 운영 및 개발</div>
+    <div class="meta-sub">OTT 서비스 "오초이스" / LG헬로비전(매출 1조)/딜라이브(매출 3,500억) 파트너사 앱 마이그레이션 2건 주도</div>
 
     <div class="blk-lbl">담당업무</div>
     <ul class="blt">
-      <li>"헬로tv"/"딜라이브 모바일TV" 앱을 Flutter 기반 "오초이스" 앱으로 통합 마이그레이션, 콘텐츠 선택 화면 React 웹 분리 전환</li>
-      <li>AWS EC2/S3/Elastic Beanstalk 기반 서버/네트워크 인프라 구축 및 운영</li>
-      <li>Spring Boot REST API 서버 개발, Quartz 배치 5분 주기 잡 6개 구성</li>
-      <li>방화벽 정책 관련 장애 대응 및 통신 구간 정보보안(SSL/HTTPS) 개선</li>
-      <li>LG헬로비전/딜라이브 등 복수 파트너사 서비스 통합 마이그레이션 및 이슈 조율</li>
-      <li>콘텐츠 메타데이터 수집 자동화(Python/Selenium/Docker/Cron Job) 및 MySQL/DynamoDB 데이터 처리</li>
+      <li>LG헬로비전/딜라이브 파트너사 앱 → 오초이스 전환 마이그레이션 기획 및 개발 주도 (팀 4인/개발 3 / 디자인 1)</li>
+      <li>Riverpod 기반 상태관리로 셋톱박스 3대 페어링 상태를 연결/기기/콘텐츠 노출 단위로 분리 관리</li>
+      <li>React + WebView JS Bridge 양방향 구조 설계, NCG DRM → Multi DRM(Widevine/FairPlay) 전환</li>
+      <li>iOS/Android 네이티브 인증서/권한/빌드 이슈 직접 대응, 앱스토어/플레이스토어 출시 및 버전 관리</li>
+      <li>Firebase Analytics, AdMob 연동 및 성능 지표 모니터링</li>
     </ul>
 
     <div class="blk-lbl">주요성과</div>
     <ul class="blt result">
-      <li>DRM 방식이 서로 다른 <strong>LG헬로비전(가입자 343만 명)/딜라이브(매출 3,500억)</strong> 앱을 별도 솔루션 도입 없이 플레이어 커스터마이징으로 통합</li>
-      <li>로드밸런싱 환경의 Proxy IP 변경으로 발생한 통신 장애를 <strong>EC2 Elastic IP 고정 구조로 재설계해 근본 해결</strong></li>
-      <li>미암호화 통신 구간에 SSL 인증서를 적용해 <strong>전 구간 HTTPS 전환</strong> 완료</li>
-      <li>웹 전환 구간 병목을 분석/개선해 <strong>FCP 39%, LCP 10.8% 개선</strong></li>
-      <li>반복 업무였던 콘텐츠 메타데이터 수집을 Python/Selenium/Docker/Cron으로 자동화</li>
+      <li>Riverpod로 셋톱박스 상태 혼재/렌더링 오류를 <strong>연결/기기/콘텐츠 단위 분리</strong>로 해결, 상태 변화 즉시 반영</li>
+      <li>WebView JS Bridge 설계로 <strong>FCP 39% 단축, LCP 10.8% 개선</strong>, 앱 재배포 없이 콘텐츠 즉시 반영되는 운영 구조 확보</li>
+      <li>Flutter 2 → 3 메이저 버전업 시 전체 라이브러리 의존성 재검토, 무중단 업그레이드 완료</li>
+      <li>AWS EC2 Elastic IP + HTTPS 전환으로 이통사 Proxy 방화벽 차단 문제 근본 해결</li>
     </ul>
 
     <div class="stack-row">
       <span class="stack-tag">Flutter</span>
-      <span class="stack-tag">React</span>
-      <span class="stack-tag">TypeScript</span>
-      <span class="stack-tag">Java</span>
-      <span class="stack-tag">Spring Boot</span>
-      <span class="stack-tag">AWS EC2</span>
-      <span class="stack-tag">AWS S3</span>
-      <span class="stack-tag">Elastic Beanstalk</span>
-      <span class="stack-tag">MySQL</span>
-      <span class="stack-tag">DynamoDB</span>
-      <span class="stack-tag">Docker</span>
+      <span class="stack-tag">Riverpod</span>
+      <span class="stack-tag">WebView JS Bridge</span>
+      <span class="stack-tag">DRM 통합</span>
+      <span class="stack-tag">iOS 배포</span>
+      <span class="stack-tag">Android 배포</span>
+      <span class="stack-tag">Firebase</span>
+      <span class="stack-tag">AdMob</span>
+      <span class="stack-tag">AWS</span>
     </div>
-  </div>
-
-  <div class="sec">
-    <div class="meta-row">
-      <span class="meta-co">아우토크립트 (그린맨파워 파견)</span>
-    </div>
-    <div class="meta-sub">IT 인프라 / 자산관리 담당</div>
-    <ul class="blt">
-      <li>엑셀 산재 자산관리를 <strong>Java/Spring Boot/React 시스템</strong>으로 전환, 실사용 데이터 2,394건 이관</li>
-      <li>헬프데스크 Form 접수를 Power Automate/Teams Webhook으로 연동, FAQ 챗봇 관리자 계정 이중화 설계</li>
-      <li>입/퇴사 시 계정 생성/회수 자동화로 정보보안 리스크 축소, SW 라이선스 관리 사내사이트 구축</li>
-    </ul>
   </div>
 
   <!-- 보유 기술 -->
@@ -204,16 +189,16 @@
     <div class="sec-title">보유 기술 / 역량</div>
     <div class="skill-groups">
       <div class="skill-group">
-        <div class="skill-group-t">백엔드/앱/웹</div>
-        <div class="skill-group-v">Java, Spring Boot, Spring Data JPA/MyBatis, Flutter, Riverpod, React, TypeScript</div>
+        <div class="skill-group-t">Flutter / 앱개발</div>
+        <div class="skill-group-v">Riverpod/GetX/Provider 상태관리, WebView JS Bridge, DRM 통합(NCG/Multi DRM), Flutter 2→3 버전업</div>
       </div>
       <div class="skill-group">
-        <div class="skill-group-t">클라우드/인프라</div>
-        <div class="skill-group-v">AWS EC2/S3/Elastic Beanstalk, 방화벽 정책 대응, Docker, SSL/HTTPS</div>
+        <div class="skill-group-t">배포 / 운영</div>
+        <div class="skill-group-v">App Store(인증서/프로비저닝/TestFlight), Play Store(Keystore/ProGuard), Firebase Analytics/AdMob/Crashlytics</div>
       </div>
       <div class="skill-group">
-        <div class="skill-group-t">데이터/자동화</div>
-        <div class="skill-group-v">MySQL, DynamoDB, Python, Selenium, Power Automate</div>
+        <div class="skill-group-t">백엔드 / 데이터</div>
+        <div class="skill-group-v">Kotlin/Spring Boot REST API/WebSocket, JWT 인증, AWS EC2/Docker, MySQL</div>
       </div>
     </div>
   </div>
@@ -223,20 +208,20 @@
     <div class="sec-title">핵심 역량</div>
     <div class="strength-grid">
       <div class="strength">
-        <div class="strength-t">장애를 구조적으로 해결</div>
-        <div class="strength-v">임시조치가 아니라 재발하지 않는 구조로 재설계하는 방식으로 접근합니다.</div>
+        <div class="strength-t">문제를 소스 레벨까지 파고드는 진단력</div>
+        <div class="strength-v">오디오 겹침 등 API 문서로 해결되지 않는 이슈를 라이브러리 소스 분석으로 해결합니다.</div>
       </div>
       <div class="strength">
-        <div class="strength-t">앱/웹/서버/인프라 전체 이해</div>
-        <div class="strength-v">Flutter 앱, React 웹, Spring Boot 서버, AWS 인프라를 실무로 함께 다뤄왔습니다.</div>
+        <div class="strength-t">앱 하나를 처음부터 끝까지 책임지는 경험</div>
+        <div class="strength-v">기획-개발-배포-운영 전 과정을 단독으로 수행한 실서비스/개인 프로젝트 다수.</div>
       </div>
       <div class="strength">
-        <div class="strength-t">요청받지 않은 문제도 먼저 개선</div>
-        <div class="strength-v">엑셀 산재 자산관리를 발견해 사내 시스템을 직접 기획/개발/운영했습니다.</div>
+        <div class="strength-t">프론트/백엔드 양쪽 관점의 설계</div>
+        <div class="strength-v">Flutter 클라이언트와 Kotlin/Spring Boot 서버를 함께 설계/구현합니다.</div>
       </div>
       <div class="strength">
         <div class="strength-t">AI 도구 활용 개발</div>
-        <div class="strength-v">Claude Code 등 AI 도구를 기획/설계/구현 전 과정에서 적극 활용합니다.</div>
+        <div class="strength-v">Claude Code 등 AI 도구를 기획/설계/구현/배포 전 과정에서 적극 활용합니다.</div>
       </div>
     </div>
   </div>
