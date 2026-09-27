@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 포트폴리오</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --em:   #1D4ED8;
+      --em-l: #DBEAFE;
+      --text: #111827;
+      --sub:  #374151;
+      --muted:#6B7280;
+      --bdr:  #E5E7EB;
+      --bg-h: #EFF6FF;
+    }
+    html { font-size: 12px; }
+    body {
+      font-family: 'Noto Sans KR', -apple-system, 'Segoe UI', sans-serif;
+      color: var(--text); background: #fff; line-height: 1.6;
+    }
+    a { color: var(--em); text-decoration: none; }
+
+    .page { width: 210mm; margin: 0 auto; padding: 15mm 17mm; background: #fff; }
+    .page + .page { page-break-before: always; }
+
+    .hd { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 2px solid var(--text); }
+    .hd-name { font-size: 24px; font-weight: 900; letter-spacing: -1px; line-height: 1.15; margin-bottom: 4px; }
+    .hd-role { font-size: 12px; font-weight: 700; color: var(--em); margin-bottom: 6px; }
+    .hd-contacts { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hd-contact { font-size: 10.5px; color: var(--muted); }
+
+    .lead { font-size: 11px; color: var(--sub); line-height: 1.7; margin-bottom: 14px; padding: 10px 12px; background: var(--bg-h); border-radius: 6px; }
+
+    .sec { margin-bottom: 12px; }
+    .sec-title {
+      font-size: 11px; font-weight: 900; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--em);
+      border-bottom: 1px solid var(--bdr);
+      padding-bottom: 5px; margin-bottom: 8px;
+    }
+
+    .proj { border: 1px solid var(--bdr); border-radius: 6px; padding: 8px 11px; margin-bottom: 7px; }
+    .proj:last-child { margin-bottom: 0; }
+    .proj-t { font-size: 12px; font-weight: 800; color: var(--text); margin-bottom: 2px; }
+    .proj-tech { font-size: 9.5px; color: var(--muted); margin-bottom: 5px; }
+    .proj-d { font-size: 10.5px; color: var(--sub); line-height: 1.6; margin-bottom: 5px; }
+    .proj-d strong { color: var(--text); font-weight: 700; }
+    .proj-pt { font-size: 10px; color: var(--em); line-height: 1.55; padding-top: 5px; border-top: 1px dashed var(--bdr); }
+    .proj-pt b { font-weight: 800; }
+
+    .meta-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+    .meta-co { font-size: 13px; font-weight: 900; }
+    .meta-period { font-size: 10.5px; color: var(--muted); font-weight: 600; }
+    .meta-sub { font-size: 10px; color: var(--muted); margin-bottom: 6px; }
+
+    .blk-lbl { font-size: 10px; font-weight: 800; color: var(--sub); margin: 6px 0 3px; }
+    ul.blt { list-style: none; }
+    ul.blt li { position: relative; padding-left: 12px; font-size: 10.5px; color: var(--sub); line-height: 1.55; margin-bottom: 3px; }
+    ul.blt li::before { content: '-'; position: absolute; left: 0; color: var(--em); font-weight: 900; }
+    ul.blt li:last-child { margin-bottom: 0; }
+    ul.blt strong { color: var(--text); font-weight: 700; }
+
+    .stack-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+    .stack-tag { padding: 3px 8px; border-radius: 4px; background: var(--bg-h); border: 1px solid var(--em-l); color: var(--em); font-size: 9.5px; font-weight: 700; }
+
+    @media print {
+      html { font-size: 11px; }
+      body { background: #fff; }
+      .page { margin: 0; padding: 12mm 14mm; width: 100%; }
+      .no-print { display: none !important; }
+    }
+    @media screen {
+      body { background: #e5e7eb; padding: 32px 0; }
+      .page { box-shadow: 0 2px 20px rgba(0,0,0,0.12); margin-bottom: 24px; }
+      .print-btn {
+        position: fixed; top: 20px; right: 20px; z-index: 100;
+        padding: 10px 20px; background: var(--em); color: #fff;
+        border: none; border-radius: 8px; font-size: 14px; font-weight: 700;
+        cursor: pointer; box-shadow: 0 4px 12px rgba(29,78,216,0.3);
+        font-family: inherit;
+      }
+      .print-btn:hover { background: #1E3A8A; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨 PDF 저장 / 인쇄</button>
+
+<!-- PAGE 1 -->
+<div class="page">
+
+  <div class="hd">
+    <div class="hd-name">박준철 포트폴리오</div>
+    <div class="hd-role">백엔드 / 서버인프라 개발자</div>
+    <div class="hd-contacts">
+      <span class="hd-contact">📞 010-2538-1519</span>
+      <span class="hd-contact">✉ justinnn980@gmail.com</span>
+      <span class="hd-contact">💻 github.com/justinnn980</span>
+      <span class="hd-contact">🌐 <a href="https://park-juncheol-portfolio-site.onrender.com/resume_common.html">포트폴리오 상세보기 →</a></span>
+    </div>
+  </div>
+
+  <div class="lead">
+    실서비스 환경에서 Flutter 기반 OTT 앱(LG헬로비전 가입자 343만 명 / 딜라이브 매출 3,500억) 개발/운영, DRM 연동, 서버/인프라 안정화를 직접 수행한 백엔드/앱 개발자입니다. 요청받지 않은 사내 시스템도 직접 기획/개발/운영해본 경험이 있습니다.
+  </div>
+
+  <!-- 실무 프로젝트 1 -->
+  <div class="sec">
+    <div class="sec-title">실무 프로젝트 01 — OTT 앱 마이그레이션 및 웹 전환</div>
+
+    <div class="meta-row">
+      <span class="meta-co">(주)홈초이스</span>
+      <span class="meta-period">2024.02 ~ 2025.11</span>
+    </div>
+    <div class="meta-sub">시니어 1명, 개발자 2명, 디자이너 1명 / LG헬로비전(매출 1조) / 딜라이브(매출 3,500억)</div>
+    <div class="proj-d">"헬로tv" 앱과 "딜라이브 모바일TV" 앱을 "오초이스" 앱으로 통합 마이그레이션. 콘텐츠 포스터가 많은 영화 선택 화면은 웹으로 분리해 앱 재배포 없이 운영 요구사항을 실시간 반영할 수 있도록 개선.</div>
+
+    <div class="blk-lbl">문제와 해결</div>
+    <ul class="blt">
+      <li><strong>웹 전환 후 성능 저하</strong> — FCP/LCP 기준 병목 분석, 스켈레톤 UI/초기 렌더링 최적화/Lazy Loading/이미지 리사이징 적용 → FCP 39%, LCP 10.8% 개선</li>
+      <li><strong>셋톱박스 페어링 상태관리</strong> — 하나의 앱에서 최대 3개 셋톱박스 연결/종료/변경 시 콘텐츠 실시간 전환, Riverpod 기반 상태관리 구조로 안정화</li>
+      <li><strong>플레이어 중복 실행</strong> — 쇼츠형 화면에서 플레이어 이중 초기화로 사운드 중복 출력, 원본 라이브러리 직접 수정해 Android 생명주기 레벨에서 단일 오디오 출력으로 해결</li>
+      <li><strong>DRM 호환성</strong> — 딜라이브 NCG DRM과 오초이스 Multi DRM 방식 차이를 별도 솔루션 도입 없이 플레이어 커스터마이징으로 동일 UI 제공</li>
+      <li><strong>Proxy IP 변경/방화벽 차단</strong> — EC2 Elastic IP 할당으로 고정 IP 구조 재구성해 근본 해결</li>
+      <li><strong>HTTPS 전환</strong> — SSL 인증서를 Proxy 서버에 적용해 전 구간 HTTPS 구성</li>
+    </ul>
+
+    <div class="stack-row">
+      <span class="stack-tag">Flutter 3</span>
+      <span class="stack-tag">React 18</span>
+      <span class="stack-tag">TypeScript</span>
+      <span class="stack-tag">Java 17</span>
+      <span class="stack-tag">Spring Boot 2</span>
+      <span class="stack-tag">MySQL</span>
+      <span class="stack-tag">DynamoDB</span>
+      <span class="stack-tag">MyBatis</span>
+      <span class="stack-tag">AWS Elastic Beanstalk</span>
+      <span class="stack-tag">AWS S3/EC2</span>
+    </div>
+  </div>
+
+  <!-- 실무 프로젝트 2 -->
+  <div class="sec">
+    <div class="sec-title">실무 프로젝트 02 — 사내 IT 자산관리 / 헬프데스크 시스템</div>
+
+    <div class="meta-row">
+      <span class="meta-co">아우토크립트 (그린맨파워 파견)</span>
+    </div>
+    <div class="meta-sub">IT 인프라 / 자산관리 담당</div>
+    <div class="proj-d">담당자 개인 엑셀에 산재하던 자산관리를 데이터베이스 기반 시스템으로 직접 기획/개발/운영. 요청받지 않은 문제를 먼저 찾아 해결한 사내 솔루션.</div>
+
+    <div class="blk-lbl">문제와 해결</div>
+    <ul class="blt">
+      <li><strong>담당자 교체 시 자산 현황 단절</strong> — Java/Spring Boot/React 기반 자산관리 시스템 자체 개발, 실사용 데이터 2,394건 이관</li>
+      <li><strong>헬프데스크 처리 지연</strong> — Form 접수를 Power Automate/Teams Webhook으로 자동 연동, 처리 이력 상세화</li>
+      <li><strong>담당자 부재 시 안내 공백</strong> — FAQ 챗봇 도입, 관리자 계정 이중화로 담당자 공백에도 안내 유지</li>
+      <li><strong>계정 방치 리스크</strong> — 입/퇴사 시 계정 생성/회수 자동화, SW 라이선스 관리 사내사이트 구축</li>
+    </ul>
+
+    <div class="stack-row">
+      <span class="stack-tag">Java</span>
+      <span class="stack-tag">Spring Boot</span>
+      <span class="stack-tag">React</span>
+      <span class="stack-tag">Power Automate</span>
+      <span class="stack-tag">Teams Webhook</span>
+      <span class="stack-tag">Docker</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+
+  <!-- 기술 스택 종합 -->
+  <div class="sec">
+    <div class="sec-title">기술 스택</div>
+    <ul class="blt">
+      <li><strong>App</strong> — Flutter 2.0~3.38, Riverpod, betterPlayer, iOS, Android</li>
+      <li><strong>Backend</strong> — Java 17/21, Spring Boot, Spring Data JPA, MyBatis, REST API, Quartz 배치</li>
+      <li><strong>Frontend</strong> — React 18, TypeScript</li>
+      <li><strong>DB</strong> — MySQL, DynamoDB</li>
+      <li><strong>인프라</strong> — AWS(EC2, S3, Elastic Beanstalk), Docker, SSL, 방화벽/Proxy</li>
+      <li><strong>자동화</strong> — Python, Selenium, Power Automate, Teams Webhook</li>
+      <li><strong>AI Tool</strong> — Claude Code — 기획/설계/구현 전 사이클 활용</li>
+    </ul>
+  </div>
+
+  <!-- 핵심 역량 -->
+  <div class="sec">
+    <div class="sec-title">핵심 역량</div>
+    <ul class="blt">
+      <li><strong>구조적 문제 해결</strong> — 장애 발생 시 임시조치와 근본원인 분석을 분리해 재발하지 않는 구조로 정리</li>
+      <li><strong>앱/웹/서버/인프라 통합 이해</strong> — 하나의 서비스를 프론트엔드부터 인프라까지 전 구간 직접 운영한 경험</li>
+      <li><strong>주도적 문제 발견</strong> — 요청받지 않은 비효율(엑셀 자산관리 등)을 먼저 찾아 시스템으로 해결</li>
+    </ul>
+  </div>
+
+  <!-- 수료 및 저서 -->
+  <div class="sec">
+    <div class="sec-title">학력 / 수료 및 저서</div>
+    <ul class="blt">
+      <li>대전대학교 컴퓨터공학과 졸업 / 복수전공: 모빌리티AI/SW융합전공</li>
+      <li>정보통신산업진흥원 인공지능 기본과정 수료</li>
+      <li>네이버 부스트코스 &lt;DATA SCIENCE&gt; 코칭스터디 2023 수료</li>
+      <li>『개발자가 되기 위해 꼭 알아야 하는 IT 용어』 공동 저자 &nbsp;<a href="https://www.yes24.com/Product/Goods/109711067">(yes24)</a></li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>
