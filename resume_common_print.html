@@ -17,7 +17,7 @@
       --bdr:  #E5E7EB;
       --bg-h: #ECFEFF;
     }
-    html { font-size: 12.5px; }
+    html { font-size: 12px; }
     body {
       font-family: 'Noto Sans KR', -apple-system, 'Segoe UI', sans-serif;
       color: var(--text); background: #fff; line-height: 1.6;
@@ -28,24 +28,17 @@
 
     /* HEADER */
     .hd { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 2px solid var(--text); }
-    .hd-name { font-size: 25px; font-weight: 900; letter-spacing: -1px; line-height: 1.15; margin-bottom: 4px; }
-    .hd-role { font-size: 12.5px; font-weight: 700; color: var(--em); margin-bottom: 8px; }
+    .hd-name { font-size: 24px; font-weight: 900; letter-spacing: -1px; line-height: 1.15; margin-bottom: 4px; }
+    .hd-role { font-size: 12px; font-weight: 700; color: var(--em); margin-bottom: 8px; }
     .hd-contacts { display: flex; gap: 14px; flex-wrap: wrap; }
-    .hd-contact { font-size: 11px; color: var(--muted); }
+    .hd-contact { font-size: 10.5px; color: var(--muted); }
 
-    /* SUMMARY BAR */
-    .sum-bar {
-      display: flex; flex-wrap: wrap; gap: 0;
-      border: 1px solid var(--bdr); border-radius: 6px; overflow: hidden;
-      margin-bottom: 16px;
-    }
-    .sum-item {
-      flex: 1 1 0; min-width: 100px; padding: 8px 10px;
-      border-right: 1px solid var(--bdr); background: var(--bg-h);
-    }
-    .sum-item:last-child { border-right: none; }
-    .sum-n { font-size: 12px; font-weight: 900; color: var(--em); }
-    .sum-l { font-size: 9.5px; color: var(--muted); font-weight: 600; margin-top: 1px; }
+    /* PERSONAL INFO */
+    .pi-row { display: flex; flex-wrap: wrap; gap: 0; border: 1px solid var(--bdr); border-radius: 6px; overflow: hidden; margin-bottom: 14px; }
+    .pi-item { flex: 1 1 0; min-width: 120px; padding: 7px 10px; border-right: 1px solid var(--bdr); }
+    .pi-item:last-child { border-right: none; }
+    .pi-lbl { font-size: 9px; color: var(--muted); font-weight: 700; margin-bottom: 2px; }
+    .pi-val { font-size: 10.5px; color: var(--text); font-weight: 600; }
 
     /* SECTION */
     .sec { margin-bottom: 14px; }
@@ -57,7 +50,7 @@
     }
 
     .meta-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
-    .meta-co   { font-size: 13.5px; font-weight: 900; }
+    .meta-co   { font-size: 13px; font-weight: 900; }
     .meta-period { font-size: 11px; color: var(--muted); font-weight: 600; }
     .meta-sub { font-size: 10.5px; color: var(--muted); margin-bottom: 8px; }
 
@@ -71,11 +64,19 @@
       content: '-'; position: absolute; left: 0; color: var(--em); font-weight: 900;
     }
     ul.blt li:last-child { margin-bottom: 0; }
-    ul.blt.result li::before { content: '▸'; font-size: 9px; top: 1px; }
     ul.blt strong { color: var(--text); font-weight: 700; }
 
     .stack-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
     .stack-tag { padding: 3px 8px; border-radius: 4px; background: var(--bg-h); border: 1px solid var(--em-l); color: var(--em); font-size: 10px; font-weight: 700; }
+
+    /* SKILL TABLE */
+    .skill-table { width: 100%; border-collapse: collapse; }
+    .skill-table th, .skill-table td { border: 1px solid var(--bdr); padding: 6px 9px; font-size: 10.5px; text-align: left; }
+    .skill-table th { background: var(--bg-h); color: var(--em); font-weight: 800; font-size: 9.5px; letter-spacing: 0.3px; }
+    .skill-table td.name { font-weight: 700; color: var(--text); }
+    .skill-table td.yr { color: var(--em); font-weight: 700; white-space: nowrap; }
+    .skill-table td.lvl { white-space: nowrap; }
+    .skill-table td.note { color: var(--sub); }
 
     /* CORE STRENGTHS */
     .strength-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -83,11 +84,22 @@
     .strength-t { font-size: 11px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
     .strength-v { font-size: 10.5px; color: var(--sub); line-height: 1.55; }
 
+    /* PROJECTS */
+    .proj { border: 1px solid var(--bdr); border-radius: 6px; padding: 8px 10px; margin-bottom: 6px; }
+    .proj:last-child { margin-bottom: 0; }
+    .proj-t { font-size: 11.5px; font-weight: 800; color: var(--text); margin-bottom: 2px; }
+    .proj-tech { font-size: 9.5px; color: var(--muted); margin-bottom: 4px; }
+    .proj-d { font-size: 10.5px; color: var(--sub); line-height: 1.55; }
+    .proj-d strong { color: var(--text); font-weight: 700; }
+
+    /* SELF INTRO */
+    .intro-box { font-size: 11px; color: var(--sub); line-height: 1.75; }
+
     /* EDU */
-    .edu-row { display: flex; justify-content: space-between; padding: 3.5px 0; border-bottom: 1px solid var(--bdr); font-size: 11.5px; }
+    .edu-row { display: flex; justify-content: space-between; padding: 3.5px 0; border-bottom: 1px solid var(--bdr); font-size: 11px; }
     .edu-row:last-child { border-bottom: none; }
     .edu-title { font-weight: 700; }
-    .edu-date  { color: var(--muted); font-size: 10.5px; flex-shrink: 0; margin-left: 8px; }
+    .edu-date  { color: var(--muted); font-size: 10px; flex-shrink: 0; margin-left: 8px; }
 
     /* PRINT */
     @media print {
@@ -130,75 +142,57 @@
     </div>
   </div>
 
-  <!-- 요약 -->
-  <div class="blk-lbl" style="margin-top:0;">요약</div>
-  <div style="font-size:11.5px; color:var(--sub); line-height:1.7; margin-bottom:12px;">
-    요청받지 않은 비효율도 먼저 찾아 자동화 구조로 바꿔온 개발자입니다. 엑셀에 흩어진 자산관리를 직접 만든 시스템으로 전환해 <strong>실사용 데이터 2,394건</strong>을 이관했고, 헬프데스크 업무를 Power Automate/Teams Webhook으로 자동 연결했습니다. 홈초이스에서는 Flutter 앱을 단독 개발/운영하며 파트너사 앱 통합 마이그레이션 2건을 주도, <strong>로딩 속도 39% 개선</strong>을 달성했습니다.
+  <!-- 인적사항 -->
+  <div class="pi-row">
+    <div class="pi-item"><div class="pi-lbl">이름</div><div class="pi-val">박준철</div></div>
+    <div class="pi-item"><div class="pi-lbl">생년월일</div><div class="pi-val">1998.03.30</div></div>
+    <div class="pi-item"><div class="pi-lbl">거주지</div><div class="pi-val">서울특별시 마포구 신공덕동</div></div>
+    <div class="pi-item"><div class="pi-lbl">학력</div><div class="pi-val">대전대학교 컴퓨터공학과 졸업</div></div>
   </div>
 
-  <!-- 경력요약 -->
-  <div class="sum-bar">
-    <div class="sum-item"><div class="sum-n">자산관리 시스템</div><div class="sum-l">자체 개발/2,394건 이관</div></div>
-    <div class="sum-item"><div class="sum-n">Power Automate</div><div class="sum-l">헬프데스크 자동화</div></div>
-    <div class="sum-item"><div class="sum-n">마이그레이션 2건</div><div class="sum-l">Flutter 앱 통합 주도</div></div>
-    <div class="sum-item"><div class="sum-n">로딩 속도 −39%</div><div class="sum-l">성능 최적화 성과</div></div>
-    <div class="sum-item"><div class="sum-n">AI 도구 상시 활용</div><div class="sum-l">Claude Code/Codex</div></div>
-  </div>
-
-  <!-- 경력사항 -->
+  <!-- 보유 스킬 -->
   <div class="sec">
-    <div class="sec-title">경력사항</div>
-
-    <div class="meta-row">
-      <span class="meta-co">아우토크립트 (그린맨파워 파견)</span>
-    </div>
-    <div class="meta-sub">IT 인프라 / 자산관리 담당 — 엑셀 기반 업무를 자동화 시스템으로 전환</div>
-    <ul class="blt">
-      <li>엑셀 산재 조직도/IT 자산 현황을 <strong>Java/Spring Boot/React 시스템</strong>으로 직접 개발, 실사용 데이터 2,394건(인원 306명/자산 1,471건) 이관</li>
-      <li>온보딩 절차를 4단계 마법사 UI로 표준화, 사번 자동 채번, SW 라이선스 만료 자동 경고</li>
-      <li>헬프데스크 MS Form 접수 → <strong>Power Automate + Teams Webhook</strong>으로 담당자 자동 전달</li>
-      <li>AI 도구로 FAQ 챗봇 개발, 관리자 퇴사/서버 장애 대비 이중화 구조 설계</li>
-      <li>Docker/Render API 배포 자동화, CORS 오류/데이터 이관 누락 직접 원인 추적 및 해결</li>
-    </ul>
-
-    <div class="stack-row">
-      <span class="stack-tag">Java/Spring Boot</span>
-      <span class="stack-tag">React</span>
-      <span class="stack-tag">Power Automate</span>
-      <span class="stack-tag">Teams Webhook</span>
-      <span class="stack-tag">Docker</span>
-      <span class="stack-tag">AI 도구 활용</span>
-    </div>
-  </div>
-
-  <div class="sec">
-    <div class="meta-row">
-      <span class="meta-co">(주)홈초이스</span>
-      <span class="meta-period">2024.02 ~ 2025.11 (1년 10개월)</span>
-    </div>
-    <div class="meta-sub">TECH사업실 / Flutter 앱 개발 및 Spring Boot 백엔드 개발 — OTT 서비스 "오초이스" / LG헬로비전(매출 1조), 딜라이브(매출 3,500억) 마이그레이션 2건 주도</div>
-    <ul class="blt">
-      <li>파트너사 앱 → 오초이스 전환 마이그레이션 기획 및 개발 주도 (팀 4인/개발 3/디자인 1)</li>
-      <li><strong>Riverpod 상태관리</strong>로 셋톱박스 3대 페어링 상태 분리 관리, Flutter ↔ WebView 구조로 <strong>로딩 속도 39% 단축</strong></li>
-      <li>NCG DRM → Multi DRM 전환, 단일 플레이어 인터페이스로 통합</li>
-      <li>Spring Boot REST API 서버 개발, Quartz 배치 5분 주기 잡 6개 구성</li>
-      <li>콘텐츠 메타데이터 수집 Python/Selenium/Docker/Cron 자동화, EC2 Elastic IP 구조로 통신 장애 근본 해결</li>
-    </ul>
-
-    <div class="stack-row">
-      <span class="stack-tag">Flutter</span>
-      <span class="stack-tag">Riverpod</span>
-      <span class="stack-tag">WebView JS Bridge</span>
-      <span class="stack-tag">DRM 통합</span>
-      <span class="stack-tag">Spring Boot</span>
-      <span class="stack-tag">Python/Selenium</span>
-      <span class="stack-tag">AWS EC2</span>
-    </div>
+    <div class="sec-title">보유 스킬</div>
+    <table class="skill-table">
+      <tr><th>스킬</th><th>사용 기간</th><th>숙련도</th><th>비고</th></tr>
+      <tr>
+        <td class="name">Dart / Flutter</td><td class="yr">2년</td><td class="lvl">중급</td>
+        <td class="note">홈초이스 실서비스 앱 단독 개발/운영 + 개인 프로젝트(담아, 숫자 대결)</td>
+      </tr>
+      <tr>
+        <td class="name">Java</td><td class="yr">2년</td><td class="lvl">중급</td>
+        <td class="note">자산관리 시스템/백엔드 개발, 백준 알고리즘 문제풀이 상시 진행</td>
+      </tr>
+      <tr>
+        <td class="name">Spring Boot</td><td class="yr">2년</td><td class="lvl">중급</td>
+        <td class="note">REST API 서버 개발 — 홈초이스, 아우토크립트, 개인 프로젝트 전반에 적용</td>
+      </tr>
+      <tr>
+        <td class="name">Python</td><td class="yr">2년</td><td class="lvl">중급</td>
+        <td class="note">Selenium/Docker/Cron 기반 업무 자동화 스크립트 개발</td>
+      </tr>
+      <tr>
+        <td class="name">SQL (MySQL)</td><td class="yr">2년</td><td class="lvl">중급</td>
+        <td class="note">실서비스/사내 시스템 데이터 조회 및 처리</td>
+      </tr>
+      <tr>
+        <td class="name">JavaScript / TypeScript</td><td class="yr">1년</td><td class="lvl">초급</td>
+        <td class="note">React 기반 웹 화면 개발, Flutter WebView 연동</td>
+      </tr>
+      <tr>
+        <td class="name">AWS (EC2/S3/DynamoDB)</td><td class="yr">2년</td><td class="lvl">중급</td>
+        <td class="note">실서비스 인프라 운영, 통신 장애 구조 개선</td>
+      </tr>
+      <tr>
+        <td class="name">Git / GitHub</td><td class="yr">2년</td><td class="lvl">중급</td>
+        <td class="note">팀 개발 및 개인 프로젝트 버전 관리 상시 활용</td>
+      </tr>
+    </table>
   </div>
 
   <!-- 핵심역량 -->
   <div class="sec">
-    <div class="sec-title">핵심 역량</div>
+    <div class="sec-title">스킬에 따른 강점</div>
     <div class="strength-grid">
       <div class="strength">
         <div class="strength-t">요청받지 않은 문제를 먼저 발굴</div>
@@ -219,18 +213,118 @@
     </div>
   </div>
 
-  <!-- 학력 / 교육 / 저서 -->
+  <!-- 경력사항 -->
   <div class="sec">
-    <div class="sec-title">학력 / 교육 / 저서</div>
+    <div class="sec-title">경력사항</div>
+
+    <div class="meta-row">
+      <span class="meta-co">아우토크립트 (그린맨파워 파견)</span>
+    </div>
+    <div class="meta-sub">IT 인프라 / 자산관리 담당 — 엑셀 기반 업무를 자동화 시스템으로 전환</div>
+    <ul class="blt">
+      <li>엑셀 산재 조직도/IT 자산 현황을 <strong>Java/Spring Boot/React 시스템</strong>으로 직접 개발, 실사용 데이터 2,394건(인원 306명/자산 1,471건) 이관</li>
+      <li>온보딩 절차를 4단계 마법사 UI로 표준화, 사번 자동 채번, SW 라이선스 만료 자동 경고</li>
+      <li>헬프데스크 MS Form 접수 → <strong>Power Automate + Teams Webhook</strong>으로 담당자 자동 전달</li>
+      <li>AI 도구로 FAQ 챗봇 개발, 관리자 퇴사/서버 장애 대비 이중화 구조 설계</li>
+      <li>Docker/Render API 배포 자동화, CORS 오류/데이터 이관 누락 직접 원인 추적 및 해결</li>
+    </ul>
+    <div class="stack-row">
+      <span class="stack-tag">Java/Spring Boot</span>
+      <span class="stack-tag">React</span>
+      <span class="stack-tag">Power Automate</span>
+      <span class="stack-tag">Teams Webhook</span>
+      <span class="stack-tag">Docker</span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="meta-row">
+      <span class="meta-co">(주)홈초이스</span>
+      <span class="meta-period">2024.02 ~ 2025.11 (1년 10개월)</span>
+    </div>
+    <div class="meta-sub">TECH사업실 / Flutter 앱 개발 및 Spring Boot 백엔드 개발 — OTT 서비스 "오초이스" / LG헬로비전(매출 1조), 딜라이브(매출 3,500억) 마이그레이션 2건 주도</div>
+    <ul class="blt">
+      <li>파트너사 앱 → 오초이스 전환 마이그레이션 기획 및 개발 주도 (팀 4인/개발 3/디자인 1)</li>
+      <li><strong>Riverpod 상태관리</strong>로 셋톱박스 3대 페어링 상태 분리 관리, Flutter ↔ WebView 구조로 <strong>로딩 속도 39% 단축</strong></li>
+      <li>NCG DRM → Multi DRM 전환, 단일 플레이어 인터페이스로 통합</li>
+      <li>Spring Boot REST API 서버 개발, Quartz 배치 5분 주기 잡 6개 구성</li>
+      <li>콘텐츠 메타데이터 수집 Python/Selenium/Docker/Cron 자동화, EC2 Elastic IP 구조로 통신 장애 근본 해결</li>
+    </ul>
+    <div class="stack-row">
+      <span class="stack-tag">Flutter</span>
+      <span class="stack-tag">Riverpod</span>
+      <span class="stack-tag">WebView JS Bridge</span>
+      <span class="stack-tag">DRM 통합</span>
+      <span class="stack-tag">Spring Boot</span>
+      <span class="stack-tag">Python/Selenium</span>
+      <span class="stack-tag">AWS EC2</span>
+    </div>
+  </div>
+
+  <!-- 프로젝트 진행 이력 -->
+  <div class="sec">
+    <div class="sec-title">프로젝트 진행 이력</div>
+
+    <div class="proj">
+      <div class="proj-t">헬로tv/딜라이브 → 오초이스 앱 통합 마이그레이션 (실무)</div>
+      <div class="proj-tech">Flutter, Riverpod, WebView JS Bridge, DRM 통합, Spring Boot / (주)홈초이스 / 2024.02–2025.10</div>
+      <div class="proj-d">두 파트너사 앱을 단일 앱으로 통합, 상태관리 재설계와 WebView 구조 개선으로 <strong>로딩 속도 39% 단축</strong>.</div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-t">엑셀 산재 자산관리 → 사내 자산관리 시스템 자체 개발 (실무)</div>
+      <div class="proj-tech">Java, Spring Boot, React, Power Automate / 아우토크립트</div>
+      <div class="proj-d">엑셀 의존 자산관리를 DB 기반 웹 시스템으로 전환, <strong>실사용 데이터 2,394건 이관</strong> 및 헬프데스크 자동화.</div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-t">담아(Dama) — 구독 통합 관리 앱 (개인)</div>
+      <div class="proj-tech">Flutter, JWT, REST API 연동 / 팀 3인 / 2026.01–2026.02</div>
+      <div class="proj-d">회원/구독/커뮤니티 화면을 도메인별로 분리 설계, JWT 인증 흐름과 연동 서버를 함께 구현.</div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-t">숫자 대결 — 실시간 대결 앱 (개인)</div>
+      <div class="proj-tech">Flutter, WebSocket 연동 / 솔로 3일 / 2026.01~</div>
+      <div class="proj-d">실시간 통신으로 여러 사용자의 입력을 동시에 반영하는 대결 화면을, 기획부터 배포까지 <strong>3일 내 단독 구현</strong>.</div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-t">SAP 연동 구조 학습 프로젝트 (개인)</div>
+      <div class="proj-tech">Java, Spring Boot, Spring Data JPA, PostgreSQL, Docker Compose / github.com/justinnn980/SAP</div>
+      <div class="proj-d">외부 시스템이 SAP OData API로 주문을 전송하는 연동 시나리오를 Mock 서버로 재현, 실패 로그/재처리 API까지 직접 구현.</div>
+    </div>
+  </div>
+
+  <!-- 대내외 교육 활동 / 수료 -->
+  <div class="sec">
+    <div class="sec-title">대내외 교육 활동 / 수료</div>
     <div class="edu-row">
       <div><div class="edu-title">대전대학교 컴퓨터공학과 졸업 / 복수전공: 모빌리티AI/SW융합전공</div></div>
       <div class="edu-date">2017.03 ~ 2024.02</div>
     </div>
     <div class="edu-row">
-      <div><div class="edu-title">정보통신산업진흥원 인공지능 기본과정 수료 / 네이버 부스트코스 &lt;DATA SCIENCE&gt; 코칭스터디 2023 수료</div></div>
+      <div><div class="edu-title">항해99 알고리즘 과정 학습</div></div>
+    </div>
+    <div class="edu-row">
+      <div><div class="edu-title">코드업(Codeup) C언어 알고리즘 문제풀이 학습</div></div>
+    </div>
+    <div class="edu-row">
+      <div><div class="edu-title">정보통신산업진흥원 인공지능 기본과정 수료</div></div>
+    </div>
+    <div class="edu-row">
+      <div><div class="edu-title">네이버 부스트코스 &lt;DATA SCIENCE&gt; 코칭스터디 2023 수료</div></div>
     </div>
     <div class="edu-row">
       <div><div class="edu-title">『개발자가 되기 위해 꼭 알아야 하는 IT 용어』 공동 저자 &nbsp;<a href="https://www.yes24.com/Product/Goods/109711067" style="font-size:10px;">(yes24)</a></div></div>
+    </div>
+  </div>
+
+  <!-- 자기소개 -->
+  <div class="sec">
+    <div class="sec-title">자기소개</div>
+    <div class="intro-box">
+      맡은 일만 처리하는 대신, 먼저 문제를 찾아서 구조를 바꾸는 방식으로 일해왔습니다. 아우토크립트에서는 아무도 요청하지 않은 엑셀 자산관리 문제를 발견해 시스템으로 직접 만들었고, 만드는 데서 끝내지 않고 배포 이후 발생한 오류까지 원인을 끝까지 추적해 해결했습니다. 홈초이스에서는 Flutter 앱 하나를 혼자 책임지며 두 파트너사의 서비스를 통합하는 마이그레이션을 이끌었고, 상태관리 구조를 다시 설계해 로딩 속도를 39% 줄였습니다. 화면을 만드는 일과 그 뒤에서 자동화/서버를 만드는 일을 모두 다뤄봤고, Claude Code 같은 AI 도구를 기획 단계부터 배포까지 상시 활용하되 결과는 항상 제가 직접 검증하는 방식으로 일합니다.
     </div>
   </div>
 

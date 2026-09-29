@@ -83,6 +83,30 @@
     .sec-title { font-size: 26px; font-weight: 900; margin-bottom: 12px; }
     .sec-desc { font-size: 13px; color: var(--muted); margin-bottom: 28px; line-height: 1.7; }
 
+    /* PERSONAL INFO */
+    .pi-row { display: flex; flex-wrap: wrap; gap: 1px; background: var(--bdr); border-radius: 10px; overflow: hidden; }
+    .pi-item { flex: 1 1 0; min-width: 140px; background: var(--card); padding: 14px 16px; }
+    .pi-lbl { font-size: 11px; color: var(--muted); font-weight: 700; margin-bottom: 4px; }
+    .pi-val { font-size: 14px; color: var(--text); font-weight: 700; }
+
+    /* SKILL TABLE */
+    .skill-table { width: 100%; border-collapse: collapse; }
+    .skill-table th, .skill-table td { border: 1px solid var(--bdr); padding: 10px 14px; font-size: 12.5px; text-align: left; }
+    .skill-table th { background: var(--card2); color: var(--cy); font-weight: 800; font-size: 11px; letter-spacing: 0.3px; }
+    .skill-table td.name { font-weight: 700; color: var(--text); }
+    .skill-table td.yr { color: var(--cy); font-weight: 700; white-space: nowrap; }
+    .skill-table td.lvl { white-space: nowrap; color: var(--sub); }
+    .skill-table td.note { color: var(--sub); font-size: 12px; }
+
+    /* STRENGTH GRID */
+    .strength-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .strength-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 10px; padding: 18px 20px; }
+    .strength-t { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+    .strength-v { font-size: 12.5px; color: var(--sub); line-height: 1.6; }
+
+    /* INTRO */
+    .intro-box { background: var(--card); border: 1px solid var(--bdr); border-radius: 12px; padding: 24px 28px; font-size: 14px; color: var(--sub); line-height: 1.9; }
+
     /* PROBLEM CARDS */
     .prob-list { display: grid; gap: 18px; }
     .prob-card {
@@ -137,6 +161,8 @@
       .hero { grid-template-columns: 1fr; }
       .hero-stats { grid-template-columns: repeat(2, 1fr); }
       .proj-grid { grid-template-columns: 1fr; }
+      .strength-grid { grid-template-columns: 1fr; }
+      .skill-table { font-size: 11px; }
     }
   </style>
 </head>
@@ -145,10 +171,11 @@
 <nav>
   <div class="nav-name">박준철<span class="nav-tag">이력서 / 포트폴리오</span></div>
   <div class="nav-links">
-    <a href="#problem">문제 해결</a>
+    <a href="#skills">보유 스킬</a>
+    <a href="#strengths">강점</a>
     <a href="#experience">경력</a>
     <a href="#projects">프로젝트</a>
-    <a href="#certs">자격/학력</a>
+    <a href="#intro">자기소개</a>
     <a href="#contact">연락처</a>
   </div>
 </nav>
@@ -217,9 +244,84 @@
   </div>
 </div>
 
-<!-- SECTION 01: 문제 해결 -->
-<div class="section" id="problem">
+<!-- 인적사항 -->
+<div class="section" style="padding-top:0; padding-bottom:32px; border-top:none;">
+  <div class="pi-row">
+    <div class="pi-item"><div class="pi-lbl">이름</div><div class="pi-val">박준철</div></div>
+    <div class="pi-item"><div class="pi-lbl">생년월일</div><div class="pi-val">1998.03.30</div></div>
+    <div class="pi-item"><div class="pi-lbl">거주지</div><div class="pi-val">서울특별시 마포구 신공덕동</div></div>
+    <div class="pi-item"><div class="pi-lbl">학력</div><div class="pi-val">대전대학교 컴퓨터공학과 졸업</div></div>
+  </div>
+</div>
+
+<!-- SECTION 01: 보유 스킬 -->
+<div class="section" id="skills">
   <div class="sec-label">Section 01</div>
+  <div class="sec-title">보유 스킬</div>
+  <table class="skill-table">
+    <tr><th>스킬</th><th>사용 기간</th><th>숙련도</th><th>비고</th></tr>
+    <tr>
+      <td class="name">Dart / Flutter</td><td class="yr">2년</td><td class="lvl">중급</td>
+      <td class="note">홈초이스 실서비스 앱 단독 개발/운영 + 개인 프로젝트(담아, 숫자 대결)</td>
+    </tr>
+    <tr>
+      <td class="name">Java</td><td class="yr">2년</td><td class="lvl">중급</td>
+      <td class="note">자산관리 시스템/백엔드 개발, 백준 알고리즘 문제풀이 상시 진행</td>
+    </tr>
+    <tr>
+      <td class="name">Spring Boot</td><td class="yr">2년</td><td class="lvl">중급</td>
+      <td class="note">REST API 서버 개발 — 홈초이스, 아우토크립트, 개인 프로젝트 전반에 적용</td>
+    </tr>
+    <tr>
+      <td class="name">Python</td><td class="yr">2년</td><td class="lvl">중급</td>
+      <td class="note">Selenium/Docker/Cron 기반 업무 자동화 스크립트 개발</td>
+    </tr>
+    <tr>
+      <td class="name">SQL (MySQL)</td><td class="yr">2년</td><td class="lvl">중급</td>
+      <td class="note">실서비스/사내 시스템 데이터 조회 및 처리</td>
+    </tr>
+    <tr>
+      <td class="name">JavaScript / TypeScript</td><td class="yr">1년</td><td class="lvl">초급</td>
+      <td class="note">React 기반 웹 화면 개발, Flutter WebView 연동</td>
+    </tr>
+    <tr>
+      <td class="name">AWS (EC2/S3/DynamoDB)</td><td class="yr">2년</td><td class="lvl">중급</td>
+      <td class="note">실서비스 인프라 운영, 통신 장애 구조 개선</td>
+    </tr>
+    <tr>
+      <td class="name">Git / GitHub</td><td class="yr">2년</td><td class="lvl">중급</td>
+      <td class="note">팀 개발 및 개인 프로젝트 버전 관리 상시 활용</td>
+    </tr>
+  </table>
+</div>
+
+<!-- SECTION 02: 핵심 역량 -->
+<div class="section" id="strengths">
+  <div class="sec-label">Section 02</div>
+  <div class="sec-title">스킬에 따른 강점</div>
+  <div class="strength-grid">
+    <div class="strength-card">
+      <div class="strength-t">요청받지 않은 문제를 먼저 발굴</div>
+      <div class="strength-v">엑셀 산재 자산관리처럼 아무도 시키지 않은 비효율을 스스로 찾아 자동화 과제로 만듭니다.</div>
+    </div>
+    <div class="strength-card">
+      <div class="strength-t">증상이 아닌 원인을 끝까지 추적</div>
+      <div class="strength-v">통신 장애/CORS 오류 등 임시 우회가 아니라 재발하지 않는 구조로 근본 해결합니다.</div>
+    </div>
+    <div class="strength-card">
+      <div class="strength-t">자동화와 앱 개발을 함께 다루는 실행력</div>
+      <div class="strength-v">업무 자동화 시스템과 Flutter 실서비스 앱을 모두 기획부터 배포까지 책임진 경험이 있습니다.</div>
+    </div>
+    <div class="strength-card">
+      <div class="strength-t">AI 도구 활용 개발</div>
+      <div class="strength-v">AI 도구를 기획/설계/구현/배포 전 과정에서 적극 활용하되 결과는 항상 직접 검증합니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 03: 문제 해결 -->
+<div class="section" id="problem">
+  <div class="sec-label">Section 03</div>
   <div class="sec-title">직접 발굴하고 해결한 문제들</div>
   <div class="prob-list">
 
@@ -303,9 +405,9 @@
   </div>
 </div>
 
-<!-- SECTION 02: 경력 -->
+<!-- SECTION 04: 경력 -->
 <div class="section" id="experience">
-  <div class="sec-label">Section 02</div>
+  <div class="sec-label">Section 04</div>
   <div class="sec-title">경력</div>
 
   <div class="career-block">
@@ -345,10 +447,11 @@
   </div>
 </div>
 
-<!-- SECTION 03: 프로젝트 -->
+<!-- SECTION 05: 프로젝트 -->
 <div class="section" id="projects">
-  <div class="sec-label">Section 03</div>
-  <div class="sec-title">개인 프로젝트</div>
+  <div class="sec-label">Section 05</div>
+  <div class="sec-title">프로젝트 진행 이력</div>
+  <div class="sec-desc">실무 프로젝트 2건은 경력 항목의 상세와 이어집니다. 개인 프로젝트는 아래에서 확인할 수 있습니다.</div>
 
   <div class="proj-grid">
 
@@ -385,18 +488,47 @@
       </ul>
     </div>
 
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="proj-title">SAP 연동 구조 학습 프로젝트</span>
+        <span class="proj-period">개인</span>
+      </div>
+      <div class="proj-sub"><a href="https://github.com/justinnn980/SAP" target="_blank">github.com/justinnn980/SAP</a></div>
+      <div class="tags">
+        <span class="tag hl">Spring Boot</span>
+        <span class="tag">Spring Data JPA</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Docker Compose</span>
+      </div>
+      <ul class="proj-ul">
+        <li>외부 시스템이 SAP OData API로 주문을 전송하는 연동 시나리오를 Mock SAP 서버로 재현</li>
+        <li>요청/응답 실패 로그 저장과 재처리 트리거 API, 전송 현황 모니터링까지 직접 구현</li>
+      </ul>
+    </div>
+
   </div>
 </div>
 
-<!-- SECTION 04: 자격/학력 -->
+<!-- SECTION 06: 대내외 교육 활동 / 수료 -->
 <div class="section" id="certs">
-  <div class="sec-label">Section 04</div>
-  <div class="sec-title">자격 / 학력 / 저서</div>
+  <div class="sec-label">Section 06</div>
+  <div class="sec-title">대내외 교육 활동 / 수료</div>
   <div class="cert-list">
     <div class="cert"><div class="cert-lbl">학력</div><div class="cert-val">대전대학교 컴퓨터공학과 졸업 / 복수전공: 모빌리티AI/SW융합전공</div></div>
+    <div class="cert"><div class="cert-lbl">항해99</div><div class="cert-val">항해99 알고리즘 과정 학습</div></div>
+    <div class="cert"><div class="cert-lbl">코드업</div><div class="cert-val">코드업(Codeup) C언어 알고리즘 문제풀이 학습</div></div>
     <div class="cert"><div class="cert-lbl">AI 기본과정 수료</div><div class="cert-val">정보통신산업진흥원 — 인공지능 기본과정 이수</div></div>
     <div class="cert"><div class="cert-lbl">데이터사이언스 수료</div><div class="cert-val">네이버 부스트코스 &lt;DATA SCIENCE&gt; 코칭스터디 2023 수료</div></div>
     <div class="cert"><div class="cert-lbl">저서</div><div class="cert-val"><a href="https://www.yes24.com/Product/Goods/109711067" target="_blank">개발자가 되기 위해 꼭 알아야 하는 IT 용어 (공동 저자)</a></div></div>
+  </div>
+</div>
+
+<!-- SECTION 07: 자기소개 -->
+<div class="section" id="intro">
+  <div class="sec-label">Section 07</div>
+  <div class="sec-title">자기소개</div>
+  <div class="intro-box">
+    맡은 일만 처리하는 대신, 먼저 문제를 찾아서 구조를 바꾸는 방식으로 일해왔습니다. 아우토크립트에서는 아무도 요청하지 않은 엑셀 자산관리 문제를 발견해 시스템으로 직접 만들었고, 만드는 데서 끝내지 않고 배포 이후 발생한 오류까지 원인을 끝까지 추적해 해결했습니다. 홈초이스에서는 Flutter 앱 하나를 혼자 책임지며 두 파트너사의 서비스를 통합하는 마이그레이션을 이끌었고, 상태관리 구조를 다시 설계해 로딩 속도를 39% 줄였습니다. 화면을 만드는 일과 그 뒤에서 자동화/서버를 만드는 일을 모두 다뤄봤고, Claude Code 같은 AI 도구를 기획 단계부터 배포까지 상시 활용하되 결과는 항상 제가 직접 검증하는 방식으로 일합니다.
   </div>
 </div>
 
