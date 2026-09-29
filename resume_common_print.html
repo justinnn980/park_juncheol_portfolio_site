@@ -69,14 +69,11 @@
     .stack-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
     .stack-tag { padding: 3px 8px; border-radius: 4px; background: var(--bg-h); border: 1px solid var(--em-l); color: var(--em); font-size: 10px; font-weight: 700; }
 
-    /* SKILL TABLE */
-    .skill-table { width: 100%; border-collapse: collapse; }
-    .skill-table th, .skill-table td { border: 1px solid var(--bdr); padding: 6px 9px; font-size: 10.5px; text-align: left; }
-    .skill-table th { background: var(--bg-h); color: var(--em); font-weight: 800; font-size: 9.5px; letter-spacing: 0.3px; }
-    .skill-table td.name { font-weight: 700; color: var(--text); }
-    .skill-table td.yr { color: var(--em); font-weight: 700; white-space: nowrap; }
-    .skill-table td.lvl { white-space: nowrap; }
-    .skill-table td.note { color: var(--sub); }
+    /* SKILL CHIPS */
+    .skill-chip-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .skill-chip { border: 1px solid var(--bdr); border-radius: 5px; padding: 5px 8px; display: flex; justify-content: space-between; align-items: baseline; gap: 4px; background: var(--bg-h); }
+    .chip-name { font-size: 10px; font-weight: 800; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .chip-meta { font-size: 9px; color: var(--em); font-weight: 700; white-space: nowrap; }
 
     /* CORE STRENGTHS */
     .strength-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -153,41 +150,16 @@
   <!-- 보유 스킬 -->
   <div class="sec">
     <div class="sec-title">보유 스킬</div>
-    <table class="skill-table">
-      <tr><th>스킬</th><th>사용 기간</th><th>숙련도</th><th>비고</th></tr>
-      <tr>
-        <td class="name">Dart / Flutter</td><td class="yr">2년</td><td class="lvl">중급</td>
-        <td class="note">홈초이스 실서비스 앱 단독 개발/운영 + 개인 프로젝트(담아, 숫자 대결)</td>
-      </tr>
-      <tr>
-        <td class="name">Java</td><td class="yr">2년</td><td class="lvl">중급</td>
-        <td class="note">자산관리 시스템/백엔드 개발, 백준 알고리즘 문제풀이 상시 진행</td>
-      </tr>
-      <tr>
-        <td class="name">Spring Boot</td><td class="yr">2년</td><td class="lvl">중급</td>
-        <td class="note">REST API 서버 개발 — 홈초이스, 아우토크립트, 개인 프로젝트 전반에 적용</td>
-      </tr>
-      <tr>
-        <td class="name">Python</td><td class="yr">2년</td><td class="lvl">중급</td>
-        <td class="note">Selenium/Docker/Cron 기반 업무 자동화 스크립트 개발</td>
-      </tr>
-      <tr>
-        <td class="name">SQL (MySQL)</td><td class="yr">2년</td><td class="lvl">중급</td>
-        <td class="note">실서비스/사내 시스템 데이터 조회 및 처리</td>
-      </tr>
-      <tr>
-        <td class="name">JavaScript / TypeScript</td><td class="yr">1년</td><td class="lvl">초급</td>
-        <td class="note">React 기반 웹 화면 개발, Flutter WebView 연동</td>
-      </tr>
-      <tr>
-        <td class="name">AWS (EC2/S3/DynamoDB)</td><td class="yr">2년</td><td class="lvl">중급</td>
-        <td class="note">실서비스 인프라 운영, 통신 장애 구조 개선</td>
-      </tr>
-      <tr>
-        <td class="name">Git / GitHub</td><td class="yr">2년</td><td class="lvl">중급</td>
-        <td class="note">팀 개발 및 개인 프로젝트 버전 관리 상시 활용</td>
-      </tr>
-    </table>
+    <div class="skill-chip-grid">
+      <div class="skill-chip"><span class="chip-name">Dart/Flutter</span><span class="chip-meta">2년/중급</span></div>
+      <div class="skill-chip"><span class="chip-name">Java</span><span class="chip-meta">2년/중급</span></div>
+      <div class="skill-chip"><span class="chip-name">Spring Boot</span><span class="chip-meta">2년/중급</span></div>
+      <div class="skill-chip"><span class="chip-name">Python</span><span class="chip-meta">2년/중급</span></div>
+      <div class="skill-chip"><span class="chip-name">SQL(MySQL)</span><span class="chip-meta">2년/중급</span></div>
+      <div class="skill-chip"><span class="chip-name">JS/TS</span><span class="chip-meta">1년/초급</span></div>
+      <div class="skill-chip"><span class="chip-name">AWS</span><span class="chip-meta">2년/중급</span></div>
+      <div class="skill-chip"><span class="chip-name">Git/GitHub</span><span class="chip-meta">2년/중급</span></div>
+    </div>
   </div>
 
   <!-- 핵심역량 -->

@@ -89,14 +89,11 @@
     .pi-lbl { font-size: 11px; color: var(--muted); font-weight: 700; margin-bottom: 4px; }
     .pi-val { font-size: 14px; color: var(--text); font-weight: 700; }
 
-    /* SKILL TABLE */
-    .skill-table { width: 100%; border-collapse: collapse; }
-    .skill-table th, .skill-table td { border: 1px solid var(--bdr); padding: 10px 14px; font-size: 12.5px; text-align: left; }
-    .skill-table th { background: var(--card2); color: var(--cy); font-weight: 800; font-size: 11px; letter-spacing: 0.3px; }
-    .skill-table td.name { font-weight: 700; color: var(--text); }
-    .skill-table td.yr { color: var(--cy); font-weight: 700; white-space: nowrap; }
-    .skill-table td.lvl { white-space: nowrap; color: var(--sub); }
-    .skill-table td.note { color: var(--sub); font-size: 12px; }
+    /* SKILL CHIPS */
+    .skill-chip-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .skill-chip { background: var(--card); border: 1px solid var(--bdr); border-radius: 8px; padding: 10px 12px; }
+    .chip-name { font-size: 12.5px; font-weight: 800; color: var(--text); }
+    .chip-meta { font-size: 11px; color: var(--cy); font-weight: 600; margin-top: 2px; }
 
     /* STRENGTH GRID */
     .strength-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
@@ -162,7 +159,7 @@
       .hero-stats { grid-template-columns: repeat(2, 1fr); }
       .proj-grid { grid-template-columns: 1fr; }
       .strength-grid { grid-template-columns: 1fr; }
-      .skill-table { font-size: 11px; }
+      .skill-chip-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -258,41 +255,16 @@
 <div class="section" id="skills">
   <div class="sec-label">Section 01</div>
   <div class="sec-title">보유 스킬</div>
-  <table class="skill-table">
-    <tr><th>스킬</th><th>사용 기간</th><th>숙련도</th><th>비고</th></tr>
-    <tr>
-      <td class="name">Dart / Flutter</td><td class="yr">2년</td><td class="lvl">중급</td>
-      <td class="note">홈초이스 실서비스 앱 단독 개발/운영 + 개인 프로젝트(담아, 숫자 대결)</td>
-    </tr>
-    <tr>
-      <td class="name">Java</td><td class="yr">2년</td><td class="lvl">중급</td>
-      <td class="note">자산관리 시스템/백엔드 개발, 백준 알고리즘 문제풀이 상시 진행</td>
-    </tr>
-    <tr>
-      <td class="name">Spring Boot</td><td class="yr">2년</td><td class="lvl">중급</td>
-      <td class="note">REST API 서버 개발 — 홈초이스, 아우토크립트, 개인 프로젝트 전반에 적용</td>
-    </tr>
-    <tr>
-      <td class="name">Python</td><td class="yr">2년</td><td class="lvl">중급</td>
-      <td class="note">Selenium/Docker/Cron 기반 업무 자동화 스크립트 개발</td>
-    </tr>
-    <tr>
-      <td class="name">SQL (MySQL)</td><td class="yr">2년</td><td class="lvl">중급</td>
-      <td class="note">실서비스/사내 시스템 데이터 조회 및 처리</td>
-    </tr>
-    <tr>
-      <td class="name">JavaScript / TypeScript</td><td class="yr">1년</td><td class="lvl">초급</td>
-      <td class="note">React 기반 웹 화면 개발, Flutter WebView 연동</td>
-    </tr>
-    <tr>
-      <td class="name">AWS (EC2/S3/DynamoDB)</td><td class="yr">2년</td><td class="lvl">중급</td>
-      <td class="note">실서비스 인프라 운영, 통신 장애 구조 개선</td>
-    </tr>
-    <tr>
-      <td class="name">Git / GitHub</td><td class="yr">2년</td><td class="lvl">중급</td>
-      <td class="note">팀 개발 및 개인 프로젝트 버전 관리 상시 활용</td>
-    </tr>
-  </table>
+  <div class="skill-chip-grid">
+    <div class="skill-chip"><div class="chip-name">Dart / Flutter</div><div class="chip-meta">2년 / 중급</div></div>
+    <div class="skill-chip"><div class="chip-name">Java</div><div class="chip-meta">2년 / 중급</div></div>
+    <div class="skill-chip"><div class="chip-name">Spring Boot</div><div class="chip-meta">2년 / 중급</div></div>
+    <div class="skill-chip"><div class="chip-name">Python</div><div class="chip-meta">2년 / 중급</div></div>
+    <div class="skill-chip"><div class="chip-name">SQL (MySQL)</div><div class="chip-meta">2년 / 중급</div></div>
+    <div class="skill-chip"><div class="chip-name">JavaScript / TS</div><div class="chip-meta">1년 / 초급</div></div>
+    <div class="skill-chip"><div class="chip-name">AWS</div><div class="chip-meta">2년 / 중급</div></div>
+    <div class="skill-chip"><div class="chip-name">Git / GitHub</div><div class="chip-meta">2년 / 중급</div></div>
+  </div>
 </div>
 
 <!-- SECTION 02: 핵심 역량 -->
