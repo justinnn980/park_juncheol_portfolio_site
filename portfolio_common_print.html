@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>박준철 포트폴리오 — Flutter 앱 개발자</title>
+  <title>박준철 포트폴리오</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
   <style>
@@ -25,7 +25,6 @@
     a { color: var(--em); text-decoration: none; }
 
     .page { width: 210mm; margin: 0 auto; padding: 15mm 17mm; background: #fff; }
-    .page + .page { page-break-before: always; }
 
     .hd { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 2px solid var(--text); }
     .hd-name { font-size: 24px; font-weight: 900; letter-spacing: -1px; line-height: 1.15; margin-bottom: 4px; }
@@ -52,20 +51,12 @@
     .proj-pt { font-size: 10px; color: var(--em); line-height: 1.55; padding-top: 5px; border-top: 1px dashed var(--bdr); }
     .proj-pt b { font-weight: 800; }
 
-    .meta-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
-    .meta-co { font-size: 13px; font-weight: 900; }
-    .meta-period { font-size: 10.5px; color: var(--muted); font-weight: 600; }
-    .meta-sub { font-size: 10px; color: var(--muted); margin-bottom: 6px; }
-
     .blk-lbl { font-size: 10px; font-weight: 800; color: var(--sub); margin: 6px 0 3px; }
     ul.blt { list-style: none; }
     ul.blt li { position: relative; padding-left: 12px; font-size: 10.5px; color: var(--sub); line-height: 1.55; margin-bottom: 3px; }
     ul.blt li::before { content: '-'; position: absolute; left: 0; color: var(--em); font-weight: 900; }
     ul.blt li:last-child { margin-bottom: 0; }
     ul.blt strong { color: var(--text); font-weight: 700; }
-
-    .stack-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
-    .stack-tag { padding: 3px 8px; border-radius: 4px; background: var(--bg-h); border: 1px solid var(--em-l); color: var(--em); font-size: 9.5px; font-weight: 700; }
 
     @media print {
       html { font-size: 11px; }
@@ -91,12 +82,11 @@
 
 <button class="print-btn no-print" onclick="window.print()">🖨 PDF 저장 / 인쇄</button>
 
-<!-- PAGE 1 -->
 <div class="page">
 
   <div class="hd">
     <div class="hd-name">박준철 포트폴리오</div>
-    <div class="hd-role">Flutter 앱 개발자 / iOS / Android</div>
+    <div class="hd-role">자동화 시스템 개발 / Flutter 앱 개발자</div>
     <div class="hd-contacts">
       <span class="hd-contact">📞 010-2538-1519</span>
       <span class="hd-contact">✉ justinnn980@gmail.com</span>
@@ -106,7 +96,7 @@
   </div>
 
   <div class="lead">
-    실서비스에서 1년 10개월간 Flutter 앱(LG헬로비전 가입자 343만 명 / 딜라이브 매출 3,500억)을 단독으로 개발/운영하며 마이그레이션, DRM 통합, 성능 개선을 직접 수행했습니다. App Store/Play Store 정식 배포부터 개인 프로젝트의 연동 서버 구현까지, 앱 하나를 처음부터 끝까지 책임져온 개발자입니다.
+    요청받지 않은 비효율도 먼저 찾아 자동화 구조로 바꿔온 개발자입니다. 엑셀에 흩어진 자산관리를 직접 만든 시스템으로 전환해 실사용 데이터 2,394건을 이관했고, 홈초이스에서는 Flutter 앱(LG헬로비전 가입자 343만 명 / 딜라이브 매출 3,500억)을 단독 개발/운영하며 파트너사 앱 통합 마이그레이션을 주도했습니다.
   </div>
 
   <!-- 실무 프로젝트 -->
@@ -114,17 +104,17 @@
     <div class="sec-title">실무 프로젝트</div>
 
     <div class="proj">
-      <div class="proj-t">헬로tv → 오초이스 앱 마이그레이션</div>
-      <div class="proj-tech">Flutter, Riverpod, WebView JS Bridge, Firebase &nbsp;|&nbsp; (주)홈초이스 / LG헬로비전(매출 1조) / 2025.02–2025.10 / 팀 4인(개발3/디자인1)</div>
-      <div class="proj-d">헬로tv 앱을 오초이스로 통합 마이그레이션. <strong>Riverpod</strong>으로 셋톱박스 3대 페어링 상태를 연결/기기/콘텐츠 단위로 분리 관리해 상태 혼재를 해결하고, Flutter ↔ WebView JS Bridge 양방향 구조로 앱 재배포 없이 콘텐츠를 즉시 반영하는 운영 구조를 구현. 화면 병목을 분석/개선해 <strong>로딩 속도 39% 단축</strong>을 달성.</div>
-      <div class="proj-pt"><b>어필 포인트</b> 상태관리 설계부터 화면 성능 최적화까지, 앱 UX 전체를 관통하는 문제 해결 능력을 보여줍니다.</div>
+      <div class="proj-t">엑셀 산재 자산관리 → 사내 자산관리 시스템 자체 개발</div>
+      <div class="proj-tech">Java, Spring Boot, React, Power Automate, Teams Webhook &nbsp;|&nbsp; 아우토크립트(그린맨파워 파견) / IT 인프라/자산관리 담당</div>
+      <div class="proj-d">담당자 개인 엑셀에 의존하던 조직도/자산 현황을 <strong>데이터베이스 기반 웹 시스템</strong>으로 직접 기획/개발해 실사용 데이터 2,394건(인원 306명/자산 1,471건)을 이관. 온보딩을 4단계 마법사 UI로 표준화하고 사번 자동 채번, SW 라이선스 만료 자동 경고 기능을 구현. 헬프데스크 Form 접수를 Power Automate/Teams Webhook으로 자동 연동하고, AI 도구로 만든 FAQ 챗봇에는 관리자 퇴사/서버 장애를 대비한 이중화 구조를 함께 설계.</div>
+      <div class="proj-pt"><b>어필 포인트</b> 요청받지 않은 비효율을 스스로 찾아 시스템으로 해결하고, 장애 상황까지 미리 대비하는 설계력을 보여줍니다.</div>
     </div>
 
     <div class="proj">
-      <div class="proj-t">딜라이브 모바일TV → 오초이스 마이그레이션</div>
-      <div class="proj-tech">Flutter 2→3, NCG DRM, Multi DRM(Widevine/FairPlay) &nbsp;|&nbsp; (주)홈초이스 / 딜라이브(매출 3,500억) / 2024.02–2024.11 / 팀 4인</div>
-      <div class="proj-d">딜라이브 앱(NCG DRM)을 오초이스(Multi DRM)로 통합. 쇼츠형 피드 스크롤 시 발생한 <strong>오디오 이중 출력 문제를 원본 플레이어 라이브러리 소스 코드까지 직접 분석</strong>해 생성/재생/종료 생명주기를 명시적으로 분리해 해결. DRM 방식을 추상화한 단일 플레이어 인터페이스로 서비스 무관 동일 시청 경험을 제공했고, 이 과정에서 <strong>Flutter 2 → 3 메이저 버전업</strong>과 전체 라이브러리 의존성 재검토를 함께 수행.</div>
-      <div class="proj-pt"><b>어필 포인트</b> API 문서만으로 해결되지 않는 문제를 라이브러리 소스 레벨까지 파고드는 진단력을 보여줍니다.</div>
+      <div class="proj-t">헬로tv/딜라이브 → 오초이스 앱 통합 마이그레이션</div>
+      <div class="proj-tech">Flutter, Riverpod, WebView JS Bridge, DRM 통합, Spring Boot &nbsp;|&nbsp; (주)홈초이스 / LG헬로비전(매출 1조), 딜라이브(매출 3,500억) / 팀 4인(개발3/디자인1)</div>
+      <div class="proj-d">두 파트너사의 앱을 "오초이스" 단일 앱으로 통합. <strong>Riverpod</strong>으로 셋톱박스 3대 페어링 상태를 연결/기기/콘텐츠 단위로 분리 관리해 상태 혼재를 해결하고, Flutter ↔ WebView 양방향 구조로 앱 재배포 없이 콘텐츠를 즉시 반영하도록 개선해 <strong>로딩 속도 39% 단축</strong>. 서로 다른 DRM 방식(NCG/Multi DRM)을 단일 플레이어로 통합했고, Spring Boot REST API와 Quartz 배치로 콘텐츠 발행/배포를 자동화.</div>
+      <div class="proj-pt"><b>어필 포인트</b> 앱 UX 설계부터 성능 최적화, 서버 자동화까지 하나의 서비스를 전 구간에서 책임지는 역량을 보여줍니다.</div>
     </div>
   </div>
 
@@ -151,9 +141,9 @@
   <div class="sec">
     <div class="sec-title">핵심 역량</div>
     <ul class="blt">
-      <li><strong>소스 레벨 진단력</strong> — API 문서로 해결되지 않는 문제를 라이브러리 소스 코드까지 분석해 해결</li>
-      <li><strong>앱 전 과정 책임</strong> — 기획-개발-배포-운영을 단독으로 수행한 실서비스/개인 프로젝트 다수</li>
-      <li><strong>성능 최적화</strong> — 화면 병목을 데이터로 분석해 로딩 속도 39% 개선 등 수치로 증명되는 결과를 만듦</li>
+      <li><strong>요청받지 않은 문제 발굴</strong> — 엑셀 산재 자산관리처럼 아무도 시키지 않은 비효율을 스스로 찾아 자동화 과제로 만듦</li>
+      <li><strong>근본 원인 추적</strong> — 통신 장애/CORS 오류 등을 임시 우회가 아니라 재발하지 않는 구조로 해결</li>
+      <li><strong>자동화와 앱 개발을 함께 다루는 실행력</strong> — 업무 자동화 시스템과 Flutter 실서비스 앱을 모두 기획부터 배포까지 책임진 경험</li>
     </ul>
   </div>
 

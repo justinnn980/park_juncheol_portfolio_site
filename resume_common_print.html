@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>박준철 이력서 / 경력기술서 — Flutter 앱 개발자</title>
+  <title>박준철 이력서 / 경력기술서</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
   <style>
@@ -64,8 +64,8 @@
     .blk-lbl { font-size: 10.5px; font-weight: 800; color: var(--sub); margin: 8px 0 4px; }
     ul.blt { list-style: none; }
     ul.blt li {
-      position: relative; padding-left: 12px; font-size: 11.5px; color: var(--sub);
-      line-height: 1.65; margin-bottom: 4px;
+      position: relative; padding-left: 12px; font-size: 11px; color: var(--sub);
+      line-height: 1.6; margin-bottom: 4px;
     }
     ul.blt li::before {
       content: '-'; position: absolute; left: 0; color: var(--em); font-weight: 900;
@@ -91,7 +91,7 @@
 
     /* PRINT */
     @media print {
-      html { font-size: 11.5px; }
+      html { font-size: 11px; }
       body { background: #fff; }
       .page { margin: 0; padding: 12mm 14mm; width: 100%; }
       .no-print { display: none !important; }
@@ -121,7 +121,7 @@
   <!-- HEADER -->
   <div class="hd">
     <div class="hd-name">박준철 이력서 / 경력기술서</div>
-    <div class="hd-role">Flutter 앱 개발자 / iOS / Android</div>
+    <div class="hd-role">자동화 시스템 개발 / Flutter 앱 개발자</div>
     <div class="hd-contacts">
       <span class="hd-contact">📞 010-2538-1519</span>
       <span class="hd-contact">✉ justinnn980@gmail.com</span>
@@ -133,42 +133,56 @@
   <!-- 요약 -->
   <div class="blk-lbl" style="margin-top:0;">요약</div>
   <div style="font-size:11.5px; color:var(--sub); line-height:1.7; margin-bottom:12px;">
-    실서비스 OTT 앱 "오초이스"를 1년 10개월간 Flutter로 단독 개발/운영. 파트너사 앱 2건 통합 마이그레이션을 주도했고, 상태관리 재설계/DRM 통합/성능 최적화로 <strong>로딩 속도 39% 개선</strong>을 달성. iOS/Android 정식 출시 및 버전 관리를 직접 수행.
+    요청받지 않은 비효율도 먼저 찾아 자동화 구조로 바꿔온 개발자입니다. 엑셀에 흩어진 자산관리를 직접 만든 시스템으로 전환해 <strong>실사용 데이터 2,394건</strong>을 이관했고, 헬프데스크 업무를 Power Automate/Teams Webhook으로 자동 연결했습니다. 홈초이스에서는 Flutter 앱을 단독 개발/운영하며 파트너사 앱 통합 마이그레이션 2건을 주도, <strong>로딩 속도 39% 개선</strong>을 달성했습니다.
   </div>
 
   <!-- 경력요약 -->
   <div class="sum-bar">
-    <div class="sum-item"><div class="sum-n">1년 10개월</div><div class="sum-l">Flutter 실서비스 개발/운영</div></div>
-    <div class="sum-item"><div class="sum-n">마이그레이션 2건</div><div class="sum-l">대형 파트너사 앱 전환 주도</div></div>
+    <div class="sum-item"><div class="sum-n">자산관리 시스템</div><div class="sum-l">자체 개발/2,394건 이관</div></div>
+    <div class="sum-item"><div class="sum-n">Power Automate</div><div class="sum-l">헬프데스크 자동화</div></div>
+    <div class="sum-item"><div class="sum-n">마이그레이션 2건</div><div class="sum-l">Flutter 앱 통합 주도</div></div>
     <div class="sum-item"><div class="sum-n">로딩 속도 −39%</div><div class="sum-l">성능 최적화 성과</div></div>
-    <div class="sum-item"><div class="sum-n">AOS + iOS</div><div class="sum-l">정식 배포 및 버전 관리</div></div>
-    <div class="sum-item"><div class="sum-n">AdMob/Firebase</div><div class="sum-l">광고/분석 실서비스 연동</div></div>
+    <div class="sum-item"><div class="sum-n">AI 도구 상시 활용</div><div class="sum-l">Claude Code/Codex</div></div>
   </div>
 
   <!-- 경력사항 -->
   <div class="sec">
     <div class="sec-title">경력사항</div>
+
+    <div class="meta-row">
+      <span class="meta-co">아우토크립트 (그린맨파워 파견)</span>
+    </div>
+    <div class="meta-sub">IT 인프라 / 자산관리 담당 — 엑셀 기반 업무를 자동화 시스템으로 전환</div>
+    <ul class="blt">
+      <li>엑셀 산재 조직도/IT 자산 현황을 <strong>Java/Spring Boot/React 시스템</strong>으로 직접 개발, 실사용 데이터 2,394건(인원 306명/자산 1,471건) 이관</li>
+      <li>온보딩 절차를 4단계 마법사 UI로 표준화, 사번 자동 채번, SW 라이선스 만료 자동 경고</li>
+      <li>헬프데스크 MS Form 접수 → <strong>Power Automate + Teams Webhook</strong>으로 담당자 자동 전달</li>
+      <li>AI 도구로 FAQ 챗봇 개발, 관리자 퇴사/서버 장애 대비 이중화 구조 설계</li>
+      <li>Docker/Render API 배포 자동화, CORS 오류/데이터 이관 누락 직접 원인 추적 및 해결</li>
+    </ul>
+
+    <div class="stack-row">
+      <span class="stack-tag">Java/Spring Boot</span>
+      <span class="stack-tag">React</span>
+      <span class="stack-tag">Power Automate</span>
+      <span class="stack-tag">Teams Webhook</span>
+      <span class="stack-tag">Docker</span>
+      <span class="stack-tag">AI 도구 활용</span>
+    </div>
+  </div>
+
+  <div class="sec">
     <div class="meta-row">
       <span class="meta-co">(주)홈초이스</span>
       <span class="meta-period">2024.02 ~ 2025.11 (1년 10개월)</span>
     </div>
-    <div class="meta-sub">OTT 서비스 "오초이스" / LG헬로비전(매출 1조)/딜라이브(매출 3,500억) 파트너사 앱 마이그레이션 2건 주도</div>
-
-    <div class="blk-lbl">담당업무</div>
+    <div class="meta-sub">TECH사업실 / Flutter 앱 개발 및 Spring Boot 백엔드 개발 — OTT 서비스 "오초이스" / LG헬로비전(매출 1조), 딜라이브(매출 3,500억) 마이그레이션 2건 주도</div>
     <ul class="blt">
-      <li>LG헬로비전/딜라이브 파트너사 앱 → 오초이스 전환 마이그레이션 기획 및 개발 주도 (팀 4인/개발 3 / 디자인 1)</li>
-      <li>Riverpod 기반 상태관리로 셋톱박스 3대 페어링 상태를 연결/기기/콘텐츠 노출 단위로 분리 관리</li>
-      <li>Flutter ↔ WebView JS Bridge 양방향 구조 설계, NCG DRM → Multi DRM(Widevine/FairPlay) 전환</li>
-      <li>iOS/Android 네이티브 인증서/권한/빌드 이슈 직접 대응, 앱스토어/플레이스토어 출시 및 버전 관리</li>
-      <li>Firebase Analytics, AdMob 연동 및 성능 지표 기반 화면 최적화</li>
-    </ul>
-
-    <div class="blk-lbl">주요성과</div>
-    <ul class="blt result">
-      <li>Riverpod로 셋톱박스 상태 혼재/렌더링 오류를 <strong>연결/기기/콘텐츠 단위 분리</strong>로 해결, 상태 변화 즉시 반영</li>
-      <li>WebView JS Bridge 설계로 <strong>로딩 속도 39% 단축</strong>, 앱 재배포 없이 콘텐츠 즉시 반영되는 운영 구조 확보</li>
-      <li>Flutter 2 → 3 메이저 버전업 시 전체 라이브러리 의존성 재검토, 무중단 업그레이드 완료</li>
-      <li>서로 다른 DRM 방식(NCG/Multi DRM)을 단일 플레이어 인터페이스로 통합, 서비스 무관 동일 시청 경험 제공</li>
+      <li>파트너사 앱 → 오초이스 전환 마이그레이션 기획 및 개발 주도 (팀 4인/개발 3/디자인 1)</li>
+      <li><strong>Riverpod 상태관리</strong>로 셋톱박스 3대 페어링 상태 분리 관리, Flutter ↔ WebView 구조로 <strong>로딩 속도 39% 단축</strong></li>
+      <li>NCG DRM → Multi DRM 전환, 단일 플레이어 인터페이스로 통합</li>
+      <li>Spring Boot REST API 서버 개발, Quartz 배치 5분 주기 잡 6개 구성</li>
+      <li>콘텐츠 메타데이터 수집 Python/Selenium/Docker/Cron 자동화, EC2 Elastic IP 구조로 통신 장애 근본 해결</li>
     </ul>
 
     <div class="stack-row">
@@ -176,10 +190,9 @@
       <span class="stack-tag">Riverpod</span>
       <span class="stack-tag">WebView JS Bridge</span>
       <span class="stack-tag">DRM 통합</span>
-      <span class="stack-tag">iOS 배포</span>
-      <span class="stack-tag">Android 배포</span>
-      <span class="stack-tag">Firebase</span>
-      <span class="stack-tag">AdMob</span>
+      <span class="stack-tag">Spring Boot</span>
+      <span class="stack-tag">Python/Selenium</span>
+      <span class="stack-tag">AWS EC2</span>
     </div>
   </div>
 
@@ -188,20 +201,20 @@
     <div class="sec-title">핵심 역량</div>
     <div class="strength-grid">
       <div class="strength">
-        <div class="strength-t">문제를 소스 레벨까지 파고드는 진단력</div>
-        <div class="strength-v">오디오 겹침 등 API 문서로 해결되지 않는 이슈를 라이브러리 소스 분석으로 해결합니다.</div>
+        <div class="strength-t">요청받지 않은 문제를 먼저 발굴</div>
+        <div class="strength-v">엑셀 산재 자산관리처럼 아무도 시키지 않은 비효율을 스스로 찾아 자동화 과제로 만듭니다.</div>
       </div>
       <div class="strength">
-        <div class="strength-t">앱 하나를 처음부터 끝까지 책임지는 경험</div>
-        <div class="strength-v">기획-개발-배포-운영 전 과정을 단독으로 수행한 실서비스/개인 프로젝트 다수.</div>
+        <div class="strength-t">증상이 아닌 원인을 끝까지 추적</div>
+        <div class="strength-v">통신 장애/CORS 오류 등 임시 우회가 아니라 재발하지 않는 구조로 근본 해결합니다.</div>
       </div>
       <div class="strength">
-        <div class="strength-t">성능 최적화 중심의 문제 해결</div>
-        <div class="strength-v">화면 병목을 데이터로 분석해 로딩 속도 39% 개선 등 수치로 증명되는 개선을 만듭니다.</div>
+        <div class="strength-t">자동화와 앱 개발을 함께 다루는 실행력</div>
+        <div class="strength-v">업무 자동화 시스템과 Flutter 실서비스 앱을 모두 기획부터 배포까지 책임진 경험이 있습니다.</div>
       </div>
       <div class="strength">
         <div class="strength-t">AI 도구 활용 개발</div>
-        <div class="strength-v">AI 도구를 기획/설계/구현/배포 전 과정에서 적극 활용합니다.</div>
+        <div class="strength-v">AI 도구를 기획/설계/구현/배포 전 과정에서 적극 활용하되 결과는 항상 직접 검증합니다.</div>
       </div>
     </div>
   </div>
