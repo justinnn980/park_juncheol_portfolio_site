@@ -70,10 +70,12 @@
     .stack-tag { padding: 3px 8px; border-radius: 4px; background: var(--bg-h); border: 1px solid var(--em-l); color: var(--em); font-size: 10px; font-weight: 700; }
 
     /* SKILL CHIPS */
-    .skill-chip-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-    .skill-chip { border: 1px solid var(--bdr); border-radius: 5px; padding: 5px 8px; display: flex; justify-content: space-between; align-items: baseline; gap: 4px; background: var(--bg-h); }
-    .chip-name { font-size: 10px; font-weight: 800; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .chip-meta { font-size: 9px; color: var(--em); font-weight: 700; white-space: nowrap; }
+    .skill-chip-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    .skill-chip { border: 1px solid var(--bdr); border-radius: 5px; padding: 6px 9px; background: var(--bg-h); }
+    .chip-row { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
+    .chip-name { font-size: 10.5px; font-weight: 800; color: var(--text); white-space: nowrap; }
+    .chip-meta { font-size: 9.5px; color: var(--em); font-weight: 700; white-space: nowrap; }
+    .chip-note { font-size: 9px; color: var(--muted); margin-top: 2px; }
 
     /* CORE STRENGTHS */
     .strength-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -151,14 +153,14 @@
   <div class="sec">
     <div class="sec-title">보유 스킬</div>
     <div class="skill-chip-grid">
-      <div class="skill-chip"><span class="chip-name">Dart/Flutter</span><span class="chip-meta">2년/중급</span></div>
-      <div class="skill-chip"><span class="chip-name">Java</span><span class="chip-meta">2년/중급</span></div>
-      <div class="skill-chip"><span class="chip-name">Spring Boot</span><span class="chip-meta">2년/중급</span></div>
-      <div class="skill-chip"><span class="chip-name">Python</span><span class="chip-meta">2년/중급</span></div>
-      <div class="skill-chip"><span class="chip-name">SQL(MySQL)</span><span class="chip-meta">2년/중급</span></div>
-      <div class="skill-chip"><span class="chip-name">JS/TS</span><span class="chip-meta">1년/초급</span></div>
-      <div class="skill-chip"><span class="chip-name">AWS</span><span class="chip-meta">2년/중급</span></div>
-      <div class="skill-chip"><span class="chip-name">Git/GitHub</span><span class="chip-meta">2년/중급</span></div>
+      <div class="skill-chip"><div class="chip-row"><span class="chip-name">Dart/Flutter</span><span class="chip-meta">1년10개월/중급</span></div><div class="chip-note">홈초이스 실서비스 앱 단독 개발</div></div>
+      <div class="skill-chip"><div class="chip-row"><span class="chip-name">Java</span><span class="chip-meta">2년/중급</span></div><div class="chip-note">백엔드 개발 + 백준 알고리즘</div></div>
+      <div class="skill-chip"><div class="chip-row"><span class="chip-name">Spring Boot</span><span class="chip-meta">2년/중급</span></div><div class="chip-note">홈초이스/아우토크립트/개인 REST API</div></div>
+      <div class="skill-chip"><div class="chip-row"><span class="chip-name">Python</span><span class="chip-meta">1년10개월/중급</span></div><div class="chip-note">Selenium/Docker/Cron 자동화</div></div>
+      <div class="skill-chip"><div class="chip-row"><span class="chip-name">SQL(MySQL)</span><span class="chip-meta">1년10개월/중급</span></div><div class="chip-note">실서비스 데이터 조회/처리</div></div>
+      <div class="skill-chip"><div class="chip-row"><span class="chip-name">JS/TS</span><span class="chip-meta">1년/초급</span></div><div class="chip-note">React 웹 화면, WebView 연동</div></div>
+      <div class="skill-chip"><div class="chip-row"><span class="chip-name">AWS</span><span class="chip-meta">1년10개월/중급</span></div><div class="chip-note">EC2/S3/DynamoDB 인프라 운영</div></div>
+      <div class="skill-chip"><div class="chip-row"><span class="chip-name">Git/GitHub</span><span class="chip-meta">2년/중급</span></div><div class="chip-note">팀/개인 프로젝트 버전 관리 상시</div></div>
     </div>
   </div>
 
