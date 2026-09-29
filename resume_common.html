@@ -90,11 +90,22 @@
     .pi-val { font-size: 14px; color: var(--text); font-weight: 700; }
 
     /* SKILL CHIPS */
+    .sk-group-title { font-size: 12px; font-weight: 800; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+    .sk-group-title-2nd { margin-top: 24px; }
     .skill-chip-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .skill-chip { background: var(--card); border: 1px solid var(--bdr); border-radius: 8px; padding: 10px 14px; }
+    .skill-chip-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .skill-chip { background: var(--card); border: 1px solid var(--bdr); border-radius: 8px; padding: 14px 16px; }
     .chip-name { font-size: 13px; font-weight: 800; color: var(--text); }
     .chip-meta { font-size: 11px; color: var(--cy); font-weight: 600; margin-top: 2px; }
-    .chip-note { font-size: 11px; color: var(--muted); margin-top: 3px; }
+    .chip-note { font-size: 11px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+
+    .tags-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--card); border: 1px solid var(--bdr); border-radius: 20px;
+      padding: 8px 16px; font-size: 12.5px; font-weight: 700; color: var(--text);
+    }
+    .skill-pill b { color: var(--cy); font-weight: 700; font-size: 11px; }
 
     /* STRENGTH GRID */
     .strength-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
@@ -256,14 +267,20 @@
 <div class="section" id="skills">
   <div class="sec-label">Section 01</div>
   <div class="sec-title">보유 스킬</div>
-  <div class="skill-chip-grid">
+
+  <div class="sk-group-title">핵심 스킬</div>
+  <div class="skill-chip-grid skill-chip-grid-3">
     <div class="skill-chip"><div class="chip-name">Dart / Flutter</div><div class="chip-meta">2년 7개월 / 중급</div><div class="chip-note">홈초이스 입사 이후 개인 프로젝트까지 계속 사용</div></div>
     <div class="skill-chip"><div class="chip-name">Java / Spring Boot</div><div class="chip-meta">3년 / 중급</div><div class="chip-note">반려견 중고거래마켓 백엔드(2021), 홈초이스 REST API/Quartz 배치, 아우토크립트 자산관리 시스템, SAP 연동 학습 프로젝트</div></div>
     <div class="skill-chip"><div class="chip-name">Python</div><div class="chip-meta">2년 / 중급</div><div class="chip-note">AI 낙상 감지 시스템(YOLOv5), 따릉이 데이터 분석(Pandas), 홈초이스 콘텐츠 크롤링 자동화(Selenium)</div></div>
-    <div class="skill-chip"><div class="chip-name">SQL (MySQL)</div><div class="chip-meta">2년 7개월 / 중급</div></div>
-    <div class="skill-chip"><div class="chip-name">JavaScript / TS</div><div class="chip-meta">1년 / 초급</div></div>
-    <div class="skill-chip"><div class="chip-name">AWS</div><div class="chip-meta">1년 10개월 / 중급</div></div>
-    <div class="skill-chip"><div class="chip-name">Git / GitHub</div><div class="chip-meta">2년 / 중급</div></div>
+  </div>
+
+  <div class="sk-group-title sk-group-title-2nd">기타 스킬</div>
+  <div class="tags-row">
+    <span class="skill-pill">SQL (MySQL) <b>2년 7개월 / 중급</b></span>
+    <span class="skill-pill">JavaScript / TS <b>1년 / 초급</b></span>
+    <span class="skill-pill">AWS <b>1년 10개월 / 중급</b></span>
+    <span class="skill-pill">Git / GitHub <b>2년 / 중급</b></span>
   </div>
 </div>
 

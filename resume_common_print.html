@@ -70,12 +70,23 @@
     .stack-tag { padding: 3px 8px; border-radius: 4px; background: var(--bg-h); border: 1px solid var(--em-l); color: var(--em); font-size: 10px; font-weight: 700; }
 
     /* SKILL CHIPS */
+    .sk-group-lbl { font-size: 9.5px; font-weight: 800; color: var(--em); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; }
+    .sk-group-lbl-2nd { margin-top: 10px; }
     .skill-chip-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
-    .skill-chip { border: 1px solid var(--bdr); border-radius: 5px; padding: 6px 9px; background: var(--bg-h); }
+    .skill-chip-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .skill-chip { border: 1px solid var(--bdr); border-radius: 5px; padding: 7px 9px; background: var(--bg-h); }
     .chip-row { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
     .chip-name { font-size: 10.5px; font-weight: 800; color: var(--text); white-space: nowrap; }
     .chip-meta { font-size: 9.5px; color: var(--em); font-weight: 700; white-space: nowrap; }
-    .chip-note { font-size: 9px; color: var(--muted); margin-top: 2px; }
+    .chip-note { font-size: 9px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+
+    .tags-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--bg-h); border: 1px solid var(--em-l); border-radius: 20px;
+      padding: 4px 10px; font-size: 10px; font-weight: 700; color: var(--text);
+    }
+    .skill-pill b { color: var(--em); font-weight: 700; font-size: 9px; }
 
     /* CORE STRENGTHS */
     .strength-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -152,14 +163,20 @@
   <!-- 보유 스킬 -->
   <div class="sec">
     <div class="sec-title">보유 스킬</div>
-    <div class="skill-chip-grid">
+
+    <div class="sk-group-lbl">핵심 스킬</div>
+    <div class="skill-chip-grid skill-chip-grid-3">
       <div class="skill-chip"><div class="chip-row"><span class="chip-name">Dart/Flutter</span><span class="chip-meta">2년7개월/중급</span></div><div class="chip-note">홈초이스 입사 이후 개인 프로젝트까지 계속 사용</div></div>
       <div class="skill-chip"><div class="chip-row"><span class="chip-name">Java/Spring Boot</span><span class="chip-meta">3년/중급</span></div><div class="chip-note">반려견 중고거래마켓 백엔드(2021), 홈초이스 REST API/Quartz, 아우토크립트 자산관리 시스템, SAP 연동 학습</div></div>
       <div class="skill-chip"><div class="chip-row"><span class="chip-name">Python</span><span class="chip-meta">2년/중급</span></div><div class="chip-note">AI 낙상 감지(YOLOv5), 따릉이 데이터 분석(Pandas), 콘텐츠 크롤링 자동화(Selenium)</div></div>
-      <div class="skill-chip"><div class="chip-row"><span class="chip-name">SQL(MySQL)</span><span class="chip-meta">2년7개월/중급</span></div></div>
-      <div class="skill-chip"><div class="chip-row"><span class="chip-name">JS/TS</span><span class="chip-meta">1년/초급</span></div></div>
-      <div class="skill-chip"><div class="chip-row"><span class="chip-name">AWS</span><span class="chip-meta">1년10개월/중급</span></div></div>
-      <div class="skill-chip"><div class="chip-row"><span class="chip-name">Git/GitHub</span><span class="chip-meta">2년/중급</span></div></div>
+    </div>
+
+    <div class="sk-group-lbl sk-group-lbl-2nd">기타 스킬</div>
+    <div class="tags-row">
+      <span class="skill-pill">SQL(MySQL) <b>2년7개월/중급</b></span>
+      <span class="skill-pill">JS/TS <b>1년/초급</b></span>
+      <span class="skill-pill">AWS <b>1년10개월/중급</b></span>
+      <span class="skill-pill">Git/GitHub <b>2년/중급</b></span>
     </div>
   </div>
 
