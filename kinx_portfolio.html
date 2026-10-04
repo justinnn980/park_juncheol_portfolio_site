@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>박준철 — 네트워크 데이터 분석 시스템 개발</title>
+<meta name="description" content="네트워크 통신 장애를 직접 추적해 해결하고, Python/SQL 기반 데이터 파이프라인과 인프라 자동화 시스템을 만든 박준철의 포트폴리오" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<style>
+  :root {
+    --bg: #08090c;
+    --bg-elevated: #0d1420;
+    --bg-card: #0f1726;
+    --line: rgba(255,255,255,0.09);
+    --line-strong: rgba(255,255,255,0.16);
+    --text: #f2f3f5;
+    --text-dim: #a3a8b4;
+    --text-faint: #676d7a;
+    --accent: #38bdf8;
+    --accent-strong: #0ea5e9;
+    --accent-soft: rgba(56,189,248,0.12);
+    --mono: "SF Mono", ui-monospace, "Cascadia Code", monospace;
+    --maxw: 1080px;
+    --radius: 14px;
+  }
+
+  :root[data-theme="light"] {
+    --bg: #f6f7f5;
+    --bg-elevated: #ffffff;
+    --bg-card: #ffffff;
+    --line: rgba(15,17,21,0.1);
+    --line-strong: rgba(15,17,21,0.18);
+    --text: #14161c;
+    --text-dim: #565c69;
+    --text-faint: #8a8f99;
+    --accent: #0369a1;
+    --accent-strong: #075985;
+    --accent-soft: rgba(3,105,161,0.09);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  code { font-family: var(--mono); }
+
+  ::selection { background: var(--accent); color: #05070c; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- nav ---------- */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    backdrop-filter: blur(14px) saturate(140%);
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand { font-weight: 800; font-size: 15px; letter-spacing: -0.01em; }
+  .nav-brand span { color: var(--accent); }
+  .nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; color: var(--text-dim); }
+  .nav-links a:hover { color: var(--text); }
+  .nav-actions { display: flex; align-items: center; gap: 12px; }
+  .theme-toggle {
+    width: 34px; height: 34px;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: var(--bg-elevated);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  .nav-cta {
+    border: 1px solid var(--line-strong);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
+  .menu-btn { display: none; }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 200px 0 120px; position: relative; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -120px; right: -160px;
+    width: 520px; height: 520px;
+    background: radial-gradient(circle, var(--accent-soft), transparent 70%);
+    pointer-events: none;
+  }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 12.5px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--line-strong);
+    background: var(--accent-soft);
+    padding: 6px 12px; border-radius: 999px;
+    margin-bottom: 28px;
+  }
+  .kicker::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .hero h1 {
+    font-size: clamp(38px, 6vw, 78px);
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+    margin: 0 0 26px; max-width: 18ch;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero-lead {
+    font-size: clamp(16px, 1.9vw, 19px);
+    color: var(--text-dim); max-width: 660px; margin: 0 0 40px;
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 64px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 24px; border-radius: 999px;
+    font-size: 14.5px; font-weight: 700;
+    border: 1px solid transparent;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn-primary {
+    background: var(--accent); color: #04121f;
+    box-shadow: 0 12px 28px -10px var(--accent-strong);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 34px -10px var(--accent-strong); }
+  .btn-ghost { border-color: var(--line-strong); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .proof-strip { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .proof-strip div { padding: 26px 24px; border-right: 1px solid var(--line); }
+  .proof-strip div:last-child { border-right: none; }
+  .proof-strip strong { display: block; font-size: clamp(20px, 2.4vw, 28px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .proof-strip span { font-size: 12.5px; color: var(--text-faint); }
+
+  /* ---------- section shell ---------- */
+  .section { padding: 120px 0; }
+  .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 56px; flex-wrap: wrap; }
+  .section-eyebrow { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; display: block; }
+  .section-head h2 { font-size: clamp(28px, 3.4vw, 42px); font-weight: 800; letter-spacing: -0.02em; margin: 0; }
+  .section-head p { color: var(--text-dim); max-width: 420px; font-size: 15px; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+  /* ---------- case studies ---------- */
+  .case { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; padding: 48px 0; border-top: 1px solid var(--line); }
+  .case:first-of-type { border-top: none; }
+  .case.rev .case-visual { order: 2; }
+  .case.rev .case-body { order: 1; }
+
+  .case-visual { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line-strong); background: var(--bg-elevated); }
+
+  .term { font-family: var(--mono); font-size: 12.5px; }
+  .term-chrome {
+    display: flex; align-items: center; gap: 6px;
+    padding: 10px 14px; border-bottom: 1px solid var(--line);
+    background: var(--bg-card);
+  }
+  .term-chrome span { width: 9px; height: 9px; border-radius: 50%; background: var(--line-strong); }
+  .term-chrome .name { margin-left: 8px; font-family: var(--mono); font-size: 11px; color: var(--text-faint); }
+  .term-body { padding: 22px; color: var(--text-dim); line-height: 1.9; }
+  .term-body .l1 { color: var(--accent); }
+  .term-body .muted { color: var(--text-faint); }
+  .term-body .k { color: #f0b429; }
+  .term-body .v { color: #93c5fd; }
+  .term-body pre { margin: 10px 0 0; white-space: pre-wrap; word-break: break-word; }
+
+  .diagram { padding: 30px 24px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .diagram .node {
+    flex: 1; min-width: 100px;
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    padding: 16px 10px;
+    text-align: center;
+    background: var(--bg-card);
+  }
+  .diagram .node.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+  .diagram .node b { display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 4px; }
+  .diagram .node span { font-size: 10.5px; color: var(--text-faint); font-family: var(--mono); }
+  .diagram .arrow { color: var(--text-faint); font-size: 16px; }
+
+  .case-tag { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.04em; margin-bottom: 12px; display: block; }
+  .case-body h3 { font-size: clamp(21px, 2.4vw, 27px); font-weight: 800; letter-spacing: -0.015em; margin: 0 0 14px; line-height: 1.3; }
+  .case-body > p { color: var(--text-dim); font-size: 15px; margin-bottom: 22px; }
+  .case-points { display: grid; gap: 14px; margin-bottom: 22px; }
+  .case-points li { display: grid; grid-template-columns: 74px 1fr; gap: 14px; font-size: 14px; }
+  .case-points b { font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-faint); padding-top: 2px; }
+  .case-points p { margin: 0; color: var(--text); }
+  .case-result { display: flex; gap: 10px; flex-wrap: wrap; }
+  .case-result span { font-size: 12.5px; font-weight: 700; padding: 7px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+  .case-links { display: flex; gap: 16px; margin-top: 18px; }
+  .case-links a { font-size: 13px; font-weight: 700; color: var(--accent); border-bottom: 1px solid var(--accent-soft); padding-bottom: 2px; }
+  .case-links a:hover { border-color: var(--accent); }
+
+  /* ---------- more grid ---------- */
+  .more-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
+  .more-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; background: var(--bg-elevated); transition: border-color 0.2s ease, transform 0.2s ease; }
+  .more-card:hover { border-color: var(--line-strong); transform: translateY(-3px); }
+  .more-card .num { font-family: var(--mono); font-size: 12px; color: var(--text-faint); }
+  .more-card h4 { font-size: 16.5px; font-weight: 700; margin: 12px 0 10px; letter-spacing: -0.01em; }
+  .more-card p { font-size: 13.5px; color: var(--text-dim); margin: 0 0 14px; }
+  .more-card .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .more-card .tags span { font-size: 11px; font-family: var(--mono); color: var(--text-faint); border: 1px solid var(--line); padding: 3px 8px; border-radius: 6px; }
+
+  /* ---------- stack ---------- */
+  .stack-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .stack-cell { background: var(--bg-elevated); padding: 26px 20px; }
+  .stack-cell h4 { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+  .stack-cell ul { display: flex; flex-direction: column; gap: 9px; }
+  .stack-cell li { font-size: 13.5px; color: var(--text-dim); }
+
+  /* ---------- timeline ---------- */
+  .timeline { border-left: 2px solid var(--line-strong); padding-left: 32px; display: flex; flex-direction: column; gap: 44px; }
+  .timeline-item { position: relative; }
+  .timeline-item::before {
+    content: ""; position: absolute; left: -39px; top: 4px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--accent);
+  }
+  .timeline-item time { font-family: var(--mono); font-size: 12.5px; color: var(--text-faint); display: block; margin-bottom: 8px; }
+  .timeline-item h4 { font-size: 18px; font-weight: 800; margin: 0 0 8px; letter-spacing: -0.01em; }
+  .timeline-item p { font-size: 14.5px; color: var(--text-dim); max-width: 640px; margin: 0; }
+
+  /* ---------- contact ---------- */
+  .contact { text-align: center; padding: 140px 0; position: relative; }
+  .contact::before {
+    content: ""; position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+    width: 640px; height: 640px;
+    background: radial-gradient(circle, var(--accent-soft), transparent 70%);
+    pointer-events: none;
+  }
+  .contact h2 { font-size: clamp(30px, 5vw, 56px); font-weight: 800; letter-spacing: -0.03em; margin: 0 0 20px; }
+  .contact p { color: var(--text-dim); font-size: 16px; margin-bottom: 40px; }
+  .contact-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 46px; }
+  .contact-links { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; font-size: 14px; color: var(--text-dim); }
+  .contact-links a:hover { color: var(--accent); }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--text-faint); flex-wrap: wrap; gap: 12px; }
+  footer a:hover { color: var(--accent); }
+
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .menu-btn { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid var(--line-strong); border-radius: 8px; background: transparent; color: var(--text); }
+    .case, .case.rev { grid-template-columns: 1fr; }
+    .case.rev .case-visual, .case.rev .case-body { order: initial; }
+    .proof-strip { grid-template-columns: repeat(2, 1fr); }
+    .proof-strip div:nth-child(2) { border-right: none; }
+    .more-grid { grid-template-columns: 1fr; }
+    .stack-grid { grid-template-columns: repeat(2, 1fr); }
+    .section { padding: 80px 0; }
+    .hero { padding: 140px 0 72px; }
+    .diagram { flex-direction: column; }
+    .diagram .arrow { transform: rotate(90deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="#top">박준철<span>.</span>dev</a>
+      <div class="nav-links">
+        <a href="#work">프로젝트</a>
+        <a href="#stack">기술 스택</a>
+        <a href="#experience">경력</a>
+        <a href="#contact">연락처</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="테마 전환">🌙</button>
+        <a class="nav-cta" href="resume_common.html">이력서 보기</a>
+        <button class="menu-btn" id="menuBtn" aria-label="메뉴">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <header id="top">
+    <section class="hero wrap">
+      <span class="kicker">Network Reliability / Python / Data Pipeline</span>
+      <h1>장애의 <em>원인을 네트워크 구조까지</em><br />추적해서 해결하는 개발자</h1>
+      <p class="hero-lead">
+        IP 변경으로 통신이 전면 차단되는 장애를 방화벽 정책/고정 IP/SSL 구조까지 추적해 해결했고,
+        Python/Selenium 기반 데이터 수집 파이프라인을 Docker로 매일 자동 실행시켜 운영했습니다.
+        화면 뒤의 통신 구조와 데이터 흐름을 같이 다뤄본 경험을 바탕으로, 네트워크 트래픽 데이터를
+        수집하고 처리하는 시스템을 만드는 일에 지원합니다.
+      </p>
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-primary">프로젝트 보기 →</a>
+        <a href="mailto:justinnn980@gmail.com" class="btn btn-ghost">이메일 보내기</a>
+      </div>
+      <div class="proof-strip" style="margin-top:8px;">
+        <div><strong>1년 10개월</strong><span>백엔드 / 인프라 실무</span></div>
+        <div><strong>2,394건</strong><span>IT 자산 데이터 이관/자동화</span></div>
+        <div><strong>Docker</strong><span>데이터 수집 파이프라인 자동 실행</span></div>
+        <div><strong>Python / SQL</strong><span>데이터 처리 및 분석 실습</span></div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="section-eyebrow">Work</span>
+            <h2>통신 구조와 데이터 흐름, 둘 다 추적한 기록</h2>
+          </div>
+          <p>네트워크 장애의 근본 원인 추적, 그리고 데이터를 자동으로 모으고 처리하는 파이프라인입니다.</p>
+        </div>
+
+        <div class="case reveal">
+          <div class="case-visual">
+            <div class="diagram">
+              <div class="node"><b>App</b><span>Flutter Client</span></div>
+              <span class="arrow">→</span>
+              <div class="node on"><b>Relay Server</b><span>고정 IP(EIP) / HTTPS</span></div>
+              <span class="arrow">→</span>
+              <div class="node"><b>Origin</b><span>Spring Boot API</span></div>
+            </div>
+          </div>
+          <div class="case-body">
+            <span class="case-tag">01 / (주)홈초이스 — 통신 장애 근본 원인 추적</span>
+            <h3>IP가 바뀌어도 끊기지 않는 통신 구조로 재설계</h3>
+            <p>
+              중계 서버의 IP가 바뀌자 방화벽 정책에 막혀 앱과 서버 간 요청이 전부 끊기는 장애가 발생했습니다.
+              증상만 우회하지 않고 네트워크 흐름을 끝까지 따라가 구조적인 원인을 찾았습니다.
+            </p>
+            <ul class="case-points">
+              <li><b>Challenge</b><p>중계 서버 IP가 바뀔 때마다 방화벽 정책에 걸려 앱-서버 통신이 전면 차단</p></li>
+              <li><b>Approach</b><p>중계 서버에 고정 IP(EIP)를 할당해 IP 변동 자체를 제거하고, HTTP → HTTPS 전환 시 SSL 인증서를 적용해 전 구간을 암호화 통신으로 재구성</p></li>
+              <li><b>Result</b><p>LG헬로비전/딜라이브 두 대형 파트너사 앱을 전환하는 동안 통신 장애 재발 없이 서비스 안정화, NCG/Multi 두 DRM 체계도 단일 구조로 통합</p></li>
+            </ul>
+            <div class="case-result">
+              <span>고정 IP + SSL</span>
+              <span>방화벽 정책 분석</span>
+              <span>AWS EC2</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="case rev reveal">
+          <div class="case-visual">
+            <div class="term">
+              <div class="term-chrome">
+                <span style="background:#ff5f57;"></span>
+                <span style="background:#febc2e;"></span>
+                <span style="background:#28c840;"></span>
+                <span class="name">kinolights-crawler</span>
+              </div>
+              <div class="term-body">
+                <div class="l1">$ docker run --rm kinolights-crawler \</div>
+                <div>&nbsp;&nbsp;--schedule <span class="k">"cron"</span> --target <span class="v">"kinolights.com"</span></div>
+                <pre class="muted">→ Selenium 세션 시작, 콘텐츠 메타데이터 1,000건+ 수집
+→ CSV 적재, 이전 결과와 비교해 신규 진입 항목 탐지
+→ 매일 자동 실행 (Cron) 후 컨테이너 종료</pre>
+              </div>
+            </div>
+          </div>
+          <div class="case-body">
+            <span class="case-tag">02 / 키노라이츠 데이터 수집 파이프라인</span>
+            <h3>Python 기반 데이터 수집/처리 파이프라인을 매일 자동 운영</h3>
+            <p>
+              외부 사이트의 콘텐츠 메타데이터를 수작업으로 확인하던 방식을 Python/Selenium으로 자동화하고,
+              Docker로 패키징해 매일 정해진 시간에 스스로 수집/비교까지 끝내도록 구성했습니다.
+            </p>
+            <ul class="case-points">
+              <li><b>Challenge</b><p>콘텐츠 메타데이터를 사람이 직접 주기적으로 확인/비교해야 해서 반복 작업과 누락이 발생</p></li>
+              <li><b>Approach</b><p>Python/Selenium으로 수집 로직을 작성하고 Docker 이미지로 패키징, Cron으로 스케줄링해 수집부터 이전 결과 비교까지 자동 실행</p></li>
+              <li><b>Result</b><p>콘텐츠 메타데이터 1,000건 이상을 평균 10분 내 수집, 신규 진입/순위 변화를 그래프로 자동 시각화</p></li>
+            </ul>
+            <div class="case-result">
+              <span>Python / Selenium</span>
+              <span>Docker / Cron</span>
+              <span>CSV 비교 / 시각화</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="more-grid reveal">
+          <article class="more-card">
+            <span class="num">03</span>
+            <h4>아우토크립트 — IT 자산/인프라 자동화 시스템</h4>
+            <p>엑셀로 흩어져 있던 조직도/IT 자산 현황을 Java/Spring Boot/React 시스템으로 직접 구축해 2,394건(인원 306명/자산 1,471건)을 이관하고, 라이선스 만료를 자동으로 경고하도록 만들었습니다.</p>
+            <div class="tags"><span>Java / Spring Boot</span><span>Docker</span><span>자동화</span></div>
+          </article>
+          <article class="more-card">
+            <span class="num">04</span>
+            <h4>따릉이 이용량 데이터 통계/예측</h4>
+            <p>서울시 공공데이터와 날씨 데이터를 Python/Pandas로 병합해 이용량을 예측하고, SQL 쿼리로 데이터를 가공해 구별 거치대 증감 판단 기준을 도출했습니다.</p>
+            <div class="tags"><span>Python / Pandas</span><span>SQL</span><span>데이터 분석</span></div>
+          </article>
+          <article class="more-card">
+            <span class="num">05</span>
+            <h4>실시간 낙상 감지 시스템</h4>
+            <p>카메라 영상을 YOLOv5로 실시간 분석해 낙상 여부를 판별하고, 알림까지 이어지는 이벤트 처리 로직을 Python으로 구현했습니다.</p>
+            <div class="tags"><span>Python</span><span>YOLOv5</span><span>실시간 처리</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stack" style="background:var(--bg-elevated); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="section-eyebrow">Stack</span>
+            <h2>실제로 써본 기술만</h2>
+          </div>
+          <p>튜토리얼이 아니라 실무와 개인 프로젝트에서 직접 사용한 기술입니다.</p>
+        </div>
+        <div class="stack-grid reveal">
+          <div class="stack-cell">
+            <h4>Data / Analysis</h4>
+            <ul><li>Python</li><li>Pandas</li><li>SQL (MySQL)</li><li>Selenium</li></ul>
+          </div>
+          <div class="stack-cell">
+            <h4>Backend</h4>
+            <ul><li>Java 17/21</li><li>Spring Boot</li><li>Spring Data JPA</li></ul>
+          </div>
+          <div class="stack-cell">
+            <h4>Infra / Network</h4>
+            <ul><li>AWS EC2 / S3</li><li>Docker</li><li>고정 IP(EIP) / SSL</li><li>방화벽 정책 분석</li></ul>
+          </div>
+          <div class="stack-cell">
+            <h4>Automation</h4>
+            <ul><li>Cron 스케줄링</li><li>GitHub Actions</li><li>Render 배포 자동화</li></ul>
+          </div>
+          <div class="stack-cell">
+            <h4>Tools</h4>
+            <ul><li>Git / GitHub</li><li>Swagger</li><li>Postman</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="section-eyebrow">Experience</span>
+            <h2>경력 / 교육</h2>
+          </div>
+        </div>
+        <div class="timeline reveal">
+          <div class="timeline-item">
+            <time>재직 중</time>
+            <h4>아우토크립트(그린맨파워 파견) / IT 인프라 / 자산관리 담당</h4>
+            <p>
+              엑셀로 흩어진 IT 자산/조직도 데이터를 Java/Spring Boot/React 시스템으로 직접 구축해 자동화했고,
+              IT 자산 비용 절감을 위한 IDC 환경 변경/클라우드 전환 실사를 진행했습니다. Docker/Render API로
+              배포를 자동화하고, 그 과정에서 발생한 오류의 원인을 직접 추적해 해결했습니다.
+            </p>
+          </div>
+          <div class="timeline-item">
+            <time>2024.02 — 2025.11 / 1년 10개월</time>
+            <h4>(주)홈초이스 / Flutter 앱 개발 및 Spring Boot 백엔드 개발</h4>
+            <p>
+              LG헬로비전/딜라이브 두 대형 파트너사 앱을 오초이스로 전환하면서, 중계 서버 IP 변경으로 인한
+              통신 장애를 고정 IP/SSL 구조로 해결했습니다. Python/Selenium 기반 콘텐츠 메타데이터
+              수집 파이프라인을 Docker로 자동화해 운영했습니다.
+            </p>
+          </div>
+          <div class="timeline-item">
+            <time>2023.08 — 2023.09</time>
+            <h4>정보통신산업진흥원 / 인공지능 기본과정 수료</h4>
+            <p>Python 기반 데이터 처리와 기초 알고리즘을 실습했습니다.</p>
+          </div>
+          <div class="timeline-item">
+            <time>2023.10 — 2023.11</time>
+            <h4>네이버 커넥트재단 / 부스트코스 &lt;DATA SCIENCE&gt; 코칭스터디 2023 수료</h4>
+            <p>Python/Pandas로 데이터를 수집/가공/분석하는 과정을 SQL 쿼리 실습과 함께 이수했습니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact wrap" id="contact">
+      <span class="section-eyebrow" style="justify-content:center; display:flex;">Contact</span>
+      <h2>네트워크 데이터를 다루는 팀에<br />합류하고 싶습니다.</h2>
+      <p>이력서, GitHub, 그동안 만든 자동화/데이터 파이프라인 프로젝트를 더 보여드릴 수 있습니다.</p>
+      <div class="contact-actions">
+        <a href="mailto:justinnn980@gmail.com" class="btn btn-primary">이메일 보내기 →</a>
+        <a href="resume_common.html" class="btn btn-ghost">이력서 보기</a>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:justinnn980@gmail.com">justinnn980@gmail.com</a>
+        <a href="https://github.com/justinnn980" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://justinnn980.tistory.com/" target="_blank" rel="noreferrer">블로그</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <a href="index.html">← 박준철 포트폴리오 홈</a>
+      <span>© 2026 Juncheol Park</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var toggle = document.getElementById('themeToggle');
+      var stored = localStorage.getItem('kinx-theme');
+      var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      var current = stored || (prefersLight ? 'light' : 'dark');
+      apply(current);
+
+      function apply(mode) {
+        root.setAttribute('data-theme', mode);
+        toggle.textContent = mode === 'dark' ? '🌙' : '☀️';
+      }
+
+      toggle.addEventListener('click', function () {
+        current = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('kinx-theme', current);
+        apply(current);
+      });
+
+      var menuBtn = document.getElementById('menuBtn');
+      var navLinks = document.querySelector('.nav-links');
+      menuBtn.addEventListener('click', function () {
+        var isOpen = navLinks.style.display === 'flex';
+        navLinks.style.cssText = isOpen
+          ? ''
+          : 'display:flex;position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;background:var(--bg-elevated);border-bottom:1px solid var(--line);padding:8px 28px 20px;';
+        if (!isOpen) {
+          navLinks.querySelectorAll('a').forEach(function (a) {
+            a.style.padding = '12px 0';
+            a.style.borderTop = '1px solid var(--line)';
+          });
+        }
+      });
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+</body>
+</html>
