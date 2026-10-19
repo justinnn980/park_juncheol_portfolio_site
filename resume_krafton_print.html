@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박준철 이력서 — 크래프톤 PIONEER HQ Tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --em:   #B4232C;
+      --em-l: #F3D3D5;
+      --text: #111827;
+      --sub:  #374151;
+      --muted:#6B7280;
+      --bdr:  #E5E7EB;
+      --bg-h: #FBF4F4;
+    }
+    html { font-size: 12px; }
+    body {
+      font-family: 'Noto Sans KR', -apple-system, 'Segoe UI', sans-serif;
+      color: var(--text); background: #fff; line-height: 1.6;
+    }
+    a { color: var(--em); text-decoration: none; }
+
+    .page { width: 210mm; min-height: 297mm; margin: 0 auto; padding: 11mm 15mm; background: #fff; page-break-after: always; }
+    .page:last-child { page-break-after: auto; }
+
+    .hd { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--text); }
+    .hd-name { font-size: 24px; font-weight: 900; letter-spacing: -1px; line-height: 1.15; margin-bottom: 4px; }
+    .hd-role { font-size: 12px; font-weight: 700; color: var(--em); margin-bottom: 6px; }
+    .hd-contacts { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hd-contact { font-size: 10.5px; color: var(--muted); }
+
+    .sec { margin-bottom: 10px; }
+    .sec-title {
+      font-size: 11px; font-weight: 900; letter-spacing: 1.5px; color: var(--em);
+      border-bottom: 1px solid var(--bdr); padding-bottom: 5px; margin-bottom: 8px;
+      break-after: avoid; page-break-after: avoid;
+    }
+
+    .pi { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--bdr); border-radius: 6px; overflow: hidden; }
+    .pi-cell { padding: 6px 10px; border-right: 1px solid var(--bdr); }
+    .pi-cell:last-child { border-right: none; }
+    .pi-k { font-size: 9px; color: var(--muted); font-weight: 700; }
+    .pi-v { font-size: 10.5px; font-weight: 700; }
+
+    table.sum { width: 100%; border-collapse: collapse; }
+    table.sum th, table.sum td { border: 1px solid var(--bdr); padding: 5px 8px; font-size: 10.5px; text-align: left; vertical-align: top; }
+    table.sum th { background: var(--bg-h); font-weight: 800; color: var(--text); white-space: nowrap; }
+
+    .match { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    .match-c { border: 1px solid var(--bdr); border-left: 3px solid var(--em); border-radius: 5px; padding: 7px 10px; break-inside: avoid; }
+    .match-k { font-size: 9.5px; font-weight: 800; color: var(--em); margin-bottom: 2px; }
+    .match-v { font-size: 10.5px; color: var(--sub); line-height: 1.55; }
+    .match-v strong { color: var(--text); font-weight: 700; }
+
+    .chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 6px; }
+    .chip { border: 1px solid var(--bdr); border-radius: 5px; padding: 6px 9px; background: var(--bg-h); break-inside: avoid; }
+    .chip-row { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
+    .chip-name { font-size: 10.5px; font-weight: 800; white-space: nowrap; }
+    .chip-meta { font-size: 9.5px; color: var(--em); font-weight: 700; white-space: nowrap; }
+    .chip-note { font-size: 9px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pill { background: var(--bg-h); border: 1px solid var(--em-l); border-radius: 20px; padding: 3px 10px; font-size: 10px; font-weight: 700; }
+    .pill b { color: var(--em); font-size: 9px; margin-left: 4px; }
+
+    .job { margin-bottom: 10px; }
+    .job:last-child { margin-bottom: 0; }
+    .job-hd { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1px; }
+    .job-co { font-size: 13px; font-weight: 900; }
+    .job-dt { font-size: 10.5px; color: var(--muted); font-weight: 600; }
+    .job-role { font-size: 10.5px; color: var(--em); font-weight: 700; margin-bottom: 5px; }
+    .task { border: 1px solid var(--bdr); border-radius: 6px; padding: 7px 10px; margin-bottom: 6px; break-inside: avoid; page-break-inside: avoid; }
+    .task-t { font-size: 11px; font-weight: 800; margin-bottom: 3px; }
+    .task-t span { font-size: 9px; font-weight: 500; color: var(--muted); margin-left: 6px; }
+    ul.blt { list-style: none; }
+    ul.blt li { position: relative; padding-left: 11px; font-size: 10.5px; color: var(--sub); line-height: 1.55; margin-bottom: 2px; }
+    ul.blt li::before { content: '-'; position: absolute; left: 0; color: var(--em); font-weight: 900; }
+    ul.blt li:last-child { margin-bottom: 0; }
+    ul.blt strong { color: var(--text); font-weight: 700; }
+
+    .pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .proj { border: 1px solid var(--bdr); border-radius: 6px; padding: 7px 10px; break-inside: avoid; page-break-inside: avoid; }
+    .proj-t { font-size: 11px; font-weight: 800; margin-bottom: 1px; }
+    .proj-tech { font-size: 9px; color: var(--muted); margin-bottom: 3px; }
+    .proj-d { font-size: 10px; color: var(--sub); line-height: 1.5; }
+    .proj-d strong { color: var(--text); font-weight: 700; }
+
+    .edu-row { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px solid var(--bdr); font-size: 10.5px; }
+    .edu-row:last-child { border-bottom: none; }
+    .edu-row b { font-weight: 700; }
+    .edu-row span { color: var(--muted); font-size: 10px; margin-left: 8px; flex-shrink: 0; }
+
+    @page { size: A4; margin: 0; }
+    @media print {
+      body { background: #fff; }
+      .page { margin: 0; }
+    }
+    @media screen {
+      body { background: #e5e7eb; padding: 32px 0; }
+      .page { box-shadow: 0 2px 20px rgba(0,0,0,0.12); margin-bottom: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 ============ -->
+<div class="page">
+
+  <div class="hd">
+    <div class="hd-name">박준철 이력서</div>
+    <div class="hd-role">2027 크래프톤 채용연계형 인턴십 PIONEER — HQ Tech</div>
+    <div class="hd-contacts">
+      <span class="hd-contact">📞 010-2538-1519</span>
+      <span class="hd-contact">✉ justinnn980@gmail.com</span>
+      <span class="hd-contact">💻 github.com/justinnn980</span>
+      <span class="hd-contact">🔗 park-juncheol-portfolio-site.onrender.com/krafton_portfolio.html</span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="pi">
+      <div class="pi-cell"><div class="pi-k">이름</div><div class="pi-v">박준철</div></div>
+      <div class="pi-cell"><div class="pi-k">지원 분야</div><div class="pi-v">HQ Tech</div></div>
+      <div class="pi-cell"><div class="pi-k">학력 / 학점</div><div class="pi-v">대전대 컴퓨터공학과 졸업 / 3.22</div></div>
+      <div class="pi-cell"><div class="pi-k">실무 경력</div><div class="pi-v">2년+</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">경력 요약</div>
+    <table class="sum">
+      <colgroup><col style="width:23%"><col style="width:19%"><col style="width:58%"></colgroup>
+      <tr><th>총 실무 경력</th><td colspan="2"><strong>2년+</strong> / AI 도구로 사내 시스템 단독 개발, 업무 자동화, 데이터 수집/이관 검증, 서버 운영과 장애 원인 추적</td></tr>
+      <tr><th>아우토크립트</th><td>재직 중</td><td>IT 인프라/자산관리 담당 — 엑셀 수작업 자산관리를 Claude Code/Codex로 만든 자체 시스템으로 전환</td></tr>
+      <tr><th>(주)홈초이스</th><td>2024.02 ~ 2025.11</td><td>TECH사업실 — OTT "오초이스" Flutter 앱/Spring Boot 서버 개발, 데이터 수집/배치 자동화</td></tr>
+      <tr><th>개인 프로젝트</th><td colspan="2">셀프 호스팅 서버 운영(외부 개방 포트 0개), 실시간 매칭 서비스 Pyoing 운영, Study Tracker API(AI 초안 + 테스트 60건)</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">Tech 분야 역량 매칭</div>
+    <div class="match">
+      <div class="match-c">
+        <div class="match-k">AI Native 개발</div>
+        <div class="match-v">Claude Code/Codex로 코드 초안을 만들고 데이터 구조와 결과 검증은 직접 맡아 <strong>사내 자산관리 시스템을 1인 개발</strong></div>
+      </div>
+      <div class="match-c">
+        <div class="match-k">소프트웨어</div>
+        <div class="match-v">Java/Spring Boot 서버, React 화면, Flutter 앱, Spring WebSocket 실시간 채팅까지 <strong>기획부터 배포까지</strong> 단독 수행</div>
+      </div>
+      <div class="match-c">
+        <div class="match-k">데이터</div>
+        <div class="match-v">실사용 데이터 <strong>2,394건</strong> 이관 후 원본 전체 대조, 메타데이터 수집 누락을 단계별 건수로 추적해 <strong>1,000건 이상 평균 10분</strong></div>
+      </div>
+      <div class="match-c">
+        <div class="match-k">인프라 / 시스템</div>
+        <div class="match-v">유휴 MacBook을 24시간 서버로 전환, <strong>재부팅 후 로그인 없이 3분 내 자동 복구</strong>, 일일 이중 백업, 10분 주기 장애 알림</div>
+      </div>
+      <div class="match-c">
+        <div class="match-k">보안</div>
+        <div class="match-v">Cloudflare Tunnel + Tailscale/SSH 키로 <strong>외부 개방 포트 0개</strong>, sudo 1개 명령만 허용하는 최소 권한, 모빌리티보안 이수</div>
+      </div>
+      <div class="match-c">
+        <div class="match-k">업무 문제를 기술로</div>
+        <div class="match-v">헬프데스크 접수 Power Automate + Teams 자동 전달, 입/퇴사자 MS 365 계정 생성/회수 자동화, 반복업무 D-5/D-1 Teams 알림</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">보유 스킬</div>
+    <div class="chips">
+      <div class="chip">
+        <div class="chip-row"><span class="chip-name">Java/Spring Boot</span><span class="chip-meta">3년/중급</span></div>
+        <div class="chip-note">아우토크립트 자산관리 시스템/헬프데스크, 홈초이스 REST API/Quartz 배치, Study Tracker API</div>
+      </div>
+      <div class="chip">
+        <div class="chip-row"><span class="chip-name">Python</span><span class="chip-meta">2년/중급</span></div>
+        <div class="chip-note">메타데이터 수집 자동화(Selenium), 조직도 수집 스크립트, 낙상 감지(YOLOv5), 따릉이 분석(Pandas)</div>
+      </div>
+      <div class="chip">
+        <div class="chip-row"><span class="chip-name">Dart/Flutter</span><span class="chip-meta">2년7개월/중급</span></div>
+        <div class="chip-note">홈초이스 OTT 앱 개발/운영, 이후 개인 프로젝트까지 계속 사용</div>
+      </div>
+    </div>
+    <div class="pills">
+      <span class="pill">Claude Code, Codex</span>
+      <span class="pill">React, TypeScript, Next.js</span>
+      <span class="pill">PostgreSQL, Redis</span>
+      <span class="pill">Docker, GitHub Actions</span>
+      <span class="pill">Linux, Bash, launchd</span>
+      <span class="pill">Cloudflare Tunnel, Tailscale</span>
+      <span class="pill">Power Automate, MS 365</span>
+      <span class="pill">SQL(MySQL)<b>2년7개월/중급</b></span>
+      <span class="pill">AWS<b>1년10개월/중급</b></span>
+      <span class="pill">Git/GitHub<b>2년/중급</b></span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">자기소개</div>
+    <p style="font-size:10.5px;color:var(--sub);line-height:1.75;">시키지 않은 비효율을 먼저 찾아 시스템으로 바꾸고, 그 결과가 맞는지 끝까지 확인하는 방식으로 일해 왔습니다. 아우토크립트에서는 엑셀에 흩어진 자산 현황을 Claude Code와 Codex로 직접 만든 시스템으로 옮겼습니다. 코드 초안은 AI에게 맡겼지만, 자산번호가 중복되는 대장에 맞춘 데이터 구조와 2,394건 이관 검증은 제가 직접 했습니다. 홈초이스에서는 오류 없이 끝나던 데이터 수집이 실제로는 매일 일부를 흘리고 있던 원인을 단계별 건수로 찾아냈습니다. 크래프톤이 에이전틱 AI로 업무를 자동화하는 길에서, 자동화가 매일 맞는 결과를 내도록 그 뒤의 시스템과 데이터를 만드는 개발자가 되겠습니다.</p>
+  </div>
+
+</div>
+
+<!-- ============ PAGE 2 ============ -->
+<div class="page">
+
+  <div class="sec">
+    <div class="sec-title">경력사항</div>
+
+    <div class="job">
+      <div class="job-hd"><span class="job-co">아우토크립트 (그린맨파워 파견)</span><span class="job-dt">재직 중</span></div>
+      <div class="job-role">IT 인프라/자산관리 담당 — 수작업 업무 시스템화, 처리 절차 표준화/자동화</div>
+
+      <div class="task">
+        <div class="task-t">엑셀 수작업 자산관리 → 자체 개발 시스템 전환<span>Java, Spring Boot, React, PostgreSQL, Docker, Claude Code/Codex</span></div>
+        <ul class="blt">
+          <li>흩어진 조직도/IT 자산 현황을 단일 시스템으로 단독 개발, 실사용 데이터 <strong>2,394건(인원 306명/자산 1,471건)</strong> 이관 후 원본 전체 대조</li>
+          <li>PostgreSQL 단일 원본 설계: 직원은 사번 키, 중복/결측이 있는 자산은 <strong>내부 ID 키</strong>, 지급/반납 이력 테이블 분리</li>
+          <li>입사자 처리 <strong>4단계</strong> 표준화, 사번 자동 채번, 라이선스 만료 경고, 퇴사 시 미반납 자산 자동 확인</li>
+          <li>배포 후 CORS 오류/이관 누락을 요청/응답 로그로 추적해 해결, 그룹웨어 조직도 수집 스크립트로 <strong>119개 부서/326명</strong> 정리</li>
+        </ul>
+      </div>
+
+      <div class="task">
+        <div class="task-t">사내 업무 자동화<span>Spring WebSocket, Next.js, Power Automate, Teams Webhook, MS 365</span></div>
+        <ul class="blt">
+          <li>사내 IT 헬프데스크: 로그인 없이 접근 키로 본인 문의방만 입장, STOMP 실시간 채팅, Docker 이미지 1개로 배포</li>
+          <li>반복업무 알림: D-5/D-1 등 지정 시점 Teams 자동 알림, 업무/날짜/시점 조합당 1회 발송으로 중복 방지</li>
+          <li>MS Form 접수 → Power Automate → Teams 담당자 자동 전달, 입/퇴사자 MS 365 계정 생성/회수 자동화</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="job-hd"><span class="job-co">(주)홈초이스</span><span class="job-dt">2024.02 ~ 2025.11 (1년 10개월)</span></div>
+      <div class="job-role">TECH사업실 / 사원 — OTT 서비스 "오초이스" 앱/서버 개발</div>
+
+      <div class="task">
+        <div class="task-t">파트너사 앱 통합 마이그레이션<span>Flutter, Riverpod, WebView JS Bridge, Multi DRM</span></div>
+        <ul class="blt">
+          <li>LG헬로비전/딜라이브 앱 → 오초이스 전환 <strong>2건</strong> 기획/개발 주도 (팀 4인: 개발 3/디자인 1)</li>
+          <li>WebView 구조 개선으로 <strong>로딩 속도 39% 단축</strong>, NCG DRM → Multi DRM 전환으로 단일 플레이어 통합</li>
+        </ul>
+      </div>
+
+      <div class="task">
+        <div class="task-t">데이터 수집/배치 자동화, 장애 근본 해결<span>Python, Selenium, Docker, Cron, Spring Boot, Quartz, AWS EC2</span></div>
+        <ul class="blt">
+          <li>수동 입력하던 영화 메타데이터 수집 자동화, 누락 원인(무한 스크롤 로딩 전 진행)을 단계별 건수로 찾아 <strong>1,000건 이상 평균 10분</strong></li>
+          <li>Quartz <strong>5분 주기 배치 잡 6개</strong>로 콘텐츠 발행부터 배포까지 자동화</li>
+          <li>중계 서버 IP 변경으로 방화벽에 막힌 통신 장애를 추적, <strong>EC2 Elastic IP 고정 + SSL</strong>로 재발 차단</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">프로젝트</div>
+    <div class="pgrid">
+      <div class="proj">
+        <div class="proj-t">맥북 셀프 호스팅 서버 구축/운영 자동화</div>
+        <div class="proj-tech">macOS launchd, Cloudflare Tunnel, Tailscale, SSH, SQLite, GitHub Actions / 2026.10 / github.com/justinnn980/uptime-monitor</div>
+        <div class="proj-d">외부 개방 포트 0개, 재부팅 후 <strong>3분 내 무인 복구</strong>, 다운타임 1~2분/데이터 손실 0으로 서비스 이전.</div>
+      </div>
+      <div class="proj">
+        <div class="proj-t">Pyoing 실시간 일자리 매칭</div>
+        <div class="proj-tech">Node.js 22, SSE, Web Push, PWA / 2026.10 / pyoing.cloud</div>
+        <div class="proj-d">외부 라이브러리 없이 실시간 목록/1:1 채팅, 위치는 <strong>100m/1km 격자</strong>로 저장해 거리만 노출.</div>
+      </div>
+      <div class="proj">
+        <div class="proj-t">Study Tracker API</div>
+        <div class="proj-tech">Java 21, Spring Boot, JPA, Redis, GitHub Actions, Docker / github.com/justinnn980/study-tracker-api</div>
+        <div class="proj-d">Claude Code 초안을 <strong>테스트 60건</strong>으로 검증해 채택, 중복 요청 방지/캐시 무효화 규칙 직접 설계.</div>
+      </div>
+      <div class="proj">
+        <div class="proj-t">SAP OData 인터페이스 연동</div>
+        <div class="proj-tech">Java, Spring Boot, JPA, PostgreSQL, Docker Compose / github.com/justinnn980/SAP</div>
+        <div class="proj-d">외부 시스템 → SAP 전송을 Mock 서버로 재현, <strong>실패 로그 저장/재처리 API</strong>와 전송 현황 모니터링.</div>
+      </div>
+      <div class="proj">
+        <div class="proj-t">AI 실시간 낙상 감지 시스템</div>
+        <div class="proj-tech">Python, YOLOv5, OpenCV, PyQt5 / 2023.05–2023.07 / github.com/TEAM-DSS/Human-Fall-Detection</div>
+        <div class="proj-d">판단 조건 재설계와 임계값 튜닝으로 <strong>오탐률 30% → 10% 이하</strong>, 25FPS 이상 실시간 처리.</div>
+      </div>
+      <div class="proj">
+        <div class="proj-t">담아(Dama) / 숫자 대결</div>
+        <div class="proj-tech">Flutter, JWT, Spring Boot, WebSocket / 2026.01–2026.02</div>
+        <div class="proj-d">팀 3인 구독 관리 앱의 JWT 인증 흐름 구현, 실시간 대결 앱을 <strong>3일 만에</strong> 기획부터 배포까지 단독 구현.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">학력 / 교육 / 어학 / 저서</div>
+    <div class="edu-row"><b>대전대학교 컴퓨터공학과 졸업 (복수전공: 모빌리티AI/SW융합전공) / 학점 3.22 / 4.5</b><span>2017.03 ~ 2024.02</span></div>
+    <div class="edu-row"><b>이수 교과: 딥러닝, 기계학습, 컴퓨터비전, 영상처리, 모빌리티보안, 자율주행개론</b><span></span></div>
+    <div class="edu-row"><b>정보통신산업진흥원 인공지능 기본과정 수료</b><span>2023.08 ~ 2023.09</span></div>
+    <div class="edu-row"><b>네이버 부스트코스 &lt;DATA SCIENCE&gt; 코칭스터디 2023 수료</b><span>2023.10 ~ 2023.11</span></div>
+    <div class="edu-row"><b>TOEIC Speaking 120</b><span>2026.07.11</span></div>
+    <div class="edu-row"><b>『개발자가 되기 위해 꼭 알아야 하는 IT 용어』 공동 저자</b><span>비제이퍼블릭</span></div>
+  </div>
+
+</div>
+</body>
+</html>
